@@ -6,4 +6,3 @@ test
 .vscode
 koa/views
 src/generated
-pages
