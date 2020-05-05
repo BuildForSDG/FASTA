@@ -1,0 +1,9 @@
+node_modules
+build
+docs
+docker
+test
+.vscode
+koa/views
+src/generated
+pages
