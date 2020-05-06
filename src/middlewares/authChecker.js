@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/index");
 
+// eslint-disable-next-line consistent-return
 module.exports = async (req, res, next) => {
   const tokenString = req.headers.authorization;
   if (!tokenString || !tokenString.startsWith("Bearer ")) {

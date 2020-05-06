@@ -34,7 +34,9 @@ router.post("/", async (req, res) => {
 
 // USER LOGIN HERE
 router.post("/login", async (req, res) => {
-  const { email, password } = req.body;
+  const {
+    email, password
+  } = req.body;
 
   await User.findOne({ email })
     .exec()
