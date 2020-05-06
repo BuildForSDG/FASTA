@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const User = require('../models/index.js');
 const bcrypt = require('../helpers/auth');
+const authChecker = require('../middlewares/authChecker');
 
 
 //  CREATE A NEW USER AND ADD TO DATABASE
@@ -53,7 +54,7 @@ router.post('/login', async (req, res) => {
 });
 
 //  GET ALL USERS FROM DATABASE
-router.get('/', (req, res) => {
+router.get('/', authChecker, (req, res) => {
   User.find().then(
     (allUsers) => {
       console.log('Getting all users!');
