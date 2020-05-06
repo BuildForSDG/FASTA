@@ -9,7 +9,9 @@ mongoose.set('useNewUrlParser', true);
 mongoose.set('useUnifiedTopology', true);
 mongoose.set('useCreateIndex', true);
 
-mongoose.connect(process.env.DB_URI)
+const dbUri = 'mongodb://localhost:27017/FASTA';
+// const dbUri = process.env.DB_URI;
+mongoose.connect(dbUri)
   .then(() => {
     console.log('Successfully connected to MongoDB Atlas for FASTA APP!');
   })

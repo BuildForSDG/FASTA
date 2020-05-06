@@ -4,7 +4,7 @@ const User = require('../models/index.js');
 
 //  CREATE A NEW USER AND ADD TO DATABASE
 router.post('/', (req, res) => {
-//   console.log(req.body);
+  console.log(req.body);
   const user = new User({
     fullname: req.body.fullname,
     email: req.body.email,
@@ -13,7 +13,7 @@ router.post('/', (req, res) => {
   });
   user.save().then(
     () => {
-    //   console.log('User account successfully created!');
+      console.log('User account successfully created!');
       res.status(201).json({
         user,
         message: 'User account successfully created!'
@@ -32,7 +32,7 @@ router.post('/', (req, res) => {
 router.get('/', (req, res) => {
   User.find().then(
     (allUsers) => {
-    //   console.log('Getting all users!');
+      console.log('Getting all users!');
       res.status(200).json(allUsers.reverse());
     }
   ).catch(
