@@ -39,7 +39,6 @@ router.post("/login", async (req, res) => {
   await User.findOne({ email })
     .exec()
     .then((user) => {
-      console.log(user);
       if (!user || user.length < 1) {
         return res.status(401).json({ response: "Auth failed" });
       }
@@ -59,7 +58,6 @@ router.post("/login", async (req, res) => {
 router.get("/", authChecker, (req, res) => {
   User.find().then(
     (allUsers) => {
-      console.log("Getting all users!");
       res.status(200).json(allUsers.reverse());
     }
   ).catch(
