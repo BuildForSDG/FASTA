@@ -1,31 +1,32 @@
 const router = require('express').Router();
 const User = require('../models/index.js');
+const bcrypt = require('../helpers/bcrypt');
 
 
 //  CREATE A NEW USER AND ADD TO DATABASE
-router.post('/', (req, res) => {
-  console.log(req.body);
-  const user = new User({
-    fullname: req.body.fullname,
-    email: req.body.email,
-    phonenumber: req.body.phonenumber,
-    password: req.body.password
+router.post('/', async (req, res) => {
+  // console.log(req.body);
+  // eslint-disable-next-line consistent-return
+  await User.findOne({ email: req.body.email }).then((result) => {
+    if (result) {
+      return res.status(403).json({ response: 'email exists' });
+    }
   });
-  user.save().then(
-    () => {
-      console.log('User account successfully created!');
-      res.status(201).json({
-        user,
-        message: 'User account successfully created!'
-      });
+  try {
+    const {
+      fullname, email, phonenumber, password, confirmPassword
+    } = req.body;
+    if (password !== confirmPassword) {
+      return res.status(403).json({ response: 'confirmpassword and password doesn\'t match' });
     }
-  ).catch(
-    (error) => {
-      res.status(400).json({
-        error
-      });
-    }
-  );
+    const hash = await bcrypt.hashPassword(confirmPassword);
+    await User.create({
+      fullname, email, phonenumber, password: hash
+    });
+    return res.status(200).json({ response: 'Signup succesfully' });
+  } catch (error) {
+    return res.status(500).json({ response: error.message });
+  }
 });
 
 //  GET ALL USERS FROM DATABASE
@@ -52,7 +53,7 @@ router.get('/:id', (req, res) => {
     _id: id
   }).then(
     (thisUser) => {
-    //   console.log('Getting specific user by ID!');
+      //   console.log('Getting specific user by ID!');
       res.status(200).json(thisUser);
     }
   ).catch(

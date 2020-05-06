@@ -2,6 +2,8 @@
 const express = require('express');
 const parser = require('body-parser');
 const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+
 
 const server = express();
 // const mongoose = require('./db/index.js');
@@ -12,20 +14,19 @@ const port = process.env.PORT || 8080;
 server.use(parser.json());
 server.use(parser.urlencoded({ extended: true }));
 
-// RouteHandler(server);
+RouteHandler(server);
 // console.log('>>>>', RouteHandler(server));
 
-// const dotenv = require('dotenv');
 
-// dotenv.config();
+dotenv.config();
 
 server.use(RouteHandler);
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useUnifiedTopology', true);
 mongoose.set('useCreateIndex', true);
 
-const dbUri = 'mongodb://localhost:27017/FASTA';
-// const dbUri = process.env.DB_URI;
+// const dbUri = 'mongodb://localhost:27017/FASTA';
+const dbUri = process.env.DB_URI;
 mongoose.connect(dbUri)
   .then(() => {
     console.log('Successfully connected to MongoDB Atlas for FASTA APP!');
