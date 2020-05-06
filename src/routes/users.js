@@ -70,7 +70,7 @@ router.get('/', authChecker, (req, res) => {
 });
 
 //  GET A SPECIFIC USER BY ID) FROM DATABASE
-router.get('/:id', (req, res) => {
+router.get('/:id', authChecker, (req, res) => {
   const { id } = req.params;
 
   User.findOne({
