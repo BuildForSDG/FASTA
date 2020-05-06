@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const User = require('../models/index.js');
-const bcrypt = require('../helpers/bcrypt');
+const bcrypt = require('../helpers/auth');
 
 
 //  CREATE A NEW USER AND ADD TO DATABASE
@@ -27,6 +27,29 @@ router.post('/', async (req, res) => {
   } catch (error) {
     return res.status(500).json({ response: error.message });
   }
+});
+
+// USER LOGIN HERE
+router.post('/login', async (req, res) => {
+  const { email, password } = req.body;
+
+  await User.findOne({ email })
+    .exec()
+    .then((user) => {
+      console.log(user);
+      if (!user || user.length < 1) {
+        return res.status(401).json({ response: 'Auth failed' });
+      }
+      const passwordcheck = bcrypt.comparePassword(password, user.password);
+      if (passwordcheck) {
+        const token = bcrypt.generateToken(user);
+        return res.status(200).json({
+          response: 'Login succesfull',
+          token
+        });
+      }
+      return res.status(401).json({ response: 'Auth failed' });
+    }).catch((error) => res.status(500).json({ response: error.message }));
 });
 
 //  GET ALL USERS FROM DATABASE
