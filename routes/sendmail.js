@@ -29,7 +29,7 @@ router.post('/send', (req, res) => {
           to: `${req.body.email}`,
           subject: 'Your Registration was successful',
           text: 'Hey there, it’s our first message from FASTA Team;) ', 
-          html: output,
+          html: output
     };
     transport.sendMail(mailOptions, (error, info) => {
       if (error) {
