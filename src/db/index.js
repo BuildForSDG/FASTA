@@ -1,22 +1,22 @@
 /* eslint-disable no-console */
-const mongoose = require('mongoose');
-const dotenv = require('dotenv');
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
 
 dotenv.config();
 
 
-mongoose.set('useNewUrlParser', true);
-mongoose.set('useUnifiedTopology', true);
-mongoose.set('useCreateIndex', true);
+mongoose.set("useNewUrlParser", true);
+mongoose.set("useUnifiedTopology", true);
+mongoose.set("useCreateIndex", true);
 
-const dbUri = 'mongodb://localhost:27017/FASTA';
+const dbUri = "mongodb://localhost:27017/FASTA";
 // const dbUri = process.env.DB_URI;
 mongoose.connect(dbUri)
   .then(() => {
-    console.log('Successfully connected to MongoDB Atlas for FASTA APP!');
+    console.log("Successfully connected to MongoDB Atlas for FASTA APP!");
   })
   .catch((error) => {
-    console.log('Unable to connect to MongoDB Atlas!');
+    console.log("Unable to connect to MongoDB Atlas!");
     console.error(error);
   });
 

@@ -1,6 +1,6 @@
-const users = require('./users');
+const users = require("./users");
 
 
 module.exports = (server) => {
-  server.use('/api/v1/users', users);
+  server.use("/api/v1/users", users);
 };

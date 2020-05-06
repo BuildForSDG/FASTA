@@ -1,11 +1,11 @@
-import app from './app';
+import app from "./app";
 
 const startApp = async () => {
-  const header = document.querySelector('[data-app-name]');
+  const header = document.querySelector("[data-app-name]");
   if (!header) return;
 
   const programName = await app();
   header.textContent = programName;
 };
 
-document.addEventListener('DOMContentLoaded', startApp);
+document.addEventListener("DOMContentLoaded", startApp);
