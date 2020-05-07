@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-require('./db/index');
+require("./db/index");
 
 const app = express();
 
