@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import views from '../components/OnBoardingLayout/view';
 import Layout from '../components/OnBoardingLayout/Layout';
 
-export default function Home() {
+export default function Hom() {
   const [loaded, setLoaded] = useState(false);
   useEffect(() => {
     setTimeout(() => {
