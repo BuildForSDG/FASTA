@@ -20,7 +20,7 @@ router.post("/", async (req, res) => {
       fullname, email, phonenumber, password, confirmPassword
     } = req.body;
     if (password !== confirmPassword) {
-      return res.status(403).json({ response: "confirmpassword and password doesn\"t match" });
+      return res.status(403).json({ response: "confirmpassword and password doesn't match" });
     }
     const hash = await bcrypt.hashPassword(confirmPassword);
     await User.create({

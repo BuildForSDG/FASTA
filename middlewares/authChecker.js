@@ -5,11 +5,11 @@ const User = require("../models/index");
 module.exports = async (req, res, next) => {
   const tokenString = req.headers.authorization;
   if (!tokenString || !tokenString.startsWith("Bearer ")) {
-    return res.status(403).end();
+    return res.status(403).json({ response: "Token not Found" });
   }
   const tokenArray = tokenString.split(" ");
   if (!tokenArray || tokenArray.length !== 2) {
-    return res.status(403).end();
+    return res.status(403).json({ response: "There is an issue with the Token" });
   }
 
   const token = tokenArray[1];

@@ -1,6 +1,6 @@
-const users = require("./users");
 
+const express = require("express");
 
-module.exports = (server) => {
-  server.use("/api/v1/users", users);
-};
+const router = express.Router();
+
+module.exports = router;
