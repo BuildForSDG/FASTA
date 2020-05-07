@@ -15,9 +15,10 @@ module.exports = {
     sourceType: "module"
   },
   rules: {
+    'comma-dangle': ['error', 'never'],
+    'no-param-reassign': ['error', { props: false }],
     "comma-dangle": ["error", "never"],
     "no-param-reassign": ["error", { props: false }],
-    "quotes": ["error", "double"],
-    "comma-style": "error",
+    "quotes": ["error", "double"]
   }
 };
