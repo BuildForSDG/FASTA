@@ -66,7 +66,12 @@ const Layout = props => {
                 <div className="flex justify-end items-center mt-10">
                   <p className="font-bold mr-4">{view.id}/4</p>
                   {view.id < 4 ? (
-                    <p className="font-bold text-2xl" onFocus={changeScreen} onClick={changeScreen} id={view.id}>
+                    <p
+                      className="cursor-pointer font-bold text-2xl"
+                      onFocus={changeScreen}
+                      onClick={changeScreen}
+                      id={view.id}
+                    >
                       &rarr;
                     </p>
                   ) : (
