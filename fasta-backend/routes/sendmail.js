@@ -10,10 +10,10 @@ const router = express.Router();
 
 router.post("/send", async (req, res) => {
   // what will be sent to the registrants after registering
-  const output = `<div style='margin: 0 auto; background: #ededed; border:1px solid #ccc'>
-          <h1>Hey! ${req.body.email} Welcome to Fasta</h1>
+  const output = `<div style='margin: 0 auto; background: #ededed; border-top:2px solid green; border-bottom:2px solid green; box-shadow: 1px 2px 3px 4px #ccc; padding: 1.5rem '>
+          <h1>Hey! ${req.body.fullname} Welcome to Fasta</h1>
           <hr>
-          <p>FASTA helps you plan your Trip and allow you to go faster, click this <a href='#'>Link</a> to confirm your registration</p>
+          <p style='padding:1.5rem;'>FASTA helps you plan your Trip and allow you to go faster, click this <a href='#'>Link</a> to confirm your registration</p>
           <h4>Welcome on board</h4>
           </div>
           `;
@@ -40,6 +40,7 @@ router.post("/send", async (req, res) => {
       return console.log(error);
     }
     console.log("Message sent: %s", info.messageId);
+    res.send(`Email sent to ${req.body.email}`);
   });
 });
 
