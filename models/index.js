@@ -7,7 +7,8 @@ const userSchema = mongoose.Schema({
   },
   email: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   phonenumber: {
     type: Number,
@@ -16,7 +17,12 @@ const userSchema = mongoose.Schema({
   password: {
     type: String,
     required: true
+  },
+  registeredDate: {
+    type: Date,
+    default: Date.now
   }
+
 });
 
 module.exports = mongoose.model("User", userSchema);
