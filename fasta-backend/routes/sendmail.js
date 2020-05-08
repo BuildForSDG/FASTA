@@ -1,9 +1,14 @@
-const express = require('express');
-const nodemailer = require('nodemailer');
+/* eslint-disable no-console */
+/* eslint-disable consistent-return */
+/* eslint-disable prefer-const */
+/* eslint-disable no-unused-vars */
+const express = require("express");
+
+const nodemailer = require("nodemailer");
 
 const router = express.Router();
 
-router.post('/send', (req, res) => {
+router.post("/send", async (req, res) => {
   // what will be sent to the registrants after registering
   const output = `<div style='margin: 0 auto; background: #ededed; border:1px solid #ccc'>
           <h1>Hey! ${req.body.email} Welcome to Fasta</h1>
@@ -13,28 +18,28 @@ router.post('/send', (req, res) => {
           </div>
           `;
   // Nodemailer setup
-  let fastaMailer = nodemailer.createTransport({
-    host: 'mail.google.com',
+  let fastaMailer = await nodemailer.createTransport({
+    host: "mail.google.com",
     port: 287,
     secure: false,
     auth: {
-      user: 'fastamovement@gmail.com', //gmail created just for testing purposes
-      pass: 'Fasta123' //for testing purposes
+      user: "fastamovement@gmail.com", // gmail created just for testing purposes
+      pass: "Fasta123" // for testing purposes
     }
   });
 
   let mailOptions = {
-    from: '"Welcome to FASTA" <fastamovement@gmail.com>',
+    from: "'Welcome to FASTA' <fastamovement@gmail.com>",
     to: `${req.body.email}`,
-    subject: 'Your Registration was successful',
-    text: 'Hey there, it’s our first message from FASTA Team;) ',
-    html: outputgo
+    subject: "Your Registration was successful",
+    text: "Hey there, it’s our first message from FASTA Team",
+    html: output
   };
-  transport.sendMail(mailOptions, (error, info) => {
+  await fastaMailer.sendMail(mailOptions, (error, info) => {
     if (error) {
       return console.log(error);
     }
-    console.log('Message sent: %s', info.messageId);
+    console.log("Message sent: %s", info.messageId);
   });
 });
 
