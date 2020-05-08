@@ -1,5 +1,5 @@
-import Head from 'next/head'
-import { FaArrowLeft } from 'react-icons/fa';
+import Head from "next/head";
+import { FaArrowLeft } from "react-icons/fa";
 
 export default function ResetPassword() {
   return (
@@ -167,5 +167,5 @@ export default function ResetPassword() {
             }
         `}</style>
     </div>
-  )
+  );
 }
