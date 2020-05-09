@@ -1,10 +1,10 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import styled from 'styled-components';
-import Link from 'next/link';
-import React, { useState } from 'react';
+import styled from "styled-components";
+import Link from "next/link";
+import React, { useState } from "react";
 
-import { H1 } from '../Text/Headings';
+import { H1 } from "../Text/Headings";
 
 const StyledLayout = styled.div`
   width: 100vw;
