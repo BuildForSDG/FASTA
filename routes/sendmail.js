@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
 /* eslint-disable consistent-return */
 /* eslint-disable prefer-const */
-/* eslint-disable no-unused-vars */
 const express = require("express");
 
 const nodemailer = require("nodemailer");
@@ -18,7 +17,7 @@ router.post("/send", async (req, res) => {
           </div>
           `;
   // Nodemailer setup
-  let fastaMailer = await nodemailer.createTransport({
+  let fastaMailer = nodemailer.createTransport({
     host: "mail.google.com",
     port: 287,
     secure: false,
@@ -35,7 +34,7 @@ router.post("/send", async (req, res) => {
     text: "Hey there, it’s our first message from FASTA Team",
     html: output
   };
-  await fastaMailer.sendMail(mailOptions, (error, info) => {
+  fastaMailer.sendMail(mailOptions, (error, info) => {
     if (error) {
       return console.log(error);
     }
