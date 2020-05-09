@@ -22,7 +22,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/", indexRouter);
-app.use("/api/v1/send", sendRouter);
+app.use("/api/v1/", sendRouter);
 
 
 module.exports = app;
