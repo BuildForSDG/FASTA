@@ -2,8 +2,8 @@
 /* eslint-disable consistent-return */
 /* eslint-disable prefer-const */
 const express = require("express");
-
 const nodemailer = require("nodemailer");
+const smtpTransport = require("nodemailer-smtp-transport");
 
 const router = express.Router();
 
@@ -17,15 +17,14 @@ router.post("/send", async (req, res) => {
           </div>
           `;
   // Nodemailer setup
-  let fastaMailer = await nodemailer.createTransport({
-    host: "mail.google.com",
-    port: 287,
-    secure: false,
+  let fastaMailer = await nodemailer.createTransport(smtpTransport({
+    service: "gmail",
+    host: "smtp.gmail.com",
     auth: {
       user: "fastamovement@gmail.com", // gmail created just for testing purposes
       pass: "Fasta123" // for testing purposes
     }
-  });
+  }));
 
   let mailOptions = {
     from: "'Welcome to FASTA' <fastamovement@gmail.com>",
