@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+import styled from "styled-components";
+import React from "react";
 
 const Nav = styled.ul`
   background-color: #43a047;

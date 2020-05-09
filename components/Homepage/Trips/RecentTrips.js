@@ -1,18 +1,19 @@
-import styled from 'styled-components';
-import Trips from './Trip';
+import styled from "styled-components";
+import React from "react";
+import Trip from "./Trip";
 
-const Recent = styled.p`
+const Text = styled.p`
   padding: 10px 0;
   font-size: 20px;
   margin-top: 10px;
 `;
 
-const RecentTrips = () => {
+const RecentTrips = (props) => {
   return (
     <div className="trips">
-      <Recent>Your Recent Trips</Recent>
-      <Trips />
-      <Trips />
+      <Text>Your Recent Trips</Text>
+      <Trip />
+      <Trip />
     </div>
   );
 };

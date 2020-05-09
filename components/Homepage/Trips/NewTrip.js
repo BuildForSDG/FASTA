@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+import styled from "styled-components";
+import React from "react";
 
 const Body = styled.div`
   background-color: #afdeb1;
@@ -17,7 +18,7 @@ const Text = styled.p`
   padding: 15px 0;
 `;
 
-const NewTrip = () => {
+const NewTrip = (props) => {
   return (
     <div className="new-trip">
       <Text>Welcome Back!</Text>

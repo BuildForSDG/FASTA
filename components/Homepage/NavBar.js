@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+import styled from "styled-components";
+import React from "react";
 
 const Nav = styled.div`
   background-color: #ffffff;
@@ -16,7 +17,7 @@ const NavLogo = styled.h3`
   color: #43a047;
 `;
 
-const NavBar = props => {
+const NavBar = (props) => {
   return (
     <Nav className="flex justify-between items-center">
       <NavLogo>{props.name}</NavLogo>

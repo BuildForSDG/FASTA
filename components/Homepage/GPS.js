@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import styled from "styled-components";
+import React from "react";
 
 const GPSbody = styled.div`
   background-color: #deb1af;
@@ -19,7 +19,7 @@ const Details = styled.p`
   }
 `;
 
-const GPS = () => {
+const GPS = (props) => {
   return (
     <GPSbody className="flex justify-evenly items-center">
       <span>Icon</span>

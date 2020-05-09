@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+import styled from "styled-components";
+import React from "react";
 
 const Heading = styled.h1`
   font-size: 20px;
@@ -18,7 +19,7 @@ const Text = styled.p`
   text-align: left;
 `;
 
-const Report = () => {
+const Report = (props) => {
   return (
     <Body>
       <Heading>Make a New Report</Heading>

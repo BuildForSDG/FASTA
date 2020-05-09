@@ -1,6 +1,7 @@
-import styled from 'styled-components';
+import styled from "styled-components";
+import React from "react";
 
-const Trip = styled.div`
+const TripBody = styled.div`
   background-color: #fff;
   border: 1px solid #afdeb1;
   border-radius: 10px;
@@ -14,14 +15,14 @@ const Trip = styled.div`
 const Start = styled.span``;
 const End = styled.span``;
 
-const Trips = () => {
+const Trip = () => {
   return (
-    <Trip className="trip">
+    <TripBody className="trip">
       <Start>Start Point : Rumuokoro, Port Harcourt</Start>
       <span>to</span>
       <End>End Point : Rumuokoro, Port Harcourt</End>
-    </Trip>
-  )
+    </TripBody>
+  );
 };
 
-export default Trips;
+export default Trip;
