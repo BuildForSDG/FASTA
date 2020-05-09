@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 import Homepage from "../components/Homepage/Homepage";
 
 const Home = (props) => {
