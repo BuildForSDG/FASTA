@@ -17,7 +17,7 @@ router.post("/send", async (req, res) => {
           </div>
           `;
   // Nodemailer setup
-  let fastaMailer = nodemailer.createTransport({
+  let fastaMailer = await nodemailer.createTransport({
     host: "mail.google.com",
     port: 287,
     secure: false,
@@ -34,7 +34,7 @@ router.post("/send", async (req, res) => {
     text: "Hey there, it’s our first message from FASTA Team",
     html: output
   };
-  fastaMailer.sendMail(mailOptions, (error, info) => {
+  await fastaMailer.sendMail(mailOptions, (error, info) => {
     if (error) {
       return console.log(error);
     }
