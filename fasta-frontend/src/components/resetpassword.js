@@ -11,7 +11,7 @@ export default function ResetPassword() {
   return (
     <div>
       <Head>
-        <title>Fasta &gt; Forgot Password</title>
+        <title>Fasta Forgot Password</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="Container">
@@ -42,5 +42,5 @@ export default function ResetPassword() {
       </div>
     </div>
     </div>
-  )
+  );
 }

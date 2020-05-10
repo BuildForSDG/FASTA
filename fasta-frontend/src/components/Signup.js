@@ -1,5 +1,5 @@
 import React from "react";
-import Head from 'next/head'
+import Head from "next/head";
 import { useForm } from "react-hook-form";
 import "../fastaStyles.css";
 
@@ -10,7 +10,7 @@ const Signup = () => {
   return (
     <div>
     <Head>
-      <title>Fasta &gt; Signup </title>
+      <title>Fasta Signup </title>
       <link rel="icon" href="/favicon.ico" />
     </Head>
     <div className="Container">
