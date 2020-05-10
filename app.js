@@ -16,7 +16,7 @@ const app = express();
 // indexRouter(app);
 // app.use(indexRouter);
 
-app.use(bodyParser.json({ type: "application/json" }));
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(logger("dev"));
