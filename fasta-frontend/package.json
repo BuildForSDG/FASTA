@@ -24,6 +24,7 @@
     "prettier": "^2.0.4"
   },
   "dependencies": {
+    "next": "^9.3.6",
     "normalize.css": "^8.0.1",
     "postcss-modules": "^2.0.0",
     "react": "^16.13.1",

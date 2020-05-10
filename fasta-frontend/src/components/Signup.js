@@ -1,30 +1,24 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import Head from 'next/head'
 import { useForm } from "react-hook-form";
-import {
-  Container,
-  FormContainer,
-  AppTitle,
-  FormTitle,
-  FormGroup,
-  Input,
-  Text,
-  FormButton,
-  FormLink,
-  ValidationError,
-} from "./FormComponents";
+import "../fastaStyles.css";
 
 const Signup = () => {
   const { register, handleSubmit, errors } = useForm();
   const onSubmit = () => {};
 
   return (
-    <Container>
-      <FormContainer>
-        <AppTitle>Fasta</AppTitle>
-        <FormGroup onSubmit={handleSubmit(onSubmit)}>
-          <FormTitle>Create an Account</FormTitle>
-          <Input
+    <div>
+    <Head>
+      <title>Fasta > Signup </title>
+      <link rel="icon" href="/favicon.ico" />
+    </Head>
+    <div className="Container">
+      <div className="FormContainer">
+        <p className="AppTitle">Fasta</p>
+        <form className="FormGroup" onSubmit={handleSubmit(onSubmit)}>
+          <h1 className="FormTitle">Create an Account</h1>
+          <input className="Input"
             type="text"
             ref={register({ required: "Full name is required" })}
             name="fullname"
@@ -33,7 +27,7 @@ const Signup = () => {
           {errors.fullname && (
             <ValidationError>{errors.fullname.message}</ValidationError>
           )}
-          <Input
+          <input className="Input"
             type="text"
             ref={register({
               required: "Email is required",
@@ -48,7 +42,7 @@ const Signup = () => {
           {errors.email && (
             <ValidationError>{errors.email.message}</ValidationError>
           )}
-          <Input
+          <input className="Input"
             type="text"
             ref={register({
               required: "Phone number is required",
@@ -59,7 +53,7 @@ const Signup = () => {
           {errors.phone_number && (
             <ValidationError>{errors.phone_number.message}</ValidationError>
           )}
-          <Input
+          <input className="Input"
             type="text"
             ref={register({ required: "Password is required" })}
             name="password"
@@ -68,7 +62,7 @@ const Signup = () => {
           {errors.password && (
             <ValidationError>{errors.password.message}</ValidationError>
           )}
-          <Input
+          <input className="Input"
             type="text"
             ref={register({ required: "Confirm Password is required" })}
             name="confirm_password"
@@ -77,18 +71,17 @@ const Signup = () => {
           {errors.confirm_password && (
             <ValidationError>{errors.confirm_password.message}</ValidationError>
           )}
-          <Text>
+          <p className="Text">
             By creating an account you agree to our <br /> Terms of Service and
             Privacy Policy.
-          </Text>
-          <FormButton>CONTINUE</FormButton>
-          <Text>Already have an Account? </Text>
-        </FormGroup>
-        <Link to="/login">
-          <FormLink>LOGIN</FormLink>
-        </Link>
-      </FormContainer>
-    </Container>
+          </p>
+          <button className="FormButton">CONTINUE</button>
+          <p className="Text">Already have an Account? </p>
+        </form>
+          <div className="FormLink">LOGIN</div>
+      </div>
+    </div>
+    </div>
   );
 };
 

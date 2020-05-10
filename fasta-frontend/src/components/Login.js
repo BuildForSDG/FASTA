@@ -1,31 +1,24 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import Head from 'next/head'
 import { useForm } from "react-hook-form";
+import "../fastaStyles.css";
 
-import {
-  Container,
-  FormContainer,
-  AppTitle,
-  FormTitle,
-  FormGroup,
-  Input,
-  Text,
-  FormButton,
-  FormLink,
-  ValidationError,
-} from "./FormComponents";
-
-const Login = () => {
+function Login() {
   const { register, handleSubmit, errors } = useForm();
   const onSubmit = () => {};
 
   return (
-    <Container>
-      <FormContainer style>
-        <AppTitle>Fasta</AppTitle>
-        <FormGroup onSubmit={handleSubmit(onSubmit)}>
-          <FormTitle>Login</FormTitle>
-          <Input
+    <div className="container">
+    <Head>
+      <title>Fasta > Login </title>
+      <link rel="icon" href="/favicon.ico" />
+    </Head>
+    <div className="Container">
+      <div className="FormContainer">
+        <p className="AppTitle">Fasta</p>
+        <form className="FormGroup" onSubmit={handleSubmit(onSubmit)}>
+          <h1 className="FormTitle">Login</h1>
+          <input className="Input"
             type="text"
             ref={register({
               required: "Email is required",
@@ -38,26 +31,25 @@ const Login = () => {
             placeholder="Email"
           />
           {errors.email && (
-            <ValidationError>{errors.email.message}</ValidationError>
+            <div className="ValidationError">{errors.email.message}</div>
           )}
-          <Input
+          <input className="Input"
             type="text"
             ref={register({ required: "Password is required" })}
             name="password"
             placeholder="Password"
           />
           {errors.password && (
-            <ValidationError>{errors.password.message}</ValidationError>
+            <div className="ValidationError">{errors.password.message}</div>
           )}
-          <Text>Forgot Password</Text>
-          <FormButton>LOGIN</FormButton>
-          <Text>Don&apos;t have an Account? </Text>
-        </FormGroup>
-        <Link to="/signup">
-          <FormLink>REGISTER</FormLink>
-        </Link>
-      </FormContainer>
-    </Container>
+          <p className="Text">Forgot Password</p>
+          <button className="FormButton">LOGIN</button>
+          <p className="Text">Don&apos;t have an Account? </p>
+        </form>
+          <div className="FormLink">REGISTER</div>
+      </div>
+    </div>
+    </div>
   );
 };
 

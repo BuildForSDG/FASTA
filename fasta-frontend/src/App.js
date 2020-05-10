@@ -1,8 +1,9 @@
 import React from "react";
 import { render } from "react-dom";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Signup from "./components/Signup";
+import Signup from "./components/signup";
 import Login from "./components/Login";
+import ResetPassword from "./components/resetpassword";
 import PageNotFound from "./PageNotFound";
 import "normalize.css";
 
@@ -12,6 +13,7 @@ const App = () => (
       <Switch>
         <Route exact path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
+        <Route path="/resetpassword" component={ResetPassword} />
         <Route component={PageNotFound} />
       </Switch>
     </div>
