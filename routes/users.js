@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable func-names */
 const express = require("express");
 const crypto = require("crypto");
@@ -110,25 +111,25 @@ router.post("/forget", (req, res, next) => {
     function (token, done) {
       User.findOne({ email }, (err, user) => {
         if (!user) {
-          console.log("email not found");
+          // console.log("email not found");
           return res.status(404).json({ response: `${email}, not found, please check the email again` });
         }
         user.resetPasswordToken = token;
         user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
 
         user.save()
-          .then((result) => {
-            console.log(result.resetPasswordToken, result.resetPasswordExpires);
+          .then(() => {
+            // console.log(result.resetPasswordToken, result.resetPasswordExpires);
             done(err, token, user);
           });
         return res.status(200).json({ response: user });
       });
-    },
+    }
 
     // TODO send the reset link to the user's mail
-    function (token, user, done) {
+    // function (token, user, done) {
 
-    }
+    // }
   ], (err) => {
     if (err) {
       return next(err);
@@ -162,6 +163,7 @@ router.route("/reset/:token")
       const hash = await bcrypt.hashPassword(password);
       const user = await User.findOneAndUpdate(
         { resetPasswordToken: req.params.token, resetPasswordExpires: { $gte: Date.now() } },
+        // eslint-disable-next-line max-len
         { $set: { password: hash }, resetPasswordToken: undefined, resetPasswordExpires: undefined },
         { useFindAndModify: false }
       );
