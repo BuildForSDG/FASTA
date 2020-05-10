@@ -3,7 +3,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 const https = require("https");
-
 // Option parameter for google api request
 const options = {
   hostname: "maps.googleapis.com",
