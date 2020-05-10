@@ -7,6 +7,7 @@ const bodyParser = require("body-parser");
 const userRouter = require("./routes/users");
 const indexRouter = require("./routes/index");
 const sendRouter = require("./routes/sendmail");
+const getTransporter = require("./routes/location-transporter");
 
 require("./db/index");
 // const userRouter = require("./routes/index");
@@ -28,5 +29,6 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/", indexRouter);
 app.use("/api/v1/", sendRouter);
+app.use("/api/v1/", getTransporter);
 
 module.exports = app;
