@@ -10,7 +10,7 @@ const Signup = () => {
   return (
     <div>
     <Head>
-      <title>Fasta > Signup </title>
+      <title>Fasta &gt; Signup </title>
       <link rel="icon" href="/favicon.ico" />
     </Head>
     <div className="Container">
@@ -25,7 +25,7 @@ const Signup = () => {
             placeholder="Full name"
           />
           {errors.fullname && (
-            <ValidationError>{errors.fullname.message}</ValidationError>
+            <div className="ValidationError">{errors.fullname.message}</div>
           )}
           <input className="Input"
             type="text"
@@ -40,7 +40,7 @@ const Signup = () => {
             placeholder="Email"
           />
           {errors.email && (
-            <ValidationError>{errors.email.message}</ValidationError>
+            <div className="ValidationError">{errors.email.message}</div>
           )}
           <input className="Input"
             type="text"
@@ -51,7 +51,7 @@ const Signup = () => {
             placeholder="Phone number"
           />
           {errors.phone_number && (
-            <ValidationError>{errors.phone_number.message}</ValidationError>
+            <div className="ValidationError">{errors.phone_number.message}</div>
           )}
           <input className="Input"
             type="text"
@@ -60,7 +60,7 @@ const Signup = () => {
             placeholder="Password"
           />
           {errors.password && (
-            <ValidationError>{errors.password.message}</ValidationError>
+            <div className="ValidationError">{errors.password.message}</div>
           )}
           <input className="Input"
             type="text"
@@ -69,7 +69,7 @@ const Signup = () => {
             placeholder="Confirm Password"
           />
           {errors.confirm_password && (
-            <ValidationError>{errors.confirm_password.message}</ValidationError>
+            <div className="ValidationError">{errors.confirm_password.message}</div>
           )}
           <p className="Text">
             By creating an account you agree to our <br /> Terms of Service and

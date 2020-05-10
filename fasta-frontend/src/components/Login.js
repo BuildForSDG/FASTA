@@ -10,7 +10,7 @@ function Login() {
   return (
     <div className="container">
     <Head>
-      <title>Fasta > Login </title>
+      <title>Fasta &gt; Login </title>
       <link rel="icon" href="/favicon.ico" />
     </Head>
     <div className="Container">

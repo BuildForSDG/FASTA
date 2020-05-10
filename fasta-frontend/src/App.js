@@ -1,9 +1,9 @@
 import React from "react";
 import { render } from "react-dom";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Signup from "./components/signup";
+import Signup from "./components/Signup";
 import Login from "./components/Login";
-import ResetPassword from "./components/resetpassword";
+import ResetPassword from "./components/ResetPassword";
 import PageNotFound from "./PageNotFound";
 import "normalize.css";
 
