@@ -1,7 +1,7 @@
-import Head from 'next/head';
-import React, { useState, useEffect } from 'react';
-import views from '../components/OnBoardingLayout/view';
-import Layout from '../components/OnBoardingLayout/Layout';
+import Head from "next/head";
+import React, { useState, useEffect } from "react";
+import views from "../components/OnBoardingLayout/view";
+import Layout from "../components/OnBoardingLayout/Layout";
 
 export default function Hom() {
   const [loaded, setLoaded] = useState(false);
@@ -9,9 +9,9 @@ export default function Hom() {
     setTimeout(() => {
       setLoaded(true);
     }, 1000);
-    return () => {
-      console.log('splash loaded');
-    };
+    // return () => {
+    //   console.log('splash loaded');
+    // };
   }, []);
   return (
     <div>

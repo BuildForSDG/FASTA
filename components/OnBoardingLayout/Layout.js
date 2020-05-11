@@ -1,19 +1,19 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import styled from 'styled-components';
-import Link from 'next/link';
-import React, { useState } from 'react';
+import styled from "styled-components";
+import Link from "next/link";
+import React, { useState } from "react";
 
-import { H1 } from '../Text/Headings';
+import { H1 } from "../Text/Headings";
 
 const StyledLayout = styled.div`
   width: 100vw;
   min-height: 100vh;
-  background-color: ${props => props.bg};
-  color: ${props => props.color};
+  background-color: ${(props) => props.bg};
+  color: ${(props) => props.color};
 
   a {
-    color: ${props => props.color};
+    color: ${(props) => props.color};
     font-size: 14px;
   }
 
@@ -32,11 +32,11 @@ const OnBoardingContainerLayout = styled.section`
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
 
-  transform: translate(-${props => props.screen * 100}vw);
+  transform: translate(-${(props) => props.screen * 100}vw);
   transition: 0.3s ease-out;
 `;
 
-const Layout = props => {
+const Layout = (props) => {
   const [screen, setScreen] = useState(0);
 
   function changeScreen({ target }) {
@@ -67,7 +67,7 @@ const Layout = props => {
                   <p className="font-bold mr-4">{view.id}/4</p>
                   {view.id < 4 ? (
                     <p
-                      className="font-bold cursor-pointer text-2xl"
+                      className="cursor-pointer font-bold text-2xl"
                       onFocus={changeScreen}
                       onClick={changeScreen}
                       id={view.id}
