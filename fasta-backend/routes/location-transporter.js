@@ -11,7 +11,7 @@ router.post("/location-transporter", (req, res) => {
   const transporter = new Transporters(req.body.latitude, req.body.longitude);
   const locationTrnasporter = transporter.getPlaces();
 
-  res.send(locationTrnasporter);
+  res.json(locationTrnasporter);
 });
 
 module.exports = router;
