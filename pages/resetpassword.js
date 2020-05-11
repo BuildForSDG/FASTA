@@ -25,7 +25,7 @@ const ResetPassword = () => {
 
   const { register, handleSubmit, errors } = useForm({ validateCriteriaMode: "all" });
   const onSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
     setSubmitted(true);
   };
 
