@@ -9,9 +9,9 @@ export default function Home() {
     setTimeout(() => {
       setLoaded(true);
     }, 1000);
-    return () => {
-      console.log('splash loaded');
-    };
+    // return () => {
+    //   console.log('splash loaded');
+    // };
   }, []);
   return (
     <div>

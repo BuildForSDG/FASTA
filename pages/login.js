@@ -24,7 +24,7 @@ const Login = () => {
   return (
     <div className="w-screen ">
       <Head>
-        <title>Fasta > Forgot Password</title>
+        <title>Fasta Login</title>
         <link rel="icon" href="/images/Logo.png" />
       </Head>
 

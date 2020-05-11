@@ -31,7 +31,7 @@ const Login = () => {
     setSubmitted(true);
   };
 
-  submitted && (document.body.style.overflow = 'hidden');
+  submitted && (document.body.style.overflow = "hidden");
 
   return (
     <div className="w-screen ">

@@ -23,17 +23,17 @@ const ResetPassword = () => {
   const [submitted, setSubmitted] = useState(false);
 
   const { register, handleSubmit, errors } = useForm({ validateCriteriaMode: 'all' });
-  const onSubmit = data => {
+  const onSubmit = (data) => {
     console.log(data);
     setSubmitted(true);
   };
 
-  submitted && (document.body.style.overflow = 'hidden');
+  submitted && (document.body.style.overflow = "hidden");
 
   return (
     <div className="w-screen ">
       <Head>
-        <title>Fasta > Forgot Password</title>
+        <title>Fasta Password Reset</title>
         <link rel="icon" href="/images/Logo.png" />
       </Head>
 
