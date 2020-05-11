@@ -10,7 +10,7 @@ const TripBody = styled.div`
   span {
     display: block;
   }
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 `;
 const Start = styled.span``;
 const End = styled.span``;
@@ -19,7 +19,7 @@ const Trip = () => {
   return (
     <TripBody className="trip">
       <Start>Start Point : Rumuokoro, Port Harcourt</Start>
-      <span>to</span>
+      <img src="images/Connector.png" alt="connector" />
       <End>End Point : Rumuokoro, Port Harcourt</End>
     </TripBody>
   );

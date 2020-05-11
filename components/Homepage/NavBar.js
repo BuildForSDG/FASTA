@@ -11,17 +11,15 @@ const Nav = styled.div`
   top: 0;
 `;
 
-const NavLogo = styled.h3`
-  font-size: 16px;
-  font-weight: bold;
-  color: #43a047;
+const NavLogo = styled.img`
+  height: 30px;
 `;
 
 const NavBar = (props) => {
   return (
     <Nav className="flex justify-between items-center">
-      <NavLogo>{props.name}</NavLogo>
-      <div>...</div>
+      <NavLogo src="images/Logo.png" alt="Fasta" />
+      <img className="cursor-pointer" src="images/More.png" alt="more" />
     </Nav>
   );
 };

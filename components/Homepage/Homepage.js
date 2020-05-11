@@ -4,8 +4,9 @@ import NavBar from "./NavBar";
 import GPS from "./GPS";
 import NewTrip from "./Trips/NewTrip";
 import RecentTrips from "./Trips/RecentTrips";
-import Report from "./NewReport";
+import NewReport from "./NewReport";
 import BottomNav from "./BottomNav";
+import Reports from "./Reports/Reports";
 
 const Body = styled.main`
   margin: 20px;
@@ -19,7 +20,8 @@ const Homepage = (props) => {
         <GPS />
         <NewTrip />
         <RecentTrips />
-        <Report />
+    <Reports />
+        <NewReport />
       </Body>
       <BottomNav />
     </div>

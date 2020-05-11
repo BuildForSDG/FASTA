@@ -12,8 +12,6 @@ const GPSbody = styled.div`
 const Details = styled.p`
   color: #a04743;
   width: 70%;
-  text-align: left;
-  white-space: pre-wrap;
   span {
     display: block;
   }
@@ -22,7 +20,7 @@ const Details = styled.p`
 const GPS = (props) => {
   return (
     <GPSbody className="flex justify-evenly items-center">
-      <span>Icon</span>
+      <img src="images/alert.png" alt="" />
       <Details>
         Your GPS location is off!<span>Please turn it on to use FASTA</span>
       </Details>

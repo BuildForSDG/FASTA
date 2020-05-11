@@ -13,13 +13,14 @@ const Body = styled.div`
   border-radius: 10px;
   padding: 20px 20px;
   margin-bottom: 60px;
+  margin-top: 30px;
 `;
 const Text = styled.p`
   font-size: 16px;
   text-align: left;
 `;
 
-const Report = (props) => {
+const NewReport = (props) => {
   return (
     <Body>
       <Heading>Make a New Report</Heading>
@@ -28,4 +29,4 @@ const Report = (props) => {
   );
 };
 
-export default Report;
+export default NewReport;
