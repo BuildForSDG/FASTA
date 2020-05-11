@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable no-useless-escape */
 import React, { useState } from "react";
 import Head from "next/head";
@@ -6,7 +7,7 @@ import { useForm, ErrorMessage } from "react-hook-form";
 
 import Header from "../components/Header";
 import Input from "../components/Input";
-import { SubmitButton, LinkButton } from '../components/Buttons';
+import { SubmitButton, LinkButton } from "../components/Buttons";
 import { H3 } from "../components/Text/Headings";
 import { TextSmall } from "../components/Text/Body";
 
@@ -22,7 +23,7 @@ const AlertCardStyle = styled.div`
 const ResetPassword = () => {
   const [submitted, setSubmitted] = useState(false);
 
-  const { register, handleSubmit, errors } = useForm({ validateCriteriaMode: 'all' });
+  const { register, handleSubmit, errors } = useForm({ validateCriteriaMode: "all" });
   const onSubmit = (data) => {
     console.log(data);
     setSubmitted(true);
@@ -51,10 +52,10 @@ const ResetPassword = () => {
             type="email"
             name="email"
             ref={register({
-              required: 'Please provide registered email',
+              required: "Please provide registered email",
               pattern: {
                 value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w+)+$/,
-                message: 'Email not valid'
+                message: "Email not valid"
               }
             })}
             placeholder="example@email.com"
@@ -77,11 +78,11 @@ const ResetPassword = () => {
         {submitted && (
           <div
             className="h-screen w-screen fixed top-0 left-0 z-40 flex justify-center items-end pb-16"
-            style={{ backgroundColor: '#AFDEB199' }}
+            style={{ backgroundColor: "#AFDEB199" }}
           >
             <AlertCardStyle className="w-10/12 bg-white">
               <img src="/images/success.svg" alt="" className="mx-auto mb-12" />
-              <TextSmall className="text-center mb-6" style={{ color: '#43A047' }}>
+              <TextSmall className="text-center mb-6" style={{ color: "#43A047" }}>
                 Your recovery link has been sent to your email.
               </TextSmall>
 

@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable no-useless-escape */
 import React, { useState, useRef } from "react";
 import Head from "next/head";
@@ -7,7 +8,7 @@ import { useForm, ErrorMessage } from "react-hook-form";
 
 import Header from "../components/Header";
 import Input from "../components/Input";
-import { SubmitButton, LinkButton } from '../components/Buttons';
+import { SubmitButton, LinkButton } from "../components/Buttons";
 import { H3 } from "../components/Text/Headings";
 import { TextSmall } from "../components/Text/Body";
 
@@ -23,11 +24,11 @@ const AlertCardStyle = styled.div`
 const Login = () => {
   const [submitted, setSubmitted] = useState(false);
 
-  const { register, handleSubmit, errors, watch } = useForm({ validateCriteriaMode: 'all' });
+  const { register, handleSubmit, errors, watch } = useForm({ validateCriteriaMode: "all" });
   const password = useRef({});
-  password.current = watch('password', '');
-  const onSubmit = data => {
-    console.log(data);
+  password.current = watch("password", "");
+  const onSubmit = (data) => {
+    // console.log(data);
     setSubmitted(true);
   };
 
@@ -52,10 +53,10 @@ const Login = () => {
             type="text"
             name="full_name"
             ref={register({
-              required: 'Please enter your full name',
+              required: "Please enter your full name",
               minLength: {
                 value: 3,
-                message: 'Please enter complete name'
+                message: "Please enter complete name"
               }
             })}
             placeholder="Your Full Name"
@@ -76,10 +77,10 @@ const Login = () => {
             type="email"
             name="email"
             ref={register({
-              required: 'Please provide registered email',
+              required: "Please provide registered email",
               pattern: {
                 value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w+)+$/,
-                message: 'Email not valid'
+                message: "Email not valid"
               }
             })}
             placeholder="example@email.com"
@@ -100,10 +101,10 @@ const Login = () => {
             type="tel"
             name="phone"
             ref={register({
-              required: 'Please provide your phone number',
+              required: "Please provide your phone number",
               pattern: {
                 value: /\d{11,14}/,
-                message: 'phone number not valid'
+                message: "phone number not valid"
               }
             })}
             placeholder="Phone Number"
@@ -124,10 +125,10 @@ const Login = () => {
             type="password"
             name="password"
             ref={register({
-              required: 'Please enter password',
+              required: "Please enter password",
               minLength: {
                 value: 8,
-                message: 'password should be at least 8 characters'
+                message: "password should be at least 8 characters"
               }
             })}
             placeholder="Password"
@@ -148,12 +149,12 @@ const Login = () => {
             type="password"
             name="cpassword"
             ref={register({
-              required: 'Please re-enter password',
+              required: "Please re-enter password",
               minLength: {
                 value: 8,
-                message: 'password should be at least 8 characters'
+                message: "password should be at least 8 characters"
               },
-              validate: value => value === password.current || 'The passwords do not match'
+              validate: value => value === password.current || "The passwords do not match"
             })}
             placeholder="Confirm Password"
           />
@@ -168,7 +169,7 @@ const Login = () => {
             }
           </ErrorMessage>
 
-          <p className="text-xs mt-5 text-center w-10/12 mx-auto" style={{ color: '#43A047' }}>
+          <p className="text-xs mt-5 text-center w-10/12 mx-auto" style={{ color: "#43A047" }}>
             By creating an account you agree to our Terms of Service and Privacy Policy
           </p>
 
@@ -178,7 +179,7 @@ const Login = () => {
         </form>
 
         <div className="w-full mt-10">
-          <p className="text-xs mb-3 text-center" style={{ color: '#43A047' }}>
+          <p className="text-xs mb-3 text-center" style={{ color: "#43A047" }}>
             Don't have an account?
           </p>
           <Link href="signup">
@@ -186,8 +187,8 @@ const Login = () => {
               <div
                 className="cursor-pointer w-full py-4 text-center text-sm"
                 style={{
-                  backgroundColor: '#7AC77D',
-                  color: '#ffffff'
+                  backgroundColor: "#7AC77D",
+                  color: "#ffffff"
                 }}
               >
                 LOGIN
@@ -199,11 +200,11 @@ const Login = () => {
         {submitted && (
           <div
             className="h-screen w-screen fixed top-0 left-0 z-40 flex justify-center items-end pb-16"
-            style={{ backgroundColor: '#AFDEB199' }}
+            style={{ backgroundColor: "#AFDEB199" }}
           >
             <AlertCardStyle className="w-10/12 bg-white">
               <img src="/images/success.svg" alt="" className="mx-auto mb-12" />
-              <TextSmall className="text-center mb-6" style={{ color: '#43A047' }}>
+              <TextSmall className="text-center mb-6" style={{ color: "#43A047" }}>
                 Your Account was created successfully.
               </TextSmall>
 

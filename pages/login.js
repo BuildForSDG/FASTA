@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable no-useless-escape */
 import React, { useState } from "react";
 import Head from "next/head";
@@ -7,7 +8,7 @@ import { useForm, ErrorMessage } from "react-hook-form";
 
 import Header from "../components/Header";
 import Input from "../components/Input";
-import { SubmitButton } from '../components/Buttons';
+import { SubmitButton } from "../components/Buttons";
 import { H3 } from "../components/Text/Headings";
 import { TextSmall } from "../components/Text/Body";
 
@@ -16,9 +17,9 @@ const MainStyle = styled.main`
 `;
 
 const Login = () => {
-  const { register, handleSubmit, errors } = useForm({ validateCriteriaMode: 'all' });
-  const onSubmit = data => {
-    console.log(data);
+  const { register, handleSubmit, errors } = useForm({ validateCriteriaMode: "all" });
+  const onSubmit = (data) => {
+    // console.log(data);
   };
 
   return (
@@ -40,10 +41,10 @@ const Login = () => {
             type="email"
             name="email"
             ref={register({
-              required: 'Please provide registered email',
+              required: "Please provide registered email",
               pattern: {
                 value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w+)+$/,
-                message: 'Email not valid'
+                message: "Email not valid"
               }
             })}
             placeholder="example@email.com"
@@ -64,10 +65,10 @@ const Login = () => {
             type="password"
             name="password"
             ref={register({
-              required: 'Please enter authorized password',
+              required: "Please enter authorized password",
               minLength: {
                 value: 8,
-                message: 'password should be at least 8 characters'
+                message: "password should be at least 8 characters"
               }
             })}
             placeholder="Password"
@@ -105,8 +106,8 @@ const Login = () => {
               <div
                 className="cursor-pointer w-full py-4 text-center text-sm"
                 style={{
-                  backgroundColor: '#7AC77D',
-                  color: '#ffffff'
+                  backgroundColor: "#7AC77D",
+                  color: "#ffffff"
                 }}
               >
                 REGISTER

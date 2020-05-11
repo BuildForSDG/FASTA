@@ -1,4 +1,6 @@
+/* eslint-disable prettier/prettier */
 import styled from "styled-components";
+import React from "react";
 
 const InputStyle = styled.div`
   height: 48px;
