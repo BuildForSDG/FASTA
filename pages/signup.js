@@ -154,7 +154,7 @@ const Login = () => {
                 value: 8,
                 message: "password should be at least 8 characters"
               },
-              validate: value => value === password.current || "The passwords do not match"
+              validate: (value) => value === password.current || "The passwords do not match"
             })}
             placeholder="Confirm Password"
           />
