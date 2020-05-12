@@ -227,10 +227,8 @@ router.route("/reset/:token")
         </div>
     </div>`
       };
-      const fireTheMail = mailer(options);
-      if (fireTheMail) {
-        return res.json({ response: `Email sent to ${user.email}` });
-      }
+      mailer(options);
+
       // return res.status(200).json({ response: "mail sent" });
     } catch (error) {
       return res.status(500).json({ response: `error ${error} occurred` });
