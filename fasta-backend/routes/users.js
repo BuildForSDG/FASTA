@@ -1,5 +1,6 @@
 /* eslint-disable consistent-return */
 /* eslint-disable func-names */
+/* eslint-disable no-undefined */
 const express = require("express");
 const crypto = require("crypto");
 const async = require("async");
@@ -204,7 +205,7 @@ router.route("/reset/:token")
       const user = await User.findOneAndUpdate(
         { resetPasswordToken: req.params.token, resetPasswordExpires: { $gte: Date.now() } },
         // eslint-disable-next-line max-len
-        { $set: { password: hash }, resetPasswordToken: undefined, resetPasswordExpires: undefined },
+        { $set: { password: hash }, resetPasswordToken: null, resetPasswordExpires: null },
         { useFindAndModify: false }
       );
       if (!user) {
