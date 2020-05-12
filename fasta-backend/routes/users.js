@@ -132,7 +132,7 @@ router.post("/forget", (req, res, next) => {
       try {
         const resetlink = `${siteUrl}/api/v1/users/reset/${token}`;
         const options = {
-          reciever: email,
+          receiver: email,
           subject: "Password Reset",
           text: `Hello ${user.fullname}`,
           output: `<p style='color: black;margin: 0px 0 30px;font-size:16px'>A password request was received, click the link below to proceed with resetting your password, <b>the link expires in 1hrs</b>:</p>
