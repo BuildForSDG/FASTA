@@ -32,6 +32,19 @@ router.post("/", async (req, res) => {
     await User.create({
       fullname, email, phonenumber, password: hash
     });
+    const options = {
+      receiver: email,
+      subject: "Password Reset",
+      text: `Hello ${fullname}`,
+      output: `<div style='margin: 0 auto; background: #ededed; border-top:2px solid green; border-bottom:2px solid green; box-shadow: 1px 2px 3px 4px #ccc; padding: 1.5rem '>
+      <h1>Hey! ${fullname} Welcome to Fasta</h1>
+      <hr>
+      <p style='padding:1.5rem;'>FASTA helps you plan your Trip and allow you to go faster, click this <a href='#'>Link</a> to confirm your registration</p>
+      <h4>Welcome on board</h4>
+      </div>
+      `
+    };
+    mailer(options);
     return res.status(200).json({ response: "Signup succesfully" });
   } catch (error) {
     return res.status(500).json({ response: error.message });
