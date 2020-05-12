@@ -16,9 +16,9 @@ const mailer = async (options) => {
 
   const mailOptions = {
     from: "<fastamovement@gmail.com>",
-    to: `${options.receiver}`,
-    subject: `${options.subject}`,
-    text: `${options.text}`,
+    to: options.receiver,
+    subject: options.subject,
+    text: options.text,
     html: options.output
   };
   console.log(mailOptions);
