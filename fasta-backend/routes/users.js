@@ -128,19 +128,23 @@ router.post("/forget", (req, res, next) => {
     },
 
     function (token, user, done) {
-      const siteUrl = "localhost:3000";
       try {
-        const resetlink = `${siteUrl}/api/v1/users/reset/${token}`;
+        const resetlink = `${req.protocol}://${req.hostname}/api/v1/users/reset/${token}`;
         const options = {
           receiver: email,
           subject: "Password Reset",
           text: `Hello ${user.fullname}`,
-          output: `<p style='color: black;margin: 0px 0 30px;font-size:16px'>A password request was received, click the link below to proceed with resetting your password, <b>the link expires in 1hrs</b>:</p>
-           <p style='color: black;margin: 0px 0 30px;font-size:16px;text-align:center'><a href="<%= resetlink %>" style="background:blue;padding:10px 12px;color:white">RESET PASSWORD</p>
+          output: `<div style='margin: 0 auto; background: #ededed; border-top:2px solid green; border-bottom:2px solid green; box-shadow: 1px 2px 3px 4px #ccc; padding: 1.5rem '>
+          <div style='width:98%;margin-left:1%;border-bottom:1px dotted black;text-align:center;padding:15px 0;'><img src='<%= site.siteLogo %>' style='height:75px'/></div>
+          <div style='margin:0 1% 1%;background:#f1f1f1;padding:20px;'>
+            A password request was received, click the link below to proceed with resetting your password, <b>the link expires in 1hr</b>:</p>
+            
+           <p style='color: black;margin: 0px 0 30px;font-size:16px;text-align:center'><a href= "${resetlink}" style="background:blue;padding:10px 12px;color:white">RESET PASSWORD</p>
            <p style='color: red;text-align:center;margin: 15px 0;font-size:16px'>Kindly disregard this email if you didn't request for password reset.</p>
            <p> if the above button didnt work, you can copy and paste this link below into your browser </p>
-             ${resetlink}
-           <p style='color: black;margin: 0px 0 15px;font-size:16px;'>Thank you.</p>`
+            ${resetlink}
+           <p style='color: black;margin: 0px 0 15px;font-size:16px;'>Thank you.</p>
+           `
 
         };
         const fireTheMail = mailer(options);
@@ -194,27 +198,25 @@ router.route("/reset/:token")
         return res.status(404).json({ response: "Invalid user" });
       }
       res.status(200).json({ response: "your password reset was succesful, login to continue" });
-      // TODO SEND MAIL TO THE USER
-      const siteUrl = "localhost:3000";
-      // eslint-disable-next-line no-unused-vars
-      const loginlink = `${siteUrl}/api/v1/users/login`;
+      const loginlink = `${req.protocol}://${req.hostname}/api/v1/users/login`;
       const options = {
-        reciever: user.email,
+        receiver: user.email,
         subject: "Password Reset",
         text: `Hello ${user.fullname}`,
-        output: `<div style='border:1px solid #dadada;width:90%;margin:20px 5%;color:#333 !important;'>
+        output: `<div style='margin: 0 auto; background: #ededed; border-top:2px solid green; border-bottom:2px solid green; box-shadow: 1px 2px 3px 4px #ccc; padding: 1.5rem '>
         <div style='width:98%;margin-left:1%;border-bottom:1px dotted black;text-align:center;padding:15px 0;'><img src='<%= site.siteLogo %>' style='height:75px'/></div>
         <div style='margin:0 1% 1%;background:#f1f1f1;padding:20px;'>
-            <h3 style='color: black;margin: 0px 0 15px;'>Hello <%= user.fullname %>,</h3>
+            <h3 style='color: black;margin: 0px 0 15px;'>Hello ${user.fullname},</h3>
             <p style='color: black;margin: 0px 0 30px;font-size:16px'>Your password reset request was successful, kindly login with the newly set password.</p>
-            <p style='color: black;margin: 0px 0 30px;font-size:16px;text-align:center'><a href="<%= loginlink %>" style="background:blue;padding:10px 12px;color:white">LOGIN TO DASHBOARD</p>
+            <p style='color: black;margin: 0px 0 30px;font-size:16px;text-align:center'><a href="${loginlink}" style="background:blue;padding:10px 12px;color:white">LOGIN TO DASHBOARD</p>
             <p style='color: black;margin: 0px 0 15px;font-size:16px;'>Thank you.</p>
         </div>
     </div>`
-
       };
-      mailer(options);
-      console.log("yeah");
+      const fireTheMail = mailer(options);
+      if (fireTheMail) {
+        return res.json({ response: `Email sent to ${user.email}` });
+      }
       // return res.status(200).json({ response: "mail sent" });
     } catch (error) {
       return res.status(500).json({ response: `error ${error} occurred` });
