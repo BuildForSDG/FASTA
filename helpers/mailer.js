@@ -21,13 +21,13 @@ const mailer = async (options) => {
     text: options.text,
     html: options.output
   };
-  console.log(mailOptions);
+  // console.log(mailOptions);
   await fastaMailer.sendMail(mailOptions, (error, info) => {
-    console.log(mailOptions, info);
+    // console.log(mailOptions, info);
     if (error) {
-      console.log(error);
+      throw error;
     }
-    console.log("Message sent: %s");
+    return `Message sent: %s ${info.messageId}`;
   });
 };
 
