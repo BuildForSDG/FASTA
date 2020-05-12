@@ -9,10 +9,14 @@ const router = express.Router();
 
 router.post("/send", async (req, res) => {
   // what will be sent to the registrants after registering
-  const output = `<div style='margin: 0 auto; background: #ededed; border-top:2px solid green; border-bottom:2px solid green; box-shadow: 1px 2px 3px 4px #ccc; padding: 1.5rem '>
+  const output = `<div style='margin: 0 auto; background: #ededed; border-top:2px solid green; border-bottom:2px solid green; box-shadow: 1px 2px 3px 4px #ccc; padding: 1.5rem; width: 50%; padding: 20px; height: auto'>
           <h1>Hey! ${req.body.fullname} Welcome to Fasta</h1>
           <hr>
-          <p style='padding:1.5rem;'>FASTA helps you plan your Trip and allow you to go faster, click this <a href='#'>Link</a> to confirm your registration</p>
+          <div style='padding:1.5rem; margin:15px'>
+          <p>FASTA helps you plan your Trip and allow you to go faster, click this <a href='#'>Link</a> to confirm your registration</div>
+          </div>
+          <br>
+          <br>
           <h4>Welcome on board</h4>
           </div>
           `;
