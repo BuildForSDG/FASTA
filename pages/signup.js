@@ -3,8 +3,11 @@
 import React, { useState, useRef } from "react";
 import Head from "next/head";
 import Link from "next/link";
+import Router from "next/router";
 import styled from "styled-components";
 import { useForm, ErrorMessage } from "react-hook-form";
+import { toast } from "react-toastify";
+import { getUrl } from "./_functions";
 
 import Header from "../components/Header";
 import Input from "../components/Input";
@@ -20,17 +23,46 @@ const AlertCardStyle = styled.div`
   border-radius: 10px;
   padding: 60px 26px 46px;
 `;
+toast.configure();
 
-const Login = () => {
+const Signup = ({loggedIn, setLoggedIn}) => {
   const [submitted, setSubmitted] = useState(false);
+  console.log("loggedIn:", loggedIn);
 
   const { register, handleSubmit, errors, watch } = useForm({ validateCriteriaMode: "all" });
   const password = useRef({});
   password.current = watch("password", "");
   const onSubmit = (data) => {
-    // console.log(data);
-    setSubmitted(true);
+    console.log(data);
+    signUp(data);
   };
+
+const apiUrl = getUrl();
+
+//  sign up
+const signUp = async(e) => {
+  console.log(e, Object.keys(e));
+
+try {
+      const res = await fetch(`${apiUrl}/users`, {
+                              method: 'POST', 
+                              body: JSON.stringify(e), 
+                              headers: { 'Content-Type' : 'application/json'}
+                            });
+      console.log(res.status);
+    if (res.status === 200) {
+      setSubmitted(true);
+    }
+    const response = await res.json();
+      console.log(response);
+      toast(response.response, { position: toast.POSITION.TOP_LEFT });
+} catch(e) {
+      console.log(e, 'Some error in connection, Please try again!');
+      toast("Error in connection", { position: toast.POSITION.TOP_LEFT });
+}
+  return;
+}  
+if (loggedIn) Router.push("/home");
 
   submitted && (document.body.style.overflow = "hidden");
 
@@ -51,7 +83,7 @@ const Login = () => {
           <Input
             className="mx-auto"
             type="text"
-            name="full_name"
+            name="fullname"
             ref={register({
               required: "Please enter your full name",
               minLength: {
@@ -61,7 +93,7 @@ const Login = () => {
             })}
             placeholder="Your Full Name"
           />
-          <ErrorMessage errors={errors} name="full_name">
+          <ErrorMessage errors={errors} name="fullname">
             {({ messages }) =>
               messages &&
               Object.entries(messages).map(([type, message]) => (
@@ -99,7 +131,7 @@ const Login = () => {
           <Input
             className="mx-auto mt-5"
             type="tel"
-            name="phone"
+            name="phonenumber"
             ref={register({
               required: "Please provide your phone number",
               pattern: {
@@ -109,7 +141,7 @@ const Login = () => {
             })}
             placeholder="Phone Number"
           />
-          <ErrorMessage errors={errors} name="phone">
+          <ErrorMessage errors={errors} name="phonenumber">
             {({ messages }) =>
               messages &&
               Object.entries(messages).map(([type, message]) => (
@@ -147,7 +179,7 @@ const Login = () => {
           <Input
             className="mx-auto mt-5"
             type="password"
-            name="cpassword"
+            name="confirmPassword"
             ref={register({
               required: "Please re-enter password",
               minLength: {
@@ -158,7 +190,7 @@ const Login = () => {
             })}
             placeholder="Confirm Password"
           />
-          <ErrorMessage errors={errors} name="cpassword">
+          <ErrorMessage errors={errors} name="confirmPassword">
             {({ messages }) =>
               messages &&
               Object.entries(messages).map(([type, message]) => (
@@ -182,7 +214,7 @@ const Login = () => {
           <p className="text-xs mb-3 text-center" style={{ color: "#43A047" }}>
             Don't have an account?
           </p>
-          <Link href="signup">
+          <Link href="login">
             <a>
               <div
                 className="cursor-pointer w-full py-4 text-center text-sm"
@@ -208,8 +240,8 @@ const Login = () => {
                 Your Account was created successfully.
               </TextSmall>
 
-              <LinkButton href="login" className="w-10/12 mx-auto">
-                continue
+              <LinkButton href="home" className="w-10/12 mx-auto">
+               <span onClick={() => setLoggedIn(true)}> continue </span>
               </LinkButton>
             </AlertCardStyle>
           </div>
@@ -219,4 +251,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;

@@ -3,8 +3,11 @@
 import React, { useState } from "react";
 import Head from "next/head";
 import Link from "next/link";
+import Router from "next/router";
 import styled from "styled-components";
 import { useForm, ErrorMessage } from "react-hook-form";
+import { toast } from "react-toastify";
+import { getUrl } from "./_functions";
 
 import Header from "../components/Header";
 import Input from "../components/Input";
@@ -15,12 +18,43 @@ import { TextSmall } from "../components/Text/Body";
 const MainStyle = styled.main`
   height: calc(100vh - 78px);
 `;
+toast.configure();
 
-const Login = () => {
+const Login = ({loggedIn, setLoggedIn}) => {
+  console.log("loggedIn:", loggedIn);
+  
   const { register, handleSubmit, errors } = useForm({ validateCriteriaMode: "all" });
   const onSubmit = (data) => {
-    // console.log(data);
+    console.log(data);
+    signIn(data);
   };
+
+ const apiUrl = getUrl();
+
+//  sign in
+const signIn = async(e) => {
+  console.log(e, Object.keys(e));
+
+try {
+      const res = await fetch(`${apiUrl}/users/login`, {
+                              method: 'POST', 
+                              body: JSON.stringify(e), 
+                              headers: { 'Content-Type' : 'application/json'}
+                            });
+      const response = await res.json();
+      console.log(res.status, response);
+      if (res.status === 200) {
+        setLoggedIn(true);
+      } else {
+        toast("Invalid email and/or password", { position: toast.POSITION.TOP_LEFT });
+      }
+} catch(e) {
+      console.log(e, 'Some error in connection, Please try again!');
+      toast("Error in connection", { position: toast.POSITION.TOP_LEFT });
+} 
+  return;
+}
+  if (loggedIn) Router.push("/home");
 
   return (
     <div className="w-screen ">

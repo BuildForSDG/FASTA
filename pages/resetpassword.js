@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import Head from "next/head";
 import styled from "styled-components";
 import { useForm, ErrorMessage } from "react-hook-form";
+import { toast } from "react-toastify";
+import { getUrl } from "./_functions";
 
 import Header from "../components/Header";
 import Input from "../components/Input";
@@ -20,14 +22,40 @@ const AlertCardStyle = styled.div`
   padding: 60px 26px 46px;
 `;
 
+toast.configure();
+
 const ResetPassword = () => {
   const [submitted, setSubmitted] = useState(false);
 
   const { register, handleSubmit, errors } = useForm({ validateCriteriaMode: "all" });
   const onSubmit = (data) => {
-    // console.log(data);
-    setSubmitted(true);
+    console.log(data);
+    reset(data);
   };
+
+ const apiUrl = getUrl();
+
+//  reset password
+const reset = async(e) => {
+  console.log(e, Object.keys(e));
+
+try {
+      const res = await fetch(`${apiUrl}/users/login`, {
+                              method: 'POST', 
+                              body: JSON.stringify(e), 
+                              headers: { 'Content-Type' : 'application/json'}
+                            });
+      console.log(res.status);
+      if (res.status === 200) setLoggedIn(true);
+      const response = await res.json();
+      toast(response.response, { position: toast.POSITION.TOP_LEFT });
+
+} catch(e) {
+      console.log(e, 'Some error in connection, Please try again!');
+      toast("Error in connection", { position: toast.POSITION.TOP_LEFT });
+}
+  return;
+}
 
   submitted && (document.body.style.overflow = "hidden");
 
