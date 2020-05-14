@@ -7,7 +7,6 @@ import Router from "next/router";
 import styled from "styled-components";
 import { useForm, ErrorMessage } from "react-hook-form";
 import { toast } from "react-toastify";
-import { getUrl } from "./_functions";
 
 import Header from "../components/Header";
 import Input from "../components/Input";
@@ -20,7 +19,7 @@ const MainStyle = styled.main`
 `;
 toast.configure();
 
-const Login = ({loggedIn, setLoggedIn}) => {
+const Login = ({loggedIn, setLoggedIn, apiCall}) => {
   console.log("loggedIn:", loggedIn);
   
   const { register, handleSubmit, errors } = useForm({ validateCriteriaMode: "all" });
@@ -28,8 +27,15 @@ const Login = ({loggedIn, setLoggedIn}) => {
     console.log(data);
     signIn(data);
   };
-
- const apiUrl = getUrl();
+  const getUrl = () => {
+    if(location.host.indexOf('localhost') >= 0){
+        console.log("functions");
+      return 'http://localhost:8080/api/v1';
+    } else { 
+      return 'https://www.fastaapp.herokuapp.com/api/v1';
+    }
+  }
+  const apiUrl = getUrl();
 
 //  sign in
 const signIn = async(e) => {
