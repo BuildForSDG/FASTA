@@ -3,8 +3,8 @@
 /* eslint-disable no-unused-vars */
 const express = require("express");
 const { Client, Status } = require("@googlemaps/google-maps-services-js");
-const Transporters = require("../api/transporters-api");
-const { TripInfo, TripMetrix } = require("../api/trip-api");
+const TripMetrix = require("../api/schedule-api");
+const TripInfo = require("../api/transporters-api");
 
 
 const router = express.Router();
