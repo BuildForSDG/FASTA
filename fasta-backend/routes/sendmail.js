@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 /* eslint-disable consistent-return */
 /* eslint-disable prefer-const */
+
 const express = require("express");
 const nodemailer = require("nodemailer");
 const smtpTransport = require("nodemailer-smtp-transport");
