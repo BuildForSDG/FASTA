@@ -3,8 +3,8 @@
 /* eslint-disable no-unused-vars */
 const express = require("express");
 const { Client, Status } = require("@googlemaps/google-maps-services-js");
-const Transporters = require("../api/transporters-api");
-const { TripInfo, TripMetrix } = require("../api/trip-api");
+const TripMetrix = require("../api/schedule-api");
+const TripInfo = require("../api/transporters-api");
 
 
 const router = express.Router();
@@ -18,11 +18,10 @@ router.post("/location-transporter", (req, res) => {
 });
 
 // api that gives the computed value for distance between in meters
-router.get("/trip-distance", (req, res) => {
-  const trip = new TripMetrix({
-    origin: { lat: req.body.latitude, lng: req.body.longitude },
-    destination: { lat: req.body.latitude, lng: req.body.longitude }
-  });
+router.post("/trip-distance", (req, res) => {
+  const originCoords = new TripInfo(req.body.latitude, req.body.longitude);
+  const destCoords = new TripInfo(req.body.latitude, req.body.longitude);
+  const trip = new TripMetrix(originCoords, destCoords);
   const tripdistance = trip.getTripDistance();
 
   res.json(tripdistance);
