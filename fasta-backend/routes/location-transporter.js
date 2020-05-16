@@ -19,9 +19,21 @@ router.post("/location-transporter", (req, res) => {
 
 // api that gives the computed value for distance between in meters
 router.post("/trip-distance", (req, res) => {
-  const originCoords = new TripInfo(req.body.latitude, req.body.longitude);
-  const destCoords = new TripInfo(req.body.latitude, req.body.longitude);
-  const trip = new TripMetrix(originCoords, destCoords);
+  console.log(req.body);
+
+  const origin = {
+    lat: req.body.latitude,
+    lng: req.body.longitude
+  };
+
+  const destination = {
+    lat: req.body.latitude,
+    lng: req.body.longitude
+  };
+  // const origin = new TripInfo(req.body.latitude, req.body.longitude);
+  // const destination = new TripInfo(req.body.latitude, req.body.longitude);
+  console.log(destination);
+  const trip = new TripMetrix(origin, destination);
   const tripdistance = trip.getTripDistance();
 
   res.json(tripdistance);
