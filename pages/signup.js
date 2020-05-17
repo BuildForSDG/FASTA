@@ -6,11 +6,13 @@ import Link from "next/link";
 import Router from "next/router";
 import styled from "styled-components";
 import { useForm, ErrorMessage } from "react-hook-form";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-nextjs-toast";
+import { css } from "@emotion/core";
+import BeatLoader from "react-spinners/BeatLoader";
 
 import Header from "../components/Header";
 import Input from "../components/Input";
-import { SubmitButton, LinkButton } from "../components/Buttons";
+import { SubmitButton, LinkButton, LoaderContainer } from "../components/Buttons";
 import { H3 } from "../components/Text/Headings";
 import { TextSmall } from "../components/Text/Body";
 
@@ -22,10 +24,10 @@ const AlertCardStyle = styled.div`
   border-radius: 10px;
   padding: 60px 26px 46px;
 `;
-toast.configure();
 
-const Signup = ({loggedIn, setLoggedIn}) => {
+const Signup = ({loggedIn, setLoggedIn, getUrl}) => {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
   console.log("loggedIn:", loggedIn);
 
   const { register, handleSubmit, errors, watch } = useForm({ validateCriteriaMode: "all" });
@@ -35,19 +37,13 @@ const Signup = ({loggedIn, setLoggedIn}) => {
     console.log(data);
     signUp(data);
   };
-  const getUrl = () => {
-    if(location.host.indexOf('localhost') >= 0){
-        console.log("Functions");
-      return 'http://localhost:8080/api/v1';
-    } else { 
-      return 'https://www.fastaapp.herokuapp.com/api/v1';
-    }
-  }
+ 
 const apiUrl = getUrl();
 
 //  sign up
 const signUp = async(e) => {
   console.log(e, Object.keys(e));
+  setLoading(true);
 
 try {
       const res = await fetch(`${apiUrl}/users`, {
@@ -61,11 +57,12 @@ try {
     }
     const response = await res.json();
       console.log(response);
-      toast(response.response, { position: toast.POSITION.TOP_LEFT });
+      toast.notify(response.response);
 } catch(e) {
       console.log(e, 'Some error in connection, Please try again!');
-      toast("Error in connection", { position: toast.POSITION.TOP_LEFT });
+      toast.notify("Error in connection");
 }
+  setLoading(false);
   return;
 }  
 if (loggedIn) Router.push("/home");
@@ -83,6 +80,7 @@ if (loggedIn) Router.push("/home");
 
       <MainStyle className="flex flex-col items-center justify-between">
         <form onSubmit={handleSubmit(onSubmit)} className="w-11/12 mt-4">
+        <ToastContainer />
           <H3 color="#43A047" className="mb-4 text-center">
             Create an Account
           </H3>
@@ -211,9 +209,18 @@ if (loggedIn) Router.push("/home");
             By creating an account you agree to our Terms of Service and Privacy Policy
           </p>
 
+          {loading ?
+          <LoaderContainer className="w-full mt-6">
+            <BeatLoader
+            size={30}
+            color={"#43a047"}
+            loading
+            />
+          </LoaderContainer>
+          :
           <SubmitButton type="submit" className="w-full mt-6">
             Continue
-          </SubmitButton>
+          </SubmitButton>}
         </form>
 
         <div className="w-full mt-10">
@@ -246,8 +253,8 @@ if (loggedIn) Router.push("/home");
                 Your Account was created successfully.
               </TextSmall>
 
-              <LinkButton href="home" className="w-10/12 mx-auto">
-               <span onClick={() => setLoggedIn(true)}> continue </span>
+              <LinkButton href="login" className="w-10/12 mx-auto">
+               <span> Please check your mail to login! </span>
               </LinkButton>
             </AlertCardStyle>
           </div>

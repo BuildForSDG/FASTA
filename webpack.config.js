@@ -20,6 +20,18 @@ module.exports = {
         query: {
           presets: ["es2015", "react"]
         }
+      },
+      {
+        test: /\.svg$/,
+        use: [
+          ['@svgr/webpack'],
+        ],
+      },
+      {
+        loader: 'react-svg-loader',
+        options: {
+          jsx: true // true outputs JSX tags
+        }
       }
     ]
   },

@@ -20,6 +20,25 @@ export const SubmitButton = styled.button`
   }
 `;
 
+export const LoaderContainer = styled.div`
+  height: 48px;
+  border: none;
+  outline: none;
+  // background: #43a047;
+  border-radius: 4px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  text-transform: uppercase;
+  text-align: center;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: bold;
+
+  &:focus {
+    outline: none;
+  }
+`;
+
 const LinkButtonStyle = styled.div`
   height: 48px;
   border: none;

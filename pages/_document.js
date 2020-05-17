@@ -1,6 +1,5 @@
 import Document from "next/document";
 import { ServerStyleSheet } from "styled-components";
-// import Router from "next/router";
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx) {
