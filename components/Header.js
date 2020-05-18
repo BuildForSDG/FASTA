@@ -1,6 +1,6 @@
 import Router from "next/router";
 
-const Header = (props) => {
+const Header = props => {
   return (
     <header className="container mx-auto mt-4 flex p-4 items-center">
       {props.back && (

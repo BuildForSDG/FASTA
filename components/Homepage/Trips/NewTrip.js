@@ -18,8 +18,7 @@ const Text = styled.p`
   padding: 15px 0;
 `;
 
-const NewTrip = (props) => {
-  console.log(props);
+const NewTrip = props => {
   return (
     <div className="new-trip">
       <Text>Welcome Back {props.user}!</Text>

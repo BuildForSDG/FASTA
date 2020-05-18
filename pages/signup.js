@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-useless-escape */
+/* eslint-disable no-console */
 import React, { useState, useRef } from "react";
 import Head from "next/head";
 import Link from "next/link";
@@ -33,10 +34,6 @@ const Signup = ({loggedIn, setLoggedIn, getUrl}) => {
   const { register, handleSubmit, errors, watch } = useForm({ validateCriteriaMode: "all" });
   const password = useRef({});
   password.current = watch("password", "");
-  const onSubmit = (data) => {
-    console.log(data);
-    signUp(data);
-  };
  
 const apiUrl = getUrl();
 
@@ -47,30 +44,29 @@ const signUp = async(e) => {
 
 try {
       const res = await fetch(`${apiUrl}/users`, {
-                              method: 'POST', 
+                              method: "POST", 
                               body: JSON.stringify(e), 
-                              headers: { 'Content-Type' : 'application/json'}
+                              headers: { "Content-Type" : "application/json"}
                             });
       console.log(res.status);
     if (res.status === 200) {
-      // const sendMail = await fetch(`${apiUrl}/send`, {
-      //   method: 'POST',
-      //   body: JSON.stringify(e.email), 
-      //   headers: { 'Content-Type' : 'application/json'}
-      // });
-      // console.log(sendMail);
       setSubmitted(true);
     }
     const response = await res.json();
       console.log(response);
       toast.notify(response.response);
 } catch(e) {
-      console.log(e, 'Some error in connection, Please try again!');
+      console.log(e, "Some error in connection, Please try again!");
       toast.notify("Error in connection");
 }
   setLoading(false);
-  return;
-}  
+}; 
+
+const onSubmit = (data) => {
+  console.log(data);
+  signUp(data);
+};
+
 if (loggedIn) Router.push("/home");
 
   submitted && (document.body.style.overflow = "hidden");
@@ -110,8 +106,7 @@ if (loggedIn) Router.push("/home");
                 <p key={type} className="text-xs text-red-500 text-center my-2">
                   {message}
                 </p>
-              ))
-            }
+              ))}
           </ErrorMessage>
 
           <Input
@@ -134,8 +129,7 @@ if (loggedIn) Router.push("/home");
                 <p key={type} className="text-xs text-red-500 text-center my-2">
                   {message}
                 </p>
-              ))
-            }
+              ))}
           </ErrorMessage>
 
           <Input
@@ -158,8 +152,7 @@ if (loggedIn) Router.push("/home");
                 <p key={type} className="text-xs text-red-500 text-center my-2">
                   {message}
                 </p>
-              ))
-            }
+              ))}
           </ErrorMessage>
 
           <Input
@@ -182,8 +175,7 @@ if (loggedIn) Router.push("/home");
                 <p key={type} className="text-xs text-red-500 text-center my-2">
                   {message}
                 </p>
-              ))
-            }
+              ))}
           </ErrorMessage>
 
           <Input
@@ -207,8 +199,7 @@ if (loggedIn) Router.push("/home");
                 <p key={type} className="text-xs text-red-500 text-center my-2">
                   {message}
                 </p>
-              ))
-            }
+              ))}
           </ErrorMessage>
 
           <p className="text-xs mt-5 text-center w-10/12 mx-auto" style={{ color: "#43A047" }}>
@@ -219,7 +210,7 @@ if (loggedIn) Router.push("/home");
           <LoaderContainer className="w-full mt-6">
             <BeatLoader
             size={30}
-            color={"#43a047"}
+            color="#43a047"
             loading
             />
           </LoaderContainer>

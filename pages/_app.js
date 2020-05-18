@@ -10,10 +10,19 @@ export default function MyApp({ Component, pageProps }) {
     // if(location.host.indexOf('localhost') >= 0){
     //     console.log("functions");
     //   return 'http://localhost:8080/api/v1';
-    // } else { 
-      return 'https://fastaapp.herokuapp.com/api/v1';
-    }
+    // } else {
+    return "https://fastaapp.herokuapp.com/api/v1";
+  };
   // }
 
-  return <Component {...pageProps} loggedIn={loggedIn} setLoggedIn={setLoggedIn} user={user} setUser={setUser} getUrl={getUrl} />;
+  return (
+    <Component
+      {...pageProps}
+      loggedIn={loggedIn}
+      setLoggedIn={setLoggedIn}
+      user={user}
+      setUser={setUser}
+      getUrl={getUrl}
+    />
+  );
 }
