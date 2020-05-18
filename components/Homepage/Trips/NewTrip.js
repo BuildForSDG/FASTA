@@ -19,9 +19,10 @@ const Text = styled.p`
 `;
 
 const NewTrip = (props) => {
+  console.log(props);
   return (
     <div className="new-trip">
-      <Text>Welcome Back!</Text>
+      <Text>Welcome Back {props.user}!</Text>
       <Body>
         <Heading>Plan a new trip</Heading>
         <p>Schedule your next outing</p>

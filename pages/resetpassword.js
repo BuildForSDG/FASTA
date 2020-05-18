@@ -41,7 +41,7 @@ const reset = async(e) => {
   setLoading(true);
 
 try {
-      const res = await fetch(`${apiUrl}/forget`, {
+      const res = await fetch(`${apiUrl}/users/forget`, {
                               method: 'POST', 
                               body: JSON.stringify(e), 
                               headers: { 'Content-Type' : 'application/json'}

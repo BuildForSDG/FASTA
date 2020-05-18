@@ -53,6 +53,12 @@ try {
                             });
       console.log(res.status);
     if (res.status === 200) {
+      // const sendMail = await fetch(`${apiUrl}/send`, {
+      //   method: 'POST',
+      //   body: JSON.stringify(e.email), 
+      //   headers: { 'Content-Type' : 'application/json'}
+      // });
+      // console.log(sendMail);
       setSubmitted(true);
     }
     const response = await res.json();

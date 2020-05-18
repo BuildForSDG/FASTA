@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 // import Router from "next/router";
+import Head from "next/head";
 import Homepage from "../components/Homepage/Homepage";
 
-const Home = ({loggedIn}) => {
+const Home = ({loggedIn, user}) => {
   
   console.log("loggedIn:", loggedIn);
     // if (!loggedIn) Router.push("/login"); 
@@ -13,12 +14,14 @@ const Home = ({loggedIn}) => {
     // }, [])
   return (
     <div>
-      <head>
+    <div>
+      <Head>
         <title>Fasta</title>
         <link rel="icon" href="/favicon.ico" />
-      </head>
+      </Head>
+      </div>
       <div className="h-screen flex" style={{ backgroundColor: "#F7F5F5" }}>
-        <Homepage />
+        <Homepage user={user} />
       </div>
     </div>
   );
