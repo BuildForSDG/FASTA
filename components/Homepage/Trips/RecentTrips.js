@@ -7,13 +7,13 @@ const Text = styled.p`
   margin: 10px 0;
 `;
 
-const RecentTrips = (props) => {
+const RecentTrips = props => {
   return (
     <div className="trips my-4 flex flex-col justify-between">
       <Text>Your Recent Trips</Text>
       <Trip />
       <Trip />
-      <span style={{ color: "#2699fb", fontSize: "12px"}}>See All Trips</span>
+      <span style={{ color: "#2699fb", fontSize: "12px" }}>See All Trips</span>
     </div>
   );
 };

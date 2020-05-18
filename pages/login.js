@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-useless-escape */
+/* eslint-disable no-console */
 import React, { useState } from "react";
 import Head from "next/head";
 import Link from "next/link";
@@ -25,10 +26,6 @@ const Login = ({loggedIn, setLoggedIn, user, setUser, getUrl}) => {
   const [loading, setLoading] = useState(false);
   
   const { register, handleSubmit, errors } = useForm({ validateCriteriaMode: "all" });
-  const onSubmit = (data) => {
-    console.log(data);
-    signIn(data);
-  };
  
   const apiUrl = getUrl();
 
@@ -39,28 +36,33 @@ const signIn = async(e) => {
 
 try {
       const res = await fetch(`${apiUrl}/users/login`, {
-                              method: 'POST', 
+                              method: "POST", 
                               body: JSON.stringify(e), 
-                              headers: { 'Content-Type' : 'application/json'}
+                              headers: { "Content-Type" : "application/json"}
                             });
       const response = await res.json();
       console.log(res.status, response);
       if (res.status === 200) {
         setLoggedIn(true);
-        const username = e.email.split('@')[0]
+        const username = e.email.split("@")[0];
         setUser(username);
         toast.notify("Login succesful");
       } else {
         toast.notify("Invalid email and/or password");
       }
 } catch(e) {
-      console.log(e, 'Some error in connection, Please try again!');
+      console.log(e, "Some error in connection, Please try again!");
       toast.notify("Error in connection");
 } 
   setLoading(false);
-  return;
-}
-  if (loggedIn) Router.push("/home");
+};
+
+const onSubmit = (data) => {
+  console.log(data);
+  signIn(data);
+};
+
+  if (loggedIn) {Router.push("/home")};
 
   return (
     <div className="w-screen ">
@@ -97,8 +99,7 @@ try {
                 <p key={type} className="text-xs text-red-500 text-center my-2">
                   {message}
                 </p>
-              ))
-            }
+              ))}
           </ErrorMessage>
 
           <Input
@@ -121,8 +122,7 @@ try {
                 <p key={type} className="text-xs text-red-500 text-center my-2">
                   {message}
                 </p>
-              ))
-            }
+              ))}
           </ErrorMessage>
 
           <Link href="resetpassword">
@@ -137,7 +137,7 @@ try {
           <LoaderContainer className="w-full mt-6">
             <BeatLoader
             size={30}
-            color={"#43a047"}
+            color="#43a047"
             loading
             />
           </LoaderContainer>

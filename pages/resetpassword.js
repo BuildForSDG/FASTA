@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-useless-escape */
+/* eslint-disable no-console */
 import React, { useState } from "react";
 import Head from "next/head";
 import styled from "styled-components";
@@ -28,10 +29,7 @@ const ResetPassword = ({getUrl }) => {
   const [loading, setLoading] = useState(false);
 
   const { register, handleSubmit, errors } = useForm({ validateCriteriaMode: "all" });
-  const onSubmit = (data) => {
-    console.log(data);
-    reset(data);
-  };
+  
  
  const apiUrl = getUrl();
 
@@ -41,10 +39,10 @@ const reset = async(e) => {
   setLoading(true);
 
 try {
-      const res = await fetch(`${apiUrl}/forget`, {
-                              method: 'POST', 
+      const res = await fetch(`${apiUrl}/users/forget`, {
+                              method: "POST", 
                               body: JSON.stringify(e), 
-                              headers: { 'Content-Type' : 'application/json'}
+                              headers: { "Content-Type" : "application/json"}
                             });
       // if (res.status === 200) setLoggedIn(true);
       const response = await res.json();
@@ -52,13 +50,17 @@ try {
       setSubmitted(true);
       console.log(res.status, response);
 } catch(e) {
-      console.log(e, 'Some error in connection, Please try again!');
+      console.log(e, "Some error in connection, Please try again!");
       toast.notify("Error in connection");
       setSubmitted(true);
 }
   setLoading(false);
-  return;
-}
+  
+};
+const onSubmit = (data) => {
+  console.log(data);
+  reset(data);
+};
 
   submitted && (document.body.style.overflow = "hidden");
 
@@ -106,7 +108,7 @@ try {
           <LoaderContainer className="w-full mt-6">
             <BeatLoader
             size={30}
-            color={"#43a047"}
+            color="#43a047"
             loading
             />
           </LoaderContainer>
