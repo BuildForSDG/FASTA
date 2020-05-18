@@ -44,7 +44,7 @@ try {
       console.log(res.status, response);
       if (res.status === 200) {
         setLoggedIn(true);
-        const username = e.email.split("@")[0]
+        const username = e.email.split("@")[0];
         setUser(username);
         toast.notify("Login succesful");
       } else {
@@ -62,7 +62,7 @@ const onSubmit = (data) => {
   signIn(data);
 };
 
-  if (loggedIn) Router.push("/home");
+  if (loggedIn) {Router.push("/home")};
 
   return (
     <div className="w-screen ">

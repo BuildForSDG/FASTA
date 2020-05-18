@@ -30,37 +30,14 @@ const override = css`
 `;
 
 const ChangePassword = ({getUrl}) => {
-  const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
+  // const [submitted, setSubmitted] = useState(false);
+  // const [loading, setLoading] = useState(false);
 
   const { register, handleSubmit, errors, watch } = useForm({ validateCriteriaMode: "all" });
   const password = useRef({});
   password.current = watch("password", "");
   
  const apiUrl = getUrl();
-
-//  reset password
-const reset = async(e) => {
-  console.log(e, Object.keys(e));
-  setLoading(true);
-
-try {
-      const res = await fetch(`${apiUrl}/users/login`, {
-                              method: "POST", 
-                              body: JSON.stringify(e), 
-                              headers: { "Content-Type" : "application/json"}
-                            });
-      console.log(res.status);
-      if (res.status === 200) setLoggedIn(true);
-      const response = await res.json();
-      toast.notify(response.response);
-      setSubmitted(true);
-} catch(e) {
-      console.log(e, "Some error in connection, Please try again!");
-      toast.notify("Error in connection");
-}
-  setLoading(false);
-};
 
 const onSubmit = (data) => {
   console.log(data);

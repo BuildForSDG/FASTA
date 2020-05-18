@@ -67,7 +67,7 @@ const onSubmit = (data) => {
   signUp(data);
 };
 
-if (loggedIn) Router.push("/home");
+if (loggedIn) {Router.push("/home")};
 
   submitted && (document.body.style.overflow = "hidden");
 
