@@ -18,14 +18,14 @@ const Text = styled.span`
   color: #7cbc7f;
 `;
 
-const BottomNav = () => {
+const BottomNav = (props) => {
   return (
     <Nav className="flex justify-evenly items-center">
       <li>
         <Link href="/home">
           <a className="flex flex-col items-center justify-between ">
             <img src="images/Home.png" alt="home" />
-            <Text style={{color: "#fff"}}>Home</Text>
+            <Text className="text-white">Home</Text>
           </a>
         </Link>
       </li>
