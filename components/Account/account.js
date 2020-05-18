@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
+import Router from "next/router";
 import styled from "styled-components";
 import BottomNav from "../Homepage/BottomNav";
-import Router from "next/router";
 
 const NavBar = styled.nav`
   height: 54px;
