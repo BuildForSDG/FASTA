@@ -12,7 +12,7 @@ const defaultConfig = {
 
 // It may be necessary to use a custom axios instance to bypass this for the time being.
 const axiosInstance = axios.create(defaultConfig);
-
+console.log(process.env.TEST_KEY);
 // instantiate the google http client
 const client = new Client({ axiosInstance });
 
@@ -20,11 +20,32 @@ const client = new Client({ axiosInstance });
 function TripMetrix(origin, destination) {
   this.origin = origin;
   this.destination = destination;
+  console.log(origin, destination);
+//   client.directions({
+//     params: {
+//       origin,
+//       destination,
+//       key: process.env.TEST_KEY,
+//       mode: "driving",
+//       traffic_model: "best_guess",
+//       departure_time: 1589673600
+//     }
+//   })
+//     .then((r) => {
+//       if (r.data.status === Status.OK) {
+//         console.log(r.data);
+//       } else {
+//         console.log(r.data.error_message);
+//       }
+//     })
+//     .catch((e) => {
+//       console.log(e);
+//     });
 }
 
 
-// api to get the distance of the trip from the origin to the destination
 TripMetrix.prototype.getTripDistance = async () => {
+  console.log(this.origin, this.destination);
 //   const latLngOrigin = latLngToString(this.origin);
 //   const latLngDestination = latLngToString(this.destination);
   client.directions({

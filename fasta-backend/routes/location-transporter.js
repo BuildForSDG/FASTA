@@ -18,11 +18,14 @@ router.post("/location-transporter", (req, res) => {
 });
 
 // api that gives the computed value for distance between in meters
-router.post("/trip-distance", (req, res) => {
+router.post("/trip-distance", async (req, res) => {
+  const  origin  = req.body.origin;
+  const  dest  = req.body.dest;
+  console.log(origin, dest);
   const originCoords = new TripInfo(req.body.latitude, req.body.longitude);
   const destCoords = new TripInfo(req.body.latitude, req.body.longitude);
-  const trip = new TripMetrix(originCoords, destCoords);
-  const tripdistance = trip.getTripDistance();
+  const trip = new TripMetrix(origin, dest);
+  const tripdistance = await trip.getTripDistance();
 
   res.json(tripdistance);
 });

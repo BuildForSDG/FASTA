@@ -3,6 +3,10 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const bodyParser = require("body-parser");
+const dotenv = require("dotenv");
+
+
+dotenv.config();
 
 const userRouter = require("./routes/users");
 const indexRouter = require("./routes/index");
