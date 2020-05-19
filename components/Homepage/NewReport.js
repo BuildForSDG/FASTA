@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import React from "react";
 
+import Link from "next/link";
+
 const Heading = styled.h1`
   font-size: 20px;
   font-weight: bold;
@@ -22,10 +24,14 @@ const Text = styled.p`
 
 const NewReport = (props) => {
   return (
-    <Body>
-      <Heading>Make a New Report</Heading>
-      <Text>Update us with your current emergencies in your area.</Text>
-    </Body>
+    <Link href="reports/makeReport">
+      <a>
+        <Body>
+          <Heading>Make a New Report</Heading>
+          <Text>Update us with your current emergencies in your area.</Text>
+        </Body>
+      </a>
+    </Link>
   );
 };
 

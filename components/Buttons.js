@@ -66,7 +66,7 @@ const NewReportButtonSyled = styled.div`
 
 export const NewReportButton = () => {
   return (
-    <Link href="makeReport">
+    <Link href="reports/makeReport">
       <a>
         <NewReportButtonSyled>
           <img src="/images/ic_file_new.svg" alt="make report" />

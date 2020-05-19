@@ -4,10 +4,10 @@ import { useForm, ErrorMessage } from "react-hook-form";
 import styled from "styled-components";
 
 
-import Layout from "../components/Layout";
-import { SubmitButton, LinkButton } from "../components/Buttons";
-import Input, { TextArea } from "../components/Input";
-import { TextSmall } from "../components/Text/Body";
+import Layout from "../../components/Layout";
+import { SubmitButton, LinkButton } from "../../components/Buttons";
+import Input, { TextArea } from "../../components/Input";
+import { TextSmall } from "../../components/Text/Body";
 
 
 const AlertCardStyle = styled.div`
@@ -98,7 +98,7 @@ const MakeReport = () => {
                 You are making the world a better place.
               </TextSmall>
 
-              <LinkButton href="reports" className="w-10/12 mx-auto">
+              <LinkButton href="report" className="w-10/12 mx-auto">
                 continue
               </LinkButton>
             </AlertCardStyle>
