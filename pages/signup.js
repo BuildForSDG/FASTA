@@ -70,7 +70,7 @@ const onSubmit = (data) => {
 
 if (loggedIn) {
   Router.push("/home");
-};
+}
 
   submitted && (document.body.style.overflow = "hidden");
 

@@ -13,7 +13,7 @@ const AllReports = styled.span`
   font-size: 12px;
 `;
 
-const Reports = props => {
+const Reports = (props) => {
   return (
     <div>
       <Heading>Reports in your area</Heading>

@@ -20,7 +20,7 @@ const Text = styled.p`
   text-align: left;
 `;
 
-const NewReport = props => {
+const NewReport = (props) => {
   return (
     <Body>
       <Heading>Make a New Report</Heading>
