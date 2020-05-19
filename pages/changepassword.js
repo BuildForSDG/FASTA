@@ -1,12 +1,13 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-useless-escape */
 /* eslint-disable no-console */
+/* eslint-disable no-unused-expressions */
+/* eslint-disable no-unused-vars */
 import React, { useState, useRef } from "react";
 import Head from "next/head";
 import styled from "styled-components";
 import { useForm, ErrorMessage } from "react-hook-form";
-import { ToastContainer, toast } from "react-nextjs-toast";
-import { css } from "@emotion/core";
+// import { css } from "@emotion/core";
 import BeatLoader from "react-spinners/BeatLoader";
 
 import Header from "../components/Header";
@@ -24,26 +25,18 @@ const AlertCardStyle = styled.div`
   padding: 60px 26px 46px;
 `;
 
-const override = css`
-  display: flex;
-  margin: 0 auto;
-`;
-
-const ChangePassword = ({getUrl}) => {
-  // const [submitted, setSubmitted] = useState(false);
-  // const [loading, setLoading] = useState(false);
+const ChangePassword = () => {
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const { register, handleSubmit, errors, watch } = useForm({ validateCriteriaMode: "all" });
   const password = useRef({});
   password.current = watch("password", "");
   
- const apiUrl = getUrl();
-
 const onSubmit = (data) => {
   console.log(data);
-  reset(data);
+  setSubmitted(true);
 };
-
   submitted && (document.body.style.overflow = "hidden");
 
   return (
@@ -56,7 +49,6 @@ const onSubmit = (data) => {
       <Header back />
 
       <MainStyle className="flex flex-col items-center justify-center">
-      <ToastContainer />
         <H3 color="#43A047" className="mb-4">
           Enter your new password
         </H3>

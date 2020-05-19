@@ -8,7 +8,7 @@ import Router from "next/router";
 import styled from "styled-components";
 import { useForm, ErrorMessage } from "react-hook-form";
 import { ToastContainer, toast } from "react-nextjs-toast";
-import { css } from "@emotion/core";
+// import { css } from "@emotion/core";
 import BeatLoader from "react-spinners/BeatLoader";
 
 import Header from "../components/Header";
@@ -21,7 +21,7 @@ const MainStyle = styled.main`
   height: calc(100vh - 78px);
 `;
 
-const Login = ({loggedIn, setLoggedIn, user, setUser, getUrl}) => {
+const Login = ({loggedIn, setLoggedIn, setUser, getUrl}) => {
   console.log("loggedIn:", loggedIn);
   const [loading, setLoading] = useState(false);
   
@@ -30,21 +30,21 @@ const Login = ({loggedIn, setLoggedIn, user, setUser, getUrl}) => {
   const apiUrl = getUrl();
 
 //  sign in
-const signIn = async(e) => {
-  console.log(e, Object.keys(e));
+const signIn = async(ev) => {
+  console.log(ev, Object.keys(ev));
   setLoading(true);
 
 try {
       const res = await fetch(`${apiUrl}/users/login`, {
                               method: "POST", 
-                              body: JSON.stringify(e), 
+                              body: JSON.stringify(ev), 
                               headers: { "Content-Type" : "application/json"}
                             });
       const response = await res.json();
       console.log(res.status, response);
       if (res.status === 200) {
         setLoggedIn(true);
-        const username = e.email.split("@")[0];
+        const username = ev.email.split("@")[0];
         setUser(username);
         toast.notify("Login succesful");
       } else {

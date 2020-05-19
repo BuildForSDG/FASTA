@@ -1,12 +1,13 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-useless-escape */
 /* eslint-disable no-console */
+/* eslint-disable no-unused-expressions */
 import React, { useState } from "react";
 import Head from "next/head";
 import styled from "styled-components";
 import { useForm, ErrorMessage } from "react-hook-form";
 import { ToastContainer, toast } from "react-nextjs-toast";
-import { css } from "@emotion/core";
+// import { css } from "@emotion/core";
 import BeatLoader from "react-spinners/BeatLoader";
 
 import Header from "../components/Header";
@@ -34,14 +35,14 @@ const ResetPassword = ({getUrl }) => {
  const apiUrl = getUrl();
 
 //  reset password
-const reset = async(e) => {
-  console.log(e, Object.keys(e));
+const reset = async(ev) => {
+  console.log(ev, Object.keys(ev));
   setLoading(true);
 
 try {
       const res = await fetch(`${apiUrl}/users/forget`, {
                               method: "POST", 
-                              body: JSON.stringify(e), 
+                              body: JSON.stringify(ev), 
                               headers: { "Content-Type" : "application/json"}
                             });
       // if (res.status === 200) setLoggedIn(true);

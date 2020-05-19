@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-useless-escape */
 /* eslint-disable no-console */
+/* eslint-disable no-unused-expressions */
 import React, { useState, useRef } from "react";
 import Head from "next/head";
 import Link from "next/link";
@@ -8,7 +9,7 @@ import Router from "next/router";
 import styled from "styled-components";
 import { useForm, ErrorMessage } from "react-hook-form";
 import { ToastContainer, toast } from "react-nextjs-toast";
-import { css } from "@emotion/core";
+// import { css } from "@emotion/core";
 import BeatLoader from "react-spinners/BeatLoader";
 
 import Header from "../components/Header";
@@ -26,7 +27,7 @@ const AlertCardStyle = styled.div`
   padding: 60px 26px 46px;
 `;
 
-const Signup = ({loggedIn, setLoggedIn, getUrl}) => {
+const Signup = ({loggedIn, getUrl}) => {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   console.log("loggedIn:", loggedIn);
@@ -38,14 +39,14 @@ const Signup = ({loggedIn, setLoggedIn, getUrl}) => {
 const apiUrl = getUrl();
 
 //  sign up
-const signUp = async(e) => {
-  console.log(e, Object.keys(e));
+const signUp = async(ev) => {
+  console.log(ev, Object.keys(ev));
   setLoading(true);
 
 try {
       const res = await fetch(`${apiUrl}/users`, {
                               method: "POST", 
-                              body: JSON.stringify(e), 
+                              body: JSON.stringify(ev), 
                               headers: { "Content-Type" : "application/json"}
                             });
       console.log(res.status);
