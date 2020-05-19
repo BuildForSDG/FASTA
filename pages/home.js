@@ -3,7 +3,9 @@ import React from "react";
 import Head from "next/head";
 import Homepage from "../components/Homepage/Homepage";
 
-const Home = ({ user }) => {
+const Home = ({ loggedIn, user }) => {
+  // console.log("loggedIn:", loggedIn);
+
   return (
     <div>
       <div>
