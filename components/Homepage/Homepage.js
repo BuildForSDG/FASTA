@@ -18,9 +18,9 @@ const Homepage = (props) => {
       <NavBar name="Fasta" />
       <Body>
         <GPS />
-        <NewTrip />
+        <NewTrip user={props.user} />
         <RecentTrips />
-    <Reports />
+        <Reports />
         <NewReport />
       </Body>
       <BottomNav />

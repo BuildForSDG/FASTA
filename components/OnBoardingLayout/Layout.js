@@ -55,7 +55,7 @@ const Layout = (props) => {
               className="w-screen h-screen flex flex-col justify-between pb-10 px-6"
             >
               <div className="text-right mt-8">
-                <Link href="home">
+                <Link href="login">
                   <a className="font-bold">SKIP</a>
                 </Link>
               </div>
@@ -75,7 +75,7 @@ const Layout = (props) => {
                       &rarr;
                     </p>
                   ) : (
-                    <Link href="home">
+                    <Link href="login">
                       <a className="font-bold">Continue</a>
                     </Link>
                   )}
