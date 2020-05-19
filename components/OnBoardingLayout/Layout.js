@@ -9,11 +9,11 @@ import { H1 } from "../Text/Headings";
 const StyledLayout = styled.div`
   width: 100vw;
   min-height: 100vh;
-  background-color: ${props => props.bg};
-  color: ${props => props.color};
+  background-color: ${(props) => props.bg};
+  color: ${(props) => props.color};
 
   a {
-    color: ${props => props.color};
+    color: ${(props) => props.color};
     font-size: 14px;
   }
 
@@ -32,11 +32,11 @@ const OnBoardingContainerLayout = styled.section`
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
 
-  transform: translate(-${props => props.screen * 100}vw);
+  transform: translate(-${(props) => props.screen * 100}vw);
   transition: 0.3s ease-out;
 `;
 
-const Layout = props => {
+const Layout = (props) => {
   const [screen, setScreen] = useState(0);
 
   function changeScreen({ target }) {

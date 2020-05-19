@@ -60,7 +60,7 @@ const LinkButtonStyle = styled.div`
 
 export const LinkButton = props => {
   return (
-    <Link href={props.href}>
+    <Link href={(props).href}>
       <a>
         <LinkButtonStyle>{props.children}</LinkButtonStyle>
       </a>
