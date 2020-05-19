@@ -15,7 +15,7 @@ const NavLogo = styled.img`
   height: 30px;
 `;
 
-const NavBar = (props) => {
+const NavBar = props => {
   return (
     <Nav className="flex justify-between items-center">
       <NavLogo src="images/Logo.png" alt="Fasta" />
