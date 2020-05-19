@@ -28,4 +28,18 @@ router.post("/report", authChecker, async (req, res) => {
   }
 });
 
+router.get("/reports", authChecker, async (req, res) => {
+  await Reports.find()
+    .select("_id type description location date")
+    .exec()
+    .then((allReports) => {
+      if (!allReports || allReports < 1) {
+        return res.status(404).json({ response: "unfortunetly, we dont have any reports for you, check back" });
+      }
+      res.status(200).json({ response: allReports.reverse() });
+    })
+    .catch((error) => {
+      res.status(500).json({ error });
+    });
+});
 module.exports = router;
