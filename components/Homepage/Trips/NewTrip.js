@@ -18,10 +18,10 @@ const Text = styled.p`
   padding: 15px 0;
 `;
 
-const NewTrip = (props) => {
+const NewTrip = props => {
   return (
     <div className="new-trip">
-      <Text>Welcome Back {props.user}!</Text>
+      <Text>Welcome back {props.user}!</Text>
       <Body>
         <Heading>Plan a new trip</Heading>
         <p>Schedule your next outing</p>

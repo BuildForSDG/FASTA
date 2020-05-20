@@ -2,7 +2,7 @@
 /* eslint-disable no-useless-escape */
 /* eslint-disable no-console */
 /* eslint-disable no-unused-expressions */
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import Router from "next/router";
@@ -30,6 +30,7 @@ const AlertCardStyle = styled.div`
 const Signup = ({loggedIn, getUrl}) => {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [url, setUrl] = useState("");
   console.log("loggedIn:", loggedIn);
 
   const { register, handleSubmit, errors, watch } = useForm({ validateCriteriaMode: "all" });
@@ -38,8 +39,15 @@ const Signup = ({loggedIn, getUrl}) => {
  
 const apiUrl = getUrl();
 
+useEffect(() => {
+  const {origin} = window.location;
+  setUrl(origin);
+}, []);
+console.log(url);
+
 //  sign up
 const signUp = async(ev) => {
+  ev.origin = url;
   console.log(ev, Object.keys(ev));
   setLoading(true);
 

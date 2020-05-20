@@ -3,10 +3,12 @@
 /* eslint-disable no-console */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-unused-vars */
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Head from "next/head";
+import Router from "next/router";
 import styled from "styled-components";
 import { useForm, ErrorMessage } from "react-hook-form";
+import { ToastContainer, toast } from "react-nextjs-toast";
 // import { css } from "@emotion/core";
 import BeatLoader from "react-spinners/BeatLoader";
 
@@ -25,20 +27,72 @@ const AlertCardStyle = styled.div`
   padding: 60px 26px 46px;
 `;
 
-const ChangePassword = () => {
+const ChangePassword = ({getUrl, token}) => {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [url, setUrl] = useState("");
 
   const { register, handleSubmit, errors, watch } = useForm({ validateCriteriaMode: "all" });
   const password = useRef({});
   password.current = watch("password", "");
   
+  const apiUrl = getUrl();
+
+useEffect(() => {
+  const {origin} = window.location;
+  setUrl(origin);
+  (async () => {
+      try {
+        const res = await fetch(`${apiUrl}/users/reset/${Object.keys(token)[0]}`, {
+                                method: "GET", 
+                                headers: { "Content-Type" : "application/json"}
+                              });
+        const response = await res.json();
+        console.log(res.status, response);
+        if (res.status === 401) {
+          Router.push("/resetpassword");
+          toast.notify("Link is INVALID, Please try again", {
+            duration: 10,
+            type: "error"
+          });
+        };
+    } catch(e) {
+        console.log(e, "Some error in connection, Please try again!");
+        toast.notify("Error in connection");
+      }
+  })();
+}, []);
+
+//  change password
+const updatePassword = async(ev) => {
+  ev.origin = url;
+  ev.token = Object.keys(token)[0];
+  console.log(ev, Object.keys(ev));
+  setLoading(true);
+
+try {
+      const res = await fetch(`${apiUrl}/users/reset/${ev.token}`, {
+                              method: "POST", 
+                              body: JSON.stringify(ev), 
+                              headers: { "Content-Type" : "application/json"}
+                            });
+      if (res.status === 200) setSubmitted(true);
+      const response = await res.json();
+      toast.notify(response.response);
+      console.log(res.status, response);
+} catch(e) {
+      console.log(e, "Some error in connection, Please try again!");
+      toast.notify("Error in connection");
+}
+  setLoading(false);
+};
+
 const onSubmit = (data) => {
   console.log(data);
-  setSubmitted(true);
+  updatePassword(data);
 };
   submitted && (document.body.style.overflow = "hidden");
-
+ 
   return (
     <div className="w-screen ">
       <Head>
@@ -49,6 +103,7 @@ const onSubmit = (data) => {
       <Header back />
 
       <MainStyle className="flex flex-col items-center justify-center">
+      <ToastContainer />
         <H3 color="#43A047" className="mb-4">
           Enter your new password
         </H3>
@@ -137,5 +192,13 @@ const onSubmit = (data) => {
     </div>
   );
 };
+
+ChangePassword.getInitialProps = async ctx => {
+  console.log(ctx.query);
+  const token = ctx.query;
+
+    
+  return {token};
+}
 
 export default ChangePassword;
