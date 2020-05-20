@@ -15,13 +15,11 @@ const mailer = require("../helpers/mailer");
 
 //  CREATE A NEW USER AND ADD TO DATABASE
 router.post("/", async (req, res) => {
-  // console.log(req.body);
   // eslint-disable-next-line consistent-return
-  await User.findOne({ email: req.body.email }).then((result) => {
-    if (result) {
+  const userExist = await User.findOne({ email: req.body.email });
+    if (userExist) {
       return res.status(403).json({ response: "email exists" });
     }
-  });
   try {
     const {
       fullname, email, phonenumber, password, confirmPassword
@@ -69,7 +67,7 @@ router.post("/login", async (req, res) => {
       if (passwordcheck) {
         const token = bcrypt.generateToken(user);
         return res.status(200).json({
-          response: "Login succesfull",
+          response: "Login successful",
           token
         });
       }
@@ -92,7 +90,7 @@ router.get("/", authChecker, (req, res) => {
   );
 });
 
-//  GET A SPECIFIC USER BY ID) FROM DATABASE
+//  GET A SPECIFIC USER (BY ID) FROM DATABASE
 router.get("/:id", authChecker, (req, res) => {
   const { id } = req.params;
 
