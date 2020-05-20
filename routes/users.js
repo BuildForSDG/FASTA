@@ -33,14 +33,15 @@ router.post("/", async (req, res) => {
     await User.create({
       fullname, email, phonenumber, password: hash
     });
+    const welcomelink = `${req.origin}/login`;
     const options = {
       receiver: email,
-      subject: "Password Reset",
+      subject: "Fasta welcomes you!",
       text: `Hello ${fullname}`,
       output: `<div style='margin: 0 auto; background: #ededed; border-top:2px solid green; border-bottom:2px solid green; box-shadow: 1px 2px 3px 4px #ccc; padding: 1.5rem '>
       <h1>Hey! ${fullname} Welcome to Fasta</h1>
       <hr>
-      <p style='padding:1.5rem;'>FASTA helps you plan your Trip and allow you to go faster, click this <a href='#'>Link</a> to confirm your registration</p>
+      <p style='padding:1.5rem;'>FASTA helps you plan your trip and allow you to go faster, click this <a href="${welcomelink}">Link</a> to login to a new world of convenience and safety</p>
       <h4>Welcome on board</h4>
       </div>
       `
@@ -112,7 +113,7 @@ router.get("/:id", authChecker, (req, res) => {
 });
 
 router.post("/forget", (req, res, next) => {
-  const { email } = req.body;
+  const { email, origin } = req.body;
   // houses muliple functions
   async.waterfall([
     function (done) {
@@ -143,7 +144,7 @@ router.post("/forget", (req, res, next) => {
 
     function (token, user, done) {
       try {
-        const resetlink = `${req.protocol}://${req.hostname}/api/v1/users/reset/${token}`;
+        const resetlink = `${origin}/changepassword?${token}`;
         const options = {
           receiver: email,
           subject: "Password Reset",
@@ -163,7 +164,7 @@ router.post("/forget", (req, res, next) => {
         };
         const fireTheMail = mailer(options);
         if (fireTheMail) {
-          return res.json({ response: `Email sent to ${email}`, resetlink: user.resetPasswordToken });
+          return res.json({ response: `Email sent to ${email}`, resetlink, token: user.resetPasswordToken });
         }
         done(null, "done");
       } catch (error) {
@@ -175,7 +176,7 @@ router.post("/forget", (req, res, next) => {
     if (err) {
       return next(err);
     }
-    return res.status(500).json({ response: `An error ${err} occured doing the process` });
+    return res.status(500).json({ response: `An error ${err} occurred doing the process` });
   });
 });
 
@@ -183,17 +184,19 @@ router.post("/forget", (req, res, next) => {
 router.route("/reset/:token")
   .all()
   .get(async (req, res) => {
+    console.log(req.params);
     await User.findOne({
       resetPasswordToken: req.params.token, resetPasswordExpires: { $gte: Date.now() }
     }).then((user) => {
       if (!user) {
-        return res.status(200).json({ response: "Invalid user" });
+        return res.status(401).json({ response: "Invalid user" });
       }
       return res.status(200).json({ response: { token: req.params.token } });
     });
   })
   .post(async (req, res) => {
     const { password, confirmPassword } = req.body;
+    console.log(req.params);
     if (!password || !confirmPassword) {
       return res.status(403).json({ response: "Both fields are required" });
     }
@@ -212,7 +215,7 @@ router.route("/reset/:token")
         return res.status(404).json({ response: "Invalid user" });
       }
       res.status(200).json({ response: "your password reset was succesful, login to continue" });
-      const loginlink = `${req.protocol}://${req.hostname}/api/v1/users/login`;
+      const loginlink = `${req.origin}/users/login`;
       const options = {
         receiver: user.email,
         subject: "Password Reset",
@@ -225,11 +228,11 @@ router.route("/reset/:token")
             <p style='color: black;margin: 0px 0 30px;font-size:16px;text-align:center'><a href="${loginlink}" style="background:blue;padding:10px 12px;color:white">LOGIN TO DASHBOARD</p>
             <p style='color: black;margin: 0px 0 15px;font-size:16px;'>Thank you.</p>
         </div>
-    </div>`
+    </div>` 
       };
       mailer(options);
 
-      // return res.status(200).json({ response: "mail sent" });
+      return res.status(200).json({ response: "mail sent", loginlink });
     } catch (error) {
       return res.status(500).json({ response: `error ${error} occurred` });
     }
