@@ -1,8 +1,11 @@
 import React from "react";
+// import Router from "next/router";
 import Head from "next/head";
 import Homepage from "../components/Homepage/Homepage";
 
-const Home = (props) => {
+const Home = ({ loggedIn, user }) => {
+  // console.log("loggedIn:", loggedIn);
+
   return (
     <div>
       <Head>
@@ -10,7 +13,7 @@ const Home = (props) => {
         <link rel="icon" href="/images/Logo.png" />
       </Head>
       <div className="" >
-        <Homepage />
+        <Homepage user={user} />
       </div>
     </div>
   );

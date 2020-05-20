@@ -1,14 +1,20 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-useless-escape */
+/* eslint-disable no-console */
+/* eslint-disable no-unused-expressions */
 import React, { useState, useRef } from "react";
 import Head from "next/head";
 import Link from "next/link";
+import Router from "next/router";
 import styled from "styled-components";
 import { useForm, ErrorMessage } from "react-hook-form";
+import { ToastContainer, toast } from "react-nextjs-toast";
+// import { css } from "@emotion/core";
+import BeatLoader from "react-spinners/BeatLoader";
 
 import Header from "../components/Header";
 import Input from "../components/Input";
-import { SubmitButton, LinkButton } from "../components/Buttons";
+import { SubmitButton, LinkButton, LoaderContainer } from "../components/Buttons";
 import { H3 } from "../components/Text/Headings";
 import { TextSmall } from "../components/Text/Body";
 
@@ -21,16 +27,50 @@ const AlertCardStyle = styled.div`
   padding: 60px 26px 46px;
 `;
 
-const Login = () => {
+const Signup = ({loggedIn, getUrl}) => {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  console.log("loggedIn:", loggedIn);
 
   const { register, handleSubmit, errors, watch } = useForm({ validateCriteriaMode: "all" });
   const password = useRef({});
   password.current = watch("password", "");
-  const onSubmit = (data) => {
-    // console.log(data);
-    setSubmitted(true);
-  };
+ 
+const apiUrl = getUrl();
+
+//  sign up
+const signUp = async(ev) => {
+  console.log(ev, Object.keys(ev));
+  setLoading(true);
+
+try {
+      const res = await fetch(`${apiUrl}/users`, {
+                              method: "POST", 
+                              body: JSON.stringify(ev), 
+                              headers: { "Content-Type" : "application/json"}
+                            });
+      console.log(res.status);
+    if (res.status === 200) {
+      setSubmitted(true);
+    }
+    const response = await res.json();
+      console.log(response);
+      toast.notify(response.response);
+} catch(e) {
+      console.log(e, "Some error in connection, Please try again!");
+      toast.notify("Error in connection");
+}
+  setLoading(false);
+}; 
+
+const onSubmit = (data) => {
+  console.log(data);
+  signUp(data);
+};
+
+if (loggedIn) {
+  Router.push("/home");
+}
 
   submitted && (document.body.style.overflow = "hidden");
 
@@ -45,13 +85,14 @@ const Login = () => {
 
       <MainStyle className="flex flex-col items-center justify-between">
         <form onSubmit={handleSubmit(onSubmit)} className="w-11/12 mt-4">
+        <ToastContainer />
           <H3 color="#43A047" className="mb-4 text-center">
             Create an Account
           </H3>
           <Input
             className="mx-auto"
             type="text"
-            name="full_name"
+            name="fullname"
             ref={register({
               required: "Please enter your full name",
               minLength: {
@@ -61,15 +102,14 @@ const Login = () => {
             })}
             placeholder="Your Full Name"
           />
-          <ErrorMessage errors={errors} name="full_name">
+          <ErrorMessage errors={errors} name="fullname">
             {({ messages }) =>
               messages &&
               Object.entries(messages).map(([type, message]) => (
                 <p key={type} className="text-xs text-red-500 text-center my-2">
                   {message}
                 </p>
-              ))
-            }
+              ))}
           </ErrorMessage>
 
           <Input
@@ -92,14 +132,13 @@ const Login = () => {
                 <p key={type} className="text-xs text-red-500 text-center my-2">
                   {message}
                 </p>
-              ))
-            }
+              ))}
           </ErrorMessage>
 
           <Input
             className="mx-auto mt-5"
             type="tel"
-            name="phone"
+            name="phonenumber"
             ref={register({
               required: "Please provide your phone number",
               pattern: {
@@ -109,15 +148,14 @@ const Login = () => {
             })}
             placeholder="Phone Number"
           />
-          <ErrorMessage errors={errors} name="phone">
+          <ErrorMessage errors={errors} name="phonenumber">
             {({ messages }) =>
               messages &&
               Object.entries(messages).map(([type, message]) => (
                 <p key={type} className="text-xs text-red-500 text-center my-2">
                   {message}
                 </p>
-              ))
-            }
+              ))}
           </ErrorMessage>
 
           <Input
@@ -140,14 +178,13 @@ const Login = () => {
                 <p key={type} className="text-xs text-red-500 text-center my-2">
                   {message}
                 </p>
-              ))
-            }
+              ))}
           </ErrorMessage>
 
           <Input
             className="mx-auto mt-5"
             type="password"
-            name="cpassword"
+            name="confirmPassword"
             ref={register({
               required: "Please re-enter password",
               minLength: {
@@ -158,31 +195,39 @@ const Login = () => {
             })}
             placeholder="Confirm Password"
           />
-          <ErrorMessage errors={errors} name="cpassword">
+          <ErrorMessage errors={errors} name="confirmPassword">
             {({ messages }) =>
               messages &&
               Object.entries(messages).map(([type, message]) => (
                 <p key={type} className="text-xs text-red-500 text-center my-2">
                   {message}
                 </p>
-              ))
-            }
+              ))}
           </ErrorMessage>
 
           <p className="text-xs mt-5 text-center w-10/12 mx-auto" style={{ color: "#43A047" }}>
             By creating an account you agree to our Terms of Service and Privacy Policy
           </p>
 
+          {loading ?
+          <LoaderContainer className="w-full mt-6">
+            <BeatLoader
+            size={30}
+            color="#43a047"
+            loading
+            />
+          </LoaderContainer>
+          :
           <SubmitButton type="submit" className="w-full mt-6">
             Continue
-          </SubmitButton>
+          </SubmitButton>}
         </form>
 
         <div className="w-full mt-10">
           <p className="text-xs mb-3 text-center" style={{ color: "#43A047" }}>
             Already have an account?
           </p>
-          <Link href="signup">
+          <Link href="login">
             <a>
               <div
                 className="cursor-pointer w-full py-4 text-center text-sm"
@@ -209,7 +254,7 @@ const Login = () => {
               </TextSmall>
 
               <LinkButton href="login" className="w-10/12 mx-auto">
-                continue
+               <span> Please check your mail to login! </span>
               </LinkButton>
             </AlertCardStyle>
           </div>
@@ -219,4 +264,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;
