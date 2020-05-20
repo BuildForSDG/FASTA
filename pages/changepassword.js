@@ -2,11 +2,11 @@
 /* eslint-disable no-useless-escape */
 /* eslint-disable no-console */
 /* eslint-disable no-unused-expressions */
-import React, { useState } from "react";
+/* eslint-disable no-unused-vars */
+import React, { useState, useRef } from "react";
 import Head from "next/head";
 import styled from "styled-components";
 import { useForm, ErrorMessage } from "react-hook-form";
-import { ToastContainer, toast } from "react-nextjs-toast";
 // import { css } from "@emotion/core";
 import BeatLoader from "react-spinners/BeatLoader";
 
@@ -25,77 +25,50 @@ const AlertCardStyle = styled.div`
   padding: 60px 26px 46px;
 `;
 
-const ResetPassword = ({getUrl }) => {
+const ChangePassword = () => {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const { register, handleSubmit, errors } = useForm({ validateCriteriaMode: "all" });
+  const { register, handleSubmit, errors, watch } = useForm({ validateCriteriaMode: "all" });
+  const password = useRef({});
+  password.current = watch("password", "");
   
- 
- const apiUrl = getUrl();
-
-//  reset password
-const reset = async(ev) => {
-  console.log(ev, Object.keys(ev));
-  setLoading(true);
-
-try {
-      const res = await fetch(`${apiUrl}/users/forget`, {
-                              method: "POST", 
-                              body: JSON.stringify(ev), 
-                              headers: { "Content-Type" : "application/json"}
-                            });
-      // if (res.status === 200) setLoggedIn(true);
-      const response = await res.json();
-      toast.notify(response.response);
-      setSubmitted(true);
-      console.log(res.status, response);
-} catch(e) {
-      console.log(e, "Some error in connection, Please try again!");
-      toast.notify("Error in connection");
-      setSubmitted(true);
-}
-  setLoading(false);
-  
-};
 const onSubmit = (data) => {
   console.log(data);
-  reset(data);
+  setSubmitted(true);
 };
-
   submitted && (document.body.style.overflow = "hidden");
 
   return (
     <div className="w-screen ">
       <Head>
-        <title>Fasta Password Reset</title>
+        <title>Fasta Change Password</title>
         <link rel="icon" href="/images/Logo.png" />
       </Head>
 
       <Header back />
 
       <MainStyle className="flex flex-col items-center justify-center">
-      <ToastContainer />
         <H3 color="#43A047" className="mb-4">
-          Recover Password
+          Enter your new password
         </H3>
-        <TextSmall color="#43A047">Enter the email address you registered with.</TextSmall>
+        <TextSmall color="#43A047">This action will update your password in our records</TextSmall>
 
         <form onSubmit={handleSubmit(onSubmit)} className="w-11/12 mt-5">
-          <Input
-            className="mx-auto"
-            type="email"
-            name="email"
+        <Input
+            className="mx-auto mt-5"
+            type="password"
+            name="password"
             ref={register({
-              required: "Please provide registered email",
-              pattern: {
-                value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w+)+$/,
-                message: "Email not valid"
+              required: "Please enter password",
+              minLength: {
+                value: 8,
+                message: "password should be at least 8 characters"
               }
             })}
-            placeholder="example@email.com"
+            placeholder="New Password"
           />
-          <ErrorMessage errors={errors} name="email">
+          <ErrorMessage errors={errors} name="password">
             {({ messages }) =>
               messages &&
               Object.entries(messages).map(([type, message]) => (
@@ -105,17 +78,41 @@ const onSubmit = (data) => {
               ))}
           </ErrorMessage>
 
+          <Input
+            className="mx-auto mt-5"
+            type="password"
+            name="confirmPassword"
+            ref={register({
+              required: "Please re-enter password",
+              minLength: {
+                value: 8,
+                message: "password should be at least 8 characters"
+              },
+              validate: (value) => value === password.current || "The passwords do not match"
+            })}
+            placeholder="Confirm Password"
+          />
+          <ErrorMessage errors={errors} name="confirmPassword">
+            {({ messages }) =>
+              messages &&
+              Object.entries(messages).map(([type, message]) => (
+                <p key={type} className="text-xs text-red-500 text-center my-2">
+                  {message}
+                </p>
+              ))}
+          </ErrorMessage>
           {loading ?
           <LoaderContainer className="w-full mt-6">
             <BeatLoader
+            // css={override}
             size={30}
             color="#43a047"
             loading
             />
           </LoaderContainer>
-          :
+        :
           <SubmitButton type="submit" className="w-full mt-6">
-            recover password
+            change password
           </SubmitButton>}
         </form>
 
@@ -127,11 +124,11 @@ const onSubmit = (data) => {
             <AlertCardStyle className="w-10/12 bg-white">
               <img src="/images/success.svg" alt="" className="mx-auto mb-12" />
               <TextSmall className="text-center mb-6" style={{ color: "#43A047" }}>
-                Your recovery link has been sent to your email.
+                Your successfully changed your password.
               </TextSmall>
 
-              <LinkButton href="changepassword" className="w-10/12 mx-auto">
-                continue
+              <LinkButton href="login" className="w-10/12 mx-auto">
+                Proceed to login
               </LinkButton>
             </AlertCardStyle>
           </div>
@@ -141,4 +138,4 @@ const onSubmit = (data) => {
   );
 };
 
-export default ResetPassword;
+export default ChangePassword;

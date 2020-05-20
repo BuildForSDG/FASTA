@@ -1,14 +1,19 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-useless-escape */
+/* eslint-disable no-console */
 import React, { useState } from "react";
 import Head from "next/head";
 import Link from "next/link";
+import Router from "next/router";
 import styled from "styled-components";
 import { useForm, ErrorMessage } from "react-hook-form";
+import { ToastContainer, toast } from "react-nextjs-toast";
+// import { css } from "@emotion/core";
+import BeatLoader from "react-spinners/BeatLoader";
 
 import Header from "../components/Header";
 import Input from "../components/Input";
-import { SubmitButton } from "../components/Buttons";
+import { SubmitButton, LoaderContainer } from "../components/Buttons";
 import { H3 } from "../components/Text/Headings";
 import { TextSmall } from "../components/Text/Body";
 
@@ -16,10 +21,49 @@ const MainStyle = styled.main`
   height: calc(100vh - 78px);
 `;
 
-const Login = () => {
+const Login = ({loggedIn, setLoggedIn, setUser, getUrl}) => {
+  console.log("loggedIn:", loggedIn);
+  const [loading, setLoading] = useState(false);
+  
   const { register, handleSubmit, errors } = useForm({ validateCriteriaMode: "all" });
-  const onSubmit = (data) => {
-    // console.log(data);
+ 
+  const apiUrl = getUrl();
+
+//  sign in
+const signIn = async(ev) => {
+  console.log(ev, Object.keys(ev));
+  setLoading(true);
+
+try {
+      const res = await fetch(`${apiUrl}/users/login`, {
+                              method: "POST", 
+                              body: JSON.stringify(ev), 
+                              headers: { "Content-Type" : "application/json"}
+                            });
+      const response = await res.json();
+      console.log(res.status, response);
+      if (res.status === 200) {
+        setLoggedIn(true);
+        const username = ev.email.split("@")[0];
+        setUser(username);
+        toast.notify("Login succesful");
+      } else {
+        toast.notify("Invalid email and/or password");
+      }
+} catch(e) {
+      console.log(e, "Some error in connection, Please try again!");
+      toast.notify("Error in connection");
+} 
+  setLoading(false);
+};
+
+const onSubmit = (data) => {
+  console.log(data);
+  signIn(data);
+};
+
+  if (loggedIn) {
+    Router.push("/home");
   };
 
   return (
@@ -33,6 +77,7 @@ const Login = () => {
 
       <MainStyle className="flex flex-col items-center justify-between">
         <form onSubmit={handleSubmit(onSubmit)} className="w-11/12 mt-32">
+          <ToastContainer />
           <H3 color="#43A047" className="text-center mb-4">
             Login
           </H3>
@@ -56,8 +101,7 @@ const Login = () => {
                 <p key={type} className="text-xs text-red-500 text-center my-2">
                   {message}
                 </p>
-              ))
-            }
+              ))}
           </ErrorMessage>
 
           <Input
@@ -80,8 +124,7 @@ const Login = () => {
                 <p key={type} className="text-xs text-red-500 text-center my-2">
                   {message}
                 </p>
-              ))
-            }
+              ))}
           </ErrorMessage>
 
           <Link href="resetpassword">
@@ -92,9 +135,18 @@ const Login = () => {
             </a>
           </Link>
 
+          {loading ?
+          <LoaderContainer className="w-full mt-6">
+            <BeatLoader
+            size={30}
+            color="#43a047"
+            loading
+            />
+          </LoaderContainer>
+          :
           <SubmitButton type="submit" className="w-full mt-6">
             LOGIN
-          </SubmitButton>
+          </SubmitButton>}
         </form>
 
         <div className="w-full">
