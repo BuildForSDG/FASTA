@@ -17,9 +17,9 @@ const mailer = require("../helpers/mailer");
 router.post("/", async (req, res) => {
   // eslint-disable-next-line consistent-return
   const userExist = await User.findOne({ email: req.body.email });
-    if (userExist) {
-      return res.status(403).json({ response: "email exists" });
-    }
+  if (userExist) {
+    return res.status(403).json({ response: "email exists" });
+  }
   try {
     const {
       fullname, email, phonenumber, password, confirmPassword, origin
@@ -49,7 +49,7 @@ router.post("/", async (req, res) => {
   } catch (error) {
     return res.status(500).json({ response: error.message, welcomelink });
   }
-}); 
+});
 
 // USER LOGIN HERE
 router.post("/login", async (req, res) => {
@@ -226,7 +226,7 @@ router.route("/reset/:token")
             <p style='color: black;margin: 0px 0 30px;font-size:16px;text-align:center'><a href="${loginlink}" style="background:blue;padding:10px 12px;color:white">LOGIN TO DASHBOARD</p>
             <p style='color: black;margin: 0px 0 15px;font-size:16px;'>Thank you.</p>
         </div>
-    </div>` 
+    </div>`
       };
       mailer(options);
 
