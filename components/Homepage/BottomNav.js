@@ -18,7 +18,7 @@ const Text = styled.span`
   color: #7cbc7f;
 `;
 
-const BottomNav = () => {
+const BottomNav = (props) => {
   return (
     <Nav className="flex justify-evenly items-center">
       <li>
