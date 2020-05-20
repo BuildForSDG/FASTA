@@ -22,7 +22,7 @@ router.post("/", async (req, res) => {
     }
   try {
     const {
-      fullname, email, phonenumber, password, confirmPassword
+      fullname, email, phonenumber, password, confirmPassword, origin
     } = req.body;
     if (password !== confirmPassword) {
       return res.status(403).json({ response: "confirmpassword and password doesn't match" });
@@ -31,7 +31,7 @@ router.post("/", async (req, res) => {
     await User.create({
       fullname, email, phonenumber, password: hash
     });
-    const welcomelink = `${req.origin}/login`;
+    const welcomelink = `${origin}/login`;
     const options = {
       receiver: email,
       subject: "Fasta welcomes you!",
@@ -45,11 +45,11 @@ router.post("/", async (req, res) => {
       `
     };
     mailer(options);
-    return res.status(200).json({ response: "Signup succesfully" });
+    return res.status(200).json({ response: "Signup succesfully", welcomelink });
   } catch (error) {
-    return res.status(500).json({ response: error.message });
+    return res.status(500).json({ response: error.message, welcomelink });
   }
-});
+}); 
 
 // USER LOGIN HERE
 router.post("/login", async (req, res) => {
@@ -193,7 +193,7 @@ router.route("/reset/:token")
     });
   })
   .post(async (req, res) => {
-    const { password, confirmPassword } = req.body;
+    const { password, confirmPassword, origin } = req.body;
     console.log(req.params);
     if (!password || !confirmPassword) {
       return res.status(403).json({ response: "Both fields are required" });
@@ -213,7 +213,7 @@ router.route("/reset/:token")
         return res.status(404).json({ response: "Invalid user" });
       }
       res.status(200).json({ response: "your password reset was succesful, login to continue" });
-      const loginlink = `${req.origin}/users/login`;
+      const loginlink = `${origin}/users/login`;
       const options = {
         receiver: user.email,
         subject: "Password Reset",
