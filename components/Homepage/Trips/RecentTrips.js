@@ -13,7 +13,7 @@ const RecentTrips = (props) => {
       <Text>Your Recent Trips</Text>
       <Trip />
       <Trip />
-      <span style={{ color: "#2699fb", fontSize: "12px"}}>See All Trips</span>
+      <span style={{ color: "#2699fb", fontSize: "12px" }}>See All Trips</span>
     </div>
   );
 };

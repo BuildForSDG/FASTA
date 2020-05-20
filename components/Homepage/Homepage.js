@@ -20,7 +20,7 @@ const Homepage = (props) => {
       <NavBar name="Fasta" />
       <Body className="px-4">
         <GPS />
-        <NewTrip />
+        <NewTrip user={props.user} />
         <RecentTrips />
         <Reports />
         <NewReport />
