@@ -6,7 +6,8 @@ import Layout from "../components/OnBoardingLayout/Layout";
 
 export default function Hom() {
   const [loaded, setLoaded] = useState(false);
-  useEffect(() => {
+  
+    useEffect(() => {
     setTimeout(() => {
       setLoaded(true);
     }, 1000);
@@ -17,7 +18,7 @@ export default function Hom() {
   return (
     <div>
       <Head>
-        <title>Create Next App</title>
+        <title>FASTA App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {!loaded ? (

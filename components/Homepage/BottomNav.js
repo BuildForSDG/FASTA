@@ -25,7 +25,7 @@ const BottomNav = (props) => {
         <Link href="/home">
           <a className="flex flex-col items-center justify-between ">
             <img src="images/Home.png" alt="home" />
-            <Text className="text-white">Home</Text>
+            <Text style={{ color: "#fff" }}>Home</Text>
           </a>
         </Link>
       </li>
