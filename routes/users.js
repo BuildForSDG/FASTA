@@ -17,9 +17,9 @@ const mailer = require("../helpers/mailer");
 router.post("/", async (req, res) => {
   // eslint-disable-next-line consistent-return
   const userExist = await User.findOne({ email: req.body.email });
-    if (userExist) {
-      return res.status(403).json({ response: "email exists" });
-    }
+  if (userExist) {
+    return res.status(403).json({ response: "email exists" });
+  }
   try {
     const {
       fullname, email, phonenumber, password, confirmPassword
