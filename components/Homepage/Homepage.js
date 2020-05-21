@@ -12,7 +12,7 @@ const Body = styled.main`
   margin: 20px;
   margin-top: 70px;
 `;
-const Homepage = props => {
+const Homepage = (props) => {
   return (
     <div className="homepage w-screen h-screen">
       <NavBar name="Fasta" />

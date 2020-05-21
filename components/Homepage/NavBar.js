@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import styled from "styled-components";
 import React from "react";
 
@@ -15,7 +16,7 @@ const NavLogo = styled.img`
   height: 30px;
 `;
 
-const NavBar = props => {
+const NavBar = (props) => {
   return (
     <Nav className="flex justify-between items-center">
       <NavLogo src="images/Logo.png" alt="Fasta" />
