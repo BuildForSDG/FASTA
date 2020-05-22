@@ -1,0 +1,54 @@
+{
+  "name": "fasta-1",
+  "version": "0.1.0",
+  "private": true,
+  "main": ".next/index.js",
+  "types": ".next/index.d.ts",
+  "directories": {
+    "test": "__tests__"
+  },
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cover": "jest --coverage",
+    "lint": "eslint \"pages/**/*.js\"",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "eslint-plugin-react": "7.14.2",
+    "html-webpack-plugin": "^4.3.0",
+    "next": "9.3.6",
+    "next-pwa": "^2.4.1",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "react-hook-form": "^5.6.3",
+    "styled-components": "^5.1.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "9.0.0",
+    "babel-jest": "^25.4.0",
+    "babel-plugin-styled-components": "^1.10.7",
+    "eslint": "6.1.0",
+    "eslint-config-airbnb": "18.0.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-config-nextjs": "1.0.6",
+    "eslint-config-prettier": "4.1.0",
+    "eslint-plugin-html": "5.0.3",
+    "eslint-plugin-import": "2.18.0",
+    "eslint-plugin-jsx-a11y": "6.2.3",
+    "eslint-plugin-prettier": "3.0.1",
+    "eslint-plugin-react-hooks": "1.4.0",
+    "jest": "^25.4.0",
+    "postcss-preset-env": "^6.7.0",
+    "prettier": "1.16.4",
+    "tailwindcss": "^1.4.4",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
+  },
+  "browserslist": [
+    "last 1 Chrome versions"
+  ]
+}
