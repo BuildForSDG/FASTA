@@ -66,9 +66,11 @@ router.post("/login", async (req, res) => {
       const passwordcheck = bcrypt.comparePassword(password, user.password);
       if (passwordcheck) {
         const token = bcrypt.generateToken(user);
+        const { phonenumber } = user;
         return res.status(200).json({
           response: "Login successful",
-          token
+          token,
+          phonenumber
         });
       }
       return res.status(401).json({ response: "Auth failed" });
@@ -193,7 +195,6 @@ router.route("/reset/:token")
   })
   .post(async (req, res) => {
     const { password, confirmPassword, origin } = req.body;
-    console.log(req.params);
     if (!password || !confirmPassword) {
       return res.status(403).json({ response: "Both fields are required" });
     }
@@ -234,6 +235,45 @@ router.route("/reset/:token")
       return res.status(500).json({ response: `error ${error} occurred` });
     }
   });
+
+
+router.post("/update/phonenumber", async (req, res) => {
+  const { email, oldphonenumber, newphonenumber } = req.body;
+  if (!email || !oldphonenumber) {
+    return res.status(403).json({ response: "Both fields are required" });
+  }
+  try {
+    const user = await User.findOneAndUpdate(
+      { email, phonenumber: `0${oldphonenumber}` },
+      // eslint-disable-next-line max-len
+      { $set: { phonenumber: newphonenumber } },
+      { useFindAndModify: false }
+    );
+    if (!user) {
+      return res.status(404).json({ response: "Record not available" });
+    }
+    const loginlink = `${origin}/users/login`;
+    const options = {
+      receiver: user.email,
+      subject: "Phone number update",
+      text: `Hello ${user.fullname}`,
+      output: `<div style='margin: 0 auto; background: #ededed; border-top:2px solid green; border-bottom:2px solid green; box-shadow: 1px 2px 3px 4px #ccc; padding: 1.5rem '>
+        <div style='width:98%;margin-left:1%;border-bottom:1px dotted black;text-align:center;padding:15px 0;'><img src='<%= site.siteLogo %>' style='height:75px'/></div>
+        <div style='margin:0 1% 1%;background:#f1f1f1;padding:20px;'>
+            <h3 style='color: black;margin: 0px 0 15px;'>Hello ${user.fullname},</h3>
+            <p style='color: black;margin: 0px 0 30px;font-size:16px'>Your new phone number has been updated in our records!</p>
+            <p style='color: black;margin: 0px 0 30px;font-size:16px;text-align:center'><a href="${loginlink}" style="background:blue;padding:10px 12px;color:white">BACK TO LOGIN</p>
+            <p style='color: black;margin: 0px 0 15px;font-size:16px;'>Thank you.</p>
+        </div>
+    </div>`
+    };
+    mailer(options);
+
+    return res.status(200).json({ response: "Phone number updated", newphonenumber });
+  } catch (error) {
+    return res.status(500).json({ response: `error ${error} occurred` });
+  }
+});
 
 
 module.exports = router;
