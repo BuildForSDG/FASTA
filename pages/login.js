@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-useless-escape */
 /* eslint-disable no-console */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import Router from "next/router";
@@ -21,7 +21,7 @@ const MainStyle = styled.main`
   height: calc(100vh - 78px);
 `;
 
-const Login = ({loggedIn, setLoggedIn, setUser, getUrl}) => {
+const Login = ({loggedIn, setLoggedIn, user, setUser, getUrl}) => {
   console.log("loggedIn:", loggedIn);
   const [loading, setLoading] = useState(false);
   
@@ -45,8 +45,8 @@ try {
       if (res.status === 200) {
         setLoggedIn(true);
         const username = ev.email.split("@")[0];
-        setUser(username);
-        toast.notify("Login succesful");
+        setUser({name: username, email: ev.email, number: response.phonenumber});
+        toast.notify(response.response);
       } else {
         toast.notify("Invalid email and/or password");
       }
@@ -61,6 +61,10 @@ const onSubmit = (data) => {
   console.log(data);
   signIn(data);
 };
+
+useEffect(() => {
+  localStorage.setItem('user', JSON.stringify(user)); 
+}, [user]);
 
   if (loggedIn) {
     Router.push("/home");

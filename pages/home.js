@@ -15,7 +15,7 @@ const Home = ({ loggedIn, user }) => {
         </Head>
       </div>
       <div className="h-screen flex" style={{ backgroundColor: "#F7F5F5" }}>
-        <Homepage user={user} />
+        <Homepage user={user.name} />
       </div>
     </div>
   );
