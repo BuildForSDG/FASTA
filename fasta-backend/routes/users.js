@@ -47,7 +47,7 @@ router.post("/", async (req, res) => {
     mailer(options);
     return res.status(200).json({ response: "Signup succesfully", welcomelink });
   } catch (error) {
-    return res.status(500).json({ response: error.message, welcomelink });
+    return res.status(500).json({ response: error.message });
   }
 });
 
@@ -182,7 +182,6 @@ router.post("/forget", (req, res, next) => {
 router.route("/reset/:token")
   .all()
   .get(async (req, res) => {
-    console.log(req.params);
     await User.findOne({
       resetPasswordToken: req.params.token, resetPasswordExpires: { $gte: Date.now() }
     }).then((user) => {
