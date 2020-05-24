@@ -45,8 +45,10 @@ try {
       if (res.status === 200) {
         setLoggedIn(true);
         const username = ev.email.split("@")[0];
-        setUser({name: username, email: ev.email, number: response.phonenumber});
+        setUser({name: response.fullname.split(" ")[0], email: ev.email, number: response.phonenumber});
         toast.notify(response.response);
+      } else if (res.status >= 500) {
+        toast.notify("Some connection or server error");
       } else {
         toast.notify("Invalid email and/or password");
       }

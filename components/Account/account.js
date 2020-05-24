@@ -74,20 +74,23 @@ const handleFetch = async (url, method, body) => {
 const Number = ({ user, setUser, getUrl }) => {
   const [updated, setUpdated] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [url, setUrl] = useState("");
+  
   const { register, handleSubmit, errors } = useForm();
   const apiUrl = getUrl();
   const { name, email, number } = user;
 
   const updateNumber = async(ev) => {
+    ev.origin = url;
     console.log(ev, Object.keys(ev), email, number);
     setLoading(true);
   
   try {
-          const resetResponse = await handleFetch(`${apiUrl}/users/update/phonenumber`, "POST", {email, oldphonenumber: number, newphonenumber: ev.newphonenumber});
+          const resetResponse = await handleFetch(`${apiUrl}/users/update/phonenumber`, "POST", {email, oldphonenumber: number, newphonenumber: ev.newphonenumber, origin});
           console.log(resetResponse);
           if (resetResponse.status === 200) {
           toast.notify("Phone Number updated successfully");
-          setUser({name, email, number: newphonenumber});
+          setUser({name, email, number: ev.newphonenumber});
           setUpdated(!updated);
         } else {
           toast.notify("Reset failed");
@@ -102,9 +105,11 @@ const Number = ({ user, setUser, getUrl }) => {
   const onSubmitForm = FormData => updateNumber(FormData);
 
   useEffect(() => {
+    const {origin} = window.location;
+    setUrl(origin);
     console.log("useEffect: ", user, updated);
     localStorage.setItem('user', JSON.stringify(user)); 
-  }, []);
+  }, [user]);
 
   return (
     <div className="bg-white p-4 mb-4 rounded-lg">
