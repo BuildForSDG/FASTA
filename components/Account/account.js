@@ -148,8 +148,6 @@ const Number = ({ user, setUser, getUrl }) => {
   );
 };
 
-
-
 const ChangePassword = ({ user, getUrl }) => {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -307,7 +305,6 @@ const Register = props => {
 };
 
 const Account = props => {
-
   return (
     <>
       <Nav title="Profile" />
