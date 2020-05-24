@@ -17,7 +17,9 @@ export default function MyApp({ Component, pageProps }) {
 
 useEffect(() => {
   if (localStorage.getItem('user')) {
-  setUser(JSON.parse(localStorage.getItem('user')) || defaultUser);
+  setUser(JSON.parse(localStorage.getItem('user')));
+  } else {
+   setuser(defaultUser);
   }
 }, []);
 

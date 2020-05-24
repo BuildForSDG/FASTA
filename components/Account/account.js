@@ -46,7 +46,8 @@ export const Nav = props => {
   );
 };
 
-const Details = ({ name, email }) => {
+const Details = ({ user }) => {
+  const { name, email } = user;
   return (
     <DetailsBody className="flex items-center">
       <img src="/images/account/profile.svg" alt="profile" />
@@ -70,11 +71,12 @@ const handleFetch = async (url, method, body) => {
   return {status: res.status, response};
 }
 
-const Number = ({ name, number, email, user, setUser, getUrl }) => {
-  const [submit, setSubmitted] = useState(false);
+const Number = ({ user, setUser, getUrl }) => {
+  const [updated, setUpdated] = useState(false);
   const [loading, setLoading] = useState(false);
   const { register, handleSubmit, errors } = useForm();
   const apiUrl = getUrl();
+  const { name, email, number } = user;
 
   const updateNumber = async(ev) => {
     console.log(ev, Object.keys(ev), email, number);
@@ -86,6 +88,7 @@ const Number = ({ name, number, email, user, setUser, getUrl }) => {
           if (resetResponse.status === 200) {
           toast.notify("Phone Number updated successfully");
           setUser({name, email, number: newphonenumber});
+          setUpdated(!updated);
         } else {
           toast.notify("Reset failed");
         }
@@ -99,12 +102,13 @@ const Number = ({ name, number, email, user, setUser, getUrl }) => {
   const onSubmitForm = FormData => updateNumber(FormData);
 
   useEffect(() => {
-    console.log("useEffect: ", user);
+    console.log("useEffect: ", user, updated);
     localStorage.setItem('user', JSON.stringify(user)); 
-  }, [user]);
+  }, []);
 
   return (
     <div className="bg-white p-4 mb-4 rounded-lg">
+      <ToastContainer />
       <div className="flex items-center mb-3">
         <img src="/images/account/phone.svg" alt="phone" />
         <div className="ml-4">
@@ -126,9 +130,18 @@ const Number = ({ name, number, email, user, setUser, getUrl }) => {
             }
           })}
         />
+        {loading ?
+          <LoaderContainer className="w-full mt-6">
+            <BeatLoader
+            size={6}
+            color="#43a047"
+            loading
+            />
+          </LoaderContainer>
+          :   
         <SubmitButton className="w-2/6" type="submit">
           UPDATE
-        </SubmitButton>
+        </SubmitButton>}
       </form>
       {errors.newphonenumber && <p className="text-xs text-red-500 my-2 ml-2">{errors.newphonenumber.message}</p>}
     </div>
@@ -137,13 +150,14 @@ const Number = ({ name, number, email, user, setUser, getUrl }) => {
 
 
 
-const ChangePassword = ({ email, getUrl }) => {
+const ChangePassword = ({ user, getUrl }) => {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const { register, handleSubmit, errors, watch } = useForm({ validateCriteriaMode: "all" });
   const newPassword = useRef({});
   newPassword.current = watch("newPassword", "");  
   
+  const { email } = user;
   const apiUrl = getUrl();
 
   const updatePassword = async(ev) => {
@@ -298,9 +312,9 @@ const Account = props => {
     <>
       <Nav title="Profile" />
       <div className="w-full p-4">
-        <Details name={props.user.name} email={props.user.email} />
-        <Number name={props.user.name} number={props.user.number} email={props.user.email} user={props.user} setUser={props.setUser} getUrl={props.getUrl} />
-        <ChangePassword email={props.user.email} getUrl={props.getUrl} />
+        <Details user={props.user} />
+        <Number user={props.user} setUser={props.setUser} getUrl={props.getUrl} />
+        <ChangePassword user={props.user} getUrl={props.getUrl} />
         <Register />
       </div>
       <BottomNav />
