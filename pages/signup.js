@@ -45,6 +45,8 @@ useEffect(() => {
 }, []);
 console.log(url);
 
+const handleToast = (msg, type = "info") => toast.notify(msg, { duration: 10, type });
+
 //  sign up
 const signUp = async(ev) => {
   ev.origin = url;
@@ -58,15 +60,16 @@ try {
                               headers: { "Content-Type" : "application/json"}
                             });
       console.log(res.status);
-    if (res.status === 200) {
-      setSubmitted(true);
-    }
-    const response = await res.json();
+      const response = await res.json();
       console.log(response);
-      toast.notify(response.response);
+      if (res.status === 200) {
+      setSubmitted(true);
+      } else {
+        handleToast(response.response, "error");
+      }
 } catch(e) {
       console.log(e, "Some error in connection, Please try again!");
-      toast.notify("Error in connection");
+      handleToast("Error in connection", "error");
 }
   setLoading(false);
 }; 

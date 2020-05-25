@@ -38,6 +38,8 @@ const ResetPassword = ({getUrl }) => {
   setUrl(origin);
 }, []);
 
+const handleToast = (msg, type = "info") => toast.notify(msg, { duration: 10, type });
+
 //  reset password
 const reset = async(ev) => {
   ev.origin = url;
@@ -50,15 +52,16 @@ try {
                               body: JSON.stringify(ev), 
                               headers: { "Content-Type" : "application/json"}
                             });
-      if (res.status === 200) setSubmitted(true);
+      if (res.status === 200) {
+        setSubmitted(true);
+        handleToast(response.response, "error");
+      }
       const response = await res.json();
-      toast.notify(response.response);
-      // setSubmitted(true);
+      handleToast(response.response, "error");
       console.log(res.status, response);
 } catch(e) {
       console.log(e, "Some error in connection, Please try again!");
-      toast.notify("Error in connection");
-      // setSubmitted(true);
+      handleToast("Error in connection", "error");
 }
   setLoading(false);
   

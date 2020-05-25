@@ -37,6 +37,7 @@ const ChangePassword = ({getUrl, token}) => {
   password.current = watch("password", "");
   
   const apiUrl = getUrl();
+  const handleToast = (msg, type = "info") => toast.notify(msg, { duration: 10, type });
 
 useEffect(() => {
   const {origin} = window.location;
@@ -51,14 +52,11 @@ useEffect(() => {
         console.log(res.status, response);
         if (res.status === 401) {
           Router.push("/resetpassword");
-          toast.notify("Link is INVALID, Please try again", {
-            duration: 10,
-            type: "error"
-          });
+          handleToast("Link is INVALID, Please try again", "error");
         };
     } catch(e) {
         console.log(e, "Some error in connection, Please try again!");
-        toast.notify("Error in connection");
+        handleToast("Error in connection", "error");
       }
   })();
 }, []);
@@ -78,11 +76,11 @@ try {
                             });
       if (res.status === 200) setSubmitted(true);
       const response = await res.json();
-      toast.notify(response.response);
+      handleToast(response.response, "success");
       console.log(res.status, response);
 } catch(e) {
       console.log(e, "Some error in connection, Please try again!");
-      toast.notify("Error in connection");
+      handleToast("Error in connection", "error");
 }
   setLoading(false);
 };

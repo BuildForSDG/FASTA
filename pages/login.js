@@ -22,12 +22,13 @@ const MainStyle = styled.main`
 `;
 
 const Login = ({loggedIn, setLoggedIn, user, setUser, getUrl}) => {
-  console.log("loggedIn:", loggedIn);
+  // console.log("loggedIn:", loggedIn);
   const [loading, setLoading] = useState(false);
   
   const { register, handleSubmit, errors } = useForm({ validateCriteriaMode: "all" });
  
   const apiUrl = getUrl();
+  const handleToast = (msg, type = "info") => toast.notify(msg, { duration: 10, type });
 
 //  sign in
 const signIn = async(ev) => {
@@ -41,20 +42,20 @@ try {
                               headers: { "Content-Type" : "application/json"}
                             });
       const response = await res.json();
-      console.log(res.status, response);
+      // console.log(res.status, response);
       if (res.status === 200) {
         setLoggedIn(true);
         const username = ev.email.split("@")[0];
         setUser({name: response.fullname.split(" ")[0], email: ev.email, number: response.phonenumber});
-        toast.notify(response.response);
+        handleToast(response.response, "success");
       } else if (res.status >= 500) {
-        toast.notify("Some connection or server error");
+        handleToast("Some connection or server error", "error");
       } else {
-        toast.notify("Invalid email and/or password");
+        handleToast("Invalid email and/or password", "error");
       }
 } catch(e) {
       console.log(e, "Some error in connection, Please try again!");
-      toast.notify("Error in connection");
+      handleToast("Error in connection", "error");
 } 
   setLoading(false);
 };
@@ -67,6 +68,7 @@ const onSubmit = (data) => {
 useEffect(() => {
   localStorage.setItem('user', JSON.stringify(user)); 
 }, [user]);
+
 
   if (loggedIn) {
     Router.push("/home");

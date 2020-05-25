@@ -71,6 +71,8 @@ const handleFetch = async (url, method, body) => {
   return {status: res.status, response};
 }
 
+const handleToast = (msg, type = "info") => toast.notify(msg, { duration: 10, type });
+
 const Number = ({ user, setUser, getUrl }) => {
   const [updated, setUpdated] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -89,15 +91,15 @@ const Number = ({ user, setUser, getUrl }) => {
           const resetResponse = await handleFetch(`${apiUrl}/users/update/phonenumber`, "POST", {email, oldphonenumber: number, newphonenumber: ev.newphonenumber, origin});
           console.log(resetResponse);
           if (resetResponse.status === 200) {
-          toast.notify("Phone Number updated successfully");
+            handleToast("Phone Number updated successfully");
           setUser({name, email, number: ev.newphonenumber});
           setUpdated(!updated);
         } else {
-          toast.notify("Reset failed");
+          handleToast("Reset failed", "error");
         }
   } catch(e) {
         console.log(e, "Some error in connection, Please try again!");
-        toast.notify("Error in connection");
+        handleToast("Error in connection", "error");
   } 
     setLoading(false);
   };
@@ -175,16 +177,16 @@ const ChangePassword = ({ user, getUrl }) => {
 
           const resetResponse = await handleFetch(`${apiUrl}/users/reset/${forgetResponse.response.token}`, "POST", {password: ev.newPassword, confirmPassword: ev.confirmPassword});
             if (resetResponse.status === 200) {
-          toast.notify("Reset successful");
+              handleToast("Reset successful", "success");
             } else {
-          toast.notify("Reset failed");
+              handleToast("Reset failed", "error");
             }
         } else {
-          toast.notify("Invalid current password");
+          handleToast("Invalid current password", "error");
         }
   } catch(e) {
         console.log(e, "Some error in connection, Please try again!");
-        toast.notify("Error in connection");
+        handleToast("Error in connection", "error");
   } 
     setLoading(false);
   };
@@ -270,6 +272,7 @@ const Register = props => {
     setSubmitted(true);
     setTimeout(() => {
     setLoading(false);
+    handleToast("Service unavailable, please check later", "error");
     }, 1000);
   };
   return (
@@ -281,16 +284,25 @@ const Register = props => {
           <Text className="mb-4">Register as a Transporter</Text>
           <Input
             className="w-full mb-3"
-            placeholder="Vehicle Type"
-            name="vehicleType"
+            placeholder="Vehicle Make, e.g.Toyota"
+            name="vehicleMake"
             ref={register({
-              required: "Vehicle type required"
+              required: "Vehicle make required"
             })}
           />
-          {errors.vehicleType && <p className="text-xs text-red-500 my-2">{errors.vehicleType.message}</p>}
+          {errors.vehicleMake && <p className="text-xs text-red-500 my-2">{errors.vehicleMake.message}</p>}
           <Input
             className="w-full mb-3"
-            placeholder="Licence Number"
+            placeholder="Vehicle Model, e.g. Camry"
+            name="vehicleModel"
+            ref={register({
+              required: "Vehicle model required"
+            })}
+          />
+          {errors.vehicleModel && <p className="text-xs text-red-500 my-2">{errors.vehicleModel.message}</p>}
+          <Input
+            className="w-full mb-3"
+            placeholder="Licence Number, e.g. KJA234AA"
             name="licenceNumber"
             ref={register({
               required: "Licence number required"
