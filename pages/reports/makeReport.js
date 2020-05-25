@@ -21,7 +21,11 @@ const MakeReport = () => {
   
   const { register, handleSubmit, errors, watch } = useForm({ validateCriteriaMode: "all" });
   const onSubmit = (_data) => {
+    const accept = (args) => {
+      return args;
+    };
     // console.log(data);
+    accept(_data)
     setSubmitted(true);
   };
 
