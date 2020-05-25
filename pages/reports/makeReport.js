@@ -20,7 +20,7 @@ const MakeReport = () => {
   submitted && (document.body.style.overflow = "hidden");
   
   const { register, handleSubmit, errors, watch } = useForm({ validateCriteriaMode: "all" });
-  const onSubmit = (data) => {
+  const onSubmit = (_data) => {
     // console.log(data);
     setSubmitted(true);
   };
