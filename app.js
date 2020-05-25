@@ -27,7 +27,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(CORS());
 app.use(express.static(path.join(__dirname, "public")));
-app.use(CORS());
 
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/", indexRouter);
