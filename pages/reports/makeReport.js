@@ -105,7 +105,7 @@ const MakeReport = () => {
           </div>
         )}
     </Layout>
-  )  
-}
+  );  
+};
 
 export default MakeReport;

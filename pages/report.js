@@ -14,8 +14,8 @@ const Reports = () => {
     // effect
     return () => {
       // cleanup
-    }
-  }, [])
+    };
+  }, []);
 
   return (
     <Layout header="Reports" back >
@@ -66,7 +66,7 @@ const Reports = () => {
 
       <NewReportButton />
     </Layout>
-  )
-}
+  );
+};
 
 export default Reports;

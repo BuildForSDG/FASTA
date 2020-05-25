@@ -30,7 +30,7 @@ const Report = (props) => {
         description="Description of report and added info... fadadj jandkjand alkdna dfaldnakld adadnlkad klnkldad this info comes from database. truncates on second line.."
       />
     </Layout>
-  )
+  );
 };
 
 // export async function getStaticPaths() {

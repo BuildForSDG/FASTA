@@ -35,7 +35,7 @@ const ListItem = (props) => {
         </ListItemStyle>
       </a>
     </Link>
-  )
+  );
 };
 
 const BottomNav = () => {
