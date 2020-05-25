@@ -264,11 +264,17 @@ const ChangePassword = ({ user, getUrl }) => {
 const Register = props => {
   const { register, handleSubmit, errors } = useForm();
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
   const onSubmitForm = FormData => {
+    setLoading(true);
     setSubmitted(true);
+    setTimeout(() => {
+    setLoading(false);
+    }, 1000);
   };
   return (
     <form onSubmit={handleSubmit(onSubmitForm)} className="bg-white p-4 rounded-lg mb-16">
+      <ToastContainer />
       <div className="flex items-start">
         <img src="/images/account/car.png" alt="password" />
         <div className="ml-4 flex flex-col justify-around w-full">
@@ -300,9 +306,18 @@ const Register = props => {
             })}
           />
           {errors.address && <p className="text-xs text-red-500 my-2">{errors.address.message}</p>}
+          {loading ?
+          <LoaderContainer className="w-full mt-6">
+            <BeatLoader
+            size={30}
+            color="#43a047"
+            loading
+            />
+          </LoaderContainer>
+          : 
           <SubmitButton className="w-full" type="submit">
             Register
-          </SubmitButton>
+          </SubmitButton>}
         </div>
       </div>
     </form>

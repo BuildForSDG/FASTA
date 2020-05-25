@@ -19,7 +19,7 @@ useEffect(() => {
   if (localStorage.getItem('user')) {
   setUser(JSON.parse(localStorage.getItem('user')));
   } else {
-   setuser(defaultUser);
+   setUser(defaultUser);
   }
 }, []);
 
