@@ -2,7 +2,7 @@
 /* eslint-disable no-useless-escape */
 /* eslint-disable no-console */
 /* eslint-disable no-unused-expressions */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import styled from "styled-components";
 import { useForm, ErrorMessage } from "react-hook-form";
@@ -28,14 +28,19 @@ const AlertCardStyle = styled.div`
 const ResetPassword = ({getUrl }) => {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [url, setUrl] = useState("");
 
   const { register, handleSubmit, errors } = useForm({ validateCriteriaMode: "all" });
-  
  
  const apiUrl = getUrl();
+ useEffect(() => {
+  const {origin} = window.location;
+  setUrl(origin);
+}, []);
 
 //  reset password
 const reset = async(ev) => {
+  ev.origin = url;
   console.log(ev, Object.keys(ev));
   setLoading(true);
 
@@ -45,15 +50,15 @@ try {
                               body: JSON.stringify(ev), 
                               headers: { "Content-Type" : "application/json"}
                             });
-      // if (res.status === 200) setLoggedIn(true);
+      if (res.status === 200) setSubmitted(true);
       const response = await res.json();
       toast.notify(response.response);
-      setSubmitted(true);
+      // setSubmitted(true);
       console.log(res.status, response);
 } catch(e) {
       console.log(e, "Some error in connection, Please try again!");
       toast.notify("Error in connection");
-      setSubmitted(true);
+      // setSubmitted(true);
 }
   setLoading(false);
   
@@ -130,7 +135,7 @@ const onSubmit = (data) => {
                 Your recovery link has been sent to your email.
               </TextSmall>
 
-              <LinkButton href="changepassword" className="w-10/12 mx-auto">
+              <LinkButton href="login" className="w-10/12 mx-auto">
                 continue
               </LinkButton>
             </AlertCardStyle>

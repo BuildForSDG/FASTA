@@ -1,7 +1,8 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import Account from "../components/Account/account";
 
-const Profile = (props) => {
+const Profile = props => {
   return (
     <div>
       <head>

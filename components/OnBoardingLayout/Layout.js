@@ -36,7 +36,7 @@ const OnBoardingContainerLayout = styled.section`
   transition: 0.3s ease-out;
 `;
 
-const Layout = (props) => {
+const Layout = props => {
   const [screen, setScreen] = useState(0);
 
   function changeScreen({ target }) {
