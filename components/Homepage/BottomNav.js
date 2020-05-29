@@ -26,7 +26,7 @@ const BottomNav = (props) => {
         <Link href="/home">
           <a className="flex flex-col items-center justify-between ">
             <img src="images/Home.png" alt="home" />
-            <Text style={{ color: "#fff" }}>Home</Text>
+            <Text style={props.homeColor}>Home</Text>
           </a>
         </Link>
       </li>
@@ -34,7 +34,7 @@ const BottomNav = (props) => {
         <Link href="/start_trip">
           <a className="flex flex-col items-center justify-between ">
             <img src="images/Explore-inactive.png" alt="start_trip" />
-            <Text>Start Trip</Text>
+            <Text style={props.startTripColor}>Start Trip</Text>
           </a>
         </Link>
       </li>
@@ -42,7 +42,7 @@ const BottomNav = (props) => {
         <Link href="/reports">
           <a className="flex flex-col items-center justify-between ">
             <img src="images/Reports-unactive.png" alt="reports" />
-            <Text>Reports</Text>
+            <Text style={props.reportsColor}>Reports</Text>
           </a>
         </Link>
       </li>
@@ -50,7 +50,7 @@ const BottomNav = (props) => {
         <Link href="/account">
           <a className="flex flex-col items-center justify-between ">
             <img src="images/Profile-inactive.png" alt="account" />
-            <Text>Account</Text>
+            <Text style={props.accountColor}>Account</Text>
           </a>
         </Link>
       </li>

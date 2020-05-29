@@ -7,7 +7,7 @@ import Link from "next/link";
 import Router from "next/router";
 import styled from "styled-components";
 import { useForm, ErrorMessage } from "react-hook-form";
-import { ToastContainer, toast } from "react-nextjs-toast";
+import { ToastContainer } from "react-nextjs-toast";
 // import { css } from "@emotion/core";
 import BeatLoader from "react-spinners/BeatLoader";
 
@@ -21,14 +21,13 @@ const MainStyle = styled.main`
   height: calc(100vh - 78px);
 `;
 
-const Login = ({loggedIn, setLoggedIn, user, setUser, getUrl}) => {
+const Login = ({loggedIn, setLoggedIn, user, setUser, getUrl, handleToast }) => {
   // console.log("loggedIn:", loggedIn);
   const [loading, setLoading] = useState(false);
   
   const { register, handleSubmit, errors } = useForm({ validateCriteriaMode: "all" });
  
   const apiUrl = getUrl();
-  const handleToast = (msg, type = "info") => toast.notify(msg, { duration: 10, type });
 
 //  sign in
 const signIn = async(ev) => {

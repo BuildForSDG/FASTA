@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../styles/styles.css";
-// import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-nextjs-toast";
 
 // This default export is required in a new `pages/_app.js` file.
 export default function MyApp({ Component, pageProps }) {
@@ -14,6 +14,8 @@ export default function MyApp({ Component, pageProps }) {
     return "https://fastaapp.herokuapp.com/api/v1";
   };
   // }
+
+  const handleToast = (msg, type = "info") => toast.notify(msg, { duration: 10, type });
 
 useEffect(() => {
   if (localStorage.getItem('user')) {
@@ -31,6 +33,7 @@ useEffect(() => {
       user={user}
       setUser={setUser}
       getUrl={getUrl}
+      handleToast={handleToast}
     />
   );
 }

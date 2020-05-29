@@ -23,7 +23,7 @@ const Homepage = (props) => {
         <Reports />
         <NewReport />
       </Body>
-      <BottomNav />
+      <BottomNav homeColor={{color: "#fff"}} />
     </div>
   );
 };

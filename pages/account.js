@@ -11,7 +11,7 @@ const Profile = props => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="" style={{ backgroundColor: "#F7F5F5" }}>
-        <Account user={props.user} setUser={props.setUser} getUrl={props.getUrl} />
+        <Account user={props.user} setUser={props.setUser} getUrl={props.getUrl} handleToast={props.handleToast} />
       </div>
     </div>
   );

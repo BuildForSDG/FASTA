@@ -25,7 +25,7 @@ const AlertCardStyle = styled.div`
   padding: 60px 26px 46px;
 `;
 
-const ResetPassword = ({getUrl }) => {
+const ResetPassword = ({getUrl, handleToast }) => {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [url, setUrl] = useState("");
@@ -37,8 +37,6 @@ const ResetPassword = ({getUrl }) => {
   const {origin} = window.location;
   setUrl(origin);
 }, []);
-
-const handleToast = (msg, type = "info") => toast.notify(msg, { duration: 10, type });
 
 //  reset password
 const reset = async(ev) => {

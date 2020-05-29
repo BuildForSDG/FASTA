@@ -27,7 +27,7 @@ const AlertCardStyle = styled.div`
   padding: 60px 26px 46px;
 `;
 
-const Signup = ({loggedIn, getUrl}) => {
+const Signup = ({loggedIn, getUrl, handleToast}) => {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [url, setUrl] = useState("");
@@ -44,8 +44,6 @@ useEffect(() => {
   setUrl(origin);
 }, []);
 console.log(url);
-
-const handleToast = (msg, type = "info") => toast.notify(msg, { duration: 10, type });
 
 //  sign up
 const signUp = async(ev) => {

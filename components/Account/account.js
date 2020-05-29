@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Router from "next/router";
 import { useForm } from "react-hook-form";
-import { ToastContainer, toast } from "react-nextjs-toast";
+import { ToastContainer } from "react-nextjs-toast";
 // import { css } from "@emotion/core";
 import BeatLoader from "react-spinners/BeatLoader";
 import styled from "styled-components";
@@ -71,9 +71,7 @@ const handleFetch = async (url, method, body) => {
   return {status: res.status, response};
 }
 
-const handleToast = (msg, type = "info") => toast.notify(msg, { duration: 10, type });
-
-const Number = ({ user, setUser, getUrl }) => {
+const Number = ({ user, setUser, getUrl, handleToast }) => {
   const [updated, setUpdated] = useState(false);
   const [loading, setLoading] = useState(false);
   const [url, setUrl] = useState("");
@@ -155,7 +153,7 @@ const Number = ({ user, setUser, getUrl }) => {
   );
 };
 
-const ChangePassword = ({ user, getUrl }) => {
+const ChangePassword = ({ user, getUrl, handleToast }) => {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const { register, handleSubmit, errors, watch } = useForm({ validateCriteriaMode: "all" });
@@ -263,7 +261,7 @@ const ChangePassword = ({ user, getUrl }) => {
   );
 };
 
-const Register = props => {
+const Register = ({ handleToast }) => {
   const { register, handleSubmit, errors } = useForm();
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -342,11 +340,11 @@ const Account = props => {
       <Nav title="Profile" />
       <div className="w-full p-4">
         <Details user={props.user} />
-        <Number user={props.user} setUser={props.setUser} getUrl={props.getUrl} />
-        <ChangePassword user={props.user} getUrl={props.getUrl} />
-        <Register />
+        <Number user={props.user} setUser={props.setUser} getUrl={props.getUrl} handleToast={props.handleToast} />
+        <ChangePassword user={props.user} getUrl={props.getUrl} handleToast={props.handleToast} />
+        <Register handleToast={props.handleToast} />
       </div>
-      <BottomNav />
+      <BottomNav accountColor={{color: "#fff"}} />
     </>
   );
 };

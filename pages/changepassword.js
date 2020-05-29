@@ -27,7 +27,7 @@ const AlertCardStyle = styled.div`
   padding: 60px 26px 46px;
 `;
 
-const ChangePassword = ({getUrl, token}) => {
+const ChangePassword = ({getUrl, token, handleToast}) => {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [url, setUrl] = useState("");
@@ -37,7 +37,6 @@ const ChangePassword = ({getUrl, token}) => {
   password.current = watch("password", "");
   
   const apiUrl = getUrl();
-  const handleToast = (msg, type = "info") => toast.notify(msg, { duration: 10, type });
 
 useEffect(() => {
   const {origin} = window.location;
