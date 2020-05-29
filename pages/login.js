@@ -46,7 +46,7 @@ try {
         setLoggedIn(true);
         const username = ev.email.split("@")[0];
         setUser(username);
-        toast.notify("Login succesful");
+        toast.notify("Login successful");
       } else {
         toast.notify("Invalid email and/or password");
       }

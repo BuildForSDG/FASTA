@@ -8,5 +8,5 @@ export const H1 = styled.h1`
 export const H3 = styled.h1`
   font-size: 20px;
   font-weight: bold;
-  color: ${(props) => props.color};
+  color: ${props => props.color};
 `;
