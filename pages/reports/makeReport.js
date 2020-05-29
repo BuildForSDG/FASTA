@@ -25,7 +25,7 @@ const MakeReport = () => {
       return args;
     };
     // console.log(data);
-    accept(_data)
+    accept(_data);
     setSubmitted(true);
   };
 
