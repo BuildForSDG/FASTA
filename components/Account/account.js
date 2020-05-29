@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import Router from "next/router";
 import { useForm } from "react-hook-form";
@@ -29,13 +30,15 @@ const Text = styled(H3)`
   font-weight: normal;
 `;
 
-export const Nav = (props) => {
+export const Nav = props => {
   return (
     <NavBar className="flex justify-between items-center z-10">
       <div onClick={() => Router.back()}>
         <img src="/images/account/Back-Arrow.svg" alt="back" />
       </div>
-      <Text color="#232323" className="my-0 font-normal mx-auto">{props.title}</Text>
+      <Text color="#232323" className="my-0 font-normal mx-auto">
+        {props.title}
+      </Text>
     </NavBar>
   );
 };
@@ -52,10 +55,10 @@ const Details = ({ name, email }) => {
   );
 };
 
-const Number = ({number}) => {
+const Number = ({ number }) => {
   const [submit, setSubmitted] = useState(false);
   const { register, handleSubmit, errors } = useForm();
-  const onSubmitForm = (FormData) => setSubmitted(true);
+  const onSubmitForm = FormData => setSubmitted(true);
   return (
     <div className="bg-white p-4 mb-4 rounded-lg">
       <div className="flex items-center mb-3">
@@ -88,10 +91,10 @@ const Number = ({number}) => {
   );
 };
 
-const ChangePassword = (props) => {
+const ChangePassword = props => {
   const [submitted, setSubmitted] = useState(false);
   const { register, handleSubmit, errors } = useForm();
-  const onSubmitForm = (FormData) => {
+  const onSubmitForm = FormData => {
     setSubmitted(true);
   };
   return (
@@ -138,10 +141,10 @@ const ChangePassword = (props) => {
   );
 };
 
-const Register = (props) => {
+const Register = props => {
   const { register, handleSubmit, errors } = useForm();
   const [submitted, setSubmitted] = useState(false);
-  const onSubmitForm = (FormData) => {
+  const onSubmitForm = FormData => {
     setSubmitted(true);
   };
   return (
@@ -186,7 +189,7 @@ const Register = (props) => {
   );
 };
 
-const Account = (props) => {
+const Account = props => {
   return (
     <>
       <Nav title="Profile" />
