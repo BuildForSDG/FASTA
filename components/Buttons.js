@@ -67,3 +67,30 @@ export const LinkButton = (props) => {
     </Link>
   );
 };
+
+const NewReportButtonSyled = styled.div`
+  height: 54px;
+  width: 54px;
+  background: #43a047;
+  color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 80px;
+  right: 18px;
+  box-shadow: 0px 0px 7px #0000001a;
+`;
+
+export const NewReportButton = () => {
+  return (
+    <Link href="reports/makeReport">
+      <a>
+        <NewReportButtonSyled>
+          <img src="/images/ic_file_new.svg" alt="make report" />
+        </NewReportButtonSyled>
+      </a>
+    </Link>
+  );
+};

@@ -234,7 +234,7 @@ if (loggedIn) {
 
         <div className="w-full mt-10">
           <p className="text-xs mb-3 text-center" style={{ color: "#43A047" }}>
-            Don't have an account?
+            Already have an account?
           </p>
           <Link href="login">
             <a>

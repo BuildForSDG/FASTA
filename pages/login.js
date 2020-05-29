@@ -71,7 +71,7 @@ useEffect(() => {
 
   if (loggedIn) {
     Router.push("/home");
-  };
+  }
 
   return (
     <div className="w-screen ">
