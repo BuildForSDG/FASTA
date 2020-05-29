@@ -9,13 +9,11 @@ const Home = ({ loggedIn, user }) => {
 
   return (
     <div>
-      <div>
-        <Head>
-          <title>Fasta</title>
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
-      </div>
-      <div className="h-screen flex" style={{ backgroundColor: "#F7F5F5" }}>
+      <Head>
+        <title>Fasta</title>
+        <link rel="icon" href="/images/Logo.png" />
+      </Head>
+      <div className="" >
         <Homepage user={user} />
       </div>
     </div>
