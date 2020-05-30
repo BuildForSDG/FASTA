@@ -6,7 +6,7 @@ import styled from "styled-components";
 import Link from "next/link";
 
 import { TextSmall } from "../Text/Body";
-import { SubmitButton, LinkButton } from "../../components/Buttons";
+import { SubmitButton } from "../../components/Buttons";
 
 
 const TripCardStyle = styled.div`
