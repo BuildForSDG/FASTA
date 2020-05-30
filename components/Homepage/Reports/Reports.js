@@ -1,26 +1,22 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
-import styled from "styled-components";
 import Report from "./Report";
+import styled from "styled-components";
+import { H3 } from "../../Text/Headings";
+import { TextSmall } from "../../Text/Body";
 
-const Heading = styled.p`
-  color: #232323;
+const Text = styled(TextSmall)`
   font-size: 20px;
-  margin: 10px 0;
-`;
-
-const AllReports = styled.span`
-  color: #2699fb;
-  font-size: 12px;
+  margin: 5px 0;
 `;
 
 const Reports = (props) => {
   return (
     <div>
-      <Heading>Reports in your area</Heading>
-      <Report title=" Accident" />
+      <Text color="#232323">Reports in your area</Text>
+      <Report title="Accident" />
       <Report title="Shoot-out" />
-      <AllReports>See All Reports</AllReports>
+      <TextSmall color="#2699fb">See All Reports</TextSmall>
     </div>
   );
 };
