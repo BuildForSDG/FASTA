@@ -50,11 +50,11 @@ try {
                               body: JSON.stringify(ev), 
                               headers: { "Content-Type" : "application/json"}
                             });
+      const response = await res.json();
       if (res.status === 200) {
         setSubmitted(true);
         handleToast(response.response, "error");
       }
-      const response = await res.json();
       handleToast(response.response, "error");
       console.log(res.status, response);
 } catch(e) {

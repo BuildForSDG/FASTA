@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React, { useState, useEffect } from "react";
+import fetch from "node-fetch";
 
 import Layout from "../components/Layout";
 import ReportCard from "../components/Cards/ReportCard";
@@ -7,11 +8,16 @@ import { NewReportButton } from "../components/Buttons";
 
 
 
-const Reports = () => {
+const Reports = ({getUrl, getReports, handleToast}) => {
   const [reports, setReports] = useState(null);
 
+  console.log(getReports.response);
+
+  // const apiUrl = getUrl();
   useEffect(() => {
     // effect
+    setReports(getReports.response);
+    console.log(getReports, reports);
     return () => {
       // cleanup
     };
@@ -19,54 +25,41 @@ const Reports = () => {
 
   return (
     <Layout header="Reports" back >
+      {reports && reports.map((report) => (
       <ReportCard 
-        id="1"
-        type="Accident"
-        location="34 Kingsley avenue, Gusau."
-        timestamp="2min ago"
-        description="Description of report and added info... this info comes from database. truncates on second line.."
-        details
+      key={report._id}
+      id={report._id}
+      type={report.type}
+      location={report.location}
+      timestamp={report.timestamp}
+      description={report.description}
+      details
       />
-
-      <ReportCard 
-        id="2"
-        type="Fire"
-        location="34 Kingsley avenue, Gusau."
-        timestamp="20min ago"
-        description="Description of report and added info... this info comes from database. truncates on second line.."
-        details
-      />
-
-      <ReportCard 
-        id="3"
-        type="Hold-Up"
-        location="34 Kingsley avenue, Gusau."
-        timestamp="3min ago"
-        description="Description of report and added info... this info comes from database. truncates on second line.."
-        details
-      />
-
-      <ReportCard 
-        id="4"
-        type="Riot"
-        location="34 Kingsley avenue, Gusau."
-        timestamp="50min ago"
-        description="Description of report and added info... this info comes from database. truncates on second line.."
-        details
-      />
-      
-      <ReportCard 
-        id="5"
-        type="Fire"
-        location="34 Kingsley avenue, Gusau."
-        timestamp="20min ago"
-        description="Description of report and added info... this info comes from database. truncates on second line.."
-        details
-      />
-
-      <NewReportButton />
+      ))}
+      <NewReportButton getUrl={getUrl} handleToast={handleToast} />
     </Layout>
   );
 };
+
+Reports.getInitialProps = async ctx => {
+
+  // try {
+    const res = await fetch("http://localhost:8080/api/v1/reports", {
+                            method: "GET", 
+                            headers: { "Content-Type" : "application/json"}
+                          });
+    const response = await res.json();
+    console.log(res.status, response);
+    // if (res.status === 200) {
+      const getReports = response;
+      return {getReports};
+    // }
+    // } catch(e) {
+    //     console.log(e, "Some error in connection, Please try again!");
+    //     // handleToast("Error in connection", "error");
+    //   }
+    
+  // return {};
+}
 
 export default Reports;

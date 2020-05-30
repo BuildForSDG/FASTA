@@ -6,7 +6,7 @@ import { ToastContainer } from "react-nextjs-toast";
 // import { css } from "@emotion/core";
 import BeatLoader from "react-spinners/BeatLoader";
 import styled from "styled-components";
-import BottomNav from "../Homepage/BottomNav";
+import BottomNav from "../BottomNav";
 import Input from "../Input";
 import { H3 } from "../Text/Headings";
 import { SubmitButton, LoaderContainer } from "../Buttons";
@@ -47,13 +47,30 @@ export const Nav = props => {
 };
 
 const Details = ({ user }) => {
-  const { name, email } = user;
+  const { fullname, email } = user;
   return (
     <DetailsBody className="flex items-center">
       <img src="/images/account/profile.svg" alt="profile" />
       <div className="ml-4">
-        <Text>{name}</Text>
+        <Text>{fullname}</Text>
         <span style={{ color: "#7f7f7f" }}>{email}</span>
+        <p>{user.status === "transporter" ? <span style={{ color: "#7f7f7f" }}>FASTA Transporter</span>: <span>Regular User</span>}</p>
+      </div>
+    </DetailsBody>
+  );
+};
+
+const VehicleDetails = ({ user }) => {
+  const { vehiclemake, vehiclemodel, licencenumber, address } = user;
+  return (
+    <DetailsBody className="flex items-center">
+      {/* <img src="/images/account/profile.svg" alt="profile" /> */}
+      <div className="ml-4">
+        <SubmitButton className="w-full">Vehicle Registration Details</SubmitButton>
+        <Text>Vehicle Type: {vehiclemake} {vehiclemodel}</Text>
+        <Text>Reg. No: {licencenumber}</Text>
+        <Text>Address: {address}</Text>
+        <SubmitButton className="w-full">Vehicle Registration Details</SubmitButton>
       </div>
     </DetailsBody>
   );
@@ -78,19 +95,19 @@ const Number = ({ user, setUser, getUrl, handleToast }) => {
   
   const { register, handleSubmit, errors } = useForm();
   const apiUrl = getUrl();
-  const { name, email, number } = user;
+  const { fullname, email, phonenumber } = user;
 
   const updateNumber = async(ev) => {
     ev.origin = url;
-    console.log(ev, Object.keys(ev), email, number);
+    console.log(ev, Object.keys(ev), email, phonenumber);
     setLoading(true);
   
   try {
-          const resetResponse = await handleFetch(`${apiUrl}/users/update/phonenumber`, "POST", {email, oldphonenumber: number, newphonenumber: ev.newphonenumber, origin});
+          const resetResponse = await handleFetch(`${apiUrl}/users/update/phonenumber`, "POST", {email, oldphonenumber: phonenumber, newphonenumber: ev.newphonenumber, origin});
           console.log(resetResponse);
           if (resetResponse.status === 200) {
             handleToast("Phone Number updated successfully");
-          setUser({name, email, number: ev.newphonenumber});
+          setUser({fullname, email, phonenumber: ev.newphonenumber});
           setUpdated(!updated);
         } else {
           handleToast("Reset failed", "error");
@@ -118,7 +135,7 @@ const Number = ({ user, setUser, getUrl, handleToast }) => {
         <img src="/images/account/phone.svg" alt="phone" />
         <div className="ml-4">
           <Text>Registered Number</Text>
-          <span style={{ color: "#7f7f7f" }}>{number}</span>
+          <span style={{ color: "#7f7f7f" }}>{phonenumber}</span>
         </div>
       </div>
       <form className="flex justify-around" onSubmit={handleSubmit(onSubmitForm)}>
@@ -156,6 +173,8 @@ const Number = ({ user, setUser, getUrl, handleToast }) => {
 const ChangePassword = ({ user, getUrl, handleToast }) => {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [url, setUrl] = useState("");
+
   const { register, handleSubmit, errors, watch } = useForm({ validateCriteriaMode: "all" });
   const newPassword = useRef({});
   newPassword.current = watch("newPassword", "");  
@@ -164,6 +183,7 @@ const ChangePassword = ({ user, getUrl, handleToast }) => {
   const apiUrl = getUrl();
 
   const updatePassword = async(ev) => {
+    ev.origin = url;
     console.log(ev, Object.keys(ev));
     setLoading(true);
   
@@ -173,7 +193,7 @@ const ChangePassword = ({ user, getUrl, handleToast }) => {
         if (auth.status === 200) {
           const forgetResponse = await handleFetch(`${apiUrl}/users/forget`, "POST", {email, password: ev.currentPassword});
 
-          const resetResponse = await handleFetch(`${apiUrl}/users/reset/${forgetResponse.response.token}`, "POST", {password: ev.newPassword, confirmPassword: ev.confirmPassword});
+          const resetResponse = await handleFetch(`${apiUrl}/users/reset/${forgetResponse.response.token}`, "POST", {password: ev.newPassword, confirmPassword: ev.confirmPassword, origin});
             if (resetResponse.status === 200) {
               handleToast("Reset successful", "success");
             } else {
@@ -191,6 +211,11 @@ const ChangePassword = ({ user, getUrl, handleToast }) => {
 
   const onSubmitForm = FormData => updatePassword(FormData);
 
+  useEffect(() => {
+    const {origin} = window.location;
+    setUrl(origin);
+  }, []);
+  
   return (
     <form onSubmit={handleSubmit(onSubmitForm)} className="bg-white p-4 rounded-lg mb-4">
       <ToastContainer />
@@ -261,18 +286,56 @@ const ChangePassword = ({ user, getUrl, handleToast }) => {
   );
 };
 
-const Register = ({ handleToast }) => {
+const Register = ({ user, setUser, getUrl, handleToast }) => {
   const { register, handleSubmit, errors } = useForm();
-  const [submitted, setSubmitted] = useState(false);
+  const [updated, setUpdated] = useState(false);
   const [loading, setLoading] = useState(false);
-  const onSubmitForm = FormData => {
+  const [url, setUrl] = useState("");
+
+  const apiUrl = getUrl();
+  const { name, email, phonenumber } = user;
+
+  const updateUserStatus = async(ev) => {
+    ev.origin = url;
+    console.log(ev, Object.keys(ev), email, phonenumber);
     setLoading(true);
-    setSubmitted(true);
-    setTimeout(() => {
+  
+  try {
+          const registerResponse = await handleFetch(`${apiUrl}/users/register/transporter`, "POST", 
+          { email, 
+            phonenumber, 
+            vehiclemake: ev.vehicleMake,
+            vehiclemodel: ev.vehicleModel,
+            licencenumber: ev.licenceNumber,
+            address: ev.address, 
+            origin
+          });
+          if (registerResponse.status === 200) {
+            handleToast("Registration is successful");
+          setUser(registerResponse.response.user);
+          setUpdated(!updated);
+          console.log(registerResponse, user);
+        } else {
+          handleToast(`Registration failed, ${registerResponse.response.response}`, "error");
+        }
+  } catch(e) {
+        console.log(e, "Some error in connection, Please try again!");
+        handleToast("Error in connection", "error");
+  } 
     setLoading(false);
-    handleToast("Service unavailable, please check later", "error");
-    }, 1000);
   };
+
+  const onSubmitForm = FormData => updateUserStatus(FormData);
+
+  useEffect(() => {
+    const {origin} = window.location;
+    setUrl(origin);
+    console.log("useEffect: ", user, updated);
+    localStorage.setItem('user', JSON.stringify(user)); 
+  }, [user]);
+
+
+  
   return (
     <form onSubmit={handleSubmit(onSubmitForm)} className="bg-white p-4 rounded-lg mb-16">
       <ToastContainer />
@@ -285,7 +348,11 @@ const Register = ({ handleToast }) => {
             placeholder="Vehicle Make, e.g.Toyota"
             name="vehicleMake"
             ref={register({
-              required: "Vehicle make required"
+              required: "Vehicle Make required",
+              pattern: {
+                value: /[A-Z]{4,}/i,
+                message: "Vehicle Make must be minimum of 4 characters"
+              }            
             })}
           />
           {errors.vehicleMake && <p className="text-xs text-red-500 my-2">{errors.vehicleMake.message}</p>}
@@ -294,7 +361,11 @@ const Register = ({ handleToast }) => {
             placeholder="Vehicle Model, e.g. Camry"
             name="vehicleModel"
             ref={register({
-              required: "Vehicle model required"
+              required: "Vehicle Model required",
+              pattern: {
+                value: /[A-Z]{4,}/i,
+                message: "Vehicle Model must be minimum of 4 characters"
+              }            
             })}
           />
           {errors.vehicleModel && <p className="text-xs text-red-500 my-2">{errors.vehicleModel.message}</p>}
@@ -303,7 +374,11 @@ const Register = ({ handleToast }) => {
             placeholder="Licence Number, e.g. KJA234AA"
             name="licenceNumber"
             ref={register({
-              required: "Licence number required"
+              required: "Licence number required",
+              pattern: {
+                value: /[A-Z]{2,3}[0-9]{2,3}[A-Z]{2,3}/i,
+                message: "Licence Number not valid"
+              }             
             })}
           />
           {errors.licenceNumber && <p className="text-xs text-red-500 my-2">{errors.licenceNumber.message}</p>}
@@ -312,7 +387,11 @@ const Register = ({ handleToast }) => {
             placeholder="Address"
             name="address"
             ref={register({
-              required: "Address required"
+              required: "Address required",
+              pattern: {
+                value: /[A-Z]{5,}/i,
+                message: "Address must be minimum of 5 characters"
+              }            
             })}
           />
           {errors.address && <p className="text-xs text-red-500 my-2">{errors.address.message}</p>}
@@ -335,6 +414,7 @@ const Register = ({ handleToast }) => {
 };
 
 const Account = props => {
+
   return (
     <>
       <Nav title="Profile" />
@@ -342,9 +422,14 @@ const Account = props => {
         <Details user={props.user} />
         <Number user={props.user} setUser={props.setUser} getUrl={props.getUrl} handleToast={props.handleToast} />
         <ChangePassword user={props.user} getUrl={props.getUrl} handleToast={props.handleToast} />
-        <Register handleToast={props.handleToast} />
+        {/* {props.user ? props.user.status : 'truck'} */}
+        {props.user.status && props.user.status === "transporter" ?
+        <VehicleDetails user={props.user} />:
+        <Register user={props.user} setUser={props.setUser} getUrl={props.getUrl} handleToast={props.handleToast} />
+        }
       </div>
-      <BottomNav accountColor={{color: "#fff"}} />
+      {/* <BottomNav accountColor={{color: "#fff"}} /> */}
+      <BottomNav />
     </>
   );
 };

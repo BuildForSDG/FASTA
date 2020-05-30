@@ -41,11 +41,11 @@ try {
                               headers: { "Content-Type" : "application/json"}
                             });
       const response = await res.json();
-      // console.log(res.status, response);
+      console.log(res.status, response);
       if (res.status === 200) {
         setLoggedIn(true);
-        const username = ev.email.split("@")[0];
-        setUser({name: response.fullname.split(" ")[0], email: ev.email, number: response.phonenumber});
+        // setUser({name: response.user.fullname.split(" ")[0], email: ev.email, number: response.user.phonenumber});
+        setUser(response.user);
         handleToast(response.response, "success");
       } else if (res.status >= 500) {
         handleToast("Some connection or server error", "error");

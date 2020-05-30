@@ -5,13 +5,13 @@ import { toast } from "react-nextjs-toast";
 // This default export is required in a new `pages/_app.js` file.
 export default function MyApp({ Component, pageProps }) {
   const [loggedIn, setLoggedIn] = useState(false);
-  const defaultUser = {name : "Guest", email: "guest@fasta.com", number: "08099887766"};
+  const defaultUser = {fullname : "Guest", email: "guest@fasta.com", phonenumber: "08099887766"};
   const [user, setUser] = useState(defaultUser);
   const getUrl = () => {
     // if(location.host.indexOf('localhost') >= 0){
-      // return 'http://localhost:8080/api/v1';
+      return 'http://localhost:8080/api/v1';
     // } else {
-    return "https://fastaapp.herokuapp.com/api/v1";
+    // return "https://fastaapp.herokuapp.com/api/v1";
   };
   // }
 

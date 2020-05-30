@@ -39,9 +39,9 @@ const BottomNav = (props) => {
         </Link>
       </li>
       <li>
-        <Link href="/reports">
+        <Link href="/report">
           <a className="flex flex-col items-center justify-between ">
-            <img src="images/Reports-unactive.png" alt="reports" />
+            <img src="images/Reports-inactive.png" alt="reports" />
             <Text style={props.reportsColor}>Reports</Text>
           </a>
         </Link>

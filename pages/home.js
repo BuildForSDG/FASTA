@@ -6,7 +6,7 @@ import Homepage from "../components/Homepage/Homepage";
 
 const Home = ({ loggedIn, user }) => {
   // console.log("loggedIn:", loggedIn);
-
+  const name = user.fullname.split(" ")[0];
   return (
     <div>
       <Head>
@@ -14,7 +14,7 @@ const Home = ({ loggedIn, user }) => {
         <link rel="icon" href="/images/Logo.png" />
       </Head>
       <div className="" >
-        <Homepage user={user} />
+        <Homepage user={name} />
       </div>
     </div>
   );
