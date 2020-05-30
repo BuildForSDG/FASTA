@@ -66,12 +66,11 @@ router.post("/login", async (req, res) => {
       const passwordcheck = bcrypt.comparePassword(password, user.password);
       if (passwordcheck) {
         const token = bcrypt.generateToken(user);
-        const { fullname, phonenumber } = user;
+        user.password = null;
         return res.status(200).json({
           response: "Login successful",
           token,
-          fullname, 
-          phonenumber
+          user
         });
       }
       return res.status(401).json({ response: "Auth failed" });
@@ -270,6 +269,45 @@ router.post("/update/phonenumber", async (req, res) => {
       await mailer(options);
 
       return res.status(200).json({ response: "Your phonenumber has been updated", message: "Mail sent", loginlink });
+    } catch (error) {
+      return res.status(500).json({ response: `error ${error} occurred` });
+    }
+  });
+
+router.post("/register/transporter", async (req, res) => {
+    const { email, phonenumber, vehiclemake, vehiclemodel, licencenumber, address, origin } = req.body;
+    if (!email || !phonenumber) {
+      return res.status(403).json({ response: "invalid authorization" });
+    }
+    try {
+      const user = await User.findOneAndUpdate(
+        { email, phonenumber },
+        // eslint-disable-next-line max-len
+        { $set: { vehiclemake, vehiclemodel, licencenumber, address, status: "transporter" } },
+        { useFindAndModify: false }
+      );
+      if (!user) {
+        return res.status(404).json({ response: "User record not available" });
+      }
+      user.password = null;
+      const loginlink = `${origin}/login`;
+      const options = {
+        receiver: user.email,
+        subject: "You are now a FASTA Transporter",
+        text: `Hello ${user.fullname}`,
+        output: `<div style='margin: 0 auto; background: #ededed; border-top:2px solid green; border-bottom:2px solid green; box-shadow: 1px 2px 3px 4px #ccc; padding: 1.5rem '>
+        <div style='width:98%;margin-left:1%;border-bottom:1px dotted black;text-align:center;padding:15px 0;'><img src='<%= site.siteLogo %>' style='height:75px'/></div>
+        <div style='margin:0 1% 1%;background:#f1f1f1;padding:20px;'>
+            <h3 style='color: black;margin: 0px 0 15px;'>Hello ${user.fullname},</h3>
+            <p style='color: black;margin: 0px 0 30px;font-size:16px'>Your status has been updated to a FASTA transporter.</p>
+            <p style='color: black;margin: 0px 0 30px;font-size:16px;text-align:center'><a href="${loginlink}" style="background:blue;padding:10px 12px;color:white">CONTINUE TO LOGIN</p>
+            <p style='color: black;margin: 0px 0 15px;font-size:16px;'>Thank you.</p>
+        </div>
+    </div>` 
+      }; 
+      await mailer(options);
+
+      return res.status(200).json({ response: "Your status has been updated to a FASTA transporter", user, message: "Mail sent", loginlink });
     } catch (error) {
       return res.status(500).json({ response: `error ${error} occurred` });
     }

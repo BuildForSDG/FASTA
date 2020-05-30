@@ -6,10 +6,11 @@ const Reports = require("../models/report");
 const authChecker = require("../middlewares/authChecker");
 
 
-router.post("/report", authChecker, async (req, res) => {
+router.post("/", async (req, res) => {
   const {
-    type, description, location
+    type, description, 
   } = req.body;
+  const location = "unknown location";
 
   if (!type || !description || !location) {
     return res.status(403).json({ response: "please all fields are required" });
@@ -29,7 +30,7 @@ router.post("/report", authChecker, async (req, res) => {
   }
 });
 
-router.get("/reports", authChecker, async (req, res) => {
+router.get("/", async (req, res) => {
   await Reports.find()
     .select("_id type description location date")
     .exec()
