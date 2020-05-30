@@ -92,7 +92,7 @@ const MakeReport = () => {
 
         {submitted && (
           <div
-            className="h-screen w-screen fixed top-0 left-0 z-40 flex justify-center items-end pb-16"
+            className="h-screen w-screen fixed top-0 left-0 z-40 flex justify-center items-center pb-16"
             style={{ backgroundColor: "#AFDEB199" }}
           >
             <AlertCardStyle className="w-10/12 bg-white">
