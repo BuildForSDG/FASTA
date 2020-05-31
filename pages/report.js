@@ -42,10 +42,10 @@ const Reports = ({getUrl, getReports, handleToast}) => {
 };
 
 Reports.getInitialProps = async ctx => {
-  const url = "https://fastaapp.herokuapp.com/api/v1";
 
+  const apiUrl = "https://fastaapp.herokuapp.com/api/v1";
   // try {
-    const res = await fetch(`${url}/reports", {
+    const res = await fetch(`${apiUrl}/reports`, {
                             method: "GET", 
                             headers: { "Content-Type" : "application/json"}
                           });
