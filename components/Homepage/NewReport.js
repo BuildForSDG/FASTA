@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import React from "react";
-import { H3 } from "../Text/Headings"
-import { TextSmall } from "../Text/Body"
+import { H3 } from "../Text/Headings";
+import { TextSmall } from "../Text/Body";
 import Link from "next/link";
 
 const Body = styled.div`
