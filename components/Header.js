@@ -2,7 +2,7 @@ import Router from "next/router";
 import styled from "styled-components";
 import { H3 } from "./Text/Headings";
 
-const Header = (props) => {
+const Header = props => {
   return (
     <header className="container-fluid mx-auto mt-1 flex p-4 items-center">
       {props.back && (

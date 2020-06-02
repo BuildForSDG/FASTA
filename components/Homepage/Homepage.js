@@ -14,7 +14,7 @@ const Body = styled.main`
   background: #f5f5f5;
 `;
 
-const Homepage = (props) => {
+const Homepage = props => {
   return (
     <div className="homepage w-screen min-h-screen">
       <NavBar name="Fasta" />

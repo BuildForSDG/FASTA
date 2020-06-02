@@ -20,7 +20,7 @@ const Text = styled.p`
   font-size: 14px;
 `;
 
-const Report = (props) => {
+const Report = props => {
   return (
     <ReportBody>
       <Title>{props.title}</Title>
