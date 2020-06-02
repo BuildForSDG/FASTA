@@ -1,12 +1,12 @@
 /* eslint-disable no-unused-vars */
+/* eslint-disable no-console */
 import React, { useState, useEffect } from "react";
 import "../styles/styles.css";
 import { toast } from "react-nextjs-toast";
 
 // This default export is required in a new `pages/_app.js` file.
 export default function MyApp({ Component, pageProps }) {
-  const [loggedIn, setLoggedIn] = useState(false);
-  const defaultUser = { fullname: "Guest", email: "guest@fasta.com", phonenumber: "08099887766" };
+  const [loggedIn, setLoggedIn] = useState(f  const defaultUser = { fullname: "Guest", email: "guest@fasta.com", phonenumber: "08099887766" };
   const [user, setUser] = useState(defaultUser);
   const getUrl = () => {
     // if(location.host.indexOf('localhost') >= 0){
@@ -25,6 +25,9 @@ export default function MyApp({ Component, pageProps }) {
       setUser(defaultUser);
     }
   }, []);
+faultUser);
+  }
+}, []);
 
   return (
     <Component

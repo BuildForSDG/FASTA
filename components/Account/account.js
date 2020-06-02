@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
+/* eslint-disable no-parentheses */
 import React, { useState, useEffect, useRef } from "react";
 import Router from "next/router";
 import { useForm } from "react-hook-form";
@@ -346,7 +347,7 @@ const Register = ({ user, setUser, getUrl, handleToast }) => {
     const { origin } = window.location;
     setUrl(origin);
     console.log("useEffect: ", user, updated);
-    localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem("user", JSON.stringify(user));
   }, [user]);
 
   return (

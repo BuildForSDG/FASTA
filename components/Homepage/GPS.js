@@ -18,7 +18,7 @@ const Details = styled.p`
   }
 `;
 
-const GPS = props => {
+const GPS = (props) => {
   return (
     <GPSbody className="flex justify-evenly items-center">
       <img src="images/alert.png" alt="" />
