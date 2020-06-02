@@ -150,9 +150,9 @@ router.put("/trips/:id", async (req, res) => {
     if (err) {
       return res
         .status(500)
-        .send({ error: "unsuccessful" });
+        .send({ error: "Update by Id unsuccessful" });
     }
-    res.send({ success: "success" });
+    res.send({ success: "Update by Id success" });
   });
 });
 
