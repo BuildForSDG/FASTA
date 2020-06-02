@@ -15,7 +15,11 @@ router.post('/location-transporter', (req, res) => {
   const trip = new TripInfo(req.body.latitude, req.body.longitude);
   const locationTrnasporter = trip.getPlaces();
 
-  res.send(`Returned transporters: ${locationTrnasporter}`);
+  locationTrnasporter.then((d) => {
+    res.send(`Returned transporters: ${d}`);
+  })
+
+  // res.send(`Returned transporters: ${locationTrnasporter}`);
 });
 
 
@@ -32,14 +36,23 @@ router.post("/trip-distance", async (req, res) => {
           return res.json({ error: response.data.error_message });
         }
         const result = response.data.rows[0].elements[0];
-        const { distance, duration } = result;
-        return res.json({ data: { distance: distance.text, duration: duration.text } });
+        // const { distance, duration } = result;
+        // return res.json({ data: { distance: distance.text, duration: duration.text } });
+        return res.json({ data: { result  } });
+        // console.log(response);
+
+
+
       })
       .catch((error) => {
-        throw new Error("Error fetching data");
+        // throw new Error("Error fetching data");
+        console.log(error);
+
       });
   } catch (error) {
-    throw new Error("Internal Server Error");
+    // throw new Error("Internal Server Error");
+    console.log(error);
+
   }
 });
 
@@ -56,16 +69,21 @@ router.post("/trip-direction-info", async (req, res) => {
         //   return res.json({ error: response.data.error_message });
         // }
         // const result = response.data.rows[0].elements[0];
+        const rse = response.data;
         // const { distance, duration } = result;
         // return res.json({ data: { distance: distance.text, duration: duration.text } });
-
-        console.log(response.data);
+        return res.json({ data: { rse  } });
+        // console.log(response.data);
       })
       .catch((error) => {
-        throw new Error("Error fetching data");
+        // throw new Error("Error fetching data");
+        console.log(error);
+
       });
   } catch (error) {
-    throw new Error("Internal Server Error");
+    // throw new Error("Internal Server Error");
+    console.log(error);
+
   }
 });
 
