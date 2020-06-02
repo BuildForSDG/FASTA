@@ -1,4 +1,5 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable no-console */
 import React, { useState, useEffect } from "react";
 import fetch from "node-fetch";
 
@@ -41,7 +42,7 @@ const Reports = ({getUrl, getReports, handleToast}) => {
   );
 };
 
-Reports.getInitialProps = async ctx => {
+Reports.getInitialProps = async (ctx) => {
 
   const apiUrl = "https://fastaapp.herokuapp.com/api/v1";
   // try {
@@ -61,6 +62,6 @@ Reports.getInitialProps = async ctx => {
     //   }
     
   // return {};
-}
+};
 
 export default Reports;

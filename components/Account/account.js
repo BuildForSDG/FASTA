@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+/* eslint-disable no-console */
 import React, { useState, useEffect, useRef } from "react";
 import Router from "next/router";
 import { useForm } from "react-hook-form";
@@ -54,7 +55,13 @@ const Details = ({ user }) => {
       <div className="ml-4">
         <Text>{fullname}</Text>
         <span style={{ color: "#7f7f7f" }}>{email}</span>
-        <p>{user.status === "transporter" ? <span style={{ color: "#7f7f7f" }}>FASTA Transporter</span>: <span>Regular User</span>}</p>
+        <p>
+          {user.status === "transporter" ? (
+            <span style={{ color: "#7f7f7f" }}>FASTA Transporter</span>
+          ) : (
+            <span>Regular User</span>
+          )}
+        </p>
       </div>
     </DetailsBody>
   );
@@ -67,7 +74,9 @@ const VehicleDetails = ({ user }) => {
       {/* <img src="/images/account/profile.svg" alt="profile" /> */}
       <div className="ml-4">
         <SubmitButton className="w-full">Vehicle Registration Details</SubmitButton>
-        <Text>Vehicle Type: {vehiclemake} {vehiclemodel}</Text>
+        <Text>
+          Vehicle Type: {vehiclemake} {vehiclemodel}
+        </Text>
         <Text>Reg. No: {licencenumber}</Text>
         <Text>Address: {address}</Text>
         <SubmitButton className="w-full">Vehicle Registration Details</SubmitButton>
@@ -79,53 +88,58 @@ const VehicleDetails = ({ user }) => {
 const handleFetch = async (url, method, body) => {
   console.log(body);
   const res = await fetch(url, {
-  method, 
-  body: JSON.stringify(body), 
-  headers: { "Content-Type" : "application/json"}
-});
+    method,
+    body: JSON.stringify(body),
+    headers: { "Content-Type": "application/json" }
+  });
   const response = await res.json();
   console.log(res.status, response);
-  return {status: res.status, response};
-}
+  return { status: res.status, response };
+};
 
 const Number = ({ user, setUser, getUrl, handleToast }) => {
   const [updated, setUpdated] = useState(false);
   const [loading, setLoading] = useState(false);
   const [url, setUrl] = useState("");
-  
+
   const { register, handleSubmit, errors } = useForm();
   const apiUrl = getUrl();
   const { fullname, email, phonenumber } = user;
 
-  const updateNumber = async(ev) => {
+  const updateNumber = async ev => {
     ev.origin = url;
     console.log(ev, Object.keys(ev), email, phonenumber);
     setLoading(true);
-  
-  try {
-          const resetResponse = await handleFetch(`${apiUrl}/users/update/phonenumber`, "POST", {email, oldphonenumber: phonenumber, newphonenumber: ev.newphonenumber, origin});
-          console.log(resetResponse);
-          if (resetResponse.status === 200) {
-            handleToast("Phone Number updated successfully");
-          setUser({fullname, email, phonenumber: ev.newphonenumber});
-          setUpdated(!updated);
-        } else {
-          handleToast("Reset failed", "error");
-        }
-  } catch(e) {
-        console.log(e, "Some error in connection, Please try again!");
-        handleToast("Error in connection", "error");
-  } 
+
+    try {
+      const resetResponse = await handleFetch(`${apiUrl}/users/update/phonenumber`, "POST", {
+        email,
+        oldphonenumber: phonenumber,
+        newphonenumber: ev.newphonenumber,
+        origin
+      });
+      console.log(resetResponse);
+      if (resetResponse.status === 200) {
+        handleToast("Phone Number updated successfully");
+        setUser({ fullname, email, phonenumber: ev.newphonenumber });
+        setUpdated(!updated);
+      } else {
+        handleToast("Reset failed", "error");
+      }
+    } catch (e) {
+      console.log(e, "Some error in connection, Please try again!");
+      handleToast("Error in connection", "error");
+    }
     setLoading(false);
   };
 
   const onSubmitForm = FormData => updateNumber(FormData);
 
   useEffect(() => {
-    const {origin} = window.location;
+    const { origin } = window.location;
     setUrl(origin);
     console.log("useEffect: ", user, updated);
-    localStorage.setItem('user', JSON.stringify(user)); 
+    localStorage.setItem("user", JSON.stringify(user));
   }, [user]);
 
   return (
@@ -152,18 +166,15 @@ const Number = ({ user, setUser, getUrl, handleToast }) => {
             }
           })}
         />
-        {loading ?
+        {loading ? (
           <LoaderContainer className="w-full mt-6">
-            <BeatLoader
-            size={6}
-            color="#43a047"
-            loading
-            />
+            <BeatLoader size={6} color="#43a047" loading />
           </LoaderContainer>
-          :   
-        <SubmitButton className="w-2/6" type="submit">
-          UPDATE
-        </SubmitButton>}
+        ) : (
+          <SubmitButton className="w-2/6" type="submit">
+            UPDATE
+          </SubmitButton>
+        )}
       </form>
       {errors.newphonenumber && <p className="text-xs text-red-500 my-2 ml-2">{errors.newphonenumber.message}</p>}
     </div>
@@ -177,45 +188,52 @@ const ChangePassword = ({ user, getUrl, handleToast }) => {
 
   const { register, handleSubmit, errors, watch } = useForm({ validateCriteriaMode: "all" });
   const newPassword = useRef({});
-  newPassword.current = watch("newPassword", "");  
-  
+  newPassword.current = watch("newPassword", "");
+
   const { email } = user;
   const apiUrl = getUrl();
 
-  const updatePassword = async(ev) => {
+  const updatePassword = async ev => {
     ev.origin = url;
     console.log(ev, Object.keys(ev));
     setLoading(true);
-  
-  try {
-        const auth = await handleFetch(`${apiUrl}/users/login`, "POST", {email, password: ev.currentPassword});
-        console.log(auth);
-        if (auth.status === 200) {
-          const forgetResponse = await handleFetch(`${apiUrl}/users/forget`, "POST", {email, password: ev.currentPassword});
 
-          const resetResponse = await handleFetch(`${apiUrl}/users/reset/${forgetResponse.response.token}`, "POST", {password: ev.newPassword, confirmPassword: ev.confirmPassword, origin});
-            if (resetResponse.status === 200) {
-              handleToast("Reset successful", "success");
-            } else {
-              handleToast("Reset failed", "error");
-            }
+    try {
+      const auth = await handleFetch(`${apiUrl}/users/login`, "POST", { email, password: ev.currentPassword });
+      console.log(auth);
+      if (auth.status === 200) {
+        const forgetResponse = await handleFetch(`${apiUrl}/users/forget`, "POST", {
+          email,
+          password: ev.currentPassword
+        });
+
+        const resetResponse = await handleFetch(`${apiUrl}/users/reset/${forgetResponse.response.token}`, "POST", {
+          password: ev.newPassword,
+          confirmPassword: ev.confirmPassword,
+          origin
+        });
+        if (resetResponse.status === 200) {
+          handleToast("Reset successful", "success");
         } else {
-          handleToast("Invalid current password", "error");
+          handleToast("Reset failed", "error");
         }
-  } catch(e) {
-        console.log(e, "Some error in connection, Please try again!");
-        handleToast("Error in connection", "error");
-  } 
+      } else {
+        handleToast("Invalid current password", "error");
+      }
+    } catch (e) {
+      console.log(e, "Some error in connection, Please try again!");
+      handleToast("Error in connection", "error");
+    }
     setLoading(false);
   };
 
   const onSubmitForm = FormData => updatePassword(FormData);
 
   useEffect(() => {
-    const {origin} = window.location;
+    const { origin } = window.location;
     setUrl(origin);
   }, []);
-  
+
   return (
     <form onSubmit={handleSubmit(onSubmitForm)} className="bg-white p-4 rounded-lg mb-4">
       <ToastContainer />
@@ -264,22 +282,19 @@ const ChangePassword = ({ user, getUrl, handleToast }) => {
                 value: 8,
                 message: "New password should be at least 8 characters"
               },
-              validate: (value) => value === newPassword.current || "The passwords do not match"
+              validate: value => value === newPassword.current || "The passwords do not match"
             })}
           />
           {errors.confirmPassword && <p className="text-xs text-red-500 my-2">{errors.confirmPassword.message}</p>}
-          {loading ?
-          <LoaderContainer className="w-full mt-6">
-            <BeatLoader
-            size={30}
-            color="#43a047"
-            loading
-            />
-          </LoaderContainer>
-          :          
-          <SubmitButton className="w-full" type="submit">
-            CHANGE PASSWORD
-          </SubmitButton>}
+          {loading ? (
+            <LoaderContainer className="w-full mt-6">
+              <BeatLoader size={30} color="#43a047" loading />
+            </LoaderContainer>
+          ) : (
+            <SubmitButton className="w-full" type="submit">
+              CHANGE PASSWORD
+            </SubmitButton>
+          )}
         </div>
       </div>
     </form>
@@ -295,47 +310,45 @@ const Register = ({ user, setUser, getUrl, handleToast }) => {
   const apiUrl = getUrl();
   const { name, email, phonenumber } = user;
 
-  const updateUserStatus = async(ev) => {
+  const updateUserStatus = async ev => {
     ev.origin = url;
     console.log(ev, Object.keys(ev), email, phonenumber);
     setLoading(true);
-  
-  try {
-          const registerResponse = await handleFetch(`${apiUrl}/users/register/transporter`, "POST", 
-          { email, 
-            phonenumber, 
-            vehiclemake: ev.vehicleMake,
-            vehiclemodel: ev.vehicleModel,
-            licencenumber: ev.licenceNumber,
-            address: ev.address, 
-            origin
-          });
-          if (registerResponse.status === 200) {
-            handleToast("Registration is successful");
-          setUser(registerResponse.response.user);
-          setUpdated(!updated);
-          console.log(registerResponse, user);
-        } else {
-          handleToast(`Registration failed, ${registerResponse.response.response}`, "error");
-        }
-  } catch(e) {
-        console.log(e, "Some error in connection, Please try again!");
-        handleToast("Error in connection", "error");
-  } 
+
+    try {
+      const registerResponse = await handleFetch(`${apiUrl}/users/register/transporter`, "POST", {
+        email,
+        phonenumber,
+        vehiclemake: ev.vehicleMake,
+        vehiclemodel: ev.vehicleModel,
+        licencenumber: ev.licenceNumber,
+        address: ev.address,
+        origin
+      });
+      if (registerResponse.status === 200) {
+        handleToast("Registration is successful");
+        setUser(registerResponse.response.user);
+        setUpdated(!updated);
+        console.log(registerResponse, user);
+      } else {
+        handleToast(`Registration failed, ${registerResponse.response.response}`, "error");
+      }
+    } catch (e) {
+      console.log(e, "Some error in connection, Please try again!");
+      handleToast("Error in connection", "error");
+    }
     setLoading(false);
   };
 
   const onSubmitForm = FormData => updateUserStatus(FormData);
 
   useEffect(() => {
-    const {origin} = window.location;
+    const { origin } = window.location;
     setUrl(origin);
     console.log("useEffect: ", user, updated);
-    localStorage.setItem('user', JSON.stringify(user)); 
+    localStorage.setItem('user', JSON.stringify(user));
   }, [user]);
 
-
-  
   return (
     <form onSubmit={handleSubmit(onSubmitForm)} className="bg-white p-4 rounded-lg mb-16">
       <ToastContainer />
@@ -352,7 +365,7 @@ const Register = ({ user, setUser, getUrl, handleToast }) => {
               pattern: {
                 value: /[A-Z]{4,}/i,
                 message: "Vehicle Make must be minimum of 4 characters"
-              }            
+              }
             })}
           />
           {errors.vehicleMake && <p className="text-xs text-red-500 my-2">{errors.vehicleMake.message}</p>}
@@ -365,7 +378,7 @@ const Register = ({ user, setUser, getUrl, handleToast }) => {
               pattern: {
                 value: /[A-Z]{4,}/i,
                 message: "Vehicle Model must be minimum of 4 characters"
-              }            
+              }
             })}
           />
           {errors.vehicleModel && <p className="text-xs text-red-500 my-2">{errors.vehicleModel.message}</p>}
@@ -378,7 +391,7 @@ const Register = ({ user, setUser, getUrl, handleToast }) => {
               pattern: {
                 value: /[A-Z]{2,3}[0-9]{2,3}[A-Z]{2,3}/i,
                 message: "Licence Number not valid"
-              }             
+              }
             })}
           />
           {errors.licenceNumber && <p className="text-xs text-red-500 my-2">{errors.licenceNumber.message}</p>}
@@ -391,22 +404,19 @@ const Register = ({ user, setUser, getUrl, handleToast }) => {
               pattern: {
                 value: /[A-Z]{5,}/i,
                 message: "Address must be minimum of 5 characters"
-              }            
+              }
             })}
           />
           {errors.address && <p className="text-xs text-red-500 my-2">{errors.address.message}</p>}
-          {loading ?
-          <LoaderContainer className="w-full mt-6">
-            <BeatLoader
-            size={30}
-            color="#43a047"
-            loading
-            />
-          </LoaderContainer>
-          : 
-          <SubmitButton className="w-full" type="submit">
-            Register
-          </SubmitButton>}
+          {loading ? (
+            <LoaderContainer className="w-full mt-6">
+              <BeatLoader size={30} color="#43a047" loading />
+            </LoaderContainer>
+          ) : (
+            <SubmitButton className="w-full" type="submit">
+              Register
+            </SubmitButton>
+          )}
         </div>
       </div>
     </form>
@@ -414,7 +424,6 @@ const Register = ({ user, setUser, getUrl, handleToast }) => {
 };
 
 const Account = props => {
-
   return (
     <>
       <Nav title="Profile" />
@@ -423,10 +432,11 @@ const Account = props => {
         <Number user={props.user} setUser={props.setUser} getUrl={props.getUrl} handleToast={props.handleToast} />
         <ChangePassword user={props.user} getUrl={props.getUrl} handleToast={props.handleToast} />
         {/* {props.user ? props.user.status : 'truck'} */}
-        {props.user.status && props.user.status === "transporter" ?
-        <VehicleDetails user={props.user} />:
-        <Register user={props.user} setUser={props.setUser} getUrl={props.getUrl} handleToast={props.handleToast} />
-        }
+        {props.user.status && props.user.status === "transporter" ? (
+          <VehicleDetails user={props.user} />
+        ) : (
+          <Register user={props.user} setUser={props.setUser} getUrl={props.getUrl} handleToast={props.handleToast} />
+        )}
       </div>
       {/* <BottomNav accountColor={{color: "#fff"}} /> */}
       <BottomNav />

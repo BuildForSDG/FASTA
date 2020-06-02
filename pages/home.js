@@ -13,7 +13,7 @@ const Home = ({ loggedIn, user }) => {
         <title>Fasta</title>
         <link rel="icon" href="/images/Logo.png" />
       </Head>
-      <div className="" >
+      <div className="">
         <Homepage user={name} />
       </div>
     </div>

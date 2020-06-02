@@ -1,4 +1,5 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable no-console */
 import React, { useState, useEffect } from "react";
 import { useForm, ErrorMessage } from "react-hook-form";
 import styled from "styled-components";
@@ -81,8 +82,7 @@ try {
                 <p key={type} className="text-xs text-red-500 text-center my-2">
                   {message}
                 </p>
-              ))
-            }
+              ))}
           </ErrorMessage>
 
 
@@ -106,8 +106,7 @@ try {
                 <p key={type} className="text-xs text-red-500 text-center my-2">
                   {message}
                 </p>
-              ))
-            }
+              ))}
           </ErrorMessage>
 
           <p className="text-xs mt-5 text-center w-10/12 mx-auto" style={{ color: "#43A047" }}>
