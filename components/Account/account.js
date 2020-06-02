@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
-/* eslint-disable no-parentheses */
+/* eslint-disable no-extra-parens */
 import React, { useState, useEffect, useRef } from "react";
 import Router from "next/router";
 import { useForm } from "react-hook-form";
