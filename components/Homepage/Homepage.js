@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import NavBar from "./NavBar";
 import GPS from "./GPS";
@@ -15,11 +15,41 @@ const Body = styled.main`
 `;
 
 const Homepage = (props) => {
+  const [locationText, setLocationText] = useState(null);
+
+  useEffect(() => {
+    let textContent = '';
+    const success = (position) => {
+      const latitude  = position.coords.latitude;
+      const longitude = position.coords.longitude;
+  
+      const href = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`;
+      textContent = `Lat: ${latitude} °, Long: ${longitude} °`;
+      console.log(textContent);
+      props.setLocated(true);
+      setLocationText(textContent);
+    }
+  
+    const error = () => {
+      textContent = 'Unable to retrieve your location';
+      setLocationText(textContent);
+    }
+  
+    if(!navigator.geolocation) {
+      textContent = 'Geolocation is not supported by your browser';
+      setLocationText(textContent);
+    } else {
+      textContent = 'Locating…';
+      setLocationText(textContent);
+      navigator.geolocation.watchPosition(success, error);
+    }
+  }, []);
+
   return (
     <div className="homepage w-screen min-h-screen">
       <NavBar name="Fasta" />
       <Body className="px-4">
-        <GPS />
+        {!props.located ? <GPS /> : <div>{locationText}</div>}
         <NewTrip user={props.user} />
         <RecentTrips />
         <Reports />

@@ -4,7 +4,7 @@ import React from "react";
 import Head from "next/head";
 import Homepage from "../components/Homepage/Homepage";
 
-const Home = ({ loggedIn, user }) => {
+const Home = ({ loggedIn, user, setLocated, located }) => {
   // console.log("loggedIn:", loggedIn);
   const name = user.fullname.split(" ")[0];
   return (
@@ -14,7 +14,7 @@ const Home = ({ loggedIn, user }) => {
         <link rel="icon" href="/images/Logo.png" />
       </Head>
       <div className="">
-        <Homepage user={name} />
+        <Homepage user={name} located={located} setLocated={setLocated} />
       </div>
     </div>
   );
