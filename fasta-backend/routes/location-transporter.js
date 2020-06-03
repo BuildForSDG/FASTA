@@ -2,22 +2,21 @@
 /* eslint-disable default-case */
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
-const express = require('express');
-const axios = require('axios');
-const { Client, Status } = require('@googlemaps/google-maps-services-js');
-const TripMetrix = require('../api/schedule-api');
-const TripInfo = require('../api/transporters-api');
+const express = require("express");
+const axios = require("axios");
+const { Client, Status } = require("@googlemaps/google-maps-services-js");
+const TripMetrix = require("../api/schedule-api");
+const TripInfo = require("../api/transporters-api");
 
 const router = express.Router();
 
 // api to get nearby transporters base on users location
-router.post('/location-transporter', (req, res) => {
+router.post("/location-transporter", (req, res) => {
   const trip = new TripInfo(req.body.latitude, req.body.longitude);
   const locationTrnasporter = trip.getPlaces();
 
   res.send(`Returned transporters: ${locationTrnasporter}`);
 });
-
 
 
 router.post("/trip-distance", async (req, res) => {

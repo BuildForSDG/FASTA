@@ -20,7 +20,7 @@ const client = new Client({ axiosInstance });
 function TripMetrix(origin, destination) {
   this.origin = origin;
   this.destination = destination;
- console.log(origin);
+  console.log(origin);
 }
 
 
