@@ -7,6 +7,7 @@ import RecentTrips from "./Trips/RecentTrips";
 import NewReport from "./NewReport";
 import BottomNav from "../BottomNav";
 import Reports from "./Reports/Reports";
+import Map from "../Map";
 
 const Body = styled.main`
   margin-top: 70px;
@@ -16,6 +17,7 @@ const Body = styled.main`
 
 const Homepage = (props) => {
   const [locationText, setLocationText] = useState(null);
+  const [coordinates, setCoordinates] = useState({lat: 59.95, lng: 30.33});
 
   useEffect(() => {
     let textContent = '';
@@ -24,10 +26,12 @@ const Homepage = (props) => {
       const longitude = position.coords.longitude;
   
       const href = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`;
-      textContent = `Lat: ${latitude} °, Long: ${longitude} °`;
+      textContent = `Lat: ${latitude.toFixed(3)} °, Long: ${longitude.toFixed(3)} °`;
       console.log(textContent);
-      props.setLocated(true);
+      setCoordinates({lat: latitude, long: longitude});
       setLocationText(textContent);
+      props.setLocated(true);
+      console.log(coordinates);
     }
   
     const error = () => {
@@ -49,7 +53,7 @@ const Homepage = (props) => {
     <div className="homepage w-screen min-h-screen">
       <NavBar name="Fasta" />
       <Body className="px-4">
-        {!props.located ? <GPS /> : <div>{locationText}</div>}
+        {!props.located ? <GPS /> : <div>Your location is @ <p></p>{locationText}<Map lat={coordinates.lat} long={coordinates.long} /></div>}
         <NewTrip user={props.user} />
         <RecentTrips />
         <Reports />

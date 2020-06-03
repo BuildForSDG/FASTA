@@ -27,10 +27,6 @@ export default function MyApp({ Component, pageProps }) {
       setUser(defaultUser);
     }
   }, []);
-<<<<<<< HEAD
-
-=======
->>>>>>> 6cbb382eee34a80e680e2ff21cfe105c58a89bc3
 
   return (
     <Component
