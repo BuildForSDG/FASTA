@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "../styles/styles.css";
 import { toast } from "react-nextjs-toast";
 
@@ -27,7 +27,10 @@ export default function MyApp({ Component, pageProps }) {
       setUser(defaultUser);
     }
   }, []);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6cbb382eee34a80e680e2ff21cfe105c58a89bc3
 
   return (
     <Component

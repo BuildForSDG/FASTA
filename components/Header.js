@@ -23,7 +23,7 @@ const ShadowedHeaderStyle = styled.header`
   top: 0;
 `;
 
-export const ShadowedHeader = props => {
+export const ShadowedHeader = (props) => {
   return (
     <ShadowedHeaderStyle className="w-screen flex p-4 items-center bg-white">
       <div className="cursor-pointer " role="" onClick={() => Router.back()}>
