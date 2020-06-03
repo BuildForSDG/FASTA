@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import { H3 } from "../../Text/Headings";
+import { TextSmall } from "../../Text/Body";
 
 const ReportBody = styled.div`
   background-color: #fff;
@@ -9,24 +11,13 @@ const ReportBody = styled.div`
   margin-bottom: 20px;
 `;
 
-const Title = styled.h1`
-  font-size: 14px;
-  color: #232323;
-  font-weight: bold;
-`;
-
-const Text = styled.p`
-  color: #6c6c6c;
-  font-size: 14px;
-`;
-
 const Report = (props) => {
   return (
     <ReportBody>
-      <Title>{props.title}</Title>
-      <Text>
+      <H3 color="#232323">{props.title}</H3>
+      <TextSmall color="#6c6c6c">
         Along Olu-Obansanjo road. cars are on fire avoid the area, fire fighters are at the scene. Traffic is...
-      </Text>
+      </TextSmall>
     </ReportBody>
   );
 };

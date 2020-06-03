@@ -2,10 +2,11 @@
 import styled from "styled-components";
 import React from "react";
 import Trip from "./Trip";
+import { TextSmall } from "../../Text/Body";
 
-const Text = styled.p`
+const Text = styled(TextSmall)`
   font-size: 20px;
-  margin: 10px 0;
+  margin: 5px 0;
 `;
 
 const RecentTrips = (props) => {
@@ -14,7 +15,7 @@ const RecentTrips = (props) => {
       <Text>Your Recent Trips</Text>
       <Trip />
       <Trip />
-      <span style={{ color: "#2699fb", fontSize: "12px" }}>See All Trips</span>
+      <TextSmall color="#2699fb">See All Trips</TextSmall>
     </div>
   );
 };

@@ -1,27 +1,15 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
-import Router from "next/router";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
-import BottomNav from "../Homepage/BottomNav";
 import Input from "../Input";
 import { H3 } from "../Text/Headings";
 import { SubmitButton } from "../Buttons";
-
-const NavBar = styled.nav`
-  height: 54px;
-  width: 100%;
-  position: fixed;
-  background-color: #fff;
-  box-shadow: 0px 1px 7px #0000001a;
-  padding: 15px;
-`;
+import Layout from "../Layout";
 
 const DetailsBody = styled.div`
   height: 76px;
   background-color: #fff;
-  border-radius: 10px;
-  margin-top: 60px;
   padding: 15px;
   margin-bottom: 15px;
 `;
@@ -30,23 +18,10 @@ const Text = styled(H3)`
   font-weight: normal;
 `;
 
-export const Nav = props => {
-  return (
-    <NavBar className="flex justify-between items-center z-10">
-      <div onClick={() => Router.back()}>
-        <img src="/images/account/Back-Arrow.svg" alt="back" />
-      </div>
-      <Text color="#232323" className="my-0 font-normal mx-auto">
-        {props.title}
-      </Text>
-    </NavBar>
-  );
-};
-
 const Details = ({ name, email }) => {
   return (
-    <DetailsBody className="flex items-center">
-      <img src="/images/account/profile.svg" alt="profile" />
+    <DetailsBody className="flex items-center rounded-lg">
+      <img src="/images/profile.svg" alt="profile" />
       <div className="ml-4">
         <Text>{name}</Text>
         <span style={{ color: "#7f7f7f" }}>{email}</span>
@@ -62,7 +37,7 @@ const Number = ({ number }) => {
   return (
     <div className="bg-white p-4 mb-4 rounded-lg">
       <div className="flex items-center mb-3">
-        <img src="/images/account/phone.svg" alt="phone" />
+        <img src="/images/phone.svg" alt="phone" />
         <div className="ml-4">
           <Text>Registered Number</Text>
           <span style={{ color: "#7f7f7f" }}>{number}</span>
@@ -100,7 +75,7 @@ const ChangePassword = props => {
   return (
     <form onSubmit={handleSubmit(onSubmitForm)} className="bg-white p-4 rounded-lg mb-4">
       <div className="flex items-start">
-        <img src="/images/account/lock.svg" alt="password" />
+        <img src="/images/lock.svg" alt="password" />
         <div className="ml-4 flex flex-col justify-around w-full">
           <Text className="mb-4">Change Password</Text>
           <Input
@@ -148,9 +123,9 @@ const Register = props => {
     setSubmitted(true);
   };
   return (
-    <form onSubmit={handleSubmit(onSubmitForm)} className="bg-white p-4 rounded-lg mb-16">
+    <form onSubmit={handleSubmit(onSubmitForm)} className="bg-white p-4 rounded-lg mb-4">
       <div className="flex items-start">
-        <img src="/images/account/car.png" alt="password" />
+        <img src="/images/car.png" alt="password" />
         <div className="ml-4 flex flex-col justify-around w-full">
           <Text className="mb-4">Register as a Transporter</Text>
           <Input
@@ -191,16 +166,12 @@ const Register = props => {
 
 const Account = props => {
   return (
-    <>
-      <Nav title="Profile" />
-      <div className="w-full p-4">
-        <Details name="Steve Smith" email="stevem@gmail.com" />
-        <Number number="081012345678" />
-        <ChangePassword />
-        <Register />
-      </div>
-      <BottomNav />
-    </>
+    <Layout header="Profile">
+      <Details name="Steve Smith" email="stevem@gmail.com" />
+      <Number number="081012345678" />
+      <ChangePassword />
+      <Register />
+    </Layout>
   );
 };
 

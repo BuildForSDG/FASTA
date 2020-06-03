@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import React from "react";
+import { H3 } from "../../Text/Headings";
+import { TextSmall } from "../../Text/Body";
 
 const Body = styled.div`
   background-color: #afdeb1;
@@ -8,14 +10,10 @@ const Body = styled.div`
   color: #43a047;
   padding: 20px;
 `;
-const Heading = styled.h1`
-  font-size: 20px;
-  font-weight: bold;
-`;
 
-const Text = styled.p`
+const Text = styled(TextSmall)`
   font-size: 20px;
-  padding: 15px 0;
+  padding: 10px 0;
 `;
 
 const NewTrip = (props) => {
@@ -23,7 +21,7 @@ const NewTrip = (props) => {
     <div className="new-trip">
       <Text>Welcome back {props.user}!</Text>
       <Body>
-        <Heading>Plan a new trip</Heading>
+        <H3>Plan a new trip</H3>
         <p>Schedule your next outing</p>
       </Body>
     </div>
