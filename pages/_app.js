@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "../styles/styles.css";
 import { toast } from "react-nextjs-toast";
 
