@@ -20,11 +20,7 @@ const client = new Client({ axiosInstance });
 function TripMetrix(origin, destination) {
   this.origin = origin;
   this.destination = destination;
-<<<<<<< HEAD
-  console.log(origin.lat);
-=======
-  console.log(origin);
->>>>>>> f3aea88f4e4b00b5d17c3b21355bd8af25e3577d
+ console.log(origin);
 }
 
 
@@ -32,20 +28,12 @@ function TripMetrix(origin, destination) {
 TripMetrix.prototype.getTripDistance = async () => {
 //   const latLngOrigin = latLngToString(this.origin);
 //   const latLngDestination = latLngToString(this.destination);
-<<<<<<< HEAD
   console.log(this.origin);
   client.directions({
 
     params: {
       origin: [{ lat: this.origin.lat, lng: this.origin.lng }],
       destination: [{ lat: this.destination.lat, lng: this.destination.lng }],
-=======
-
-  client.directions({
-    params: {
-      origin: { lat: this.origin.lat, lng: this.origin.lng },
-      destination: { lat: this.destination.lat, lng: this.destination.lng },
->>>>>>> f3aea88f4e4b00b5d17c3b21355bd8af25e3577d
       key: process.env.TEST_KEY,
       mode: "driving",
       traffic_model: "best_guess",
