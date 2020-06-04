@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import React from "react";
+import Link from "next/link";
 
 const Body = styled.div`
   background-color: #afdeb1;
@@ -20,13 +21,19 @@ const Text = styled.p`
 
 const NewTrip = (props) => {
   return (
-    <div className="new-trip">
+    <>
       <Text>Welcome back {props.user}!</Text>
-      <Body>
-        <Heading>Plan a new trip</Heading>
-        <p>Schedule your next outing</p>
-      </Body>
-    </div>
+      <Link href="trips/new-trip">
+        <a>
+          <div className="new-trip">
+            <Body>
+              <Heading>Plan a new trip</Heading>
+              <p>Schedule your next outing</p>
+            </Body>
+          </div>
+        </a>
+      </Link>
+    </>
   );
 };
 

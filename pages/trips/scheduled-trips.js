@@ -1,6 +1,5 @@
 /* eslint-disable prettier/prettier */
 import React, { useState, useEffect } from "react";
-import Router, { useRouter } from "next/router";
 import fetch from "node-fetch";
 
 import trips from "./trips.json";

@@ -102,7 +102,7 @@ const MakeReport = () => {
                 You are making the world a better place.
               </TextSmall>
 
-              <LinkButton href="report" className="w-10/12 mx-auto">
+              <LinkButton href="../report" className="w-10/12 mx-auto">
                 continue
               </LinkButton>
             </AlertCardStyle>
