@@ -244,8 +244,6 @@ router.route("/reset/:token")
     }
   });
 
-
-
 router.post("/update/phonenumber", async (req, res) => {
   const { email, oldphonenumber, newphonenumber } = req.body;
   if (!email || !oldphonenumber) {
