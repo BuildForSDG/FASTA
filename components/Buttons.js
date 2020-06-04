@@ -58,7 +58,7 @@ const LinkButtonStyle = styled.div`
   }
 `;
 
-export const LinkButton = (props) => {
+export const LinkButton = props => {
   return (
     <Link href={props.href}>
       <a>

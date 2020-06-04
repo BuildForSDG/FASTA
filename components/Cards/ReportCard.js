@@ -31,7 +31,7 @@ const ReportCardStyle = styled.div`
   }
 `;
 
-const ReportCard = (props) => {
+const ReportCard = props => {
   return (
     <Link href="/reports/[id]" as={`/reports/${props.id}`}>
       <a>

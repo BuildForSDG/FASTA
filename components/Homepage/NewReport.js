@@ -22,7 +22,7 @@ const Text = styled.p`
   text-align: left;
 `;
 
-const NewReport = (props) => {
+const NewReport = props => {
   return (
     <Link href="reports/makeReport">
       <a>

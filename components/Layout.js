@@ -10,7 +10,7 @@ const Body = styled.main`
   max-width: 100vw;
 `;
 
-const Layout = (props) => {
+const Layout = props => {
   return (
     <div className=" w-screen min-h-screen">
       <Head>

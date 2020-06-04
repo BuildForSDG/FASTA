@@ -15,37 +15,36 @@ const Body = styled.main`
   background: #f5f5f5;
 `;
 
-const Homepage = (props) => {
+const Homepage = props => {
   const [locationText, setLocationText] = useState(null);
-  const [coordinates, setCoordinates] = useState({lat: 6.550, lng: 3.333});
+  const [coordinates, setCoordinates] = useState({ lat: 6.55, lng: 3.333 });
 
   useEffect(() => {
     let textContent = '';
-    const success = (position) => {
-      const latitude  = position.coords.latitude;
-      const longitude = position.coords.longitude;
-  
-      const href = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`;
+    const success = position => {
+      const { latitude } = position.coords;
+      const { longitude } = position.coords;
+
       textContent = `Lat: ${latitude.toFixed(3)} °, Long: ${longitude.toFixed(3)} °`;
-      console.log(textContent);
-      setCoordinates({lat: latitude, long: longitude});
+      // console.log(textContent, latitude, longitude);
+      setCoordinates({ lat: latitude, lng: longitude });
       setLocationText(textContent);
       props.setLocated(true);
-      console.log(coordinates);
-    }
-  
+      // console.log(coordinates, props.located, process.env.apiKey);
+    };
+
     const error = () => {
       textContent = 'Unable to retrieve your location';
       setLocationText(textContent);
-    }
-  
-    if(!navigator.geolocation) {
+    };
+
+    if (!navigator.geolocation) {
       textContent = 'Geolocation is not supported by your browser';
       setLocationText(textContent);
     } else {
       textContent = 'Locating…';
       setLocationText(textContent);
-      navigator.geolocation.watchPosition(success, error);
+      navigator.geolocation.getCurrentPosition(success, error);
     }
   }, []);
 
@@ -53,7 +52,14 @@ const Homepage = (props) => {
     <div className="homepage w-screen min-h-screen">
       <NavBar name="Fasta" />
       <Body className="px-4">
-        {!props.located ? <GPS /> : <div>Your location is @ <p></p>{locationText}<Map lat={coordinates.lat} long={coordinates.long} /></div>}
+        {!props.located ? (
+          <GPS />
+        ) : (
+          <div>
+            {locationText}
+            <Map lat={coordinates.lat} lng={coordinates.lng} />
+          </div>
+        )}
         <NewTrip user={props.user} />
         <RecentTrips />
         <Reports />
