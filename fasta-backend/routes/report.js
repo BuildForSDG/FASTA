@@ -4,6 +4,7 @@ const express = require("express");
 const router = express.Router();
 const Reports = require("../models/report");
 const authChecker = require("../middlewares/authChecker");
+// const Trip = require("../models/trips");
 
 
 router.post("/report", authChecker, async (req, res) => {
