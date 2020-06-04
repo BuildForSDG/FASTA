@@ -21,6 +21,7 @@ const ShadowedHeaderStyle = styled.header`
   box-shadow: 0px 1px 7px #0000001a;
   position: sticky;
   top: 0;
+  z-index: 10;
 `;
 
 export const ShadowedHeader = props => {

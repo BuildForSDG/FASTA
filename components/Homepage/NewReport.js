@@ -1,12 +1,8 @@
 import styled from "styled-components";
 import React from "react";
-
+import { H3 } from "../Text/Headings";
+import { TextSmall } from "../Text/Body";
 import Link from "next/link";
-
-const Heading = styled.h1`
-  font-size: 20px;
-  font-weight: bold;
-`;
 
 const Body = styled.div`
   background-color: #bce0fd;
@@ -14,12 +10,8 @@ const Body = styled.div`
   border: 1px solid #bce0fd;
   border-radius: 10px;
   padding: 20px 20px;
-  margin-bottom: 60px;
-  margin-top: 30px;
-`;
-const Text = styled.p`
-  font-size: 16px;
-  text-align: left;
+  margin-bottom: 10px;
+  margin-top: 20px;
 `;
 
 const NewReport = props => {
@@ -27,8 +19,8 @@ const NewReport = props => {
     <Link href="reports/makeReport">
       <a>
         <Body>
-          <Heading>Make a New Report</Heading>
-          <Text>Update us with your current emergencies in your area.</Text>
+          <H3>Make a New Report</H3>
+          <TextSmall>Update us with your current emergencies in your area.</TextSmall>
         </Body>
       </a>
     </Link>

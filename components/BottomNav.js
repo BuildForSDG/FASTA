@@ -31,7 +31,7 @@ const ListItem = (props) => {
       <a>
         <ListItemStyle className="flex flex-col items-center justify-between ">
           <img src={router.pathname.includes(props.href) ? props.activeImg : props.inactiveImg} alt="" />
-          <Text style={{color: router.pathname.includes(props.href) ? "#ffffff" : "#7CBC7F"}}>{props.text}</Text>
+          <Text style={{color: router.pathname.includes(props.href) ? "#ffffff" : "rgba(255, 255, 255, 0.6"}}>{props.text}</Text>
         </ListItemStyle>
       </a>
     </Link>
@@ -53,7 +53,7 @@ const BottomNav = () => {
       href="/trip"
       activeImg="/images/Explore-active.svg"
       inactiveImg="/images/Explore-inactive.png"
-      text="Start Trip"
+      text="Trips"
      />
 
      <ListItem 

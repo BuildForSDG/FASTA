@@ -11,6 +11,7 @@ import styled from "styled-components";
 import BottomNav from "../BottomNav";
 import Input from "../Input";
 import { H3 } from "../Text/Headings";
+import Layout from "../Layout";
 import { SubmitButton, LoaderContainer } from "../Buttons";
 
 const NavBar = styled.nav`
@@ -25,8 +26,6 @@ const NavBar = styled.nav`
 const DetailsBody = styled.div`
   height: 76px;
   background-color: #fff;
-  border-radius: 10px;
-  margin-top: 60px;
   padding: 15px;
   margin-bottom: 15px;
 `;
@@ -51,8 +50,8 @@ export const Nav = props => {
 const Details = ({ user }) => {
   const { fullname, email } = user;
   return (
-    <DetailsBody className="flex items-center">
-      <img src="/images/account/profile.svg" alt="profile" />
+    <DetailsBody className="flex items-center rounded-lg">
+      <img src="/images/profile.svg" alt="profile" />
       <div className="ml-4">
         <Text>{fullname}</Text>
         <span style={{ color: "#7f7f7f" }}>{email}</span>
@@ -147,7 +146,7 @@ const Number = ({ user, setUser, getUrl, handleToast }) => {
     <div className="bg-white p-4 mb-4 rounded-lg">
       <ToastContainer />
       <div className="flex items-center mb-3">
-        <img src="/images/account/phone.svg" alt="phone" />
+        <img src="/images/phone.svg" alt="phone" />
         <div className="ml-4">
           <Text>Registered Number</Text>
           <span style={{ color: "#7f7f7f" }}>{phonenumber}</span>
@@ -239,7 +238,7 @@ const ChangePassword = ({ user, getUrl, handleToast }) => {
     <form onSubmit={handleSubmit(onSubmitForm)} className="bg-white p-4 rounded-lg mb-4">
       <ToastContainer />
       <div className="flex items-start">
-        <img src="/images/account/lock.svg" alt="password" />
+        <img src="/images/lock.svg" alt="password" />
         <div className="ml-4 flex flex-col justify-around w-full">
           <Text className="mb-4">Change Password</Text>
           <Input
@@ -354,7 +353,7 @@ const Register = ({ user, setUser, getUrl, handleToast }) => {
     <form onSubmit={handleSubmit(onSubmitForm)} className="bg-white p-4 rounded-lg mb-16">
       <ToastContainer />
       <div className="flex items-start">
-        <img src="/images/account/car.png" alt="password" />
+        <img src="/images/car.png" alt="password" />
         <div className="ml-4 flex flex-col justify-around w-full">
           <Text className="mb-4">Register as a Transporter</Text>
           <Input
