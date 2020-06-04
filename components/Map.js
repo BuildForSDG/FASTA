@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+/* eslint no-unused-vars */
 import React from "react";
 import ReactMap from "google-map-react";
 // import env from "dotenv";
