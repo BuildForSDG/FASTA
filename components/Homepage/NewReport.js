@@ -14,7 +14,7 @@ const Body = styled.div`
   margin-top: 20px;
 `;
 
-const NewReport = props => {
+const NewReport = (props) => {
   return (
     <Link href="reports/makeReport">
       <a>

@@ -10,7 +10,7 @@ const Text = styled(TextSmall)`
   margin: 5px 0;
 `;
 
-const Reports = props => {
+const Reports = (props) => {
   return (
     <div>
       <Text color="#232323">Reports in your area</Text>

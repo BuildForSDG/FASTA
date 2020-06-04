@@ -1,5 +1,5 @@
-const { parsed: localEnv } = require('dotenv').config();
-const webpack = require('webpack');
+// const { parsed: localEnv } = require('dotenv').config();
+// const webpack = require('webpack');
 
 // module.exports = {
 //   webpack(config) {
@@ -11,7 +11,7 @@ const webpack = require('webpack');
 
 module.exports = {
   env: {
-    customKey: 'my-value',
+    customKey: "my-value",
     apiKey: "AIzaSyAm00Wsdh6jJB2QzlW5c6t_nu0gMRAZB9s"
   }
 };

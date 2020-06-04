@@ -1,11 +1,12 @@
-import React from 'react';
-import ReactMap from 'google-map-react';
+/* eslint-disable no-unused-vars */
+import React from "react";
+import ReactMap from "google-map-react";
 // import env from "dotenv";
 // env.config();
 
 const MapComponent = ({ text }) => <div>{text}</div>;
 
-const Map = props => {
+const Map = (props) => {
   const defaultProps = {
     center: {
       lat: 59.95,

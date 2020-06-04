@@ -15,13 +15,13 @@ const Body = styled.main`
   background: #f5f5f5;
 `;
 
-const Homepage = props => {
+const Homepage = (props) => {
   const [locationText, setLocationText] = useState(null);
   const [coordinates, setCoordinates] = useState({ lat: 6.55, lng: 3.333 });
 
   useEffect(() => {
-    let textContent = '';
-    const success = position => {
+    let textContent = "";
+    const success = (position) => {
       const { latitude } = position.coords;
       const { longitude } = position.coords;
 
@@ -34,15 +34,15 @@ const Homepage = props => {
     };
 
     const error = () => {
-      textContent = 'Unable to retrieve your location';
+      textContent = "Unable to retrieve your location";
       setLocationText(textContent);
     };
 
     if (!navigator.geolocation) {
-      textContent = 'Geolocation is not supported by your browser';
+      textContent = "Geolocation is not supported by your browser";
       setLocationText(textContent);
     } else {
-      textContent = 'Locating…';
+      textContent = "Locating…";
       setLocationText(textContent);
       navigator.geolocation.getCurrentPosition(success, error);
     }
