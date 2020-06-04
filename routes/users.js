@@ -15,17 +15,6 @@ const mailer = require("../helpers/mailer");
 
 //  CREATE A NEW USER AND ADD TO DATABASE
 router.post("/", async (req, res) => {
-  // console.log(req.body);
-  // eslint-disable-next-line consistent-return
-  await User.findOne({ email: req.body.email }).then((result) => {
-    if (result) {
-      return res.status(403).json({ response: "email exists" });
-    }
-  });
-  try {
-    const {
-      fullname, email, phonenumber, password, confirmPassword
-
   // eslint-disable-next-line consistent-return
   const userExist = await User.findOne({ email: req.body.email });
   if (userExist) {
@@ -33,7 +22,7 @@ router.post("/", async (req, res) => {
   }
   try {
     const {
-      fullname, email, phonenumber, password, confirmPassword, origin
+      fullname, email, phonenumber, password, confirmPassword
     } = req.body;
     if (password !== confirmPassword) {
       return res.status(403).json({ response: "confirmpassword and password doesn't match" });
@@ -42,21 +31,20 @@ router.post("/", async (req, res) => {
     await User.create({
       fullname, email, phonenumber, password: hash
     });
-    const welcomelink = `${origin}/login`;
     const options = {
       receiver: email,
-      subject: "Fasta welcomes you!",
+      subject: "Password Reset",
       text: `Hello ${fullname}`,
       output: `<div style='margin: 0 auto; background: #ededed; border-top:2px solid green; border-bottom:2px solid green; box-shadow: 1px 2px 3px 4px #ccc; padding: 1.5rem '>
       <h1>Hey! ${fullname} Welcome to Fasta</h1>
       <hr>
-      <p style='padding:1.5rem;'>FASTA helps you plan your trip and allow you to go faster, click this <a href="${welcomelink}">Link</a> to login to a new world of convenience and safety</p>
+      <p style='padding:1.5rem;'>FASTA helps you plan your Trip and allow you to go faster, click this <a href='#'>Link</a> to confirm your registration</p>
       <h4>Welcome on board</h4>
       </div>
       `
     };
     mailer(options);
-    return res.status(200).json({ response: "Signup succesfully", welcomelink });
+    return res.status(200).json({ response: "Signup succesfully" });
   } catch (error) {
     return res.status(500).json({ response: error.message });
   }
@@ -77,11 +65,9 @@ router.post("/login", async (req, res) => {
       const passwordcheck = bcrypt.comparePassword(password, user.password);
       if (passwordcheck) {
         const token = bcrypt.generateToken(user);
-        const { phonenumber } = user;
         return res.status(200).json({
           response: "Login successful",
-          token,
-          phonenumber
+          token
         });
       }
       return res.status(401).json({ response: "Auth failed" });
@@ -124,7 +110,7 @@ router.get("/:id", authChecker, (req, res) => {
 });
 
 router.post("/forget", (req, res, next) => {
-  const { email, origin } = req.body;
+  const { email } = req.body;
   // houses muliple functions
   async.waterfall([
     function (done) {
@@ -155,7 +141,7 @@ router.post("/forget", (req, res, next) => {
 
     function (token, user, done) {
       try {
-        const resetlink = `${origin}/changepassword?${token}`;
+        const resetlink = `${req.protocol}://${req.hostname}/api/v1/users/reset/${token}`;
         const options = {
           receiver: email,
           subject: "Password Reset",
@@ -175,7 +161,7 @@ router.post("/forget", (req, res, next) => {
         };
         const fireTheMail = mailer(options);
         if (fireTheMail) {
-          return res.json({ response: `Email sent to ${email}`, resetlink, token: user.resetPasswordToken });
+          return res.json({ response: `Email sent to ${email}`, resetlink: user.resetPasswordToken });
         }
         done(null, "done");
       } catch (error) {
@@ -187,7 +173,7 @@ router.post("/forget", (req, res, next) => {
     if (err) {
       return next(err);
     }
-    return res.status(500).json({ response: `An error ${err} occurred doing the process` });
+    return res.status(500).json({ response: `An error ${err} occured doing the process` });
   });
 });
 
@@ -199,13 +185,13 @@ router.route("/reset/:token")
       resetPasswordToken: req.params.token, resetPasswordExpires: { $gte: Date.now() }
     }).then((user) => {
       if (!user) {
-        return res.status(401).json({ response: "Invalid user" });
+        return res.status(200).json({ response: "Invalid user" });
       }
       return res.status(200).json({ response: { token: req.params.token } });
     });
   })
   .post(async (req, res) => {
-    const { password, confirmPassword, origin } = req.body;
+    const { password, confirmPassword } = req.body;
     if (!password || !confirmPassword) {
       return res.status(403).json({ response: "Both fields are required" });
     }
@@ -224,8 +210,7 @@ router.route("/reset/:token")
         return res.status(404).json({ response: "Invalid user" });
       }
       res.status(200).json({ response: "your password reset was succesful, login to continue" });
-
-      const loginlink = `${origin}/users/login`;
+      const loginlink = `${req.protocol}://${req.hostname}/api/v1/users/login`;
       const options = {
         receiver: user.email,
         subject: "Password Reset",
@@ -241,50 +226,12 @@ router.route("/reset/:token")
     </div>`
       };
       mailer(options);
-      return res.status(200).json({ response: "mail sent", loginlink });
+
+      // return res.status(200).json({ response: "mail sent" });
     } catch (error) {
       return res.status(500).json({ response: `error ${error} occurred` });
     }
   });
 
-
-
-router.post("/update/phonenumber", async (req, res) => {
-  const { email, oldphonenumber, newphonenumber } = req.body;
-  if (!email || !oldphonenumber) {
-    return res.status(403).json({ response: "Both fields are required" });
-  }
-  try {
-    const user = await User.findOneAndUpdate(
-      { email, phonenumber: `0${oldphonenumber}` },
-      // eslint-disable-next-line max-len
-      { $set: { phonenumber: newphonenumber } },
-      { useFindAndModify: false }
-    );
-    if (!user) {
-      return res.status(404).json({ response: "Record not available" });
-    }
-    const loginlink = `${origin}/users/login`;
-    const options = {
-      receiver: user.email,
-      subject: "Phone number update",
-      text: `Hello ${user.fullname}`,
-      output: `<div style='margin: 0 auto; background: #ededed; border-top:2px solid green; border-bottom:2px solid green; box-shadow: 1px 2px 3px 4px #ccc; padding: 1.5rem '>
-        <div style='width:98%;margin-left:1%;border-bottom:1px dotted black;text-align:center;padding:15px 0;'><img src='<%= site.siteLogo %>' style='height:75px'/></div>
-        <div style='margin:0 1% 1%;background:#f1f1f1;padding:20px;'>
-            <h3 style='color: black;margin: 0px 0 15px;'>Hello ${user.fullname},</h3>
-            <p style='color: black;margin: 0px 0 30px;font-size:16px'>Your new phone number has been updated in our records!</p>
-            <p style='color: black;margin: 0px 0 30px;font-size:16px;text-align:center'><a href="${loginlink}" style="background:blue;padding:10px 12px;color:white">BACK TO LOGIN</p>
-            <p style='color: black;margin: 0px 0 15px;font-size:16px;'>Thank you.</p>
-        </div>
-    </div>`
-    };
-    mailer(options);
-
-    return res.status(200).json({ response: "Phone number updated", newphonenumber });
-  } catch (error) {
-    return res.status(500).json({ response: `error ${error} occurred` });
-  }
-});
 
 module.exports = router;

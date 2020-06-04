@@ -1,3 +1,4 @@
+
 /* eslint-disable consistent-return */
 /* eslint-disable default-case */
 /* eslint-disable no-undef */
@@ -7,6 +8,8 @@ const axios = require("axios");
 const { Client, Status } = require("@googlemaps/google-maps-services-js");
 const TripMetrix = require("../api/schedule-api");
 const TripInfo = require("../api/transporters-api");
+const Transporters = require("../api/transporters-api");
+
 
 const router = express.Router();
 
@@ -144,4 +147,12 @@ router.delete("/trips/:id", async (req, res) => {
     res.send({ success: "Delete success" });
   });
 });
+
+  const transporter = new Transporters(req.body.latitude, req.body.longitude);
+  const locationTrnasporter = transporter.getPlaces();
+
+  res.send(locationTrnasporter);
+});
+
+
 module.exports = router;
