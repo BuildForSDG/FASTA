@@ -1,13 +1,13 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-useless-escape */
 /* eslint-disable no-console */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import Router from "next/router";
 import styled from "styled-components";
 import { useForm, ErrorMessage } from "react-hook-form";
-import { ToastContainer, toast } from "react-nextjs-toast";
+import { ToastContainer } from "react-nextjs-toast";
 // import { css } from "@emotion/core";
 import BeatLoader from "react-spinners/BeatLoader";
 
@@ -21,8 +21,8 @@ const MainStyle = styled.main`
   height: calc(100vh - 78px);
 `;
 
-const Login = ({loggedIn, setLoggedIn, setUser, getUrl}) => {
-  console.log("loggedIn:", loggedIn);
+const Login = ({loggedIn, setLoggedIn, user, setUser, getUrl, handleToast }) => {
+  // console.log("loggedIn:", loggedIn);
   const [loading, setLoading] = useState(false);
   
   const { register, handleSubmit, errors } = useForm({ validateCriteriaMode: "all" });
@@ -44,23 +44,30 @@ try {
       console.log(res.status, response);
       if (res.status === 200) {
         setLoggedIn(true);
-        const username = ev.email.split("@")[0];
-        setUser(username);
-        toast.notify("Login successful");
+        // setUser({name: response.user.fullname.split(" ")[0], email: ev.email, number: response.user.phonenumber});
+        setUser(response.user);
+        handleToast(response.response, "success");
+      } else if (res.status >= 500) {
+        handleToast("Some connection or server error", "error");
       } else {
-        toast.notify("Invalid email and/or password");
+        handleToast("Invalid email and/or password", "error");
       }
 } catch(e) {
       console.log(e, "Some error in connection, Please try again!");
-      toast.notify("Error in connection");
+      handleToast("Error in connection", "error");
 } 
   setLoading(false);
 };
 
 const onSubmit = (data) => {
-  console.log(data);
+  // console.log(data);
   signIn(data);
 };
+
+useEffect(() => {
+  localStorage.setItem("user", JSON.stringify(user)); 
+}, [user]);
+
 
   if (loggedIn) {
     Router.push("/home");

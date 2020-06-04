@@ -11,6 +11,17 @@ const ReportBody = styled.div`
   margin-bottom: 20px;
 `;
 
+const Title = styled.h1`
+  font-size: 14px;
+  color: #232323;
+  font-weight: bold;
+`;
+
+const Text = styled.p`
+  color: #6c6c6c;
+  font-size: 14px;
+`;
+
 const Report = (props) => {
   return (
     <ReportBody>

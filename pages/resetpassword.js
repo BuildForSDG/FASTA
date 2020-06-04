@@ -25,7 +25,7 @@ const AlertCardStyle = styled.div`
   padding: 60px 26px 46px;
 `;
 
-const ResetPassword = ({getUrl }) => {
+const ResetPassword = ({getUrl, handleToast }) => {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [url, setUrl] = useState("");
@@ -50,15 +50,16 @@ try {
                               body: JSON.stringify(ev), 
                               headers: { "Content-Type" : "application/json"}
                             });
-      if (res.status === 200) setSubmitted(true);
       const response = await res.json();
-      toast.notify(response.response);
-      // setSubmitted(true);
+      if (res.status === 200) {
+        setSubmitted(true);
+        handleToast(response.response, "error");
+      }
+      handleToast(response.response, "error");
       console.log(res.status, response);
 } catch(e) {
       console.log(e, "Some error in connection, Please try again!");
-      toast.notify("Error in connection");
-      // setSubmitted(true);
+      handleToast("Error in connection", "error");
 }
   setLoading(false);
   
