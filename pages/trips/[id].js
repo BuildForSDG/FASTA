@@ -46,7 +46,7 @@ const Trip = (props) => {
     } catch (error) {
       return error;
     }
-  }
+  };
 
   const { register, handleSubmit, errors } = useForm({ validateCriteriaMode: "all" });
   const onSubmit = (data) => {

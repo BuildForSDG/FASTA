@@ -96,7 +96,7 @@ export const TransportProvider = (props) => {
           </ActionButtonStyle>
         </a>
       </Link>
-      <h2 style={{ color: '#232323' }}>{props.business_name}</h2>
+      <h2 style={{ color: "#232323" }}>{props.business_name}</h2>
       <p style={{ color: "#7F7F7F" }} className="text-xs">
         {props.vehicle_type}
       </p>
