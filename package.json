@@ -17,8 +17,8 @@
     "test:watch": "jest --watch",
     "test:cover": "jest --coverage",
     "lint": "eslint \"src/**/*.js\"",
-    "start": "parcel ./src/index.html",
-    "dev": "nodemon ./src/server.js"
+    "start": "node ./fasta-backend/bin/www",
+    "dev": "nodemon ./fasta-backend/bin/www"
   },
   "author": {
     "name": "Build For SDG",

@@ -7,6 +7,8 @@ const axios = require("axios");
 const { Client, Status } = require("@googlemaps/google-maps-services-js");
 const TripMetrix = require("../api/schedule-api");
 const TripInfo = require("../api/transporters-api");
+const Transporters = require("../api/transporters-api");
+
 
 const router = express.Router();
 
@@ -20,6 +22,7 @@ router.post("/location-transporter", (req, res) => {
   });
 });
 
+// api that gives the computed value for distance between in meters
 router.post("/trip-distance", async (req, res) => {
   const { origin, destination } = req.body;
   try {
@@ -142,4 +145,6 @@ router.delete("/trips/:id", async (req, res) => {
     res.send({ success: "Delete success" });
   });
 });
+
+
 module.exports = router;

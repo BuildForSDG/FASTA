@@ -1,10 +1,16 @@
-/* eslint-disable no-undef */
-/* eslint-disable no-param-reassign */
-/* eslint-disable no-unused-vars */
-const { Client, Status } = require("@googlemaps/google-maps-services-js");
 
-// instantiate the google http client
-const client = new Client({});
+/* eslint-disable no-console */
+/* eslint-disable class-methods-use-this */
+/* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
+const https = require("https");
+// Option parameter for google api request
+const options = {
+  hostname: "maps.googleapis.com",
+  port: 443,
+  path: `/maps/api/place/textsearch/json?query=transport&location=${this.latitude},${this.longitude}&radius=10000&key=AIzaSyDg-6GC6doxzpE_etI9E-yJR2NOLyFzBYc`,
+  method: "GET"
+};
 
 // Allow function to receive coordinate argument from client
 class GetTripInfo {
