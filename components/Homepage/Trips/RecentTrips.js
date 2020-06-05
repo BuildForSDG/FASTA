@@ -3,10 +3,11 @@ import styled from "styled-components";
 import React from "react";
 import Link from "next/link";
 import Trip from "./Trip";
+import { TextSmall } from "../../Text/Body";
 
-const Text = styled.p`
+const Text = styled(TextSmall)`
   font-size: 20px;
-  margin: 10px 0;
+  margin: 5px 0;
 `;
 
 const RecentTrips = () => {

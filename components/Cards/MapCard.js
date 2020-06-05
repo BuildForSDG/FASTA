@@ -8,7 +8,7 @@ const MapCardStyle = styled.div`
   margin-bottom: 15px;
 `;
 
-const MapCard = (props) => {
+const MapCard = () => {
   return <MapCardStyle />;
 };
 

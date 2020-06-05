@@ -1,18 +1,11 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
-import styled from "styled-components";
 import Report from "./Report";
 import Link from "next/link";
 
-const Heading = styled.p`
-  color: #232323;
+const Text = styled(TextSmall)`
   font-size: 20px;
-  margin: 10px 0;
-`;
-
-const AllReports = styled.span`
-  color: #2699fb;
-  font-size: 12px;
+  margin: 5px 0;
 `;
 
 const Reports = (props) => {

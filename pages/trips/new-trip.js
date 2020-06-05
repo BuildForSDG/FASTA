@@ -21,8 +21,7 @@ const NewTrip = () => {
   }, []);
 
   const { register, handleSubmit, errors } = useForm({ validateCriteriaMode: "all" });
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = () => {
     Router.push("/trips/scheduled-trips");
   };
 
@@ -37,13 +36,13 @@ const NewTrip = () => {
               data come from the result of the map selection and
               typed location
             */}
-            <LocationInput 
-              label="start position" 
-              input="34 Thompson drive, Lokoja, Kogi, Nigeria and other texts that come in from database and google" 
+            <LocationInput
+              label="start position"
+              input="34 Thompson drive, Lokoja, Kogi, Nigeria and other texts that come in from database and google"
             />
-            <LocationInput 
-              label="end position" 
-              input="Enter location or Select from map." 
+            <LocationInput
+              label="end position"
+              input="Enter location or Select from map."
             />
 
             <p style={{ color: "#2699FB" }} className="text-xs capitalize mb-2">
@@ -51,7 +50,7 @@ const NewTrip = () => {
             </p>
 
             {/* Add ref from react-hook-forms */}
-            <TypeInput type="datetime-local" 
+            <TypeInput type="datetime-local"
               name="tripTime"
               ref={register({
                 required: "Please enter trip date and time"
@@ -71,7 +70,7 @@ const NewTrip = () => {
               Select health condition if any
             </p>
 
-            <SelectInput placeholder="--Condition--" 
+            <SelectInput placeholder="--Condition--"
               name="condition"
               options={[
                 "None",

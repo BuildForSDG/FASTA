@@ -16,7 +16,7 @@ const Heading = styled.h1`
 
 const Text = styled.p`
   font-size: 20px;
-  padding: 15px 0;
+  padding: 10px 0;
 `;
 
 const NewTrip = (props) => {

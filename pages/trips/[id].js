@@ -15,7 +15,7 @@ import { LocationInput, TypeInput, SelectInput} from "../../components/MapInput"
 import { Grid, TransportCompany, TransportProvider } from "../../components/Cards/TransportCard";
 
 
-const Trip = (git) => {
+const Trip = () => {
   const [provider, setProvider] = useState("");
   const [riders, setRiders] = useState([]);
   const [transportCompany, setTransportCompany] = useState([]);
@@ -44,7 +44,7 @@ const Trip = (git) => {
         setTransportCompany([]);
       }
     } catch (error) {
-      console.log(error)
+      return error;
     }
   };
 
@@ -66,12 +66,12 @@ const Trip = (git) => {
             data come from the result of the map selection and
             typed location
           */}
-          <LocationInput 
-            label="start position" 
+          <LocationInput
+            label="start position"
             input={trip.origin}
           />
-          <LocationInput 
-            label="end position" 
+          <LocationInput
+            label="end position"
             input={trip.destination}
           />
 
@@ -80,7 +80,7 @@ const Trip = (git) => {
           </p>
 
           {/* Add ref from react-hook-forms */}
-          <SelectInput placeholder="-- Mode of Transport --" 
+          <SelectInput placeholder="-- Mode of Transport --"
             onChange={modeOfTransport}
             name="modeOfTransport"
             options={[
@@ -116,7 +116,7 @@ const Trip = (git) => {
               </p>
               <Grid>
                 {transportCompanies.map((company, idx) => (
-                  <TransportCompany 
+                  <TransportCompany
                     key={idx}
                     id={company.id}
                     business_name={company.business_name}
@@ -157,7 +157,7 @@ const Trip = (git) => {
           </p>
 
           {/* Add ref from react-hook-forms */}
-          <SelectInput placeholder="-- Condition --" 
+          <SelectInput placeholder="-- Condition --"
             name="condition"
             options={[
               "None",
@@ -185,7 +185,7 @@ const Trip = (git) => {
             Start Trip
           </SubmitButton>
         </form>
-        
+
       </div>
 
     </div>
