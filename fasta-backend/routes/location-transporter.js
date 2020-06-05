@@ -1,12 +1,15 @@
+
 /* eslint-disable consistent-return */
 /* eslint-disable default-case */
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
-const express = require('express');
-const axios = require('axios');
-const { Client, Status } = require('@googlemaps/google-maps-services-js');
-const TripMetrix = require('../api/schedule-api');
-const TripInfo = require('../api/transporters-api');
+const express = require("express");
+const axios = require("axios");
+const { Client, Status } = require("@googlemaps/google-maps-services-js");
+const TripMetrix = require("../api/schedule-api");
+const TripInfo = require("../api/transporters-api");
+const Transporters = require("../api/transporters-api");
+
 
 const router = express.Router();
 
@@ -20,7 +23,9 @@ router.post('/location-transporter', (req, res) => {
   });
 });
 
-router.post('/trip-distance', async (req, res) => {
+// api that gives the computed value for distance between in meters
+router.post("/trip-distance", async (req, res) => {
+
   const { origin, destination } = req.body;
   try {
     await axios
@@ -140,4 +145,6 @@ router.delete('/trips/:id', async (req, res) => {
     res.send({ success: 'Delete success' });
   });
 });
+
+
 module.exports = router;
