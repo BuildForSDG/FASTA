@@ -1,20 +1,17 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
-import Report from "./Report";
-import Link from "next/link";
 import styled from "styled-components";
-
-const Text = styled(TextSmall)`
-  font-size: 20px;
-  margin: 5px 0;
-`;
+import Link from "next/link";
+import Report from "./Report";
+import { H3 } from "../../Text/Headings";
 
 const Reports = () => {
   return (
     <div>
       {/* fetch Reports from report api */}
       {/* Show only the two latest reports */}
-      <Heading>Reports in your area</Heading>
+      <H3>Reports in your area</H3>
+
       <Report
         title=" Accident"
         description="Along Olu-Obansanjo road. cars are on fire avoid the area, fire fighters are at the scene. Traffic is..."
@@ -25,7 +22,7 @@ const Reports = () => {
       />
       <Link href="/report">
         <a>
-          <AllReports>See All Reports</AllReports>
+          <span style={{ color: "#2699fb", fontSize: "12px" }}>See All Reports</span>
         </a>
       </Link>
     </div>

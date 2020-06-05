@@ -1,13 +1,11 @@
 /* eslint-disable prettier/prettier */
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useForm, ErrorMessage } from "react-hook-form";
 import Router from "next/router";
 
 import Layout from "../../components/Layout";
-import TripCard from "../../components/Cards/TripCard";
-import { NewTripButton, SubmitButton } from "../../components/Buttons";
+import { SubmitButton } from "../../components/Buttons";
 import MapCard from "../../components/Cards/MapCard";
-import { TextSmall } from "../../components/Text/Body";
 import { LocationInput, TypeInput, SelectInput} from "../../components/MapInput";
 
 const NewTrip = () => {

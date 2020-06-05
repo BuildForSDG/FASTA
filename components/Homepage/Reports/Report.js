@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { H3 } from "../../Text/Headings";
 import { TextSmall } from "../../Text/Body";
 
 const ReportBody = styled.div`

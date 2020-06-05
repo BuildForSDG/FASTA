@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Router, { useRouter } from "next/router";
 import { useForm, ErrorMessage } from "react-hook-form";
 
@@ -7,15 +7,14 @@ import trips from "./trips.json";
 import transportCompanies from "./transportCompanies.json";
 import transporters from "./riders.json";
 import Layout from "../../components/Layout";
-import TripCard from "../../components/Cards/TripCard";
 import { SubmitButton } from "../../components/Buttons";
 import MapCard from "../../components/Cards/MapCard";
-import { TextSmall } from "../../components/Text/Body";
-import { LocationInput, TypeInput, SelectInput} from "../../components/MapInput";
+import { LocationInput, SelectInput} from "../../components/MapInput";
 import { Grid, TransportCompany, TransportProvider } from "../../components/Cards/TransportCard";
 
 
 const Trip = () => {
+  // set riders, providers and transport companies from api
   const [provider, setProvider] = useState("");
   const [riders, setRiders] = useState([]);
   const [transportCompany, setTransportCompany] = useState([]);
@@ -29,6 +28,7 @@ const Trip = () => {
     setProvider(providerID);
   };
 
+  // eslint-disable-next-line consistent-return
   const modeOfTransport = (e) => {
     const {value} = e.target;
 
@@ -49,7 +49,7 @@ const Trip = () => {
   };
 
   const { register, handleSubmit, errors } = useForm({ validateCriteriaMode: "all" });
-  const onSubmit = (data) => {
+  const onSubmit = () => {
     // console.log(data);
     Router.push("/trips/ongoing-trip");
   };
