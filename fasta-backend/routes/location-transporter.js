@@ -1,17 +1,177 @@
+
+/* eslint-disable consistent-return */
 /* eslint-disable default-case */
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 const express = require("express");
+const axios = require("axios");
+const { Client, Status } = require("@googlemaps/google-maps-services-js");
+const TripMetrix = require("../api/schedule-api");
+const TripInfo = require("../api/transporters-api");
 const Transporters = require("../api/transporters-api");
+const ScheduleTrip = require("../models/trip");
+const authChecker = require("../middlewares/authChecker");
+
 
 const router = express.Router();
 
 // api to get nearby transporters base on users location
 router.post("/location-transporter", (req, res) => {
-  const transporter = new Transporters(req.body.latitude, req.body.longitude);
-  const locationTrnasporter = transporter.getPlaces();
+  const trip = new TripInfo(req.body.latitude, req.body.longitude);
+  const locationTrnasporter = trip.getPlaces();
 
-  res.send(locationTrnasporter);
+  res.send(`Returned transporters: ${locationTrnasporter}`);
 });
+
+// api that gives the computed value for distance between in meters
+router.post("/trip-distance", async (req, res) => {
+  const { origin, destination } = req.body;
+  try {
+    await axios
+      .get(
+        `https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${origin}&destinations=${destination}&key=${process.env.TEST_KEY}`
+      )
+      .then((response) => {
+        if (response.data.rows.length <= 0) {
+          return res.json({ error: response.data.error_message });
+        }
+        const result = response.data.rows[0].elements[0];
+        const { distance, duration } = result;
+        return res.json({ data: { distance: distance.text, duration: duration.text } });
+      })
+      .catch((error) => {
+        throw new Error("Error fetching data");
+      });
+  } catch (error) {
+    throw new Error("Internal Server Error");
+  }
+});
+
+// api that gives the computed value for distance between in miles
+router.post("/trip-direction-info", async (req, res) => {
+  const { origin, destination } = req.body;
+  try {
+    await axios
+      .get(
+        `https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${destination}&key=${process.env.TEST_KEY}`
+      )
+      .then((response) => {
+        // if (response.data.rows.length <= 0) {
+        //   return res.json({ error: response.data.error_message });
+        // }
+        // const result = response.data.rows[0].elements[0];
+        // const { distance, duration } = result;
+        // return res.json({ data: { distance: distance.text, duration: duration.text } });
+
+        // console.log(response.data);
+      })
+      .catch((error) => {
+        throw new Error("Error fetching data");
+      });
+  } catch (error) {
+    throw new Error("Internal Server Error");
+  }
+});
+
+router.post("/schedule-a-trip", async (req, res) => {
+  const {
+    mode,
+    origin,
+    destination,
+    isVulnerable,
+    tripDistance,
+    tripTime
+  } = req.body;
+
+  if (!mode
+      || !origin
+      || !destination
+      || !isVulnerable
+      || !tripDistance
+      || !tripTime) {
+    return res.status(403).json({ response: "please all fields are required" });
+  }
+
+  try {
+    const tripDetails = {
+      mode,
+      origin,
+      destination,
+      isVulnerable,
+      tripDistance,
+      tripTime
+    };
+    const trips = await ScheduleTrip.create(tripDetails);
+    if (trips) {
+      return res.status(200).json({ response: "Your Trip Details are saved!" });
+    }
+  } catch (error) {
+    return res.status(500).json({ response: `oopss, Error: ${error} occured` });
+  }
+});
+
+// endpoint will list all the schecduled trip
+router.get("/trips", authChecker, async (req, res) => {
+  await ScheduleTrip.find()
+    .select("_id mode origin destination isVulnerable tripDistance tripTime date")
+    .exec()
+    .then((allTrips) => {
+      if (!allTrips || allTrips < 1) {
+        return res.status(404).json({ response: "unfortunetly, we dont have any trips schedule for you, check back" });
+      }
+      res.status(200).json({ response: allTrips.reverse() });
+    })
+    .catch((error) => {
+      res.status(500).json({ error });
+    });
+});
+
+//  endpoint will update trips scheduled by Id
+router.put("/trips/:id", authChecker, async (req, res) => {
+  await ScheduleTrip.findByIdAndUpdate(req.params.id, req.body, (err, user) => {
+    if (err) {
+      return res
+        .status(500)
+        .send({ error: "Update by Id unsuccessful" });
+    }
+    res.send({ success: "Update by Id success" });
+  });
+});
+
+//  endpoint will delete trips scheduled by Id
+router.delete("/trips/:id", authChecker, async (req, res) => {
+  await ScheduleTrip.findOneAndDelete(req.params.id, (err, user) => {
+    if (err) {
+      return res
+        .status(500)
+        .send({ error: "Delete unsuccessful" });
+    }
+    res.send({ success: "Delete success" });
+  });
+});
+
+// endpoint will get a specific trip
+router.get("/trips/:id", authChecker, async (req, res) => {
+  await ScheduleTrip.findById(req.params.id)
+    .then((trip) => {
+      if (!trip || trip < 1) {
+        return res.status(404).json({ response: "This report doesn't exist anymore" });
+      }
+      return res.status(200).json({
+        response: {
+          mode: trip.mode,
+          origin: trip.origin,
+          destination: trip.destination,
+          isVulnerable: trip.isVulnerable,
+          tripDistance: trip.tripDistance,
+          tripTime: trip.tripTime,
+          date: trip.date
+        }
+      });
+    }).catch((e) => {
+      res.status(500).json({ e: e.message });
+    });
+});
+
 
 module.exports = router;
