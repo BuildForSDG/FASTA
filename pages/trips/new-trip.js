@@ -100,12 +100,8 @@ const NewTrip = () => {
             </SubmitButton>
 
           </form>
-
-          
         </div>
-
       </div>
-
     </Layout>
   );
 };

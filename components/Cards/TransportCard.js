@@ -65,7 +65,7 @@ export const TransportCompany = (props) => {
       <ActionButtonStyle as="button" id={props.id} onClick={props.onClick}>
         <img src="/images/success.svg" alt="make report" />
       </ActionButtonStyle>
-      <h2 style={{ color: '#232323' }}>{props.business_name}</h2>
+      <h2 style={{ color: "#232323" }}>{props.business_name}</h2>
       <p style={{ color: "#7F7F7F" }} className="text-xs services">
         {props.services}
       </p>
@@ -96,7 +96,7 @@ export const TransportProvider = (props) => {
           </ActionButtonStyle>
         </a>
       </Link>
-      <h2 style={{ color: '#232323' }}>{props.business_name}</h2>
+      <h2 style={{ color: "#232323" }}>{props.business_name}</h2>
       <p style={{ color: "#7F7F7F" }} className="text-xs">
         {props.vehicle_type}
       </p>
@@ -105,9 +105,7 @@ export const TransportProvider = (props) => {
           available
         </p>
       ) : (
-        <p className="text-xs text-red-500">
-          unavailable
-        </p>
+        <p className="text-xs text-red-500">unavailable</p>
       )}
 
       <p style={{ color: "#6C6C6C" }} className="text-xs">

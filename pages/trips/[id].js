@@ -15,10 +15,10 @@ import { LocationInput, TypeInput, SelectInput} from "../../components/MapInput"
 import { Grid, TransportCompany, TransportProvider } from "../../components/Cards/TransportCard";
 
 
-const Trip = (props) => {
-  const [provider, setProvider] = useState("")
-  const [riders, setRiders] = useState([])
-  const [transportCompany, setTransportCompany] = useState([])
+const Trip = () => {
+  const [provider, setProvider] = useState("");
+  const [riders, setRiders] = useState([]);
+  const [transportCompany, setTransportCompany] = useState([]);
   const router = useRouter();
   const {id} = router.query;
 
@@ -27,7 +27,7 @@ const Trip = (props) => {
   const makeProvider = (e) => {
     const {providerID} = e.target;
     setProvider(providerID);
-  }
+  };
 
   const modeOfTransport = (e) => {
     const {value} = e.target;
@@ -46,7 +46,7 @@ const Trip = (props) => {
     } catch (error) {
       console.log(error)
     }
-  }
+  };
 
   const { register, handleSubmit, errors } = useForm({ validateCriteriaMode: "all" });
   const onSubmit = (data) => {
@@ -193,6 +193,5 @@ const Trip = (props) => {
   </Layout>
   );
 };
-
 
 export default Trip;

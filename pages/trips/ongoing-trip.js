@@ -8,7 +8,7 @@ import { TextSmall } from "../../components/Text/Body";
 import Reports from "../../components/Homepage/Reports/Reports";
 import NewReport from "../../components/Homepage/NewReport";
 
-const Trip = (props) => {
+const Trip = () => {
 
   return (
     <Layout header="Ongoing Trip" back>
