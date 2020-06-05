@@ -16,9 +16,9 @@ import { Grid, TransportCompany, TransportProvider } from "../../components/Card
 
 
 const Trip = (props) => {
-  const [provider, setProvider] = useState("")
-  const [riders, setRiders] = useState([])
-  const [transportCompany, setTransportCompany] = useState([])
+  const [provider, setProvider] = useState("");
+  const [riders, setRiders] = useState([]);
+  const [transportCompany, setTransportCompany] = useState([]);
   const router = useRouter();
   const {id} = router.query;
 
@@ -27,7 +27,7 @@ const Trip = (props) => {
   const makeProvider = (e) => {
     const {providerID} = e.target;
     setProvider(providerID);
-  }
+  };
 
   const modeOfTransport = (e) => {
     const {value} = e.target;
@@ -44,13 +44,13 @@ const Trip = (props) => {
         setTransportCompany([]);
       }
     } catch (error) {
-      console.log(error)
+      return error;
     }
   }
 
   const { register, handleSubmit, errors } = useForm({ validateCriteriaMode: "all" });
   const onSubmit = (data) => {
-    console.log(data);
+    return data;
   };
 
   return (
@@ -65,12 +65,12 @@ const Trip = (props) => {
             data come from the result of the map selection and
             typed location
           */}
-          <LocationInput 
-            label="start position" 
+          <LocationInput
+            label="start position"
             input={trip.origin}
           />
-          <LocationInput 
-            label="end position" 
+          <LocationInput
+            label="end position"
             input={trip.destination}
           />
 
@@ -79,7 +79,7 @@ const Trip = (props) => {
           </p>
 
           {/* Add ref from react-hook-forms */}
-          <SelectInput placeholder="-- Mode of Transport --" 
+          <SelectInput placeholder="-- Mode of Transport --"
             onChange={modeOfTransport}
             name="modeOfTransport"
             options={[
@@ -115,7 +115,7 @@ const Trip = (props) => {
               </p>
               <Grid>
                 {transportCompanies.map((company, idx) => (
-                  <TransportCompany 
+                  <TransportCompany
                     key={idx}
                     id={company.id}
                     business_name={company.business_name}
@@ -156,7 +156,7 @@ const Trip = (props) => {
           </p>
 
           {/* Add ref from react-hook-forms */}
-          <SelectInput placeholder="-- Condition --" 
+          <SelectInput placeholder="-- Condition --"
             name="condition"
             options={[
               "None",
@@ -184,7 +184,7 @@ const Trip = (props) => {
             Start Trip
           </SubmitButton>
         </form>
-        
+
       </div>
 
     </div>

@@ -9,8 +9,12 @@ const Body = styled.div`
   color: #43a047;
   padding: 20px;
 `;
+const Heading = styled.h1`
+  font-size: 20px;
+  font-weight: bold;
+`;
 
-const Text = styled(TextSmall)`
+const Text = styled.p`
   font-size: 20px;
   padding: 10px 0;
 `;

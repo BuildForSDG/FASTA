@@ -65,7 +65,7 @@ export const TransportCompany = (props) => {
       <ActionButtonStyle as="button" id={props.id} onClick={props.onClick}>
         <img src="/images/success.svg" alt="make report" />
       </ActionButtonStyle>
-      <h2 style={{ color: '#232323' }}>{props.business_name}</h2>
+      <h2 style={{ color: "#232323" }}>{props.business_name}</h2>
       <p style={{ color: "#7F7F7F" }} className="text-xs services">
         {props.services}
       </p>
