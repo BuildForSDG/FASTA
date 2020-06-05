@@ -15,7 +15,7 @@ import { LocationInput, TypeInput, SelectInput} from "../../components/MapInput"
 import { Grid, TransportCompany, TransportProvider } from "../../components/Cards/TransportCard";
 
 
-const Trip = () => {
+const Trip = (git) => {
   const [provider, setProvider] = useState("");
   const [riders, setRiders] = useState([]);
   const [transportCompany, setTransportCompany] = useState([]);
