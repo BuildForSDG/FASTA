@@ -27,7 +27,7 @@ const AlertCardStyle = styled.div`
   padding: 60px 26px 46px;
 `;
 
-const ChangePassword = ({getUrl, token}) => {
+const ChangePassword = ({getUrl, token, handleToast}) => {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [url, setUrl] = useState("");
@@ -51,14 +51,11 @@ useEffect(() => {
         console.log(res.status, response);
         if (res.status === 401) {
           Router.push("/resetpassword");
-          toast.notify("Link is INVALID, Please try again", {
-            duration: 10,
-            type: "error"
-          });
+          handleToast("Link is INVALID, Please try again", "error");
         };
     } catch(e) {
         console.log(e, "Some error in connection, Please try again!");
-        toast.notify("Error in connection");
+        handleToast("Error in connection", "error");
       }
   })();
 }, []);
@@ -78,11 +75,11 @@ try {
                             });
       if (res.status === 200) setSubmitted(true);
       const response = await res.json();
-      toast.notify(response.response);
+      handleToast(response.response, "success");
       console.log(res.status, response);
 } catch(e) {
       console.log(e, "Some error in connection, Please try again!");
-      toast.notify("Error in connection");
+      handleToast("Error in connection", "error");
 }
   setLoading(false);
 };

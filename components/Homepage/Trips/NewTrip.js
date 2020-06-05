@@ -9,14 +9,10 @@ const Body = styled.div`
   color: #43a047;
   padding: 20px;
 `;
-const Heading = styled.h1`
-  font-size: 20px;
-  font-weight: bold;
-`;
 
-const Text = styled.p`
+const Text = styled(TextSmall)`
   font-size: 20px;
-  padding: 15px 0;
+  padding: 10px 0;
 `;
 
 const NewTrip = (props) => {
