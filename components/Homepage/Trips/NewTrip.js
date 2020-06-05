@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import React from "react";
-import { H3 } from "../../Text/Headings";
-import { TextSmall } from "../../Text/Body";
+import Link from "next/link";
 
 const Body = styled.div`
   background-color: #afdeb1;
@@ -10,21 +9,31 @@ const Body = styled.div`
   color: #43a047;
   padding: 20px;
 `;
+const Heading = styled.h1`
+  font-size: 20px;
+  font-weight: bold;
+`;
 
-const Text = styled(TextSmall)`
+const Text = styled.p`
   font-size: 20px;
   padding: 10px 0;
 `;
 
 const NewTrip = (props) => {
   return (
-    <div className="new-trip">
+    <>
       <Text>Welcome back {props.user}!</Text>
-      <Body>
-        <H3>Plan a new trip</H3>
-        <p>Schedule your next outing</p>
-      </Body>
-    </div>
+      <Link href="trips/new-trip">
+        <a>
+          <div className="new-trip">
+            <Body>
+              <Heading>Plan a new trip</Heading>
+              <p>Schedule your next outing</p>
+            </Body>
+          </div>
+        </a>
+      </Link>
+    </>
   );
 };
 

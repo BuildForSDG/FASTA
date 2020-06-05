@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import React from "react";
+import { TextSmall } from "../../Text/Body";
+
 
 const TripBody = styled.div`
   background-color: #fff;
@@ -12,15 +14,18 @@ const TripBody = styled.div`
   }
   margin-bottom: 20px;
 `;
-const Start = styled.span``;
-const End = styled.span``;
 
-const Trip = () => {
+const Trip = (props) => {
   return (
     <TripBody className="trip">
-      <Start>Start Point : Rumuokoro, Port Harcourt</Start>
-      <img src="images/Connector.png" alt="connector" />
-      <End>End Point : Rumuokoro, Port Harcourt</End>
+       <p style={{ color: "#2699FB" }} className="text-xs">
+        Start Position
+      </p>
+      <TextSmall color="#6C6C6C">{props.origin}</TextSmall>
+      <p style={{ color: "#2699FB" }} className="text-xs mt-4">
+        End Position
+      </p>
+      <TextSmall color="#6C6C6C">{props.destination}</TextSmall>
     </TripBody>
   );
 };

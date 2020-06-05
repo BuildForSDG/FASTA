@@ -97,9 +97,9 @@ export const NewReportButton = () => {
 
 export const NewTripButton = () => {
   return (
-    <Link href="newTrip">
+    <Link href="new-trip">
       <a>
-        <NewReportButtonSyled style={{backgroundColor: "#fff"}}>
+        <NewReportButtonSyled>
           <img src="/images/add-trip.svg" alt="add trip" />
         </NewReportButtonSyled>
       </a>
