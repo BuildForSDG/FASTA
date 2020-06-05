@@ -11,7 +11,7 @@
   {
     "id" : 1,
     "business_name" : "ABC transport",
-    "services" : "Services from db",
+    "vehicle_type" : "Toyota Sienna",
     "status": false,
     "distance" : "2.3km",
     "location" : "from api",
@@ -20,7 +20,7 @@
   {
     "id" : 2,
     "business_name" : "ABC transport",
-    "services" : "Services from db",
+    "vehicle_type" : "Lexus Saloon Car",
     "status": false,
     "distance" : "2.3km",
     "location" : "from api",
@@ -29,7 +29,7 @@
   {
     "id" : 3,
     "business_name" : "ABC transport",
-    "services" : "Services from db",
+    "vehicle_type" : "Honda Accord",
     "status": true,
     "distance" : "2.3km",
     "location" : "from api",

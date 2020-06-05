@@ -74,8 +74,8 @@ export const TransportCompany = (props) => {
           available
         </p>
       ) : (
-        <p style={{ color: "#43A047" }} className="text-xs">
-          available
+        <p style={{ color: "#43A047" }} className="text-xs text-red-500">
+          unavailable
         </p>
       )}
 
@@ -105,8 +105,8 @@ export const TransportProvider = (props) => {
           available
         </p>
       ) : (
-        <p style={{ color: "#43A047" }} className="text-xs">
-          available
+        <p className="text-xs text-red-500">
+          unavailable
         </p>
       )}
 

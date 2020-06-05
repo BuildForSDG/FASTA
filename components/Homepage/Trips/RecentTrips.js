@@ -2,6 +2,7 @@
 import styled from "styled-components";
 import React from "react";
 import Trip from "./Trip";
+import Link from "next/link";
 
 const Text = styled.p`
   font-size: 20px;
@@ -12,9 +13,13 @@ const RecentTrips = (props) => {
   return (
     <div className="trips my-4 flex flex-col justify-between">
       <Text>Your Recent Trips</Text>
-      <Trip />
-      <Trip />
-      <span style={{ color: "#2699fb", fontSize: "12px" }}>See All Trips</span>
+      <Trip origin="Rumuokoro, Port Harcourt" destination="Choba, Port Harcourt" />
+      <Trip origin="Asaba, Delta State" destination="Ikeja, Lagos" />
+      <Link href="/trips/scheduled-trips">
+        <a>
+          <span style={{ color: "#2699fb", fontSize: "12px" }}>See All Trips</span>
+        </a>
+      </Link>
     </div>
   );
 };

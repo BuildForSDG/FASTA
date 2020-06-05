@@ -20,7 +20,6 @@ const NavBar = (props) => {
   return (
     <Nav className="flex justify-between items-center">
       <NavLogo src="images/Logo.png" alt="Fasta" />
-      <img className="cursor-pointer" src="images/More.png" alt="more" />
     </Nav>
   );
 };

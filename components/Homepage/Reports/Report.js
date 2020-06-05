@@ -18,15 +18,27 @@ const Title = styled.h1`
 const Text = styled.p`
   color: #6c6c6c;
   font-size: 14px;
+
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  @supports (-webkit-line-clamp: 2) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: initial;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
 `;
 
 const Report = (props) => {
   return (
     <ReportBody>
       <Title>{props.title}</Title>
-      <Text>
-        Along Olu-Obansanjo road. cars are on fire avoid the area, fire fighters are at the scene. Traffic is...
-      </Text>
+      <Text>{props.description}</Text>
     </ReportBody>
   );
 };
