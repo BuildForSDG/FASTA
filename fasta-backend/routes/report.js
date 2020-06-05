@@ -1,13 +1,11 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable consistent-return */
 const express = require("express");
-const mongoose = require("mongoose");
 
 
 const router = express.Router();
 const Reports = require("../models/report");
 const authChecker = require("../middlewares/authChecker");
-const Trip = require("../models/trip");
 
 
 router.post("/report", authChecker, async (req, res) => {

@@ -10,6 +10,7 @@ const TripMetrix = require("../api/schedule-api");
 const TripInfo = require("../api/transporters-api");
 const Transporters = require("../api/transporters-api");
 const ScheduleTrip = require("../models/trip");
+const authChecker = require("../middlewares/authChecker");
 
 
 const router = express.Router();
@@ -109,8 +110,8 @@ router.post("/schedule-a-trip", async (req, res) => {
   }
 });
 
-// add the authChecker for authentication before, endpoint will list all the schecduled trip
-router.get("/trips", async (req, res) => {
+// endpoint will list all the schecduled trip
+router.get("/trips", authChecker, async (req, res) => {
   await ScheduleTrip.find()
     .select("_id mode origin destination isVulnerable tripDistance tripTime date")
     .exec()
@@ -125,8 +126,8 @@ router.get("/trips", async (req, res) => {
     });
 });
 
-// add the authChecker for authentication before, endpoint will update trips scheduled by Id
-router.put("/trips/:id", async (req, res) => {
+//  endpoint will update trips scheduled by Id
+router.put("/trips/:id", authChecker, async (req, res) => {
   await ScheduleTrip.findByIdAndUpdate(req.params.id, req.body, (err, user) => {
     if (err) {
       return res
@@ -137,8 +138,8 @@ router.put("/trips/:id", async (req, res) => {
   });
 });
 
-// add the authChecker for authentication before, endpoint will delete trips scheduled by Id
-router.delete("/trips/:id", async (req, res) => {
+//  endpoint will delete trips scheduled by Id
+router.delete("/trips/:id", authChecker, async (req, res) => {
   await ScheduleTrip.findOneAndDelete(req.params.id, (err, user) => {
     if (err) {
       return res
