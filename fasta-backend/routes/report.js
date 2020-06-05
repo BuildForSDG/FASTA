@@ -47,7 +47,7 @@ router.get("/reports", authChecker, async (req, res) => {
       res.status(200).json({ response: allReports.reverse() });
     })
     .catch((error) => {
-      res.status(500).json({ error });
+      res.status(500).json({ error: error.message });
     });
 });
 

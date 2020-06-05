@@ -62,7 +62,7 @@ router.post("/trip-direction-info", async (req, res) => {
         // const { distance, duration } = result;
         // return res.json({ data: { distance: distance.text, duration: duration.text } });
 
-        console.log(response.data);
+        // console.log(response.data);
       })
       .catch((error) => {
         throw new Error("Error fetching data");
