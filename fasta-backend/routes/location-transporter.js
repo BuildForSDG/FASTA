@@ -150,5 +150,28 @@ router.delete("/trips/:id", authChecker, async (req, res) => {
   });
 });
 
+// endpoint will get a specific trip
+router.get("/trips/:id", authChecker, async (req, res) => {
+  await ScheduleTrip.findById(req.params.id)
+    .then((trip) => {
+      if (!trip || trip < 1) {
+        return res.status(404).json({ response: "This report doesn't exist anymore" });
+      }
+      return res.status(200).json({
+        response: {
+          mode: trip.mode,
+          origin: trip.origin,
+          destination: trip.destination,
+          isVulnerable: trip.isVulnerable,
+          tripDistance: trip.tripDistance,
+          tripTime: trip.tripTime,
+          date: trip.date
+        }
+      });
+    }).catch((e) => {
+      res.status(500).json({ e: e.message });
+    });
+});
+
 
 module.exports = router;

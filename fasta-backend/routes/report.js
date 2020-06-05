@@ -76,5 +76,4 @@ router.get("/reports/:id", authChecker, async (req, res) => {
     });
 });
 
-
 module.exports = router;
