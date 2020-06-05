@@ -9,6 +9,7 @@ const { Client, Status } = require("@googlemaps/google-maps-services-js");
 const TripMetrix = require("../api/schedule-api");
 const TripInfo = require("../api/transporters-api");
 const Transporters = require("../api/transporters-api");
+const ScheduleTrip = require("../models/trip");
 
 
 const router = express.Router();
