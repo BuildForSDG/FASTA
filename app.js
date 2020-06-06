@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const CORS = require("cors");
 
 const userRouter = require("./routes/users");
+const reportRouter = require("./routes/reports");
 const indexRouter = require("./routes/index");
 const sendRouter = require("./routes/sendmail");
 const getTransporter = require("./routes/location-transporter");
@@ -27,8 +28,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(CORS());
 app.use(express.static(path.join(__dirname, "public")));
+app.use(CORS());
 
 app.use("/api/v1/users", userRouter);
+app.use("/api/v1/reports", reportRouter);
 app.use("/api/v1/", indexRouter);
 app.use("/api/v1/", sendRouter);
 app.use("/api/v1/", getTransporter);

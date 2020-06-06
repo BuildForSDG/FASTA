@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const userSchema = mongoose.Schema({
+const userSchema = new mongoose.Schema({
   fullname: {
     type: String,
     required: true
@@ -27,6 +27,21 @@ const userSchema = mongoose.Schema({
   },
   resetPasswordExpires: {
     type: Date
+  },
+  vehiclemake: {
+    type: String
+  },
+  vehiclemodel: {
+    type: String
+  },
+  licencenumber: {
+    type: String
+  },
+  address: {
+    type: String
+  },
+  status: {
+    type: String
   }
 });
 
