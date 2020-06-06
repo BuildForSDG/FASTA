@@ -30,7 +30,7 @@ const Homepage = (props) => {
       setCoordinates({ lat: latitude, lng: longitude });
       setLocationText(textContent);
       props.setLocated(true);
-      // console.log(coordinates, props.located, process.env.apiKey);
+      console.log(coordinates, props.located);
     };
 
     const error = () => {
@@ -56,7 +56,7 @@ const Homepage = (props) => {
           <GPS />
         ) : (
           <div>
-            {locationText}
+            {/* {locationText} */}
             <Map lat={coordinates.lat} lng={coordinates.lng} />
           </div>
         )}

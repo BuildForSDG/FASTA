@@ -38,7 +38,7 @@ export const Nav = props => {
   return (
     <NavBar className="flex justify-between items-center z-10">
       <div onClick={() => Router.back()}>
-        <img src="/images/account/Back-Arrow.svg" alt="back" />
+        <img src="/images/Back-Arrow-Black.svg" alt="back" />
       </div>
       <Text color="#232323" className="my-0 font-normal mx-auto">
         {props.title}

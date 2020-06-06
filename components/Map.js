@@ -7,14 +7,20 @@ import ReactMap from "google-map-react";
 const MapComponent = ({ text }) => <div>{text}</div>;
 
 const Map = (props) => {
+  // const defaultProps = {
+  //   center: {
+  //     lat: 59.95,
+  //     lng: 30.33
+  //   },
   const defaultProps = {
     center: {
-      lat: 59.95,
-      lng: 30.33
+      lat: props.lat,
+      lng: props.lng
     },
     zoom: 11
   };
   //  console.log(process.env.apiKey);
+  console.log(props);
   return (
     <div style={{ height: "30vh", width: "100%" }}>
       <ReactMap

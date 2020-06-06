@@ -12,13 +12,13 @@ import { NewReportButton } from "../components/Buttons";
 const Reports = ({getUrl, getReports, handleToast}) => {
   const [reports, setReports] = useState(null);
 
-  console.log(getReports.response);
+  // console.log(getReports.response);
 
   // const apiUrl = getUrl();
   useEffect(() => {
     // effect
     setReports(getReports.response);
-    console.log(getReports, reports);
+    // console.log(getReports, reports);
     return () => {
       // cleanup
     };
@@ -45,23 +45,21 @@ const Reports = ({getUrl, getReports, handleToast}) => {
 Reports.getInitialProps = async (ctx) => {
 
   const apiUrl = "https://fastaapp.herokuapp.com/api/v1";
-  // try {
+  try {
     const res = await fetch(`${apiUrl}/reports`, {
                             method: "GET", 
                             headers: { "Content-Type" : "application/json"}
                           });
     const response = await res.json();
     console.log(res.status, response);
-    // if (res.status === 200) {
+    if (res.status === 200) {
       const getReports = response;
       return {getReports};
-    // }
-    // } catch(e) {
-    //     console.log(e, "Some error in connection, Please try again!");
-    //     // handleToast("Error in connection", "error");
-    //   }
-    
-  // return {};
+    }
+    } catch(e) {
+        console.log(e, "Some error in connection, Please try again!");
+      return {};
+      }
 };
 
 export default Reports;
