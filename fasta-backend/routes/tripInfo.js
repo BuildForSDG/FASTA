@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable consistent-return */
 const express = require("express");
-const { SphericalUtil, PolyUtil } = require("node-geometry-library");
+const { PolyUtil } = require("node-geometry-library");
 const ScheduleTrip = require("../models/trip");
 const Reports = require("../models/report");
 
@@ -21,7 +21,7 @@ router.get("/trip-info/:tripId", async (req, res) => {
 
       const valuesArray = Object.keys(allReports);
       valuesArray.forEach((key) => {
-        const value = allReports[key];
+        const value = allReports[parseInt(key)];
         reports.push(value.location);
       });
     })
