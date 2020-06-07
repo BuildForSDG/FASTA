@@ -11,7 +11,7 @@ mongoose.set("useCreateIndex", true);
 // const db_uri = "mongodb://localhost:27017/FASTA";
 // eslint-disable-next-line camelcase
 const db_uri = process.env.DB_URI;
-console.log(db_uri);
+// console.log(db_uri);
 // console.log(db_uri);
 console.log("Trying to connect to DB...");
 

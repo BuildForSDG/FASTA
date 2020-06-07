@@ -5,10 +5,12 @@ const tripSchema = new mongoose.Schema({
   origin: { type: Object },
   destination: { type: Object },
   tripDistance: { type: String },
-  tripTime: {
-    type: Date,
-    default: Date.now
-  },
+  // tripTime: {
+  //   type: Date,
+  //   default: Date.now
+  // },
+  tripTime: { type: String },
+  userId: { type: String },
   isVulnerable: { type: Boolean },
   date: {
     type: Date,

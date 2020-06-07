@@ -10,6 +10,7 @@ const TripMetrix = require("../api/schedule-api");
 const TripInfo = require("../api/transporters-api");
 const Transporters = require("../api/transporters-api");
 const ScheduleTrip = require("../models/trip");
+const authChecker = require("../middlewares/authChecker");
 
 
 const router = express.Router();
@@ -72,7 +73,7 @@ router.post("/trip-direction-info", async (req, res) => {
   }
 });
 
-router.post("/schedule-a-trip", async (req, res) => {
+router.post("/schedule-a-trip", authChecker, async (req, res) => {
   const {
     mode,
     origin,
@@ -98,7 +99,8 @@ router.post("/schedule-a-trip", async (req, res) => {
       destination,
       isVulnerable,
       tripDistance,
-      tripTime
+      tripTime,
+      userId: req.user._id
     };
     const trips = await ScheduleTrip.create(tripDetails);
     if (trips) {
@@ -110,12 +112,13 @@ router.post("/schedule-a-trip", async (req, res) => {
 });
 
 // add the authChecker for authentication before, endpoint will list all the schecduled trip
-router.get("/trips", async (req, res) => {
-  await ScheduleTrip.find()
+router.get("/trips", authChecker, async (req, res) => {
+  await ScheduleTrip.find({ userId: req.user._id})
     .select("_id mode origin destination isVulnerable tripDistance tripTime date")
     .exec()
     .then((allTrips) => {
       if (!allTrips || allTrips < 1) {
+        console.log(allTrips);
         return res.status(404).json({ response: "unfortunetly, we dont have any trips schedule for you, check back" });
       }
       res.status(200).json({ response: allTrips.reverse() });

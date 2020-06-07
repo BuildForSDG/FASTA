@@ -25,7 +25,8 @@ const mailer = async (options) => {
   await fastaMailer.sendMail(mailOptions, (error, info) => {
     // console.log(mailOptions, info);
     if (error) {
-      throw error;
+      // throw error;
+      console.log(error);
     }
     return `Message sent: %s ${info.messageId}`;
   });
