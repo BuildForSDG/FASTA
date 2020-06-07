@@ -21,6 +21,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.12",
     "morgan": "~1.9.1",
+    "node-geometry-library": "^1.2.2",
     "nodemailer": "^6.4.6",
     "nodemailer-smtp-transport": "^2.7.4"
   },
