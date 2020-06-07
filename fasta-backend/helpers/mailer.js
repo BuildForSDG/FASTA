@@ -28,7 +28,7 @@ const mailer = async (options) => {
       // throw error;
       console.log(error);
     }
-    return `Message sent: %s ${info.messageId}`;
+    return "Mail sent";
   });
 };
 

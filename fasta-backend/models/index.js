@@ -19,6 +19,22 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  vehiclemake: {
+    type: String,
+    default: null
+  },
+  vehiclemodel: {
+    type: String,
+    default: null
+  },
+  licencenumber: {
+    type: String,
+    default: null
+  },
+  address: {
+    type: String,
+    default: null
+  },
   registeredDate: {
     type: Date,
     default: Date.now

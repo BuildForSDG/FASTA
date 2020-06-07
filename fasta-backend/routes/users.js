@@ -298,32 +298,33 @@ router.post("/register/transporter", async (req, res) => {
   }
   try {
     const user = await User.findOneAndUpdate(
-      { email, phonenumber: `0${oldphonenumber}` },
+      { email, phonenumber },
       // eslint-disable-next-line max-len
-      { $set: { phonenumber: newphonenumber } },
+      { $set: { vehiclemake, vehiclemodel, licencenumber, address } },
       { useFindAndModify: false }
     );
     if (!user) {
       return res.status(404).json({ response: "Record not available" });
     }
     const loginlink = `${origin}/users/login`;
+    user.password = null;
     const options = {
       receiver: user.email,
-      subject: "Phone number update",
+      subject: "Congratulations, our latest FASTA transporter",
       text: `Hello ${user.fullname}`,
       output: `<div style='margin: 0 auto; background: #ededed; border-top:2px solid green; border-bottom:2px solid green; box-shadow: 1px 2px 3px 4px #ccc; padding: 1.5rem '>
         <div style='width:98%;margin-left:1%;border-bottom:1px dotted black;text-align:center;padding:15px 0;'><img src='<%= site.siteLogo %>' style='height:75px'/></div>
         <div style='margin:0 1% 1%;background:#f1f1f1;padding:20px;'>
             <h3 style='color: black;margin: 0px 0 15px;'>Hello ${user.fullname},</h3>
-            <p style='color: black;margin: 0px 0 30px;font-size:16px'>Your new phone number has been updated in our records!</p>
+            <p style='color: black;margin: 0px 0 30px;font-size:16px'>Your status has been updated in our records!</p>
             <p style='color: black;margin: 0px 0 30px;font-size:16px;text-align:center'><a href="${loginlink}" style="background:blue;padding:10px 12px;color:white">BACK TO LOGIN</p>
             <p style='color: black;margin: 0px 0 15px;font-size:16px;'>Thank you.</p>
         </div>
     </div>`
     };
-    mailer(options);
+    await mailer(options);
 
-    return res.status(200).json({ response: "Phone number updated", newphonenumber });
+    return res.status(200).json({ response: "Your profile has been updated", user });
   } catch (error) {
     return res.status(500).json({ response: `error ${error} occurred` });
   }
