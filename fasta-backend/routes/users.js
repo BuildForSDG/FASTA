@@ -300,7 +300,7 @@ router.post("/register/transporter", async (req, res) => {
     const user = await User.findOneAndUpdate(
       { email, phonenumber },
       // eslint-disable-next-line max-len
-      { $set: { vehiclemake, vehiclemodel, licencenumber, address } },
+      { $set: { vehiclemake, vehiclemodel, licencenumber, address, status: "transporter" } },
       { useFindAndModify: false }
     );
     if (!user) {

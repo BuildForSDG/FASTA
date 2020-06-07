@@ -35,6 +35,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: null
   },
+  status: {
+    type: String,
+    default: null
+  },
   registeredDate: {
     type: Date,
     default: Date.now
