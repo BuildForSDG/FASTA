@@ -1,0 +1,38 @@
+[
+  {
+    "id" : 0,
+    "business_name" : "Bode Steve",
+    "vehicle_type" : "Toyota Camry",
+    "status": true,
+    "distance" : "2.3km",
+    "location" : "from api",
+    "phone": "08012345678"
+  },
+  {
+    "id" : 1,
+    "business_name" : "ABC transport",
+    "vehicle_type" : "Toyota Sienna",
+    "status": false,
+    "distance" : "2.3km",
+    "location" : "from api",
+    "phone": "08012345678"
+  },
+  {
+    "id" : 2,
+    "business_name" : "ABC transport",
+    "vehicle_type" : "Lexus Saloon Car",
+    "status": false,
+    "distance" : "2.3km",
+    "location" : "from api",
+    "phone": "08012345678"
+  },
+  {
+    "id" : 3,
+    "business_name" : "ABC transport",
+    "vehicle_type" : "Honda Accord",
+    "status": true,
+    "distance" : "2.3km",
+    "location" : "from api",
+    "phone": "08012345678"
+  }
+]

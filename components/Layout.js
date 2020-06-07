@@ -6,7 +6,7 @@ import BottomNav from "./BottomNav";
 
 const Body = styled.main`
   padding-bottom: 60px;
-  background: #f5f5f5;
+  // background: #f5f5f5;
   max-width: 100vw;
 `;
 

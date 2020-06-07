@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import React from "react";
+import { TextSmall } from "../../Text/Body";
+
 
 const TripBody = styled.div`
   background-color: #fff;
@@ -12,8 +14,6 @@ const TripBody = styled.div`
   }
   margin-bottom: 20px;
 `;
-const Start = styled.span``;
-const End = styled.span``;
 
 const Trip = (props) => {
   return (
