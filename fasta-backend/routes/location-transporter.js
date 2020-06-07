@@ -7,24 +7,32 @@ const axios = require("axios");
 const { Client, Status } = require("@googlemaps/google-maps-services-js");
 const TripMetrix = require("../api/schedule-api");
 const TripInfo = require("../api/transporters-api");
+const Transporters = require("../api/transporters-api");
+const ScheduleTrip = require("../models/trip");
+const authChecker = require("../middlewares/authChecker");
+
 
 const router = express.Router();
 
 // api to get nearby transporters base on users location
 router.post("/location-transporter", (req, res) => {
-  const trip = new TripInfo(req.body.latitude, req.body.longitude);
+  const trip = new TripInfo(req.body.latitude, req.body.longitude, req.body.method);
   const locationTrnasporter = trip.getPlaces();
 
-  res.send(`Returned transporters: ${locationTrnasporter}`);
+  locationTrnasporter.then((data) => {
+    res.send({ data });
+  });
 });
 
-
+// api that gives the computed value for distance between in meters
 router.post("/trip-distance", async (req, res) => {
   const { origin, destination } = req.body;
   try {
     await axios
       .get(
-        `https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${origin}&destinations=${destination}&key=${process.env.TEST_KEY}`
+        `https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${origin}&destinations=${destination}&key=${
+          process.env.TEST_KEY
+        }`
       )
       .then((response) => {
         if (response.data.rows.length <= 0) {
@@ -33,12 +41,16 @@ router.post("/trip-distance", async (req, res) => {
         const result = response.data.rows[0].elements[0];
         const { distance, duration } = result;
         return res.json({ data: { distance: distance.text, duration: duration.text } });
+        // return res.json({ data: { result } });
+        // console.log(response);
       })
       .catch((error) => {
-        throw new Error("Error fetching data");
+        // throw new Error("Error fetching data");
+        // console.log(error);
       });
   } catch (error) {
-    throw new Error("Internal Server Error");
+    // throw new Error("Internal Server Error");
+    // console.log(error);
   }
 });
 
@@ -48,42 +60,40 @@ router.post("/trip-direction-info", async (req, res) => {
   try {
     await axios
       .get(
-        `https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${destination}&key=${process.env.TEST_KEY}`
+        `https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${destination}&key=${
+          process.env.TEST_KEY
+        }`
       )
       .then((response) => {
         // if (response.data.rows.length <= 0) {
         //   return res.json({ error: response.data.error_message });
         // }
         // const result = response.data.rows[0].elements[0];
+        const rse = response.data;
         // const { distance, duration } = result;
         // return res.json({ data: { distance: distance.text, duration: duration.text } });
 
-        console.log(response.data);
+
+        return res.json({ data: { rse } });
+
+        // console.log(response.data);
       })
       .catch((error) => {
-        throw new Error("Error fetching data");
+        // throw new Error("Error fetching data");
+        // console.log(error);
       });
   } catch (error) {
-    throw new Error("Internal Server Error");
+    // throw new Error("Internal Server Error");
+    // console.log(error);
   }
 });
 
 router.post("/schedule-a-trip", async (req, res) => {
   const {
-    mode,
-    origin,
-    destination,
-    isVulnerable,
-    tripDistance,
-    tripTime
+    mode, origin, destination, isVulnerable, tripDistance, tripTime
   } = req.body;
 
-  if (!mode
-      || !origin
-      || !destination
-      || !isVulnerable
-      || !tripDistance
-      || !tripTime) {
+  if (!mode || !origin || !destination || !isVulnerable || !tripDistance || !tripTime) {
     return res.status(403).json({ response: "please all fields are required" });
   }
 
@@ -105,8 +115,8 @@ router.post("/schedule-a-trip", async (req, res) => {
   }
 });
 
-// add the authChecker for authentication before, endpoint will list all the schecduled trip
-router.get("/trips", async (req, res) => {
+// endpoint will list all the schecduled trip
+router.get("/trips", authChecker, async (req, res) => {
   await ScheduleTrip.find()
     .select("_id mode origin destination isVulnerable tripDistance tripTime date")
     .exec()
@@ -121,27 +131,48 @@ router.get("/trips", async (req, res) => {
     });
 });
 
-// add the authChecker for authentication before, endpoint will update trips scheduled by Id
-router.put("/trips/:id", async (req, res) => {
+//  endpoint will update trips scheduled by Id
+router.put("/trips/:id", authChecker, async (req, res) => {
   await ScheduleTrip.findByIdAndUpdate(req.params.id, req.body, (err, user) => {
     if (err) {
-      return res
-        .status(500)
-        .send({ error: "Update by Id unsuccessful" });
+      return res.status(500).send({ error: "Update by Id unsuccessful" });
     }
     res.send({ success: "Update by Id success" });
   });
 });
 
-// add the authChecker for authentication before, endpoint will delete trips scheduled by Id
-router.delete("/trips/:id", async (req, res) => {
+//  endpoint will delete trips scheduled by Id
+router.delete("/trips/:id", authChecker, async (req, res) => {
   await ScheduleTrip.findOneAndDelete(req.params.id, (err, user) => {
     if (err) {
-      return res
-        .status(500)
-        .send({ error: "Delete unsuccessful" });
+      return res.status(500).send({ error: "Delete unsuccessful" });
     }
     res.send({ success: "Delete success" });
   });
 });
+
+// endpoint will get a specific trip
+router.get("/trips/:id", authChecker, async (req, res) => {
+  await ScheduleTrip.findById(req.params.id)
+    .then((trip) => {
+      if (!trip || trip < 1) {
+        return res.status(404).json({ response: "This report doesn't exist anymore" });
+      }
+      return res.status(200).json({
+        response: {
+          mode: trip.mode,
+          origin: trip.origin,
+          destination: trip.destination,
+          isVulnerable: trip.isVulnerable,
+          tripDistance: trip.tripDistance,
+          tripTime: trip.tripTime,
+          date: trip.date
+        }
+      });
+    }).catch((e) => {
+      res.status(500).json({ e: e.message });
+    });
+});
+
+
 module.exports = router;
