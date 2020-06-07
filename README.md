@@ -10,10 +10,10 @@ Critically examine your community and the feasibility of a working alternate tra
 HELP UPGRADING TRANSPORT AND LOGISTICS NETWORKS IN COMMUNITIES:
 ## BRIEF INTRODUCTION
  Strictly speaking, transport refers to the movementof people, and logistics refers to the movement of freight. It’s all about moving things, storing things and supplying things. And when we say ‘things’, we mean anything and everything, from people and animals to goods and services. Without the transport and logistics industry, we wouldn’t be able to get to work in the morning, or fly away on holiday, and international trade would certainly not be ‘inter-national’ anymore. Plus, you would never wake up to find a birthday card being stuffed through your letterbox.From the above definitions, FASTA is set in place to help upgrading transport and logistics networks in communities.
- What are the major problems?
- 1.Citizen’s safety and health
- 2.Vulnerability cases “every one at a certain stage is vulnerable from the above definition ”
- 3.Difficulty in accessibility to ease livelihood.
+ # What are the major problems?
+ 1. Citizen’s safety and health
+ 2. Vulnerability cases “every one at a certain stage is vulnerable from the above definition ”
+ 3. Difficulty in accessibility to ease livelihood.
 ## HOW DOES FASTA SOLVE THE PROBLME
 Maximizing transport accessibility for all social groups, gender and income level, so that all citizens can access health care, education, jobs, businesses and a lot more with minimal effort, cost, safety and journey time.
 FASTA will also create a safe, secured environment with minimum possible risk of becoming victim of kidnapping, robbery and other threat to human kind .
