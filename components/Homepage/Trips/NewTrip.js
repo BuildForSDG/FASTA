@@ -19,7 +19,7 @@ const Text = styled(TextSmall)`
 const NewTrip = (props) => {
   return (
     <div className="new-trip">
-      <Text>Welcome back {props.user}!</Text>
+      <Text>Welcome back {props.user.name}!</Text>
       <Body>
         <H3>Plan a new trip</H3>
         <p>Schedule your next outing</p>

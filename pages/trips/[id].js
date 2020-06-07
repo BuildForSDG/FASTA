@@ -3,23 +3,21 @@ import React, { useState, useEffect } from "react";
 import Router, { useRouter } from "next/router";
 import fetch from "node-fetch";
 
-// import trips from "./trips.js";
 import Layout from "../../components/Layout";
 import TripCard from "../../components/Cards/TripCard";
 
 
-const Trip = ({getTrips}) => {
+const Trip = ({getTrips, trips, setTrips}) => {
 
   const [trip, setTrip] = useState(null);
   const router = useRouter();
   const {id} = router.query;
 
-  // const trip = trips[id];
-  // console.log(trips, id)
-
   useEffect(() => {
     // effect
-  const trip = getTrips.response.filter(x => x["_id"] === id);
+    setTrips(trips);
+    // const trip = getTrips.response.filter(x => x["_id"] === id);
+  const trip = trips.filter(x => x["_id"] === id);
   setTrip(trip[0]);
     console.log(trip, getTrips);
     return () => {

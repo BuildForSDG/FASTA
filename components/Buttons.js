@@ -83,7 +83,7 @@ const NewReportButtonSyled = styled.div`
   box-shadow: 0px 0px 7px #0000001a;
 `;
 
-export const NewReportButton = () => {
+export const NewReportButton = (props) => {
   return (
     <Link href="reports/makeReport">
       <a>

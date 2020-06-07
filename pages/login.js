@@ -21,7 +21,7 @@ const MainStyle = styled.main`
   height: calc(100vh - 78px);
 `;
 
-const Login = ({loggedIn, setLoggedIn, user, setUser, getUrl, handleToast }) => {
+const Login = ({loggedIn, setLoggedIn, user, setUser, getUrl, handleToast, token, setToken }) => {
   // console.log("loggedIn:", loggedIn);
   const [loading, setLoading] = useState(false);
   
@@ -44,8 +44,9 @@ try {
       console.log(res.status, response);
       if (res.status === 200) {
         setLoggedIn(true);
-        // setUser({name: response.user.fullname.split(" ")[0], email: ev.email, number: response.user.phonenumber});
-        setUser(response.user);
+        setToken(response.token);
+        setUser({name: response.user.fullname.split(" ")[0], email: ev.email, phonenumber: response.user.phonenumber});
+        // setUser(response.fullname);
         handleToast(response.response, "success");
       } else if (res.status >= 500) {
         handleToast("Some connection or server error", "error");
@@ -66,6 +67,7 @@ const onSubmit = (data) => {
 
 useEffect(() => {
   localStorage.setItem("user", JSON.stringify(user)); 
+  localStorage.setItem("token", JSON.stringify(token)); 
 }, [user]);
 
 

@@ -8,13 +8,17 @@ import { toast } from "react-nextjs-toast";
 export default function MyApp({ Component, pageProps }) {
   const [loggedIn, setLoggedIn] = useState(false);
   const [located, setLocated] = useState(false);
-  const defaultUser = { fullname: "Guest", email: "guest@fasta.com", phonenumber: "08099887766" };
+  const [location, setLocation] = useState(null);
+  const [reports, setReports] = useState(null);
+  const [trips, setTrips] = useState(null);
+  const [token, setToken] = useState(null);
+  const defaultUser = { name: "Guest", email: "guest@fasta.com", phonenumber: "08099887766" };
   const [user, setUser] = useState(defaultUser);
   const getUrl = () => {
     // if(location.host.indexOf('localhost') >= 0){
     // return 'http://localhost:8080/api/v1';
     // } else {
-    return "https://fastaapp.herokuapp.com/api/v1";
+    return "https://fasta-app.herokuapp.com/api/v1";
   };
   // }
 
@@ -23,6 +27,7 @@ export default function MyApp({ Component, pageProps }) {
   useEffect(() => {
     if (localStorage.getItem("user")) {
       setUser(JSON.parse(localStorage.getItem("user")));
+      setToken(JSON.parse(localStorage.getItem("token")));
     } else {
       setUser(defaultUser);
     }
@@ -39,6 +44,14 @@ export default function MyApp({ Component, pageProps }) {
       handleToast={handleToast}
       located={located}
       setLocated={setLocated}
+      location={location}
+      setLocation={setLocation}
+      reports={reports}
+      setReports={setReports}
+      trips={trips}
+      setTrips={setTrips}
+      token={token}
+      setToken={setToken}
     />
   );
 }

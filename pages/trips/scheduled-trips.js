@@ -1,7 +1,5 @@
 /* eslint-disable prettier/prettier */
-import React, { useState, useEffect } from "react";
-import Router, { useRouter } from "next/router";
-import fetch from "node-fetch";
+import React, { useEffect } from "react";
 
 // import trips from "./trips.json";
 import Layout from "../../components/Layout";
@@ -9,33 +7,15 @@ import TripCard from "../../components/Cards/TripCard";
 import { NewTripButton } from "../../components/Buttons";
 
 
-const ScheduledTrips = ({getTrips}) => {
-  const [trips, setTrips] = useState(null);
-
-  console.log(getTrips);
+const ScheduledTrips = ({trips, setTrips}) => {
+  console.log(trips);
 
   useEffect(() => {
     // effect
-    // setTrips(getTrips.response);
-    (async() => {
-      const apiUrl = "https://fasta-app.herokuapp.com/api/v1";
-      try {
-        const res = await fetch(`${apiUrl}/trips`, {
-                                method: "GET", 
-                                headers: { "Content-Type" : "application/json"}
-                              });
-        const response = await res.json();
-        console.log(res.status, response);
-        if (res.status === 200) {
-          const getTrips = response;
-    setTrips(getTrips.response);
-    return {getTrips};
-        }
-        } catch(e) {
-            console.log(e, "Some error in connection, Please try again!");
-          return {response: e.message};
-          }
-    })();
+    // if (getTrips !== undefined) {
+    //   setTrips(getTrips.response);
+    // }
+    
     return () => {
       // cleanup
     };
@@ -43,40 +23,22 @@ const ScheduledTrips = ({getTrips}) => {
 
   return (
     <Layout header="Your Scheduled Trips" back>
+      {!trips && <div>No trips available!</div>}
       { trips && trips.map((trip, index) => (
         <TripCard 
           key={index}
           id={trip._id}
           origin={trip.origin}
           destination={trip.destination}
-          time={trip.tripTime}
+          tripTime={trip.tripTime}
+          trips={trips}
+          setTrips={setTrips}
          />
       ))}
 
       <NewTripButton />
     </Layout>
   );
-};
-
-ScheduledTrips.getInitialProps = async (ctx) => {
-
-  const apiUrl = "https://fasta-app.herokuapp.com/api/v1";
-  try {
-    const res = await fetch(`${apiUrl}/trips`, {
-                            method: "GET", 
-                            headers: { "Content-Type" : "application/json"}
-                          });
-    const response = await res.json();
-    console.log(res.status, response);
-    if (res.status === 200) {
-      const getTrips = response;
-      return {getTrips};
-    }
-    } catch(e) {
-        console.log(e, "Some error in connection, Please try again!");
-      const getTrips = {response: e.message};
-      return {getTrips};
-      }
 };
 
 export default ScheduledTrips;

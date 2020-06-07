@@ -28,6 +28,7 @@ const Homepage = (props) => {
       textContent = `Lat: ${latitude.toFixed(3)} °, Long: ${longitude.toFixed(3)} °`;
       // console.log(textContent, latitude, longitude);
       setCoordinates({ lat: latitude, lng: longitude });
+      props.setLocation({ lat: latitude, lng: longitude });
       setLocationText(textContent);
       props.setLocated(true);
       console.log(coordinates, props.located);
@@ -46,7 +47,63 @@ const Homepage = (props) => {
       setLocationText(textContent);
       navigator.geolocation.getCurrentPosition(success, error);
     }
+
+    (async () => {
+      const apiUrl = props.getUrl();
+    try {
+      const res = await fetch(`${apiUrl}/trips`, {
+                              method: "GET", 
+                              headers: { "Content-Type" : "application/json",
+                                        "Authorization": `Bearer ${props.token}`}
+                            });
+      const response = await res.json();
+      console.log(res.status, response);
+      if (res.status === 200) {
+        const getTrips = response;
+        props.setTrips(getTrips.response);
+        return {getTrips};
+      }
+      } catch(e) {
+          console.log(e, "Some error in connection, Please try again!");
+        // const getTrips = {response: e.message};
+        const getTrips = {response: []};
+        return {getTrips};
+        }
+      })();
+
+      console.log(props.location);
+    const apiUrl = new URL(`${props.getUrl()}/reports`);
+   
+    (async () => {
+      if (props.location === null) {
+        const getReports = {response: [{_id: 0, description: "Your location is not available!"}]};
+        props.setReports(getReports.response);
+        return getReports;;
+      }      
+      apiUrl.searchParams.set('lat', props.location.lat);
+      apiUrl.searchParams.set('lng', props.location.lng);
+      try {
+        const res = await fetch(`${apiUrl}`, {
+                                method: "GET", 
+                                headers: { "Content-Type" : "application/json"}
+                              });
+        const response = await res.json();
+        console.log(res.status, response);
+        if (res.status === 200) {
+          const getReports = response;
+          props.setReports(getReports.response);
+          return {getReports};
+        }
+        } catch(e) {
+            console.log(e, "Some error in connection, Please try again!");
+            const getReports = {response: [{_id: 0, description: "No reports available!"}]};
+            props.setReports(getReports.response);
+            return {getReports};
+          }
+    })();
+
   }, []);
+  console.log(props.trips, props.reports, props);
 
   return (
     <div className="homepage w-screen min-h-screen">
@@ -61,8 +118,8 @@ const Homepage = (props) => {
           </div>
         )}
         <NewTrip user={props.user} />
-        <RecentTrips />
-        <Reports />
+        <RecentTrips trips={props.trips} />
+        <Reports reports={props.reports} />
         <NewReport />
       </Body>
       {/* <BottomNav homeColor={{color: "#fff"}} /> */}

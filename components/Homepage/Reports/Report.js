@@ -25,9 +25,9 @@ const Text = styled.p`
 const Report = (props) => {
   return (
     <ReportBody>
-      <H3 color="#232323">{props.title}</H3>
+      <H3 color="#232323">{props.report.type}</H3>
       <TextSmall color="#6c6c6c">
-        Along Olu-Obansanjo road. cars are on fire avoid the area, fire fighters are at the scene. Traffic is...
+        {props.report.description}
       </TextSmall>
     </ReportBody>
   );

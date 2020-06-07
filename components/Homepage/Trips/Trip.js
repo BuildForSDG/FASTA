@@ -15,12 +15,12 @@ const TripBody = styled.div`
 const Start = styled.span``;
 const End = styled.span``;
 
-const Trip = () => {
+const Trip = (props) => {
   return (
     <TripBody className="trip">
-      <Start>Start Point : Rumuokoro, Port Harcourt</Start>
+      <Start>Start Point : {props.trip.origin}</Start>
       <img src="images/Connector.png" alt="connector" />
-      <End>End Point : Rumuokoro, Port Harcourt</End>
+      <End>End Point : {props.trip.destination}</End>
     </TripBody>
   );
 };

@@ -137,7 +137,7 @@ const TripCard = (props) => {
       <p style={{ color: "#2699FB" }} className="text-xs mt-4">
         Scheduled For:
       </p>
-      <TextSmall color="#6C6C6C">{props.time}</TextSmall>
+      <TextSmall color="#6C6C6C">{props.tripTime}</TextSmall>
 
       <Link href="/trips/[id]" as={`/trips/${props.id}`}>
         <a>

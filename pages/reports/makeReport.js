@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { useForm, ErrorMessage } from "react-hook-form";
 import styled from "styled-components";
+import { toast } from "react-nextjs-toast";
 
 
 import Layout from "../../components/Layout";
@@ -15,8 +16,9 @@ const AlertCardStyle = styled.div`
   border-radius: 10px;
   padding: 60px 26px 46px;
 `;
+const handleToast = (msg, type = "info") => toast.notify(msg, { duration: 10, type });
 
-const MakeReport = ({getUrl, handleToast}) => {
+const MakeReport = ({getUrl, token, location}) => {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   submitted && (document.body.style.overflow = "hidden");
@@ -24,18 +26,21 @@ const MakeReport = ({getUrl, handleToast}) => {
   const { register, handleSubmit, errors, watch } = useForm({ validateCriteriaMode: "all" });
   const apiUrl = getUrl();
 
+  console.log(location);
 //  makeReport
 const submitReport = async(ev) => {
+  ev.location = location;
   console.log(ev, Object.keys(ev));
   setLoading(true);
 
 try {
-      const res = await fetch(`${apiUrl}/reports`, {
+      const res = await fetch(`${apiUrl}/report`, {
                               method: "POST", 
                               body: JSON.stringify(ev), 
-                              headers: { "Content-Type" : "application/json"}
+                              headers: { "Content-Type" : "application/json",
+                                        "Authorization": `Bearer ${token}`}
                             });
-      console.log(res.status);
+      console.log(res.status, res);
       const response = await res.json();
       console.log(response);
       if (res.status === 200) {

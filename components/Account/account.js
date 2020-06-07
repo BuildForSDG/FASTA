@@ -28,6 +28,7 @@ const DetailsBody = styled.div`
   background-color: #fff;
   padding: 15px;
   margin-bottom: 15px;
+  margin-top: 45px;
 `;
 
 const Text = styled(H3)`
@@ -116,7 +117,7 @@ const Number = ({ user, setUser, getUrl, handleToast }) => {
         email,
         oldphonenumber: phonenumber,
         newphonenumber: ev.newphonenumber,
-        origin
+        origin: ev.origin
       });
       console.log(resetResponse);
       if (resetResponse.status === 200) {
@@ -327,7 +328,8 @@ const Register = ({ user, setUser, getUrl, handleToast }) => {
       });
       if (registerResponse.status === 200) {
         handleToast("Registration is successful");
-        setUser(registerResponse.response.user);
+        // setUser(registerResponse.response.user);
+        setUser(registerResponse.user);
         setUpdated(!updated);
         console.log(registerResponse, user);
       } else {

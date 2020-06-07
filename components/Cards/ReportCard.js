@@ -39,7 +39,7 @@ const ReportCard = (props) => {
           <h4 className="text-base font-semibold" style={{ color: "#43A047" }}>
             {props.type}
           </h4>
-          <TextSmall color="#232323">{(typeof props.location) === 'object' ? props.location.lat : props.location}</TextSmall>
+          <TextSmall color="#232323">{(typeof props.location) === 'object' ? `lat: ${props.location.lat}, lng: ${props.location.lng}` : props.location}</TextSmall>
           <p style={{ color: "#6C6C6C" }} className="text-xs">
             {props.timestamp}
           </p>
