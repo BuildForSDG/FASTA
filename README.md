@@ -5,7 +5,7 @@ FASTA
 ## SDG 
 Industry, Innovation and Infastructure
 ## STATEMENT OF PROBLEM 
-Critically examine your community and the feasibility of a working alternate transport solution, with special attention to the needs of those in vulnerable situations, women, children, persons with disabilities and older persons. Build it and wow us.
+Critically examine your community and the feasibility of a working alternate transport solution, with special attention to the needs of those in vulnerable situations, women, children, persons with disabilities and older persons.
 ## PROBLEM
 HELP UPGRADING TRANSPORT AND LOGISTICS NETWORKS IN COMMUNITIES:
 ## BRIEF INTRODUCTION
