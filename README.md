@@ -47,6 +47,7 @@ FASTA APP will enhance the well-being by saving of lives through our alternate t
 ![image](https://github.com/danieletchie/FASTA/blob/develop/ANALYSIS%20FOR%20FASTA.png)
 
 Based on analysis, all user segments will benefit from FASTA as shown above.
+
 Travelers have a high percentage based on the following imparts below;
 * Accessibility: giving access to transport companies at their convenient
 * Knowledge: It will enable travelers not to be cut unaware by updating them with information.
@@ -54,13 +55,13 @@ Travelers have a high percentage based on the following imparts below;
 * Save Money: having access to cheaper tickets, avoiding up and down movement which leads to losing money when purchasing a ticket or looking for a vehicles.
 * Save time: FASTA will assist you in avoiding time wastage in car parks for purchase of tickets or waiting for vehicles to full, hence save your time.
 Drivers;
-** Knowledge: it will enable drivers not to be cut unaware by updating them with relevant info that will make their journey smooth.
-** Safety: they will receive updates on real time info which will enhance their safety on the go.
+* Knowledge: it will enable drivers not to be cut unaware by updating them with relevant info that will make their journey smooth.
+* Safety: they will receive updates on real time info which will enhance their safety on the go.
 * Save time: avoiding time relating issues like traffic congestion e.t.c
 
 Transport Companies;
-** Accessibility: making their company accessible to the community hence increase their popularity and services.
-** Keeping track of their customer for update on their service
+* Accessibility: making their company accessible to the community hence increase their popularity and services.
+* Keeping track of their customer for update on their service
 
 Based on the analysis above (safety, accessibility, saving time and money, knowledge e.t.c.), people using FASTA will benefit more and find living easier than non-users.
 
