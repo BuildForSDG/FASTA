@@ -66,8 +66,7 @@ const DeleteButton = (props) => {
   };
 
   const deleteTrip = (e) => {
-
-setToDelete(true);
+    setToDelete(true);
   };
 
   return (
