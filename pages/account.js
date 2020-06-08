@@ -3,7 +3,7 @@ import React from "react";
 import Head from "next/head";
 import Account from "../components/Account/account";
 
-const Profile = props => {
+const Profile = (props) => {
   return (
     <div>
       <Head>
