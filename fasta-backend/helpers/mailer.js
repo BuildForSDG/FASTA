@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 // const express = require("");
 
 const nodemailer = require("nodemailer");
@@ -25,8 +26,8 @@ const mailer = async (options) => {
   await fastaMailer.sendMail(mailOptions, (error, info) => {
     // console.log(mailOptions, info);
     if (error) {
-      // throw error;
-      console.log(error);
+      throw error;
+      // console.log(error);
     }
     return "Mail sent";
   });

@@ -36,7 +36,7 @@ router.get("/reports", async (req, res) => {
   let { lat, lng } = req.query;
   lat = Number(lat);
   lng = Number(lng);
-  await Reports.find({ "location.lat": { "$gte": lat - 1, "$lte": lat + 1 }, "location.lng": { "$gte": lng - 1, "$lte": lng + 1 } })
+  await Reports.find({ "location.lat": { $gte: lat - 1, $lte: lat + 1 }, "location.lng": { $gte: lng - 1, $lte: lng + 1 } })
   // await Reports.find({ "location.lat": { lat }, "location.lng": { lng } })
     .select("_id type description location date")
     .exec()

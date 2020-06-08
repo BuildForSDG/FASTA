@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable consistent-return */
 /* eslint-disable default-case */
 /* eslint-disable no-undef */
@@ -118,12 +119,11 @@ router.post("/schedule-a-trip", authChecker, async (req, res) => {
 
 // add the authChecker for authentication before, endpoint will list all the schecduled trip
 router.get("/trips", authChecker, async (req, res) => {
-  await ScheduleTrip.find({ userId: req.user._id})
+  await ScheduleTrip.find({ userId: req.user._id })
     .select("_id mode origin destination isVulnerable tripDistance tripTime date")
     .exec()
     .then((allTrips) => {
       if (!allTrips || allTrips < 1) {
-        console.log(allTrips);
         return res.status(404).json({ response: "unfortunetly, we dont have any trips schedule for you, check back" });
       }
       res.status(200).json({ response: allTrips.reverse() });
