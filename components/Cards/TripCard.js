@@ -66,8 +66,8 @@ const DeleteButton = (props) => {
   };
 
   const deleteTrip = (e) => {
-    console.log(e.target.parentNode.id);
-    setToDelete(true);
+
+setToDelete(true);
   };
 
   return (
