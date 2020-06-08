@@ -54,6 +54,7 @@ Travelers have a high percentage based on the following imparts below;
 * Safety: Having access to more secure and approved vehicles, plan for movement only when it’s safe hence avoiding falling a victim.
 * Save Money: having access to cheaper tickets, avoiding up and down movement which leads to losing money when purchasing a ticket or looking for a vehicles.
 * Save time: FASTA will assist you in avoiding time wastage in car parks for purchase of tickets or waiting for vehicles to full, hence save your time.
+
 Drivers;
 * Knowledge: it will enable drivers not to be cut unaware by updating them with relevant info that will make their journey smooth.
 * Safety: they will receive updates on real time info which will enhance their safety on the go.
