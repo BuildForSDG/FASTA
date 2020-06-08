@@ -1,99 +1,103 @@
-define("./workbox-b90066a8.js",['exports'], function (exports) { 'use strict';
+/* eslint-disable max-classes-per-file */
+define("./workbox-b90066a8.js", ["exports"], function(exports) {
+  "use strict";
 
-    try {
-      self['workbox:core:5.1.3'] && _();
-    } catch (e) {}
+  try {
+    self["workbox:core:5.1.3"] && _();
+  } catch (e) {console.log(e)}
 
-    /*
-      Copyright 2019 Google LLC
+  /*
+    Copyright 2019 Google LLC
 
-      Use of this source code is governed by an MIT-style
-      license that can be found in the LICENSE file or at
-      https://opensource.org/licenses/MIT.
-    */
-    /**
-     * Force a service worker to activate immediately, instead of
-     * [waiting](https://developers.google.com/web/fundamentals/primers/service-workers/lifecycle#waiting)
-     * for existing clients to close.
-     *
-     * @memberof module:workbox-core
-     */
+    Use of this source code is governed by an MIT-style
+    license that can be found in the LICENSE file or at
+    https://opensource.org/licenses/MIT.
+  */
+  /**
+   * Force a service worker to activate immediately, instead of
+   * [waiting](https://developers.google.com/web/fundamentals/primers/service-workers/lifecycle#waiting)
+   * for existing clients to close.
+   *
+   * @memberof module:workbox-core
+   */
 
-    function skipWaiting() {
-      // We need to explicitly call `self.skipWaiting()` here because we're
-      // shadowing `skipWaiting` with this local function.
-      self.addEventListener('install', () => self.skipWaiting());
-    }
+  function skipWaiting() {
+    // We need to explicitly call `self.skipWaiting()` here because we're
+    // shadowing `skipWaiting` with this local function.
+    self.addEventListener("install", () => self.skipWaiting());
+  }
 
-    /*
-      Copyright 2019 Google LLC
+  /*
+    Copyright 2019 Google LLC
 
-      Use of this source code is governed by an MIT-style
-      license that can be found in the LICENSE file or at
-      https://opensource.org/licenses/MIT.
-    */
-    /**
-     * Claim any currently available clients once the service worker
-     * becomes active. This is normally used in conjunction with `skipWaiting()`.
-     *
-     * @memberof module:workbox-core
-     */
+    Use of this source code is governed by an MIT-style
+    license that can be found in the LICENSE file or at
+    https://opensource.org/licenses/MIT.
+  */
+  /**
+   * Claim any currently available clients once the service worker
+   * becomes active. This is normally used in conjunction with `skipWaiting()`.
+   *
+   * @memberof module:workbox-core
+   */
 
-    function clientsClaim() {
-      self.addEventListener('activate', () => self.clients.claim());
-    }
+  function clientsClaim() {
+    self.addEventListener("activate", () => self.clients.claim());
+  }
 
-    /*
+  /*
       Copyright 2018 Google LLC
 
       Use of this source code is governed by an MIT-style
       license that can be found in the LICENSE file or at
       https://opensource.org/licenses/MIT.
     */
-    const _cacheNameDetails = {
-      googleAnalytics: 'googleAnalytics',
-      precache: 'precache-v2',
-      prefix: 'workbox',
-      runtime: 'runtime',
-      suffix: typeof registration !== 'undefined' ? registration.scope : ''
-    };
+  const _cacheNameDetails = {
+    googleAnalytics: "googleAnalytics",
+    precache: "precache-v2",
+    prefix: "workbox",
+    runtime: "runtime",
+    suffix: typeof registration !== "undefined" ? registration.scope : ""
+  };
 
-    const _createCacheName = cacheName => {
-      return [_cacheNameDetails.prefix, cacheName, _cacheNameDetails.suffix].filter(value => value && value.length > 0).join('-');
-    };
+  const _createCacheName = (cacheName) => {
+    return [_cacheNameDetails.prefix, cacheName, _cacheNameDetails.suffix]
+      .filter(value => value && value.length > 0)
+      .join("-");
+  };
 
-    const eachCacheNameDetail = fn => {
-      for (const key of Object.keys(_cacheNameDetails)) {
-        fn(key);
-      }
-    };
+  const eachCacheNameDetail = (fn) => {
+    for (const key of Object.keys(_cacheNameDetails)) {
+      fn(key);
+    }
+  };
 
-    const cacheNames = {
-      updateDetails: details => {
-        eachCacheNameDetail(key => {
-          if (typeof details[key] === 'string') {
-            _cacheNameDetails[key] = details[key];
-          }
-        });
-      },
-      getGoogleAnalyticsName: userCacheName => {
-        return userCacheName || _createCacheName(_cacheNameDetails.googleAnalytics);
-      },
-      getPrecacheName: userCacheName => {
-        return userCacheName || _createCacheName(_cacheNameDetails.precache);
-      },
-      getPrefix: () => {
-        return _cacheNameDetails.prefix;
-      },
-      getRuntimeName: userCacheName => {
-        return userCacheName || _createCacheName(_cacheNameDetails.runtime);
-      },
-      getSuffix: () => {
-        return _cacheNameDetails.suffix;
-      }
-    };
+  const cacheNames = {
+    updateDetails: (details) => {
+      eachCacheNameDetail((key) => {
+        if (typeof details[key] === "string") {
+          _cacheNameDetails[key] = details[key];
+        }
+      });
+    },
+    getGoogleAnalyticsName: (userCacheName) => {
+      return userCacheName || _createCacheName(_cacheNameDetails.googleAnalytics);
+    },
+    getPrecacheName: (userCacheName) => {
+      return userCacheName || _createCacheName(_cacheNameDetails.precache);
+    },
+    getPrefix: () => {
+      return _cacheNameDetails.prefix;
+    },
+    getRuntimeName: (userCacheName) => {
+      return userCacheName || _createCacheName(_cacheNameDetails.runtime);
+    },
+    getSuffix: () => {
+      return _cacheNameDetails.suffix;
+    }
+  };
 
-    /*
+  /*
       Copyright 2018 Google LLC
 
       Use of this source code is governed by an MIT-style
@@ -101,79 +105,85 @@ define("./workbox-b90066a8.js",['exports'], function (exports) { 'use strict';
       https://opensource.org/licenses/MIT.
     */
 
-    const getFriendlyURL = url => {
-      const urlObj = new URL(String(url), location.href); // See https://github.com/GoogleChrome/workbox/issues/2323
-      // We want to include everything, except for the origin if it's same-origin.
+  const getFriendlyURL = (url) => {
+    const urlObj = new URL(String(url), location.href); // See https://github.com/GoogleChrome/workbox/issues/2323
+    // We want to include everything, except for the origin if it's same-origin.
 
-      return urlObj.href.replace(new RegExp(`^${location.origin}`), '');
-    };
+    return urlObj.href.replace(new RegExp(`^${location.origin}`), "");
+  };
 
-    /*
+  /*
       Copyright 2019 Google LLC
       Use of this source code is governed by an MIT-style
       license that can be found in the LICENSE file or at
       https://opensource.org/licenses/MIT.
     */
-    const logger =  (() => {
-      // Don't overwrite this value if it's already set.
-      // See https://github.com/GoogleChrome/workbox/pull/2284#issuecomment-560470923
-      if (!('__WB_DISABLE_DEV_LOGS' in self)) {
-        self.__WB_DISABLE_DEV_LOGS = false;
+  const logger =  (() => {
+    // Don't overwrite this value if it's already set.
+    // See https://github.com/GoogleChrome/workbox/pull/2284#issuecomment-560470923
+    if (!("__WB_DISABLE_DEV_LOGS" in self)) {
+      self.__WB_DISABLE_DEV_LOGS = false;
+    }
+
+    let inGroup = false;
+    const methodToColorMap = {
+      debug: "#7f8c8d",
+      log: "#2ecc71",
+      warn: "#f39c12",
+      error: "#c0392b",
+      groupCollapsed: "#3498db",
+      groupEnd: null
+    };
+
+    const print = function (method, args) {
+      if (self.__WB_DISABLE_DEV_LOGS) {
+        return;
       }
 
-      let inGroup = false;
-      const methodToColorMap = {
-        debug: `#7f8c8d`,
-        log: `#2ecc71`,
-        warn: `#f39c12`,
-        error: `#c0392b`,
-        groupCollapsed: `#3498db`,
-        groupEnd: null
-      };
-
-      const print = function (method, args) {
-        if (self.__WB_DISABLE_DEV_LOGS) {
+      if (method === "groupCollapsed") {
+        // Safari doesn't print all console.groupCollapsed() arguments:
+        // https://bugs.webkit.org/show_bug.cgi?id=182754
+        if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
+          console[method](...args);
           return;
         }
-
-        if (method === 'groupCollapsed') {
-          // Safari doesn't print all console.groupCollapsed() arguments:
-          // https://bugs.webkit.org/show_bug.cgi?id=182754
-          if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
-            console[method](...args);
-            return;
-          }
-        }
-
-        const styles = [`background: ${methodToColorMap[method]}`, `border-radius: 0.5em`, `color: white`, `font-weight: bold`, `padding: 2px 0.5em`]; // When in a group, the workbox prefix is not displayed.
-
-        const logPrefix = inGroup ? [] : ['%cworkbox', styles.join(';')];
-        console[method](...logPrefix, ...args);
-
-        if (method === 'groupCollapsed') {
-          inGroup = true;
-        }
-
-        if (method === 'groupEnd') {
-          inGroup = false;
-        }
-      };
-
-      const api = {};
-      const loggerMethods = Object.keys(methodToColorMap);
-
-      for (const key of loggerMethods) {
-        const method = key;
-
-        api[method] = (...args) => {
-          print(method, args);
-        };
       }
 
-      return api;
-    })();
+      const styles = [
+        `background: ${methodToColorMap[method]}`,
+        "border-radius: 0.5em",
+        "color: white",
+        "font-weight: bold",
+        "padding: 2px 0.5em"
+      ]; // When in a group, the workbox prefix is not displayed.
 
-    /*
+      const logPrefix = inGroup ? [] : ["%cworkbox", styles.join(";")];
+      console[method](...logPrefix, ...args);
+
+      if (method === "groupCollapsed") {
+        inGroup = true;
+      }
+
+      if (method === "groupEnd") {
+        inGroup = false;
+      }
+    };
+
+    const api = {};
+    const loggerMethods = Object.keys(methodToColorMap);
+
+    for (const key of loggerMethods) {
+      const method = key;
+
+      api[method] = (...args) => {
+        print(method, args);
+      };
+    }
+
+    return api;
+  })();
+
+  /*
       Copyright 2018 Google LLC
 
       Use of this source code is governed by an MIT-style
@@ -181,25 +191,25 @@ define("./workbox-b90066a8.js",['exports'], function (exports) { 'use strict';
       https://opensource.org/licenses/MIT.
     */
     const messages = {
-      'invalid-value': ({
+      "invalid-value": ({
         paramName,
         validValueDescription,
         value
       }) => {
         if (!paramName || !validValueDescription) {
-          throw new Error(`Unexpected input to 'invalid-value' error.`);
+          throw new Error("Unexpected input to 'invalid-value' error.");
         }
 
         return `The '${paramName}' parameter was given a value with an ` + `unexpected value. ${validValueDescription} Received a value of ` + `${JSON.stringify(value)}.`;
       },
-      'not-an-array': ({
+      "not-an-array": ({
         moduleName,
         className,
         funcName,
         paramName
       }) => {
         if (!moduleName || !className || !funcName || !paramName) {
-          throw new Error(`Unexpected input to 'not-an-array' error.`);
+          throw new Error("Unexpected input to 'not-an-array' error.");
         }
 
         return `The parameter '${paramName}' passed into ` + `'${moduleName}.${className}.${funcName}()' must be an array.`;
@@ -217,7 +227,7 @@ define("./workbox-b90066a8.js",['exports'], function (exports) { 'use strict';
 
         return `The parameter '${paramName}' passed into ` + `'${moduleName}.${className ? className + '.' : ''}` + `${funcName}()' must be of type ${expectedType}.`;
       },
-      'incorrect-class': ({
+      "incorrect-class": ({
         expectedClass,
         paramName,
         moduleName,
@@ -226,16 +236,19 @@ define("./workbox-b90066a8.js",['exports'], function (exports) { 'use strict';
         isReturnValueProblem
       }) => {
         if (!expectedClass || !moduleName || !funcName) {
-          throw new Error(`Unexpected input to 'incorrect-class' error.`);
+          throw new Error("Unexpected input to 'incorrect-class' error.");
         }
 
         if (isReturnValueProblem) {
-          return `The return value from ` + `'${moduleName}.${className ? className + '.' : ''}${funcName}()' ` + `must be an instance of class ${expectedClass.name}.`;
+        return (
+          "The return value from " +
+          `'${moduleName}.${className ? className + "." : ""}${funcName}()' ` +
+          `must be an instance of class ${expectedClass.name}.`
         }
 
         return `The parameter '${paramName}' passed into ` + `'${moduleName}.${className ? className + '.' : ''}${funcName}()' ` + `must be an instance of class ${expectedClass.name}.`;
       },
-      'missing-a-method': ({
+      "missing-a-method": ({
         expectedMethod,
         paramName,
         moduleName,

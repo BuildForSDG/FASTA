@@ -14,13 +14,22 @@
 
 // If the loader is already loaded, just stop.
 if (!self.define) {
-  const singleRequire = name => {
+  const singleRequire = (name) => {
     if (name !== "require") {
       name += ".js";
     }
     let promise = Promise.resolve();
+
+    const require = (names, resolve) => {
+      Promise.all(names.map(singleRequire)).then((modules) => resolve(modules.length === 1 ? modules[0] : modules));
+    };
+
+    const registry = {
+      require: Promise.resolve(require)
+    };
+
     if (!registry[name]) {
-      promise = new Promise(async resolve => {
+      promise = new Promise((resolve) => {
         if ("document" in self) {
           const script = document.createElement("script");
           script.src = name;
@@ -40,14 +49,6 @@ if (!self.define) {
     });
   };
 
-  const require = (names, resolve) => {
-    Promise.all(names.map(singleRequire)).then(modules => resolve(modules.length === 1 ? modules[0] : modules));
-  };
-
-  const registry = {
-    require: Promise.resolve(require)
-  };
-
   self.define = (moduleName, depsNames, factory) => {
     if (registry[moduleName]) {
       // Module is already loading or loaded.
@@ -59,7 +60,7 @@ if (!self.define) {
         uri: location.origin + moduleName.slice(1)
       };
       return Promise.all(
-        depsNames.map(depName => {
+        depsNames.map((depName) => {
           switch (depName) {
             case "exports":
               return exports;
@@ -69,7 +70,7 @@ if (!self.define) {
               return singleRequire(depName);
           }
         })
-      ).then(deps => {
+      ).then((deps) => {
         const facValue = factory(...deps);
         if (!exports.default) {
           exports.default = facValue;

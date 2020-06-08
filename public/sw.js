@@ -14,13 +14,22 @@
 
 // If the loader is already loaded, just stop.
 if (!self.define) {
-  const singleRequire = name => {
+  const singleRequire = (name) => {
     if (name !== "require") {
       name += ".js";
     }
     let promise = Promise.resolve();
+
+    const require = (names, resolve) => {
+      Promise.all(names.map(singleRequire)).then((modules) => resolve(modules.length === 1 ? modules[0] : modules));
+    };
+
+    const registry = {
+      require: Promise.resolve(require)
+    };
+
     if (!registry[name]) {
-      promise = new Promise(async resolve => {
+      promise = new Promise((resolve) => {
         if ("document" in self) {
           const script = document.createElement("script");
           script.src = name;
@@ -40,14 +49,6 @@ if (!self.define) {
     });
   };
 
-  const require = (names, resolve) => {
-    Promise.all(names.map(singleRequire)).then(modules => resolve(modules.length === 1 ? modules[0] : modules));
-  };
-
-  const registry = {
-    require: Promise.resolve(require)
-  };
-
   self.define = (moduleName, depsNames, factory) => {
     if (registry[moduleName]) {
       // Module is already loading or loaded.
@@ -59,7 +60,7 @@ if (!self.define) {
         uri: location.origin + moduleName.slice(1)
       };
       return Promise.all(
-        depsNames.map(depName => {
+        depsNames.map((depName) => {
           switch (depName) {
             case "exports":
               return exports;
@@ -69,7 +70,7 @@ if (!self.define) {
               return singleRequire(depName);
           }
         })
-      ).then(deps => {
+      ).then((deps) => {
         const facValue = factory(...deps);
         if (!exports.default) {
           exports.default = facValue;
@@ -79,7 +80,8 @@ if (!self.define) {
     });
   };
 }
-define("./sw.js",['./workbox-b90066a8'], function (workbox) { "use strict";
+define("./service-worker.js",["./workbox-b90066a8"], function (workbox) { "use strict";
+
   /**
    * Welcome to your Workbox-powered service worker!
    *
@@ -113,7 +115,7 @@ define("./sw.js",['./workbox-b90066a8'], function (workbox) { "use strict";
       },
       {
     "url": "/_next/static/runtime/main.js",
-    "revision": "7c023e1503436aa3473612b35af5d405"
+    "revision": "bba4e516f8fcbe18d5fc97699c4db96b"
       },
       {
     "url": "/_next/static/runtime/main.js.map",
@@ -137,11 +139,11 @@ define("./sw.js",['./workbox-b90066a8'], function (workbox) { "use strict";
       },
       {
     "url": "/_next/static/runtime/webpack.js",
-    "revision": "af5c7e9853a76e389eafe645daef7700"
+    "revision": "915d3605a14f0bfd9606947497329e34"
       },
       {
     "url": "/_next/static/runtime/webpack.js.map",
-    "revision": "1b3834a2def548464d78cb0e17e76b81"
+    "revision": "d1bd060599ff123c9cc9a644fb79ec6a"
       }
     ],
     {
@@ -150,4 +152,4 @@ define("./sw.js",['./workbox-b90066a8'], function (workbox) { "use strict";
   );
   workbox.cleanupOutdatedCaches();
 });
-// # sourceMappingURL=sw.js.map
+// # sourceMappingURL=service-worker.js.map
