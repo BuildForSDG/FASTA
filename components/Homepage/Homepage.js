@@ -11,7 +11,7 @@ import Reports from "./Reports/Reports";
 const Body = styled.main`
   margin-top: 70px;
   padding-bottom: 60px;
-  background: #f5f5f5;
+  background: #ffffff;
 `;
 
 const Homepage = (props) => {
