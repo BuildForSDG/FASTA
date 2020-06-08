@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import React, { useState } from "react"
+import React, { useState } from "react";
 
 import styled from "styled-components";
 import Link from "next/link";
@@ -86,7 +86,7 @@ const DeleteButton = (props) => {
             </TextSmall>
 
             <div className="flex justify-around items-center">
-              <SubmitButton className="w-5/12 " style={{ backgroundColor: '#A04743' }} onClick={confirmTripDelete}>
+              <SubmitButton className="w-5/12 " style={{ backgroundColor: "#A04743" }} onClick={confirmTripDelete}>
                 delete
               </SubmitButton>
 
