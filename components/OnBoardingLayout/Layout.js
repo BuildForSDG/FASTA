@@ -59,6 +59,7 @@ const Layout = props => {
                   <a className="font-bold">SKIP</a>
                 </Link>
               </div>
+              <img className="mx-auto my-2" src={view.img} alt="" />
               <div>
                 <H1 className="w-10/12 font-bold uppercase mb-8">{view.heading}</H1>
                 <p>{view.text}</p>
