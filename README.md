@@ -69,8 +69,8 @@ Transport Companies;
 ## CONCLUSION
 Based on the analysis above (safety, accessibility, saving time and money, knowledge e.t.c.), people using FASTA will benefit more and find living easier than non-users.
 ## BUILT WITH
-*   [Nextjs](https://www.djangoproject.com) - Backend framework used
-*   [Nodejs](https://reactjs.org) - Frontend framework used
+*   [Nextjs](https://www.djangoproject.com) - Frontend framework used
+*   [Nodejs](https://reactjs.org) - Backend framework used
 *   [MongoAtlas](https://www.android.com) - Cloud based Database service used
 ## WEBSITE
 [FASTA](https://frontend-fasta.thevetdoctor.now.sh/)
