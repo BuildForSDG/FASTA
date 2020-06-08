@@ -1,0 +1,34 @@
+[
+  {
+    "id" : 0,
+    "business_name" : "ABC transport",
+    "services" : "Services from db",
+    "status": true,
+    "distance" : "2.3km",
+    "location" : "from api"
+  },
+  {
+    "id" : 1,
+    "business_name" : "ABC transport",
+    "services" : "Services from db",
+    "status": true,
+    "distance" : "2.3km",
+    "location" : "from api"
+  },
+  {
+    "id" : 2,
+    "business_name" : "ABC transport",
+    "services" : "Services from db",
+    "status": true,
+    "distance" : "2.3km",
+    "location" : "from api"
+  },
+  {
+    "id" : 3,
+    "business_name" : "ABC transport",
+    "services" : "Services from db",
+    "status": true,
+    "distance" : "2.3km",
+    "location" : "from api"
+  }
+]

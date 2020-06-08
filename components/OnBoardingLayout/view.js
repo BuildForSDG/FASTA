@@ -3,6 +3,7 @@ const views = [
   {
     id: 1,
     bg: "#AFDEB1",
+    img: "/images/traveling.png",
     color: "#43A047",
     heading: "Plan Your Trips",
     text:
@@ -11,6 +12,7 @@ const views = [
   {
     id: 2,
     bg: "#BCE0FD",
+    img: "/images/destination.png",
     color: "#2699FB",
     heading: "DISCOVER NEW LOCATIONS",
     text: "Get feedback on locations that can catch your fancy along your way."
@@ -18,6 +20,7 @@ const views = [
   {
     id: 3,
     bg: "#DEB1AF",
+    img: "/images/road.png",
     color: "#A04743",
     heading: "SAFETY FIRST",
     text: "We provide routes that are risk-free and considered safe by our users. Avoid secluded and vulnerable spots"
@@ -25,6 +28,7 @@ const views = [
   {
     id: 4,
     bg: "#AFDEB1",
+    img: "/images/order-ride.png",
     color: "#43A047",
     heading: "BOOK RIDES",
     text:

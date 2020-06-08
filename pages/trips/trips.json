@@ -1,0 +1,26 @@
+[
+  {
+    "id" : 0,
+    "origin" : "Rumuokoro, Port Harcourt",
+    "destination" : "Choba, Port Harcourt",
+    "time" : "22/08/2020 2:27pm"
+  },
+  {
+    "id" : 1,
+    "origin" : "Asaba, Delta",
+    "destination" : "Uniben, Edo",
+    "time" : "22/08/2020 10:27am"
+  },
+  {
+    "id" : 2,
+    "origin" : "Onitsha",
+    "destination" : "Gusau, Abuja",
+    "time" : "22/08/2020 12:07pm"
+  },
+  {
+    "id" : 3,
+    "origin" : "Ikeja, Lagos",
+    "destination" : "Choba, Port Harcourt",
+    "time" : "22/08/2020 1:50pm"
+  }
+]
