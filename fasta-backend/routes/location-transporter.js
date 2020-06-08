@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable consistent-return */
 /* eslint-disable default-case */
 /* eslint-disable no-undef */
@@ -88,7 +89,7 @@ router.post("/trip-direction-info", async (req, res) => {
   }
 });
 
-router.post("/schedule-a-trip", async (req, res) => {
+router.post("/schedule-a-trip", authChecker, async (req, res) => {
   const {
     mode, origin, destination, isVulnerable, tripDistance, tripTime
   } = req.body;
@@ -104,7 +105,8 @@ router.post("/schedule-a-trip", async (req, res) => {
       destination,
       isVulnerable,
       tripDistance,
-      tripTime
+      tripTime,
+      userId: req.user._id
     };
     const trips = await ScheduleTrip.create(tripDetails);
     if (trips) {
@@ -115,9 +117,9 @@ router.post("/schedule-a-trip", async (req, res) => {
   }
 });
 
-// endpoint will list all the schecduled trip
+// add the authChecker for authentication before, endpoint will list all the schecduled trip
 router.get("/trips", authChecker, async (req, res) => {
-  await ScheduleTrip.find()
+  await ScheduleTrip.find({ userId: req.user._id })
     .select("_id mode origin destination isVulnerable tripDistance tripTime date")
     .exec()
     .then((allTrips) => {

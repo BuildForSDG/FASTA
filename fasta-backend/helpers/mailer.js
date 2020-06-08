@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 // const express = require("");
 
 const nodemailer = require("nodemailer");
@@ -21,13 +22,16 @@ const mailer = async (options) => {
     text: options.text,
     html: options.output
   };
-  // console.log(mailOptions);
-  await fastaMailer.sendMail(mailOptions, (error, info) => {
+  // NOTE!!!
+  //  this is for any developer in the future, info is the second parameter of the callback
+  //  after error, i had to remove it since i wasnt using it currently to fix some codacy issue
+  await fastaMailer.sendMail(mailOptions, (error) => {
     // console.log(mailOptions, info);
     if (error) {
       throw error;
+      // console.log(error);
     }
-    return `Message sent: %s ${info.messageId}`;
+    return "Mail sent";
   });
 };
 
