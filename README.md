@@ -44,7 +44,7 @@ FASTA APP will enhance the well-being by saving of lives through our alternate t
 ## CHALLENGES/WEAKNESS 
 1.  How to get user to trust FASTA and provide accurate informations
 ## CONCLUSION
-The WasteCoin solution is not just one feasible solution but also inclusive, safe, scalable and sustainable in any applied environmental settings.
+The FASTA APP makes travelling interesting.
 ## BUILT WITH
 *   [Nextjs](https://www.djangoproject.com) - Backend framework used
 *   [Nodejs](https://reactjs.org) - Frontend framework used
