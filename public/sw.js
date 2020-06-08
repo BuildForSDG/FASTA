@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 /**
  * Copyright 2018 Google Inc. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -80,16 +81,16 @@ if (!self.define) {
 }
 define("./sw.js",['./workbox-b90066a8'], function (workbox) { "use strict";
   /**
-  * Welcome to your Workbox-powered service worker!
-  *
-  * You'll need to register this file in your web app.
-  * See https://goo.gl/nhQhGp
-  *
-  * The rest of the code is auto-generated. Please don't update this file
-  * directly; instead, make changes to your Workbox build configuration
-  * and re-run your build process.
-  * See https://goo.gl/2aRDsh
-  */
+   * Welcome to your Workbox-powered service worker!
+   *
+   * You'll need to register this file in your web app.
+   * See https://goo.gl/nhQhGp
+   *
+   * The rest of the code is auto-generated. Please don't update this file
+   * directly; instead, make changes to your Workbox build configuration
+   * and re-run your build process.
+   * See https://goo.gl/2aRDsh
+   */
 
   importScripts();
   workbox.skipWaiting();
@@ -100,40 +101,53 @@ define("./sw.js",['./workbox-b90066a8'], function (workbox) { "use strict";
    * See https://goo.gl/S9QRab
    */
 
-  workbox.precacheAndRoute([{
+  workbox.precacheAndRoute(
+    [
+      {
     "url": "/_next/static/runtime/amp.js",
     "revision": "1c60d6b33b389162128030c309c1d80a"
-  }, {
+      },
+      {
     "url": "/_next/static/runtime/amp.js.map",
     "revision": "fd38c26e5868171cf58387cd48fd71f4"
-  }, {
+      },
+      {
     "url": "/_next/static/runtime/main.js",
     "revision": "7c023e1503436aa3473612b35af5d405"
-  }, {
+      },
+      {
     "url": "/_next/static/runtime/main.js.map",
     "revision": "a0b530375180abf14c7296894afb81fd"
-  }, {
+      },
+      {
     "url": "/_next/static/runtime/polyfills.js",
     "revision": "cf6f4b12f4634f8f79378d41f3a855a4"
-  }, {
+      },
+      {
     "url": "/_next/static/runtime/polyfills.js.map",
     "revision": "82dca635a629d8ab38c3ad85b2ad65a2"
-  }, {
+      },
+      {
     "url": "/_next/static/runtime/react-refresh.js",
     "revision": "57d6b6dd46444111cc6c2cb191ec72bc"
-  }, {
+      },
+      {
     "url": "/_next/static/runtime/react-refresh.js.map",
     "revision": "3eefcd56d3f5bfcc8b7c33d935f42689"
-  }, {
+      },
+      {
     "url": "/_next/static/runtime/webpack.js",
     "revision": "af5c7e9853a76e389eafe645daef7700"
-  }, {
+      },
+      {
     "url": "/_next/static/runtime/webpack.js.map",
     "revision": "1b3834a2def548464d78cb0e17e76b81"
-  }], {
+      }
+    ],
+    {
     "ignoreURLParametersMatching": [/ts/]
-  });
+    }
+  );
   workbox.cleanupOutdatedCaches();
-
 });
 // # sourceMappingURL=sw.js.map

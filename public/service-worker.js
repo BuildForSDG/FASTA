@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 /**
  * Copyright 2018 Google Inc. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,24 +15,22 @@
 // If the loader is already loaded, just stop.
 if (!self.define) {
   const singleRequire = name => {
-    if (name !== 'require') {
-      name = name + '.js';
+    if (name !== "require") {
+      name += ".js";
     }
     let promise = Promise.resolve();
     if (!registry[name]) {
-      
-        promise = new Promise(async resolve => {
-          if ("document" in self) {
-            const script = document.createElement("script");
-            script.src = name;
-            document.head.appendChild(script);
-            script.onload = resolve;
-          } else {
-            importScripts(name);
-            resolve();
-          }
-        });
-      
+      promise = new Promise(async resolve => {
+        if ("document" in self) {
+          const script = document.createElement("script");
+          script.src = name;
+          document.head.appendChild(script);
+          script.onload = resolve;
+        } else {
+          importScripts(name);
+          resolve();
+        }
+      });
     }
     return promise.then(() => {
       if (!registry[name]) {
@@ -42,10 +41,9 @@ if (!self.define) {
   };
 
   const require = (names, resolve) => {
-    Promise.all(names.map(singleRequire))
-      .then(modules => resolve(modules.length === 1 ? modules[0] : modules));
+    Promise.all(names.map(singleRequire)).then(modules => resolve(modules.length === 1 ? modules[0] : modules));
   };
-  
+
   const registry = {
     require: Promise.resolve(require)
   };
@@ -62,7 +60,7 @@ if (!self.define) {
       };
       return Promise.all(
         depsNames.map(depName => {
-          switch(depName) {
+          switch (depName) {
             case "exports":
               return exports;
             case "module":
@@ -73,7 +71,7 @@ if (!self.define) {
         })
       ).then(deps => {
         const facValue = factory(...deps);
-        if(!exports.default) {
+        if (!exports.default) {
           exports.default = facValue;
         }
         return exports;
@@ -81,19 +79,19 @@ if (!self.define) {
     });
   };
 }
-define("./service-worker.js",['./workbox-b90066a8'], function (workbox) { 'use strict';
+define("./service-worker.js",["./workbox-b90066a8"], function (workbox) { "use strict";
 
   /**
-  * Welcome to your Workbox-powered service worker!
-  *
-  * You'll need to register this file in your web app.
-  * See https://goo.gl/nhQhGp
-  *
-  * The rest of the code is auto-generated. Please don't update this file
-  * directly; instead, make changes to your Workbox build configuration
-  * and re-run your build process.
-  * See https://goo.gl/2aRDsh
-  */
+   * Welcome to your Workbox-powered service worker!
+   *
+   * You'll need to register this file in your web app.
+   * See https://goo.gl/nhQhGp
+   *
+   * The rest of the code is auto-generated. Please don't update this file
+   * directly; instead, make changes to your Workbox build configuration
+   * and re-run your build process.
+   * See https://goo.gl/2aRDsh
+   */
 
   importScripts();
   workbox.skipWaiting();
@@ -104,40 +102,53 @@ define("./service-worker.js",['./workbox-b90066a8'], function (workbox) { 'use s
    * See https://goo.gl/S9QRab
    */
 
-  workbox.precacheAndRoute([{
+  workbox.precacheAndRoute(
+    [
+      {
     "url": "/_next/static/runtime/amp.js",
     "revision": "1c60d6b33b389162128030c309c1d80a"
-  }, {
+      },
+      {
     "url": "/_next/static/runtime/amp.js.map",
     "revision": "fd38c26e5868171cf58387cd48fd71f4"
-  }, {
+      },
+      {
     "url": "/_next/static/runtime/main.js",
     "revision": "bba4e516f8fcbe18d5fc97699c4db96b"
-  }, {
+      },
+      {
     "url": "/_next/static/runtime/main.js.map",
     "revision": "a0b530375180abf14c7296894afb81fd"
-  }, {
+      },
+      {
     "url": "/_next/static/runtime/polyfills.js",
     "revision": "cf6f4b12f4634f8f79378d41f3a855a4"
-  }, {
+      },
+      {
     "url": "/_next/static/runtime/polyfills.js.map",
     "revision": "82dca635a629d8ab38c3ad85b2ad65a2"
-  }, {
+      },
+      {
     "url": "/_next/static/runtime/react-refresh.js",
     "revision": "57d6b6dd46444111cc6c2cb191ec72bc"
-  }, {
+      },
+      {
     "url": "/_next/static/runtime/react-refresh.js.map",
     "revision": "3eefcd56d3f5bfcc8b7c33d935f42689"
-  }, {
+      },
+      {
     "url": "/_next/static/runtime/webpack.js",
     "revision": "915d3605a14f0bfd9606947497329e34"
-  }, {
+      },
+      {
     "url": "/_next/static/runtime/webpack.js.map",
     "revision": "d1bd060599ff123c9cc9a644fb79ec6a"
-  }], {
+      }
+    ],
+    {
     "ignoreURLParametersMatching": [/ts/]
-  });
+    }
+  );
   workbox.cleanupOutdatedCaches();
-
 });
-//# sourceMappingURL=service-worker.js.map
+// # sourceMappingURL=service-worker.js.map
