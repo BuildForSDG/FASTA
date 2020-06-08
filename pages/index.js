@@ -33,7 +33,7 @@ export default function Hom() {
         <meta name="mobile-web-app-capable" content="yes" />
 
         {/* <!-- iOS --> */}
-        <meta name="apple-mobile-web-app-title" content="Application Title" />
+        <meta name="apple-mobile-web-app-title" content="Fasta" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 
@@ -44,8 +44,8 @@ export default function Hom() {
         <meta name="msapplication-config" content="browserconfig.xml" />
 
         {/* <!-- Pinned Sites  --> */}
-        <meta name="application-name" content="Application Name" />
-        <meta name="msapplication-tooltip" content="Tooltip Text" />
+        <meta name="application-name" content="Fasta" />
+        <meta name="msapplication-tooltip" content="your travel companion" />
         <meta name="msapplication-starturl" content="/" />
 
         {/* <!-- Tap highlighting  --> */}
