@@ -15,6 +15,14 @@ const mailer = require("../helpers/mailer");
 
 //  CREATE A NEW USER AND ADD TO DATABASE
 router.post("/", async (req, res) => {
+  // console.log(req.body);
+  // eslint-disable-next-line consistent-return
+  await User.findOne({ email: req.body.email }).then((result) => {
+    if (result) {
+      return res.status(403).json({ response: "email exists" });
+    }
+  });
+
   // eslint-disable-next-line consistent-return
   const userExist = await User.findOne({ email: req.body.email });
   if (userExist) {
@@ -213,6 +221,7 @@ router.route("/reset/:token")
         return res.status(404).json({ response: "Invalid user" });
       }
       res.status(200).json({ response: "your password reset was succesful, login to continue" });
+
       const loginlink = `${origin}/users/login`;
       const options = {
         receiver: user.email,
@@ -229,13 +238,11 @@ router.route("/reset/:token")
     </div>`
       };
       mailer(options);
-
       return res.status(200).json({ response: "mail sent", loginlink });
     } catch (error) {
       return res.status(500).json({ response: `error ${error} occurred` });
     }
   });
-
 
 router.post("/update/phonenumber", async (req, res) => {
   const { email, oldphonenumber, newphonenumber } = req.body;
@@ -274,6 +281,5 @@ router.post("/update/phonenumber", async (req, res) => {
     return res.status(500).json({ response: `error ${error} occurred` });
   }
 });
-
 
 module.exports = router;

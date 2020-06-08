@@ -1,8 +1,10 @@
 const mongoose = require("mongoose");
 
-const reportSchema = new mongoose.Schema({
+const { Schema } = mongoose;
+
+const reportSchema = new Schema({
+  tripId: { type: Schema.Types.ObjectId, ref: "trips" },
   type: { type: String },
-  heading: { type: String },
   description: { type: String },
   location: { type: Object },
   date: {
