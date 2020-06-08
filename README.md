@@ -64,7 +64,7 @@ Transport Companies;
 * Accessibility: making their company accessible to the community hence increase their popularity and services.
 * Keeping track of their customer for update on their service
 
-Based on the analysis above (safety, accessibility, saving time and money, knowledge e.t.c.), people using FASTA will benefit more and find living easier than non-users.
+![image](https://github.com/danieletchie/FASTA/blob/develop/FASTA%20ANALYSIS%202.png)
 
 ## CONCLUSION
 Based on the analysis above (safety, accessibility, saving time and money, knowledge e.t.c.), people using FASTA will benefit more and find living easier than non-users.
