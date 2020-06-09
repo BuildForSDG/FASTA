@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useForm, ErrorMessage } from "react-hook-form";
 import Router from "next/router";
 import BeatLoader from "react-spinners/BeatLoader";
-import places from "./places";
+// import places from "./places";
 // import distanceData from "./distanceMatrix";
 
 import Layout from "../../components/Layout";
