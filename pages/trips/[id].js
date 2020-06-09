@@ -18,9 +18,9 @@ const Trip = (props) => {
   const [riders, setRiders] = useState([]);
   const [transportCompany, setTransportCompany] = useState([]);
   const router = useRouter();
-  const {id} = router.query;
+  // const {id} = router.query;
 
-  const trip = props.trips[id];
+  // const trip = props.trips[id];
 
   const makeProvider = (e) => {
     const {providerID} = e.target;
@@ -65,14 +65,14 @@ const Trip = (props) => {
             data come from the result of the map selection and
             typed location
           */}
-          <LocationInput
+          {/* <LocationInput
             label="start position"
             input={trip.origin}
           />
           <LocationInput
             label="end position"
             input={trip.destination}
-          />
+          /> */}
 
           <p style={{ color: "#2699FB" }} className="text-xs mb-2">
             Select mode of transport
