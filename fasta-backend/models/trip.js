@@ -2,16 +2,17 @@ const mongoose = require("mongoose");
 
 const tripSchema = new mongoose.Schema({
   mode: { type: String },
-  origin: { type: Object },
-  destination: { type: Object },
+  origin: { type: String },
+  originLocation: { type: String },
+  originLatLng: { type: Object },
+  destination: { type: String },
+  destinationLocation: { type: String },
+  destinationLatLng: { type: Object },
   tripDistance: { type: String },
-  // tripTime: {
-  //   type: Date,
-  //   default: Date.now
-  // },
+  tripDuration: { type: String },
   tripTime: { type: String },
   userId: { type: String },
-  isVulnerable: { type: Boolean },
+  isVulnerable: { type: String },
   date: {
     type: Date,
     default: Date.now
