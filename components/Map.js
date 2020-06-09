@@ -17,7 +17,7 @@ const Map = (props) => {
       lat: props.lat,
       lng: props.lng
     },
-    zoom: 11
+    zoom: 15
   };
   //  console.log(process.env.apiKey);
   console.log(props);

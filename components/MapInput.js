@@ -35,7 +35,7 @@ const InputFieldStyle = styled(MapInputStyle)`
 export const TypeInput = React.forwardRef((props, ref) => {
   return (
     <InputFieldStyle className="mb-4 py-2 px-4">
-      <input ref={ref} type={props.type} name={props.name} placeholder={props.placeholder} />
+      <input ref={ref} type={props.type} name={props.name} placeholder={props.placeholder} onChange={props.onChange} onBlur={props.onBlur} />
     </InputFieldStyle>
   );
 });

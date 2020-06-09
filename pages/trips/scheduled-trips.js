@@ -7,7 +7,7 @@ import TripCard from "../../components/Cards/TripCard";
 import { NewTripButton } from "../../components/Buttons";
 
 
-const ScheduledTrips = ({trips, setTrips}) => {
+const ScheduledTrips = ({trips, setTrips, getUrl, token}) => {
   console.log(trips);
 
   useEffect(() => {
@@ -31,8 +31,12 @@ const ScheduledTrips = ({trips, setTrips}) => {
           origin={trip.origin}
           destination={trip.destination}
           tripTime={trip.tripTime}
+          tripDistance={trip.tripDistance}
+          tripDuration={trip.tripDuration}
           trips={trips}
           setTrips={setTrips}
+          getUrl={getUrl}
+          token={token}
          />
       ))}
 

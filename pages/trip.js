@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import ScheduledTrips from "./trips/scheduled-trips";
 import fetch from "node-fetch";
 
-const Trips = ({getUrl, getTrips, token, trips, setTrips}) => {
+const Trips = ({getUrl, getTrips, token, trips, setTrips, location}) => {
 
   console.log(getTrips, trips);
 
@@ -38,7 +38,7 @@ const Trips = ({getUrl, getTrips, token, trips, setTrips}) => {
   }, []);
 
   return (
-    <ScheduledTrips trips={trips} setTrips={setTrips} />
+    <ScheduledTrips trips={trips} setTrips={setTrips} getUrl={getUrl} token={token} />
   );
 };
 

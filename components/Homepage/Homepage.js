@@ -17,7 +17,7 @@ const Body = styled.main`
 
 const Homepage = (props) => {
   const [locationText, setLocationText] = useState(null);
-  const [coordinates, setCoordinates] = useState({ lat: 6.55, lng: 3.333 });
+  const [coordinates, setCoordinates] = useState({ lat: 7.5, lng: 3.133 });
 
   useEffect(() => {
     let textContent = "";
@@ -28,7 +28,8 @@ const Homepage = (props) => {
       textContent = `Lat: ${latitude.toFixed(3)} °, Long: ${longitude.toFixed(3)} °`;
       // console.log(textContent, latitude, longitude);
       setCoordinates({ lat: latitude, lng: longitude });
-      props.setLocation({ lat: latitude, lng: longitude });
+      // props.setLocation({ lat: latitude, lng: longitude });
+      props.setLocation(coordinates);
       setLocationText(textContent);
       props.setLocated(true);
       console.log(coordinates, props.located);
@@ -47,7 +48,7 @@ const Homepage = (props) => {
       setLocationText(textContent);
       navigator.geolocation.getCurrentPosition(success, error);
     }
-
+    
     (async () => {
       const apiUrl = props.getUrl();
     try {
@@ -62,6 +63,10 @@ const Homepage = (props) => {
         const getTrips = response;
         props.setTrips(getTrips.response);
         return {getTrips};
+      } else {
+        const getTrips = {response: [{_id: 0, origin: "Trips not available!", destination: "Trips not available!"}]};
+        props.setTrips(getTrips.response);
+        return getTrips;
       }
       } catch(e) {
           console.log(e, "Some error in connection, Please try again!");
@@ -78,7 +83,7 @@ const Homepage = (props) => {
       if (props.location === null) {
         const getReports = {response: [{_id: 0, description: "Your location is not available!"}]};
         props.setReports(getReports.response);
-        return getReports;;
+        return getReports;
       }      
       apiUrl.searchParams.set('lat', props.location.lat);
       apiUrl.searchParams.set('lng', props.location.lng);
@@ -117,7 +122,7 @@ const Homepage = (props) => {
             <Map lat={coordinates.lat} lng={coordinates.lng} />
           </div>
         )}
-        <NewTrip user={props.user} />
+        <NewTrip user={props.user} location={props.location} />
         <RecentTrips trips={props.trips} />
         <Reports reports={props.reports} />
         <NewReport />

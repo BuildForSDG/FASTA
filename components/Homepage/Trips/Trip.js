@@ -18,9 +18,11 @@ const TripBody = styled.div`
 const Trip = (props) => {
   return (
     <TripBody className="trip">
-      <Start>Start Point : {props.trip.origin}</Start>
+      {/* <Start>Start Point : {props.trip.origin}</Start> */}
+      Start Point : {props.trip.origin}
       <img src="images/Connector.png" alt="connector" />
-      <End>End Point : {props.trip.destination}</End>
+      {/* <End>End Point : {props.trip.destination}</End> */}
+      End Point : {props.trip.destination}
     </TripBody>
   );
 };

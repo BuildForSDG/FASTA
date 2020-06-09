@@ -201,7 +201,7 @@ const ChangePassword = ({ user, getUrl, handleToast }) => {
 
     try {
       const auth = await handleFetch(`${apiUrl}/users/login`, "POST", { email, password: ev.currentPassword });
-      console.log(auth);
+      // console.log(auth);
       if (auth.status === 200) {
         const forgetResponse = await handleFetch(`${apiUrl}/users/forget`, "POST", {
           email,

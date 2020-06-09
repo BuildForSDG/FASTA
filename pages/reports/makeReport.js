@@ -4,10 +4,11 @@ import React, { useState, useEffect } from "react";
 import { useForm, ErrorMessage } from "react-hook-form";
 import styled from "styled-components";
 import { toast } from "react-nextjs-toast";
+import BeatLoader from "react-spinners/BeatLoader";
 
 
 import Layout from "../../components/Layout";
-import { SubmitButton, LinkButton } from "../../components/Buttons";
+import { SubmitButton, LinkButton, LoaderContainer } from "../../components/Buttons";
 import Input, { TextArea } from "../../components/Input";
 import { TextSmall } from "../../components/Text/Body";
 
@@ -118,9 +119,17 @@ try {
             Your location is recorded as part of report data.
           </p>
 
-          <SubmitButton type="submit" className="w-full mt-6">
+          {loading ?
+          <LoaderContainer className="w-full mt-6">
+            <BeatLoader
+            size={30}
+            color="#43a047"
+            loading
+            />
+          </LoaderContainer>
+          :<SubmitButton type="submit" className="w-full mt-6">
             Submit
-          </SubmitButton>
+          </SubmitButton>}
         </form>
 
         {submitted && (
