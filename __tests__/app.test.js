@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 // const app = require("../fasta-backend/app.js");
 
 // describe("app module", () => {
@@ -18,5 +19,4 @@ describe("app module", () => {
   test("it exists", async () => {
     expect(app).toBeDefined();
   });
-
- });
+});
