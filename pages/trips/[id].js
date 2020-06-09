@@ -12,7 +12,7 @@ import { LocationInput, SelectInput} from "../../components/MapInput";
 import { Grid, TransportCompany, TransportProvider } from "../../components/Cards/TransportCard";
 
 
-const Trip = () => {
+const Trip = (props) => {
   // set riders, providers and transport companies from api
   const [provider, setProvider] = useState("");
   const [riders, setRiders] = useState([]);
@@ -20,7 +20,7 @@ const Trip = () => {
   const router = useRouter();
   const {id} = router.query;
 
-  const trip = trips[id];
+  const trip = props.trips[id];
 
   const makeProvider = (e) => {
     const {providerID} = e.target;
