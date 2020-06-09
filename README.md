@@ -18,15 +18,14 @@ HELP UPGRADING TRANSPORT AND LOGISTICS NETWORKS IN COMMUNITIES:
 Maximizing transport accessibility for all social groups, gender and income level, so that all citizens can access health care, education, jobs, businesses and a lot more with minimal effort, cost, safety and journey time.
 FASTA will also create a safe, secured environment with minimum possible risk of becoming victim of kidnapping, robbery and other threat to human kind .
 1.  FASTA will suggest where is safe to be, and what time is safe to be there based on past activities that has happened in that area, also from social media and also get feedbacks from travelers about locations. Based on this information’s or data gotten, thereby reducing the level of insecurity.
-2.  FASTA on click, give users access to all hospital’s emergency number in case of emergency must especially vulnerable. 
-3.  FASTA will support travelers by helping them book their travels from home and giving them the necessary details, they need toknow concerning transport companies in their environment andtheir roots, and also providing personalized email/SMS, special offers and discount from listed vendors.
-4.  FASTA will also assist people with disabilities by letting them know if their provision like wheel chair, walkways in their desired destination, hence help them prepare ahead for the situations
-5.  FASTA will help to schedule users’ movements and travels to any place like hospitals, super markets banks etc.
-6.  FASTA will collect information’s from transport companies pertaining to their stations and parks around the country, prices and other necessary information’s that can assist travelers in picking the right choice.
-7.  FASTA also give users shortest routes at all time and also in terms of emergency. 
-8.  FASTA will have various customer segments including travelers,drivers, transport companies etc.
-9.  FASTA will also provide voice support for visually imped persons
-10. With FASTA, you can monitor one’s journey and optimizes traffic
+2.  FASTA will support travelers by helping them book their travels from home and giving them the necessary details they need to know informing them of incidence report on their trip directions, providing personalized email/SMS, special offers and discount from listed vendors.
+3.  FASTA will also assist people with disabilities by letting them know if their provision like wheel chair, walkways in their desired destination, hence help them prepare ahead for the situations
+4.  FASTA will help to schedule users’ movements and travels to any place like hospitals, super markets banks etc.
+5.  FASTA will collect information’s from transport companies pertaining to their stations and parks around the country, prices and other necessary information’s that can assist travelers in picking the right choice.
+6.  FASTA also give users shortest routes at all time and also in terms of emergency. 
+7.  FASTA will have various customer segments including travelers,drivers, transport companies etc.
+8.  FASTA will also provide voice support for visually imped persons
+9. With FASTA, you can monitor one’s journey and optimizes traffic
 ## HOW IS THIS PROJECT RELEVANT (How much lives can be improved with FASTA)
 FASTA APP will enhance the well-being by saving of lives through our alternate transport solution.
 1.  The global status Report on road safety 2018, lauched by WHO in December 2018, highlights that the number of annual road traffic deaths has reach 1.35 million. Road trafficinjuries are now the leading killer of people aged 5-29 years which makes it to be the eighth-leading cause of death. Don’t panic because FASTA is here to solve this problem.FASTA gives you access to avoid traffic congestion by alerting you and suggesting the shortest route to your destination.
@@ -43,6 +42,7 @@ FASTA APP will enhance the well-being by saving of lives through our alternate t
 4.  Schedule your journey at your convenient
 ## CHALLENGES/WEAKNESS 
 1.  How to get user to trust FASTA and provide accurate informations
+2.  Relying on google api and transporter api for reporting
 ## ANALYSIS FOR USERS
 ![image](https://github.com/danieletchie/FASTA/blob/develop/ANALYSIS%20FOR%20FASTA.png)
 
