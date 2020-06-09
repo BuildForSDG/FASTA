@@ -129,7 +129,7 @@ router.get("/trips", authChecker, async (req, res) => {
     .exec()
     .then((allTrips) => {
       if (!allTrips || allTrips < 1) {
-        console.log(allTrips);
+        // console.log(allTrips);
         return res.status(404).json({ response: "Unfortunately, we dont have any trips scheduled for you, please check back" });
       }
       res.status(200).json({ response: allTrips.reverse() });
