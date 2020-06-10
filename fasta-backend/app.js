@@ -10,6 +10,7 @@ const sendRouter = require("./routes/sendmail");
 const getTransporter = require("./routes/location-transporter");
 const reportRouter = require("./routes/report");
 const tripInfoRouter = require("./routes/tripInfo");
+const startTripRouter = require("./routes/startTrip");
 
 
 require("./db/index");
@@ -35,5 +36,6 @@ app.use("/api/v1/", sendRouter);
 app.use("/api/v1/", getTransporter);
 app.use("/api/v1", reportRouter);
 app.use("/api/v1", tripInfoRouter);
+app.use("/api/v1", startTripRouter);
 
 module.exports = app;

@@ -8,21 +8,21 @@ const Reports = require("../models/report");
 const router = express.Router();
 
 router.get("/trip-info/:tripId", async (req, res) => {
-// get allthe report locations
+// get all the report locations
   const reports = [];
-  let trips;
+  let tripDirection;
   await Reports.find()
     .select("-_id location")
     .exec()
     .then((allReports) => {
       if (!allReports || allReports < 1) {
-        return res.status(404).json({ response: "unfortunetly, we dont have any report location schedule for you, check back" });
+        return res.status(404).json({ response: "unfortunetly, we dont have any report in your location , check back" });
       }
 
-      const valuesArray = Object.keys(allReports);
-      valuesArray.forEach((key) => {
-        const value = allReports[key];
-        reports.push(value.location);
+      const reportArray = Object.keys(allReports);
+      reportArray.forEach((key) => {
+        const reportLocation = allReports[key];
+        reports.push(reportLocation.location);
       });
     })
     .catch((error) => {
@@ -37,15 +37,19 @@ router.get("/trip-info/:tripId", async (req, res) => {
       if (!trip || trip < 1) {
         return res.status(404).json({ response: "unfortunetly, we dont have any report location schedule for you, check back" });
       }
-      trips = trip;
+      tripDirection = trip;
     })
     .catch((error) => {
       res.status(500).json({ error });
     });
 
   try {
-    const response = await PolyUtil.containsLocation(trips, reports);
-    if (response) {
+    // get trip directions as polygon
+    const polygon = await PolyUtil.encode(reports);
+
+    // get the incidence report that falls on the trip direction
+    const incidence = await PolyUtil.containsLocation(tripDirection, polygon);
+    if (incidence) {
       await Reports.find()
         .select()
         .exec()
