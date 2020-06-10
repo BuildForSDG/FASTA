@@ -11,11 +11,14 @@ const TripInfo = require("../api/transporters-api");
 const Transporters = require("../api/transporters-api");
 const ScheduleTrip = require("../models/trip");
 const authChecker = require("../middlewares/authChecker");
+const dotenv = require("dotenv");
+dotenv.config();
 
-const key= "AIzaSyAm00Wsdh6jJB2QzlW5c6t_nu0gMRAZB9s";
 const distancePath = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&";
 const placesPath = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=";
 const router = express.Router();
+
+console.log((process.env.TEST_KEY ? "keyTrue" : "keyFalse"));
 
 // api to get nearby transporters base on users location
 router.post("/location-transporter", (req, res) => {
@@ -36,14 +39,16 @@ router.post("/trip-distance", async (req, res) => {
         `https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${origin}&destinations=${destination}&key=${
           process.env.TEST_KEY
         }`
-      )
+      ) 
       .then((response) => {
-        if (response.data.rows.length <= 0) {
-          return res.json({ error: response.data.error_message });
-        }
+        // if (response.data.rows.length <= 0) {
+        //   return res.json({ error: response.data.error_message });
+        // }
         const result = response.data.rows[0].elements[0];
         const { distance, duration } = result;
-        return res.json({ data: { distance: distance.text, duration: duration.text } });
+        // return res.json({ data: { distance: distance.text, duration: duration.text } });
+        console.log(response);
+        return res.json({ response });
         // return res.json({ data: { result } });
         // console.log(response);
       })
@@ -176,17 +181,22 @@ router.get("/trips/:id", authChecker, async (req, res) => {
     });
 });
 
-router.get("/getplaces/:place", async (req, res) => {
-    console.log(req.params);
+router.get("/getplaces/:val", async (req, res) => {
     const { val } = req.params;
-    const placesUrl = `${placesPath}${val}&key=${key}`;
+    console.log(req.params, val);
+    const placesUrl = `${placesPath}${val}&key=${process.env.TEST_KEY}`;
 
       try {
-          const place = await fetch(placesUrl);
-          const placeResponse = await place.json();
-          return placeResponse;
+          await axios
+          .get(placesUrl)
+          .then((response) => {
+            console.log(response);
+            return res.json({response});
+          })
+          .catch((e) => console.log(e));
       } catch (e) {
-        console.log(e);  
+        res.status(500).json({ e: e.message });
       }
-})
+});
+
 module.exports = router;
