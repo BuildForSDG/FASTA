@@ -12,7 +12,9 @@ const Transporters = require("../api/transporters-api");
 const ScheduleTrip = require("../models/trip");
 const authChecker = require("../middlewares/authChecker");
 
-
+const key= "AIzaSyAm00Wsdh6jJB2QzlW5c6t_nu0gMRAZB9s";
+const distancePath = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&";
+const placesPath = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=";
 const router = express.Router();
 
 // api to get nearby transporters base on users location
@@ -174,5 +176,17 @@ router.get("/trips/:id", authChecker, async (req, res) => {
     });
 });
 
+router.get("/getplaces/:place", async (req, res) => {
+    console.log(req.params);
+    const { val } = req.params;
+    const placesUrl = `${placesPath}${val}&key=${key}`;
 
+      try {
+          const place = await fetch(placesUrl);
+          const placeResponse = await place.json();
+          return placeResponse;
+      } catch (e) {
+        console.log(e);  
+      }
+})
 module.exports = router;
