@@ -108,7 +108,7 @@ const Homepage = (props) => {
     })();
 
   }, []);
-  console.log(props.trips, props.reports, props);
+  // console.log(props.trips, props.reports, props);
 
   return (
     <div className="homepage w-screen min-h-screen">

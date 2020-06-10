@@ -60,8 +60,9 @@ const NewTrip = (props) => {
     console.log(name, val);
     const placesUrl = `${placesPath}${val}&key=${key}`;
     try {
-        const place = await fetch(placesUrl);
-        const placeResponse = await place.json();
+        const placeResponse = await handleFetch(`${apiUrl}/getplaces/${val}`, 'GET');
+        // const place = await fetch(placesUrl);
+        // const placeResponse = await place.json();
         console.log(placeResponse);
         // console.log(places[val]);
         if (name === "origin") {
@@ -85,8 +86,9 @@ const NewTrip = (props) => {
     (async () => {
       const distanceUrl = `${distancePath}origins=${origin.lat},${origin.lng}&destinations=${destination.lat},${destination.lng}&key=${key}`;
       try {
-          const distanceMatrix = await fetch(distanceUrl);
-          const distanceMatrixResponse = await distanceMatrix.json();
+        const distanceMatrixResponse  = await handleFetch(`${apiUrl}/trip-distance`, 'POST', {origin, destination});
+          // const distanceMatrix = await fetch(distanceUrl);
+          // const distanceMatrixResponse = await distanceMatrix.json();
           console.log(distanceMatrixResponse);
           // console.log(distanceData, distanceData.rows[0].elements[0], distanceUrl);
           // const { distance, duration } = distanceData.rows[0].elements[0];
@@ -206,18 +208,17 @@ const NewTrip = (props) => {
               Select health condition if any
             </p>
 
-            <SelectInput placeholder="--Condition--"
+            <SelectInput placeholder="--Category--"
               name="condition"
               options={[
-                "None",
-                "Blind",
-                "Deaf",
+                "Children below 15 years",
+                "Adults above 60 years",
+                "I am a woman",
                 "Pregnant",
-                "Cripple",
-                "Lame"
+                "Have some disability",
               ]}
               ref={register({
-                required: "Please select a condition or none"
+                required: "Please select a category"
               })}
             />
             <ErrorMessage errors={errors} name="condition">

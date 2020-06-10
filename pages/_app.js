@@ -23,6 +23,7 @@ export default function MyApp({ Component, pageProps }) {
   // }
 
   const handleToast = (msg, type = "info") => toast.notify(msg, { duration: 10, type });
+        // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
 
   useEffect(() => {
     if (localStorage.getItem("user")) {

@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { TextSmall } from "./Text/Body";
+import AutoComplete from "../pages/trips/AutoComplete";
 
 const MapInputStyle = styled.div`
   box-shadow: 0px 3px 6px #00000029;
@@ -35,6 +36,7 @@ const InputFieldStyle = styled(MapInputStyle)`
 export const TypeInput = React.forwardRef((props, ref) => {
   return (
     <InputFieldStyle className="mb-4 py-2 px-4">
+      {/* <AutoComplete ref={ref} placeholder={props.placeholder} onSelect={props.onSelect} /> */}
       <input ref={ref} type={props.type} name={props.name} placeholder={props.placeholder} onChange={props.onChange} onBlur={props.onBlur} />
     </InputFieldStyle>
   );

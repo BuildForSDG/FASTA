@@ -9,7 +9,8 @@ import BeatLoader from "react-spinners/BeatLoader";
 
 import Layout from "../../components/Layout";
 import { SubmitButton, LinkButton, LoaderContainer } from "../../components/Buttons";
-import Input, { TextArea } from "../../components/Input";
+import { Input,  TextArea } from "../../components/Input";
+import { SelectInput } from "../../components/MapInput";
 import { TextSmall } from "../../components/Text/Body";
 
 
@@ -68,18 +69,21 @@ try {
   return (
     <Layout header="Make New Report" back>
       <form onSubmit={handleSubmit(onSubmit)} className="w-full mt-4">
-          <Input
+          <SelectInput placeholder="Report Type"
+              name="type"
             className="mx-auto"
-            type="text"
-            name="type"
+            options={[
+              "Traffic",
+              "Congestion",
+              "Accident",
+              "Crime",
+              "Safety",
+              "Armed robbery",
+              "Fire",
+            ]}
             ref={register({
-              required: "Please enter type of report",
-              minLength: {
-                value: 3,
-                message: "Please enter descriptive type, e.g 'accident', 'fire', 'hold-up'"
-              }
+              required: "Please select type of report",
             })}
-            placeholder="Report Type"
           />
           <ErrorMessage errors={errors} name="report_type">
             {({ messages }) =>
