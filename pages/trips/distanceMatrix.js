@@ -1,4 +1,6 @@
-export default {
+import React from "react";
+
+const distanceData = {
     destination_addresses: [
     "5 Eluku St, Ikorodu 300001, Ikorodu, Nigeria"
     ],
@@ -24,3 +26,5 @@ export default {
     ],
     status: "OK"
     }
+
+export default distanceData;

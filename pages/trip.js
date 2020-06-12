@@ -1,14 +1,19 @@
 /* eslint-disable prettier/prettier */
 import React, { useEffect } from "react";
+import Router from "next/router";
 import ScheduledTrips from "./trips/scheduled-trips";
 import fetch from "node-fetch";
 
-const Trips = ({getUrl, getTrips, token, trips, setTrips, location}) => {
+const Trips = ({getUrl, loggedIn, setLoggedIn, getTrips, token, trips, setTrips, location}) => {
 
   console.log(getTrips, trips);
-
+  
   useEffect(() => {
     // effect
+    if (!loggedIn) {
+      Router.push("/login");
+    }
+    
     (async () => {
     const apiUrl = getUrl();
   try {
@@ -23,22 +28,26 @@ const Trips = ({getUrl, getTrips, token, trips, setTrips, location}) => {
       const getTrips = response;
       setTrips(getTrips.response);
       return {getTrips};
-    }
+    } 
     } catch(e) {
         console.log(e, "Some error in connection, Please try again!");
       // const getTrips = {response: e.message};
       const getTrips = {response: []};
       return {getTrips};
       }
-      // setTrips(getTrips.response);
+      // setTrips(getTrips.response); 
     })();
     return () => {
       // cleanup
     };
   }, []);
 
+  console.log(trips);
   return (
-    <ScheduledTrips trips={trips} setTrips={setTrips} getUrl={getUrl} token={token} />
+    // {trips ?
+      // <div>No shceduled trips at the moment! </div>:
+    <ScheduledTrips loggedIn={loggedIn} setLoggedIn={setLoggedIn} trips={trips} setTrips={setTrips} getUrl={getUrl} token={token} />
+  // }
   );
 };
 

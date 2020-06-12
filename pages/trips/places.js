@@ -1,4 +1,6 @@
- export default { ikeja : {
+import React from "react";
+
+const places = { ikeja : {
     html_attributions: [ ],
     results: [
     {
@@ -88,3 +90,5 @@
         status: "OK"
         }
 }
+
+export default places;

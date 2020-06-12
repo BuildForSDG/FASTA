@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useForm, ErrorMessage } from "react-hook-form";
 import Router from "next/router";
 import BeatLoader from "react-spinners/BeatLoader";
+// import distance from 'google-distance-matrix';
 // import places from "./places";
 // import distanceData from "./distanceMatrix";
 
@@ -17,7 +18,9 @@ const handleFetch = async (url, method, body, token) => {
   const res = await fetch(url, {
     method,
     body: JSON.stringify(body),
-    headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` }
+    headers: { "Content-Type": "application/json", 
+               "Authorization": `Bearer ${token}`
+              }
   });
   const response = await res.json();
   console.log(res.status, response);
@@ -54,15 +57,27 @@ const NewTrip = (props) => {
   const distancePath = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&";
   const placesPath = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=";
 
+//   distance.key(key);
+// var origins = ['San Francisco CA'];
+// var destinations = ['New York NY', '41.8337329,-87.7321554'];
+ 
+// distance.matrix(origins, destinations, function (err, distances) {
+//     if (!err)
+//         console.log(distances);
+// })
+
   const onBlur = async (e) => {
-    const name = e.target.name;
+    const name = e.target.name; 
     const val = e.target.value;
     console.log(name, val);
     const placesUrl = `${placesPath}${val}&key=${key}`;
     try {
-        const placeResponse = await handleFetch(`${apiUrl}/getplaces/${val}`, 'GET');
-        // const place = await fetch(placesUrl);
-        // const placeResponse = await place.json();
+        // const placeResponse = await handleFetch(`${apiUrl}/getplaces/${val}`, 'GET');
+        const place = await fetch(placesUrl
+          // , {method: "GET", mode: "cors", credentials: "include",
+        // headers: { "Content-Type": "application/json", "Accept": "*" } }
+        );
+        const placeResponse = await place.json();
         console.log(placeResponse);
         // console.log(places[val]);
         if (name === "origin") {
@@ -86,10 +101,10 @@ const NewTrip = (props) => {
     (async () => {
       const distanceUrl = `${distancePath}origins=${origin.lat},${origin.lng}&destinations=${destination.lat},${destination.lng}&key=${key}`;
       try {
-        const distanceMatrixResponse  = await handleFetch(`${apiUrl}/trip-distance`, 'POST', {origin, destination});
-          // const distanceMatrix = await fetch(distanceUrl);
-          // const distanceMatrixResponse = await distanceMatrix.json();
-          console.log(distanceMatrixResponse);
+        // const distanceMatrixResponse  = await handleFetch(`${apiUrl}/trip-distance`, 'POST', {origin, destination});
+          const distanceMatrix = await fetch(distanceUrl);
+          const distanceMatrixResponse = await distanceMatrix.json();
+          // console.log(distanceMatrixResponse);
           // console.log(distanceData, distanceData.rows[0].elements[0], distanceUrl);
           // const { distance, duration } = distanceData.rows[0].elements[0];
           // const { origin_addresses, destination_addresses } = distanceData;

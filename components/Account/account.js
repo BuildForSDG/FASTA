@@ -426,6 +426,7 @@ const Register = ({ user, setUser, getUrl, handleToast }) => {
 };
 
 const Account = props => {
+
   return (
     <>
       <Nav title="Profile" />

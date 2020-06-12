@@ -17,7 +17,7 @@ const Body = styled.main`
 
 const Homepage = (props) => {
   const [locationText, setLocationText] = useState(null);
-  const [coordinates, setCoordinates] = useState({ lat: 7.5, lng: 3.133 });
+  const [coordinates, setCoordinates] = useState({});
 
   useEffect(() => {
     let textContent = "";

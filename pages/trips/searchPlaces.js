@@ -41,6 +41,7 @@ async function handlePlaceSelect(updateQuery) {
 }
 
   const key= "AIzaSyAm00Wsdh6jJB2QzlW5c6t_nu0gMRAZB9s";
+  // const key= "AIzaSyDWLwUNUCh-ON8nTTvdKd6VVlDZDquwi-I";
 
 function SearchLocationInput() {
   const [query, setQuery] = useState("");
