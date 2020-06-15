@@ -246,7 +246,9 @@ router.route("/reset/:token")
   });
 
 router.post("/update/phonenumber", async (req, res) => {
-  const { email, oldphonenumber, newphonenumber, origin } = req.body;
+  const {
+    email, oldphonenumber, newphonenumber, origin
+  } = req.body;
   if (!email || !oldphonenumber) {
     return res.status(403).json({ response: "Both fields are required" });
   }
@@ -285,14 +287,15 @@ router.post("/update/phonenumber", async (req, res) => {
 
 
 router.post("/register/transporter", async (req, res) => {
-  const {  email,
+  const {
+    email,
     phonenumber,
     vehiclemake,
     vehiclemodel,
     licencenumber,
     address,
     origin
-   } = req.body;
+  } = req.body;
   if (!vehiclemake || !vehiclemodel || !licencenumber || !address) {
     return res.status(403).json({ response: "All fields are required" });
   }
@@ -300,7 +303,11 @@ router.post("/register/transporter", async (req, res) => {
     const user = await User.findOneAndUpdate(
       { email, phonenumber },
       // eslint-disable-next-line max-len
-      { $set: { vehiclemake, vehiclemodel, licencenumber, address, status: "transporter" } },
+      {
+        $set: {
+          vehiclemake, vehiclemodel, licencenumber, address, status: "transporter"
+        }
+      },
       { useFindAndModify: false }
     );
     if (!user) {
