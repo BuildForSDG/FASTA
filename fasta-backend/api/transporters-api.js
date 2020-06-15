@@ -1,4 +1,4 @@
-
+const { Client, Status } = require("@googlemaps/google-maps-services-js");
 /* eslint-disable no-console */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-undef */
@@ -8,9 +8,11 @@ const https = require("https");
 const options = {
   hostname: "maps.googleapis.com",
   port: 443,
-  path: `/maps/api/place/textsearch/json?query=transport&location=${this.latitude},${this.longitude}&radius=10000&key=AIzaSyDg-6GC6doxzpE_etI9E-yJR2NOLyFzBYc`,
+  path: `/maps/api/place/textsearch/json?query=transport&location=${this.latitude},${this.longitude}&radius=10000&key=AIzaSyC8G-WQhDTvlVflIFPzOj30rDQGk0Fekx8`,
   method: "GET"
 };
+
+const client = new Client({});
 
 // Allow function to receive coordinate argument from client
 class GetTripInfo {

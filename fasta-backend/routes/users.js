@@ -11,6 +11,7 @@ const User = require("../models/index.js");
 const bcrypt = require("../helpers/auth");
 const authChecker = require("../middlewares/authChecker");
 const mailer = require("../helpers/mailer");
+const notification = require("../helpers/notification");
 
 
 //  CREATE A NEW USER AND ADD TO DATABASE
@@ -74,8 +75,7 @@ router.post("/login", async (req, res) => {
       const passwordcheck = bcrypt.comparePassword(password, user.password);
       if (passwordcheck) {
         const token = bcrypt.generateToken(user);
-        user.password = null;
-        // const { fullname, phonenumber } = user;
+        notification();
         return res.status(200).json({
           response: "Login successful",
           token,
@@ -162,7 +162,7 @@ router.post("/forget", (req, res, next) => {
           <div style='width:98%;margin-left:1%;border-bottom:1px dotted black;text-align:center;padding:15px 0;'><img src='<%= site.siteLogo %>' style='height:75px'/></div>
           <div style='margin:0 1% 1%;background:#f1f1f1;padding:20px;'>
             A password request was received, click the link below to proceed with resetting your password, <b>the link expires in 1hr</b>:</p>
-            
+
            <p style='color: black;margin: 0px 0 30px;font-size:16px;text-align:center'><a href= "${resetlink}" style="background:blue;padding:10px 12px;color:white">RESET PASSWORD</p>
            <p style='color: red;text-align:center;margin: 15px 0;font-size:16px'>Kindly disregard this email if you didn't request for password reset.</p>
            <p> if the above button didnt work, you can copy and paste this link below into your browser </p>
@@ -246,7 +246,9 @@ router.route("/reset/:token")
   });
 
 router.post("/update/phonenumber", async (req, res) => {
-  const { email, oldphonenumber, newphonenumber, origin } = req.body;
+  const {
+    email, oldphonenumber, newphonenumber, origin
+  } = req.body;
   if (!email || !oldphonenumber) {
     return res.status(403).json({ response: "Both fields are required" });
   }
@@ -285,14 +287,15 @@ router.post("/update/phonenumber", async (req, res) => {
 
 
 router.post("/register/transporter", async (req, res) => {
-  const {  email,
+  const {
+    email,
     phonenumber,
     vehiclemake,
     vehiclemodel,
     licencenumber,
     address,
     origin
-   } = req.body;
+  } = req.body;
   if (!vehiclemake || !vehiclemodel || !licencenumber || !address) {
     return res.status(403).json({ response: "All fields are required" });
   }
@@ -300,7 +303,11 @@ router.post("/register/transporter", async (req, res) => {
     const user = await User.findOneAndUpdate(
       { email, phonenumber },
       // eslint-disable-next-line max-len
-      { $set: { vehiclemake, vehiclemodel, licencenumber, address, status: "transporter" } },
+      {
+        $set: {
+          vehiclemake, vehiclemodel, licencenumber, address, status: "transporter"
+        }
+      },
       { useFindAndModify: false }
     );
     if (!user) {

@@ -91,12 +91,13 @@ router.post("/trip-direction-info", async (req, res) => {
 
 router.post("/schedule-a-trip", authChecker, async (req, res) => {
   const {
-    mode, origin, originLatLng, originLocation, destination, destinationLatLng, destinationLocation, isVulnerable, tripDistance, tripDuration, tripTime
+    mode, origin, originLatLng, originLocation, destination,
+    destinationLatLng, destinationLocation, isVulnerable, tripDistance, tripDuration, tripTime
   } = req.body;
 
-  if (!mode || !origin || !destination || !isVulnerable || !tripDistance || !tripTime) {
-    return res.status(403).json({ response: "please all fields are required" });
-  }
+  // if (!mode || !origin || !destination || !isVulnerable || !tripDistance || !tripTime) {
+  //   return res.status(403).json({ response: "please all fields are required" });
+  // }
 
   try {
     const tripDetails = {
@@ -124,7 +125,7 @@ router.post("/schedule-a-trip", authChecker, async (req, res) => {
 
 // add the authChecker for authentication before, endpoint will list all the schecduled trip
 router.get("/trips", authChecker, async (req, res) => {
-  await ScheduleTrip.find({ userId: req.user._id})
+  await ScheduleTrip.find({ userId: req.user._id })
     .select()
     .exec()
     .then((allTrips) => {
