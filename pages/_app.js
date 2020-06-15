@@ -22,7 +22,7 @@ export default function MyApp({ Component, pageProps }) {
   };
   // }
 
-  const handleToast = (msg, type = "info") => toast.notify(msg, { duration: 10, type });
+  const handleToast = (msg, type = "info") => toast.notify(msg, { duration: 5, type });
 
   useEffect(() => {
     if (localStorage.getItem("user")) {

@@ -289,12 +289,12 @@ const NewTrip = (props) => {
             <SelectInput placeholder="--Mode--"
               name="mode"
               options={[
-                "Road",
-                "Air",
-                "Walking"
+                "Driving",
+                "Walking",
+                "Transit"
               ]}
               ref={register({
-                required: "Preferred mode"
+                required: "Please select the preferred mode"
               })}
             />
             <ErrorMessage errors={errors} name="mode">
