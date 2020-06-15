@@ -1,7 +1,7 @@
 /* eslint-disable consistent-return */
 /* eslint-disable func-names */
 /* eslint-disable no-undefined */
-// const cron = require('cron');
+const cron = require("node-cron");
 
 const ScheduleTrip = require("../models/trip");
 const Reports = require("../models/report");
@@ -17,39 +17,34 @@ const notification = async () => {
     .select("destination tripTime userId")
     .exec();
 
-
   reports.forEach((r) => {
     schedules.forEach((s) => {
       if (r.location === s.destination && r.date < s.tripTime) {
-        // console.log(`${s.userId}`);
-
-        const ids = User.findById(s.userId).select("email fullname").exec();
-
-        ids.then((id) => {
-          const options = {
-            receiver: id.email,
-            subject: "This is happening in your desiation!",
-            text: `Hello ${id.fullname}`,
-            output: `${r.description}\n\n`
-          };
-          const as = mailer(options);
-          as.then((a) => {
-            console.log(a);
+        const ids = User.findById(s.userId)
+          .select("email fullname")
+          .exec();
+        ids
+          .then((id) => {
+            const options = {
+              receiver: id.email,
+              subject: "This is happening in your desiation!",
+              text: `Hello ${id.fullname}`,
+              output: `${r.description}\n\n`
+            };
+            mailer(options);
+          })
+          .catch(() => {
+            // console.log(e);
           });
-
-
-          // const push = new cron.CronJob('00 00 08 * * *', () => {
-          //   mailer(options);
-          // });
-
-        //   push.start();
-        }).catch((e) => {
-          console.log(e);
-        });
       }
     });
   });
 };
 
+const pushNotification = () => {
+  cron.schedule("* 08 * * *", () => {
+    notification();
+  });
+};
 
-module.exports = notification;
+module.exports = pushNotification;
