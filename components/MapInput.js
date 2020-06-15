@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { TextSmall } from "./Text/Body";
-import AutoComplete from "../pages/trips/AutoComplete";
 
 const MapInputStyle = styled.div`
   box-shadow: 0px 3px 6px #00000029;

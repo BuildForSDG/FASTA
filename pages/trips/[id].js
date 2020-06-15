@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Router, { useRouter } from "next/router";
 import { useForm, ErrorMessage } from "react-hook-form";
 
+import trips from "./trips.json";
 import transportCompanies from "./transportCompanies.json";
 import transporters from "./riders.json";
 import Layout from "../../components/Layout";
@@ -53,6 +54,39 @@ const Trip = (props) => {
     Router.push("/trips/ongoing-trip");
   };
 
+  const trip = trips[id];
+
+  const makeProvider = (e) => {
+    const {providerID} = e.target;
+    setProvider(providerID);
+  };
+
+  // eslint-disable-next-line consistent-return
+  const modeOfTransport = (e) => {
+    const {value} = e.target;
+
+    try {
+      if (value === "Transport Company" ) {
+        setTransportCompany(transportCompanies);
+        setRiders([]);
+      } else if (value === "Hail Taxi on Fasta") {
+        setRiders(transporters);
+        setTransportCompany([]);
+      } else {
+        setRiders([]);
+        setTransportCompany([]);
+      }
+    } catch (error) {
+      return error;
+    }
+  };
+
+  const { register, handleSubmit, errors } = useForm({ validateCriteriaMode: "all" });
+  const onSubmit = () => {
+    // console.log(data);
+    Router.push("/trips/ongoing-trip");
+  };
+
   return (
     <Layout header="Start trip" back>
     <div className="absolute top-0 right-0 w-screen pb-24">
@@ -65,14 +99,14 @@ const Trip = (props) => {
             data come from the result of the map selection and
             typed location
           */}
-          {/* <LocationInput
+          <LocationInput
             label="start position"
             input={trip.origin}
           />
           <LocationInput
             label="end position"
             input={trip.destination}
-          /> */}
+          />
 
           <p style={{ color: "#2699FB" }} className="text-xs mb-2">
             Select mode of transport

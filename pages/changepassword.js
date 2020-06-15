@@ -73,7 +73,10 @@ try {
                               body: JSON.stringify(ev), 
                               headers: { "Content-Type" : "application/json"}
                             });
-      if (res.status === 200) setSubmitted(true);
+      if {
+        (res.status === 200) 
+        setSubmitted(true)
+      };
       const response = await res.json();
       handleToast(response.response, "success");
       console.log(res.status, response);
