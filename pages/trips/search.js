@@ -1,10 +1,27 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import usePlacesAutocomplete, { getGeocode, getLatLng } from 'use-places-autocomplete';
 import useOnclickOutside from 'react-cool-onclickoutside';
-import Head from "next/head";
-    <Head>
-        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAm00Wsdh6jJB2QzlW5c6t_nu0gMRAZB9s&libraries=places"></script>
-    </Head>
+
+const key= "AIzaSyAm00Wsdh6jJB2QzlW5c6t_nu0gMRAZB9s";
+
+const loadScript = (url) => {
+  let script = document.createElement("script");
+  script.type = "text/javascript";
+
+  if (script.readyState) {
+    script.onreadystatechange = function() {
+      if (script.readyState === "loaded" || script.readyState === "complete") {
+        script.onreadystatechange = null;
+        console.log('script');
+      }
+    };
+  } else {
+    script.onload = () => console.log('script');
+  }
+
+  script.src = url;
+  document.getElementsByTagName("head")[0].appendChild(script);
+};
 
 const PlacesAutocomplete = () => {
   const {
@@ -36,13 +53,13 @@ const PlacesAutocomplete = () => {
     clearSuggestions();
 
     // Get latitude and longitude via utility functions
-    getGeocode({ address: description })
-      .then(results => getLatLng(results[0]))
-      .then(({ lat, lng }) => {
-        console.log('📍 Coordinates: ', { lat, lng });
-      }).catch(error => {
-        console.log('😱 Error: ', error)
-      });
+    // getGeocode({ address: description })
+    //   .then(results => getLatLng(results[0]))
+    //   .then(({ lat, lng }) => {
+    //     console.log('📍 Coordinates: ', { lat, lng });
+    //   }).catch(error => {
+    //     console.log('😱 Error: ', error)
+    //   });
   };
 
   const renderSuggestions = () =>
@@ -61,7 +78,10 @@ const PlacesAutocomplete = () => {
         </li>
       );
     });
-
+    useEffect(() => {
+      loadScript(
+        `https://maps.googleapis.com/maps/api/js?key=${key}&libraries=places`);
+    }, []);
   return (
     <div ref={ref}>
       <input

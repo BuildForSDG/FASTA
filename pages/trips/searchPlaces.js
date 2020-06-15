@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { TypeInput, SelectInput} from "../../components/MapInput";
 
 let autoComplete;
 
@@ -25,7 +26,7 @@ function handleScriptLoad(updateQuery, autoCompleteRef) {
   autoComplete = new window.google.maps.places.Autocomplete(
     autoCompleteRef.current,
     // { types: ["(cities)"], componentRestrictions: { country: "us" } }
-    { types: ["(cities)", "(geocode)"], componentRestrictions: { country: "ng" } }
+    { types: ["(cities)"], componentRestrictions: { country: "ng" } }
   );
   autoComplete.setFields(["address_components", "formatted_address", "geometry"]);
   autoComplete.addListener("place_changed", () =>
@@ -57,13 +58,24 @@ function SearchLocationInput() {
   const onChange = event => setQuery(event.target.value);
   return (
     <div className="search-location-input">
-      <input
+      {/* <input
         ref={autoCompleteRef}
         onChange={onChange}
         placeholder="Enter a City"
         value={query}
-      />
-     
+      /> */}
+      <TypeInput
+              type="text"
+              name="origin"
+              placeholder="Start from ..."
+              ref={autoCompleteRef}
+              onChange={onChange}
+              value={query}
+              // ref={register({
+              //   required: "Please enter your takeoff location"
+              // })}
+              // onBlur={onBlur}
+            />
     </div>
   );
 }

@@ -1,5 +1,7 @@
 /* eslint-disable prettier/prettier */
 import React, { useState, useEffect } from "react";
+import Head from "next/head";
+import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import { useForm, ErrorMessage } from "react-hook-form";
 import Router from "next/router";
 import BeatLoader from "react-spinners/BeatLoader";
@@ -42,6 +44,27 @@ const NewTrip = (props) => {
 
   useEffect(() => {
     // effect
+    const loadScript = (url) => {
+      let script = document.createElement("script");
+      script.type = "text/javascript";
+    
+      if (script.readyState) {
+        script.onreadystatechange = function() {
+          if (script.readyState === "loaded" || script.readyState === "complete") {
+            script.onreadystatechange = null;
+            console.log('script-1');
+          }
+        };
+      } else {
+        script.onload = () => console.log('script-2');
+      }
+    
+      script.src = url;
+      document.getElementsByTagName("head")[0].appendChild(script);
+    };
+
+    // loadScript(
+    //   `https://maps.googleapis.com/maps/api/js?key=${key}&libraries=places`);
     return () => {
       // cleanup
     };
@@ -51,9 +74,11 @@ const NewTrip = (props) => {
 
 
   const location = {lat: 6.33, lng: 3.33};
+  console.log(location, props);
   // path: `transport&location=${this.latitude},${this.longitude}&radius=10000&
   
   const key= "AIzaSyAm00Wsdh6jJB2QzlW5c6t_nu0gMRAZB9s";
+  // const key= "AIzaSyDWLwUNUCh-ON8nTTvdKd6VVlDZDquwi-I";
   const distancePath = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&";
   const placesPath = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=";
 
@@ -128,6 +153,8 @@ const NewTrip = (props) => {
           if (newTrip.status === 200) {
             setLoading(false);
             setScheduled(true);
+            console.log("Trip has been scheduled");
+            return;
           } else {
             setLoading(false);
             setScheduled(false);
@@ -138,7 +165,7 @@ const NewTrip = (props) => {
       }
       console.log(distanceUrl);
       setLoading(false);
-      console.log("Trip has been scheduled");
+      // console.log("Trip has been scheduled");
     })();
   };
 
@@ -146,7 +173,8 @@ const NewTrip = (props) => {
     <Layout header="Schedule a trip" back>
       <div className="absolute top-20 right-0 w-screen mb-24">
         {/* Add google map to MapCard */}
-        <Map lat={location.lat} lng={location.lng} />
+        {/* <div><Map lat={location.lat} lng={location.lng} /></div> */}
+        <div><Map lat={location.lat} lng={location.lng} /></div>
         <div className="px-4">
           <form onSubmit={handleSubmit(onSubmit)}>
             {/* Add click event to LocationInput and make input
@@ -156,15 +184,32 @@ const NewTrip = (props) => {
             <p style={{ color: "#2699FB" }} className="text-xs capitalize mb-2">
               Take-off point
             </p>
+            {/* <GooglePlacesAutocomplete
+              onSelect={console.log}
+              apiKey={key}
+              idPrefix={'1'}
+              renderInput={(props) => (
+                <div className="custom-wrapper">
+                  <TypeInput
+                    type="text"
+                    name="origin"
+                    placeholder="Start from ..."
+                    ref={register({
+                      required: "Please enter your takeoff location"
+                    })}
+                  />
+                </div>
+              )}
+            /> */}
             <TypeInput
-              type="text"
-              name="origin"
-              placeholder="Start from ..."
-              ref={register({
-                required: "Please enter your takeoff location"
-              })}
-              onBlur={onBlur}
-            />
+                    type="text"
+                    name="origin"
+                    placeholder="Start from ..."
+                    ref={register({
+                      required: "Please enter your takeoff location"
+                    })}
+                    onBlur={onBlur}
+                  />
             <ErrorMessage errors={errors} name="origin">
             {({ messages }) =>
               messages &&
@@ -178,16 +223,34 @@ const NewTrip = (props) => {
             <p style={{ color: "#2699FB" }} className="text-xs capitalize mb-2">
               Destination
             </p>
-            <TypeInput
-              type="text"
-              name="destination"
-              placeholder="Heading to ..."
-              ref={register({
-                required: "Please enter your destination"
-              })}   
-              // onChange={onChange}
-              onBlur={onBlur}
-              />
+             <TypeInput
+                    type="text"
+                    name="destination"
+                    placeholder="Heading to ..."
+                    ref={register({
+                      required: "Please enter your destination"
+                    })}
+                    onBlur={onBlur}
+                  />
+            {/* <GooglePlacesAutocomplete
+              onSelect={({ description }) => (
+                console.log({ address: description })
+              )}
+              apiKey={key}
+              idPrefix={'1'}
+              renderInput={(props) => (
+                <div className="custom-wrapper">
+                  <TypeInput
+                    type="text"
+                    name="destination"
+                    placeholder="Heading to ..."
+                    ref={register({
+                      required: "Please enter your destination"
+                    })}
+                  />
+                </div>
+              )}
+            /> */}
               <ErrorMessage errors={errors} name="destination">
             {({ messages }) =>
               messages &&
@@ -220,15 +283,40 @@ const NewTrip = (props) => {
             </ErrorMessage>
 
             <p style={{ color: "#2699FB" }} className="text-xs mb-2">
+              Select your preferred mode
+            </p>
+
+            <SelectInput placeholder="--Mode--"
+              name="mode"
+              options={[
+                "Road",
+                "Air",
+                "Walking"
+              ]}
+              ref={register({
+                required: "Preferred mode"
+              })}
+            />
+            <ErrorMessage errors={errors} name="mode">
+            {({ messages }) =>
+              messages &&
+              Object.entries(messages).map(([type, message]) => (
+                <p key={type} className="text-xs text-red-500 text-center my-2">
+                  {message}
+                </p>
+              ))}
+            </ErrorMessage>
+
+            <p style={{ color: "#2699FB" }} className="text-xs mb-2">
               Select health condition if any
             </p>
 
             <SelectInput placeholder="--Category--"
               name="condition"
               options={[
+                "Regular user",
                 "Children below 15 years",
                 "Adults above 60 years",
-                "I am a woman",
                 "Pregnant",
                 "Have some disability",
               ]}

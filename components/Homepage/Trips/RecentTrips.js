@@ -15,7 +15,7 @@ const RecentTrips = (props) => {
   return (
     <div className="trips my-4 flex flex-col justify-between">
       <Text>Your Recent Trips</Text>
-      {props.trips && props.trips.map((trip) => (
+      {props.trips && props.trips.slice(0,2).map((trip, index) => (
       <Trip key={trip._id} trip={trip} />
       ))}
       

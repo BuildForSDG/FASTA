@@ -17,6 +17,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "dotenv-load": "^2.0.0",
     "eslint-plugin-react": "7.14.2",
@@ -65,4 +66,9 @@
   "browserslist": [
     "last 1 Chrome versions"
   ],
-  "browser": { "fs": false, "path": false, "os": false}}
+  "browser": {
+    "fs": false,
+    "path": false,
+    "os": false
+  }
+}

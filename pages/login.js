@@ -64,10 +64,12 @@ const onSubmit = (data) => {
   // console.log(data);
   signIn(data);
 };
+console.log("token:" , token);
 
 useEffect(() => {
   localStorage.setItem("user", JSON.stringify(user)); 
   localStorage.setItem("token", JSON.stringify(token)); 
+  localStorage.setItem("loggedIn", JSON.stringify(loggedIn)); 
 }, [user]);
 
 

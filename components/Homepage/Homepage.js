@@ -17,7 +17,7 @@ const Body = styled.main`
 
 const Homepage = (props) => {
   const [locationText, setLocationText] = useState(null);
-  const [coordinates, setCoordinates] = useState({});
+  const [coordinates, setCoordinates] = useState({ lat: 7.5, lng: 3.133 });
 
   useEffect(() => {
     let textContent = "";
@@ -51,6 +51,7 @@ const Homepage = (props) => {
     
     (async () => {
       const apiUrl = props.getUrl();
+      console.log(props);
     try {
       const res = await fetch(`${apiUrl}/trips`, {
                               method: "GET", 

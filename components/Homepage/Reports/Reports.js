@@ -16,7 +16,7 @@ const Reports = (props) => {
   return (
     <div>
       <Text color="#232323">Reports in your area</Text>
-      {props.reports && props.reports.map((report) => (
+      {props.reports && props.reports.slice(0,2).map((report) => (
       <Report key={report._id} report={report} />
       ))}      
 

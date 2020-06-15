@@ -1,5 +1,5 @@
 /* eslint no-unused-vars */
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ReactMap from "google-map-react";
 // import env from "dotenv";
 // env.config();
@@ -7,11 +7,7 @@ import ReactMap from "google-map-react";
 const MapComponent = ({ text }) => <div>{text}</div>;
 
 const Map = (props) => {
-  // const defaultProps = {
-  //   center: {
-  //     lat: 59.95,
-  //     lng: 30.33
-  //   },
+  const [pointer, setPointer] = useState({lat: props.lat, lng: props.lng})
   const defaultProps = {
     center: {
       lat: props.lat,
@@ -21,6 +17,11 @@ const Map = (props) => {
   };
   //  console.log(process.env.apiKey);
   console.log(props);
+
+  useEffect(() => {
+    setPointer({lat: props.lat, lng: props.lng});
+  },[props]);
+
   return (
     <div style={{ height: "30vh", width: "100%" }}>
       <ReactMap
