@@ -75,12 +75,11 @@ router.post("/login", async (req, res) => {
       const passwordcheck = bcrypt.comparePassword(password, user.password);
       if (passwordcheck) {
         const token = bcrypt.generateToken(user);
-        const { phonenumber } = user;
         notification();
         return res.status(200).json({
           response: "Login successful",
           token,
-          phonenumber
+          user
         });
       }
       return res.status(401).json({ response: "Auth failed" });
