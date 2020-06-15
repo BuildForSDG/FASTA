@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable consistent-return */
 /* eslint-disable default-case */
 /* eslint-disable no-undef */
@@ -88,9 +89,9 @@ router.post("/trip-direction-info", async (req, res) => {
   }
 });
 
-router.post("/schedule-a-trip", async (req, res) => {
+router.post("/schedule-a-trip", authChecker, async (req, res) => {
   const {
-    mode, origin, destination, isVulnerable, tripDistance, tripTime, userId
+    mode, origin, originLatLng, originLocation, destination, destinationLatLng, destinationLocation, isVulnerable, tripDistance, tripDuration, tripTime
   } = req.body;
 
   // if (!mode || !origin || !destination || !isVulnerable || !tripDistance || !tripTime) {
@@ -101,11 +102,16 @@ router.post("/schedule-a-trip", async (req, res) => {
     const tripDetails = {
       mode,
       origin,
+      originLatLng,
+      originLocation,
       destination,
+      destinationLatLng,
+      destinationLocation,
       isVulnerable,
       tripDistance,
+      tripDuration,
       tripTime,
-      userId
+      userId: req.user._id
     };
     const trips = await ScheduleTrip.create(tripDetails);
     if (trips) {
@@ -116,14 +122,15 @@ router.post("/schedule-a-trip", async (req, res) => {
   }
 });
 
-// endpoint will list all the schecduled trip
+// add the authChecker for authentication before, endpoint will list all the schecduled trip
 router.get("/trips", authChecker, async (req, res) => {
-  await ScheduleTrip.find()
-    .select("_id mode origin destination isVulnerable tripDistance tripTime date")
+  await ScheduleTrip.find({ userId: req.user._id})
+    .select()
     .exec()
     .then((allTrips) => {
       if (!allTrips || allTrips < 1) {
-        return res.status(404).json({ response: "unfortunetly, we dont have any trips schedule for you, check back" });
+        // console.log(allTrips);
+        return res.status(404).json({ response: "Unfortunately, we dont have any trips scheduled for you, please check back" });
       }
       res.status(200).json({ response: allTrips.reverse() });
     })
@@ -160,15 +167,7 @@ router.get("/trips/:id", authChecker, async (req, res) => {
         return res.status(404).json({ response: "This report doesn't exist anymore" });
       }
       return res.status(200).json({
-        response: {
-          mode: trip.mode,
-          origin: trip.origin,
-          destination: trip.destination,
-          isVulnerable: trip.isVulnerable,
-          tripDistance: trip.tripDistance,
-          tripTime: trip.tripTime,
-          date: trip.date
-        }
+        response: trip
       });
     }).catch((e) => {
       res.status(500).json({ e: e.message });
