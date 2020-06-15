@@ -24,10 +24,10 @@ const Report = (props) => {
   return (
     <Layout header="Report" back>
        <ReportCard 
-        type="Accident"
-        location="34 Kingsley avenue, Gusau."
-        timestamp="23min ago"
-        description="Description of report and added info... fadadj jandkjand alkdna dfaldnakld adadnlkad klnkldad this info comes from database. truncates on second line.."
+        type={props.type}
+        location={props.location}
+        timestamp={props.date}
+        description={props.description}
       />
     </Layout>
   );

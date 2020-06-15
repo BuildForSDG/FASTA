@@ -37,7 +37,7 @@ const OnBoardingContainerLayout = styled.section`
   transition: 0.3s ease-out;
 `;
 
-const Layout = props => {
+const Layout = (props) => {
   const [screen, setScreen] = useState(0);
 
   function changeScreen({ target }) {
@@ -156,6 +156,7 @@ const Layout = props => {
                   <a className="font-bold">SKIP</a>
                 </Link>
               </div>
+              <img className="mx-auto my-2" src={view.img} alt="" />
               <div>
                 <H1 className="w-10/12 font-bold uppercase mb-8">{view.heading}</H1>
                 <p>{view.text}</p>

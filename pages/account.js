@@ -1,16 +1,17 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
+import Head from "next/head";
 import Account from "../components/Account/account";
 
-const Profile = props => {
+const Profile = (props) => {
   return (
     <div>
-      <head>
+      <Head>
         <title>Profile</title>
         <link rel="icon" href="/favicon.ico" />
-      </head>
+      </Head>
       <div className="" style={{ backgroundColor: "#F7F5F5" }}>
-        <Account />
+        <Account user={props.user} setUser={props.setUser} getUrl={props.getUrl} handleToast={props.handleToast} />
       </div>
     </div>
   );

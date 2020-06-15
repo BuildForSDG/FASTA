@@ -1,4 +1,5 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable no-console */
 import React, { useState, useEffect } from "react";
 import { useForm, ErrorMessage } from "react-hook-form";
 import styled from "styled-components";
@@ -15,18 +16,47 @@ const AlertCardStyle = styled.div`
   padding: 60px 26px 46px;
 `;
 
-const MakeReport = () => {
+const MakeReport = ({getUrl, handleToast}) => {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
   submitted && (document.body.style.overflow = "hidden");
   
   const { register, handleSubmit, errors, watch } = useForm({ validateCriteriaMode: "all" });
+  const apiUrl = getUrl();
+
+//  makeReport
+const submitReport = async(ev) => {
+  console.log(ev, Object.keys(ev));
+  setLoading(true);
+
+try {
+      const res = await fetch(`${apiUrl}/reports`, {
+                              method: "POST", 
+                              body: JSON.stringify(ev), 
+                              headers: { "Content-Type" : "application/json"}
+                            });
+      console.log(res.status);
+      const response = await res.json();
+      console.log(response);
+      if (res.status === 200) {
+      setSubmitted(true);
+      } else {
+        // handleToast(response.response, "error");
+      }
+} catch(e) {
+      console.log(e, "Some error in connection, Please try again!");
+      // handleToast("Error in connection", "error");
+}
+  setLoading(false);
+}; 
+
   const onSubmit = (_data) => {
     const accept = (args) => {
       return args;
     };
     // console.log(data);
-    accept(_data);
-    setSubmitted(true);
+    submitReport(_data);
+    // setSubmitted(true);
   };
 
   return (
@@ -35,7 +65,7 @@ const MakeReport = () => {
           <Input
             className="mx-auto"
             type="text"
-            name="report_type"
+            name="type"
             ref={register({
               required: "Please enter type of report",
               minLength: {
@@ -52,8 +82,7 @@ const MakeReport = () => {
                 <p key={type} className="text-xs text-red-500 text-center my-2">
                   {message}
                 </p>
-              ))
-            }
+              ))}
           </ErrorMessage>
 
 
@@ -77,8 +106,7 @@ const MakeReport = () => {
                 <p key={type} className="text-xs text-red-500 text-center my-2">
                   {message}
                 </p>
-              ))
-            }
+              ))}
           </ErrorMessage>
 
           <p className="text-xs mt-5 text-center w-10/12 mx-auto" style={{ color: "#43A047" }}>
@@ -92,7 +120,7 @@ const MakeReport = () => {
 
         {submitted && (
           <div
-            className="h-screen w-screen fixed top-0 left-0 z-40 flex justify-center items-end pb-16"
+            className="h-screen w-screen fixed top-0 left-0 z-40 flex justify-center items-center pb-16"
             style={{ backgroundColor: "#AFDEB199" }}
           >
             <AlertCardStyle className="w-10/12 bg-white">
@@ -102,7 +130,7 @@ const MakeReport = () => {
                 You are making the world a better place.
               </TextSmall>
 
-              <LinkButton href="report" className="w-10/12 mx-auto">
+              <LinkButton href="../report" className="w-10/12 mx-auto">
                 continue
               </LinkButton>
             </AlertCardStyle>

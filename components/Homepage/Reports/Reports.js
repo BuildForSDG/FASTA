@@ -1,26 +1,30 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 import styled from "styled-components";
+import Link from "next/link";
 import Report from "./Report";
+import { H3 } from "../../Text/Headings";
 
-const Heading = styled.p`
-  color: #232323;
-  font-size: 20px;
-  margin: 10px 0;
-`;
-
-const AllReports = styled.span`
-  color: #2699fb;
-  font-size: 12px;
-`;
-
-const Reports = (props) => {
+const Reports = () => {
   return (
     <div>
-      <Heading>Reports in your area</Heading>
-      <Report title=" Accident" />
-      <Report title="Shoot-out" />
-      <AllReports>See All Reports</AllReports>
+      {/* fetch Reports from report api */}
+      {/* Show only the two latest reports */}
+      <H3>Reports in your area</H3>
+
+      <Report
+        title=" Accident"
+        description="Along Olu-Obansanjo road. cars are on fire avoid the area, fire fighters are at the scene. Traffic is..."
+      />
+      <Report
+        title="Shoot-out"
+        description="Along Olu-Obansanjo road. cars are on fire avoid the area, fire fighters are at the scene. Traffic is..."
+      />
+      <Link href="/report">
+        <a>
+          <span style={{ color: "#2699fb", fontSize: "12px" }}>See All Reports</span>
+        </a>
+      </Link>
     </div>
   );
 };

@@ -94,3 +94,15 @@ export const NewReportButton = () => {
     </Link>
   );
 };
+
+export const NewTripButton = () => {
+  return (
+    <Link href="new-trip">
+      <a>
+        <NewReportButtonSyled>
+          <img src="/images/add-trip.svg" alt="add trip" />
+        </NewReportButtonSyled>
+      </a>
+    </Link>
+  );
+};
