@@ -9,6 +9,7 @@ const tripSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   },
+  userId:{ type: String },
   isVulnerable: { type: Boolean },
   date: {
     type: Date,

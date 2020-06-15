@@ -9,13 +9,13 @@ const mailer = async (options) => {
     service: "gmail",
     host: "smtp.gmail.com",
     auth: {
-      user: "fastamovement@gmail.com", // gmail created just for testing purposes
-      pass: "Fasta123" // for testing purposes
+      user: "fastamovements@gmail.com", // gmail created just for testing purposes
+      pass: "Fasta1234" // for testing purposes
     }
   }));
 
   const mailOptions = {
-    from: "<fastamovement@gmail.com>",
+    from: "<fastamovements@gmail.com>",
     to: options.receiver,
     subject: options.subject,
     text: options.text,
@@ -25,9 +25,10 @@ const mailer = async (options) => {
   await fastaMailer.sendMail(mailOptions, (error, info) => {
     // console.log(mailOptions, info);
     if (error) {
-      throw error;
+      // throw error;
+      console.log(error);
     }
-    return `Message sent: %s ${info.messageId}`;
+    return `Message sent: %s ${info}`;
   });
 };
 

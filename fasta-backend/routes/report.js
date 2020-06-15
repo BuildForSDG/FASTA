@@ -6,6 +6,7 @@ const express = require("express");
 const router = express.Router();
 const Reports = require("../models/report");
 const authChecker = require("../middlewares/authChecker");
+const notification = require("../helpers/notification");
 
 
 router.post("/report", authChecker, async (req, res) => {
@@ -43,6 +44,7 @@ router.get("/reports", authChecker, async (req, res) => {
         return res.status(404).json({ response: "unfortunetly, we dont have any reports for you, check back" });
       }
       res.status(200).json({ response: allReports.reverse() });
+      notification();
     })
     .catch((error) => {
       res.status(500).json({ error: error.message });

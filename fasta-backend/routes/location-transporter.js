@@ -90,12 +90,12 @@ router.post("/trip-direction-info", async (req, res) => {
 
 router.post("/schedule-a-trip", async (req, res) => {
   const {
-    mode, origin, destination, isVulnerable, tripDistance, tripTime
+    mode, origin, destination, isVulnerable, tripDistance, tripTime, userId
   } = req.body;
 
-  if (!mode || !origin || !destination || !isVulnerable || !tripDistance || !tripTime) {
-    return res.status(403).json({ response: "please all fields are required" });
-  }
+  // if (!mode || !origin || !destination || !isVulnerable || !tripDistance || !tripTime) {
+  //   return res.status(403).json({ response: "please all fields are required" });
+  // }
 
   try {
     const tripDetails = {
@@ -104,7 +104,8 @@ router.post("/schedule-a-trip", async (req, res) => {
       destination,
       isVulnerable,
       tripDistance,
-      tripTime
+      tripTime,
+      userId
     };
     const trips = await ScheduleTrip.create(tripDetails);
     if (trips) {
