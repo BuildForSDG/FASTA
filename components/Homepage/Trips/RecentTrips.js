@@ -5,6 +5,11 @@ import Link from "next/link";
 import Trip from "./Trip";
 import { TextSmall } from "../../Text/Body";
 
+// const TextSmall = styled.p`
+//   font-size: 14px;
+//   color: ${(props) => props.color};
+// `;
+
 const Text = styled(TextSmall)`
   font-size: 20px;
   margin: 5px 0;

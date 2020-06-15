@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Router, { useRouter } from "next/router";
 import { useForm, ErrorMessage } from "react-hook-form";
 
@@ -8,53 +8,36 @@ import transportCompanies from "./transportCompanies.json";
 import transporters from "./riders.json";
 import Layout from "../../components/Layout";
 import { SubmitButton } from "../../components/Buttons";
-import MapCard from "../../components/Cards/MapCard";
+import Map from "../../components/Map";
+// import MapCard from "../../components/Cards/MapCard";
 import { LocationInput, SelectInput} from "../../components/MapInput";
 import { Grid, TransportCompany, TransportProvider } from "../../components/Cards/TransportCard";
 
 
 const Trip = (props) => {
+  const [trip, setTrip] = useState(null);
+  const [location, setLocation] = useState({lat: 5.4, lng: 3.2});
   // set riders, providers and transport companies from api
   const [provider, setProvider] = useState("");
   const [riders, setRiders] = useState([]);
   const [transportCompany, setTransportCompany] = useState([]);
+
   const router = useRouter();
-  // const {id} = router.query;
+  const {id} = router.query;
 
-  // const trip = props.trips[id];
+  useEffect(() => {
+    // effect
+    props.setTrips(props.trips);
+  const trip = props.trips.filter(x => x["_id"] === id);
+  setTrip(trip[0]);
+    console.log(trip, props.getTrips);
+    return () => {
+      // cleanup
+    };
+  }, []);
+  
 
-  const makeProvider = (e) => {
-    const {providerID} = e.target;
-    setProvider(providerID);
-  };
-
-  // eslint-disable-next-line consistent-return
-  const modeOfTransport = (e) => {
-    const {value} = e.target;
-
-    try {
-      if (value === "Transport Company" ) {
-        setTransportCompany(transportCompanies);
-        setRiders([]);
-      } else if (value === "Hail Taxi on Fasta") {
-        setRiders(transporters);
-        setTransportCompany([]);
-      } else {
-        setRiders([]);
-        setTransportCompany([]);
-      }
-    } catch (error) {
-      return error;
-    }
-  };
-
-  const { register, handleSubmit, errors } = useForm({ validateCriteriaMode: "all" });
-  const onSubmit = () => {
-    // console.log(data);
-    Router.push("/trips/ongoing-trip");
-  };
-
-  const trip = trips[id];
+  // const trip = trips[id];
 
   const makeProvider = (e) => {
     const {providerID} = e.target;
@@ -91,7 +74,8 @@ const Trip = (props) => {
     <Layout header="Start trip" back>
     <div className="absolute top-0 right-0 w-screen pb-24">
       {/* Add google map to MapCard */}
-      <MapCard />
+      <div><Map lat={location.lat} lng={location.lng} /></div>
+      {/* <MapCard /> */}
       <div className="px-4">
         <form onSubmit={handleSubmit(onSubmit)}>
 
@@ -101,11 +85,11 @@ const Trip = (props) => {
           */}
           <LocationInput
             label="start position"
-            input={trip.origin}
+            input={trip && trip.origin}
           />
           <LocationInput
             label="end position"
-            input={trip.destination}
+            input={trip && trip.destination}
           />
 
           <p style={{ color: "#2699FB" }} className="text-xs mb-2">

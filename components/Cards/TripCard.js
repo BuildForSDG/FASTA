@@ -198,7 +198,7 @@ const TripCard = (props) => {
       </p>
       <TextSmall color="#6C6C6C">{props.tripDuration}</TextSmall>
 
-      <Link href="/trips/ongoing-trip" as={`/trips/${props.id}`}>
+      <Link href="/trips/[id]" as={`/trips/${props.id}`}>
         <a>
           <p style={{ color: "#43A047" }} className="text-center uppercase font-bold text-xs mt-3">
             Start trip now

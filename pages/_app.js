@@ -28,7 +28,7 @@ export default function MyApp({ Component, pageProps }) {
     if (localStorage.getItem("user")) {
       setUser(JSON.parse(localStorage.getItem("user")));
       setToken(JSON.parse(localStorage.getItem("token")));
-      setToken(JSON.parse(localStorage.getItem("loggedIn")));
+      setLoggedIn(JSON.parse(localStorage.getItem("loggedIn")));
     } else {
       setUser(defaultUser);
     }

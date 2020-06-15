@@ -64,7 +64,7 @@ const onSubmit = (data) => {
   // console.log(data);
   signIn(data);
 };
-console.log("token:" , token);
+// console.log("token:" , token);
 
 useEffect(() => {
   localStorage.setItem("user", JSON.stringify(user)); 

@@ -81,7 +81,8 @@ const NewTrip = (props) => {
   // const key= "AIzaSyDWLwUNUCh-ON8nTTvdKd6VVlDZDquwi-I";
   const distancePath = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&";
   const placesPath = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=";
-
+  const transporterPath = `https://maps.googleapis.com/maps/api/place/textsearch/json?location`;
+  const locationStr = "=&radius=1000&sensor=true&query=transport&key=";
 //   distance.key(key);
 // var origins = ['San Francisco CA'];
 // var destinations = ['New York NY', '41.8337329,-87.7321554'];
@@ -124,6 +125,23 @@ const NewTrip = (props) => {
     console.log(e);    
     setLoading(true);
     (async () => {
+      try {
+        const transporter = await fetch(`${transporterPath}${origin.lat},${origin.lng}${locationStr}${key}`)
+        const transporterResponse = await transporter.json();
+        console.log(transporterResponse.results);
+        // const transporterList = transporterResponse.results.slice(0, 5).map(t => {
+        const transporterList = transporterResponse.results.map(t => {
+          t.name,
+          t.formatted_adddress,
+          t.geometry
+          t.icon
+        });
+        console.log(transporterList);
+        // return;
+      } catch(e) {
+        console.log(e);
+      }
+
       const distanceUrl = `${distancePath}origins=${origin.lat},${origin.lng}&destinations=${destination.lat},${destination.lng}&key=${key}`;
       try {
         // const distanceMatrixResponse  = await handleFetch(`${apiUrl}/trip-distance`, 'POST', {origin, destination});
@@ -167,6 +185,26 @@ const NewTrip = (props) => {
       setLoading(false);
       // console.log("Trip has been scheduled");
     })();
+    
+    (async () => {
+      // try {
+      //   const transporter = await fetch(`${transporterPath}6.3,3.3${locationStr}${key}`)
+      //   const transporterResponse = await transporter.json();
+      //   // console.log(transporterResponse);
+      //   const transporterList = transporterResponse.slice(0, 5).map(t => {
+      //     t.name,
+      //     t.formatted_adddress,
+      //     t.geometry
+      //     t.icon
+      //   });
+      //   console.log(transporterList);
+
+      //   return;
+      // } catch(e) {
+      //   console.log(e);
+      // }
+    })();
+
   };
 
   return (
@@ -291,6 +329,7 @@ const NewTrip = (props) => {
               options={[
                 "Driving",
                 "Walking",
+                "Bicycling",
                 "Transit"
               ]}
               ref={register({

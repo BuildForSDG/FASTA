@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { TextSmall } from "../../Text/Body";
+import { H3 } from "../../Text/Headings";
 
 const ReportBody = styled.div`
   background-color: #fff;

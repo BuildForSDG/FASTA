@@ -3,7 +3,8 @@ import React from "react";
 import styled from "styled-components";
 import Link from "next/link";
 import Report from "./Report";
-import { H3 } from "../../Text/Headings";
+import { TextSmall } from "../../Text/Body";
+// import { H3 } from "../../Text/Headings";
 
 const Text = styled(TextSmall)`
   font-size: 20px;
