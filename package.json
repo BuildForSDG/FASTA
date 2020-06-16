@@ -71,5 +71,6 @@
     "fs": false,
     "path": false,
     "os": false
-  }
+  },
+  "proxy": "https://www.google.com"
 }

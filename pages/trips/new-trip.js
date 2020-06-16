@@ -5,6 +5,9 @@ import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import { useForm, ErrorMessage } from "react-hook-form";
 import Router from "next/router";
 import BeatLoader from "react-spinners/BeatLoader";
+import { toast } from "react-nextjs-toast";
+
+const handleToast = (msg, type = "info") => toast.notify(msg, { duration: 5, type });
 // import distance from 'google-distance-matrix';
 // import places from "./places";
 // import distanceData from "./distanceMatrix";
@@ -83,11 +86,6 @@ const NewTrip = (props) => {
   const placesPath = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=";
   const transporterPath = `https://maps.googleapis.com/maps/api/place/textsearch/json?location`;
   const locationStr = "=&radius=1000&sensor=true&query=transport&key=";
-//   distance.key(key);
-// var origins = ['San Francisco CA'];
-// var destinations = ['New York NY', '41.8337329,-87.7321554'];
- 
-// distance.matrix(origins, destinations, function (err, distances) {
 //     if (!err)
 //         console.log(distances);
 // })
@@ -98,14 +96,9 @@ const NewTrip = (props) => {
     console.log(name, val);
     const placesUrl = `${placesPath}${val}&key=${key}`;
     try {
-        // const placeResponse = await handleFetch(`${apiUrl}/getplaces/${val}`, 'GET');
-        const place = await fetch(placesUrl
-          // , {method: "GET", mode: "cors", credentials: "include",
-        // headers: { "Content-Type": "application/json", "Accept": "*" } }
-        );
+        const place = await fetch(`${apiUrl}/getplaces/${val}`);
         const placeResponse = await place.json();
         console.log(placeResponse);
-        // console.log(places[val]);
         if (name === "origin") {
           setOrigin(placeResponse.results[0].geometry.location);
         } else if (name === "destination") {
@@ -115,7 +108,8 @@ const NewTrip = (props) => {
         }
         return;
     } catch(e) {
-      console.log(e);
+      // console.log(e);
+      // handleToast("Error in connection", "error");
     }
   };
 
@@ -126,10 +120,9 @@ const NewTrip = (props) => {
     setLoading(true);
     (async () => {
       try {
-        const transporter = await fetch(`${transporterPath}${origin.lat},${origin.lng}${locationStr}${key}`)
-        const transporterResponse = await transporter.json();
+        const transporter = await handleFetch(`${apiUrl}/gettransporters`, 'POST', {origin});
+        const transporterResponse = transporter.response;
         console.log(transporterResponse.results);
-        // const transporterList = transporterResponse.results.slice(0, 5).map(t => {
         const transporterList = transporterResponse.results.map(t => {
           t.name,
           t.formatted_adddress,
@@ -139,18 +132,14 @@ const NewTrip = (props) => {
         console.log(transporterList);
         // return;
       } catch(e) {
-        console.log(e);
+        // console.log(e);
+        // handleToast("Error in connection", "error");
       }
 
       const distanceUrl = `${distancePath}origins=${origin.lat},${origin.lng}&destinations=${destination.lat},${destination.lng}&key=${key}`;
       try {
-        // const distanceMatrixResponse  = await handleFetch(`${apiUrl}/trip-distance`, 'POST', {origin, destination});
-          const distanceMatrix = await fetch(distanceUrl);
-          const distanceMatrixResponse = await distanceMatrix.json();
-          // console.log(distanceMatrixResponse);
-          // console.log(distanceData, distanceData.rows[0].elements[0], distanceUrl);
-          // const { distance, duration } = distanceData.rows[0].elements[0];
-          // const { origin_addresses, destination_addresses } = distanceData;
+        const distanceMatrix  = await handleFetch(`${apiUrl}/getdistances`, 'POST', {origin, destination});
+          const distanceMatrixResponse = distanceMatrix.response;
           console.log(distanceMatrixResponse, distanceMatrixResponse.rows[0].elements[0], distanceUrl);
           const { distance, duration } = distanceMatrixResponse.rows[0].elements[0];
           const { origin_addresses, destination_addresses } = distanceMatrixResponse;
@@ -176,33 +165,15 @@ const NewTrip = (props) => {
           } else {
             setLoading(false);
             setScheduled(false);
+            return;
           }
-          return;
       } catch(e) {
-        console.log(e);
+        // console.log(e);
+        // handleToast("Error in connection", "error");
+        return;
       }
-      console.log(distanceUrl);
-      setLoading(false);
-      // console.log("Trip has been scheduled");
-    })();
-    
-    (async () => {
-      // try {
-      //   const transporter = await fetch(`${transporterPath}6.3,3.3${locationStr}${key}`)
-      //   const transporterResponse = await transporter.json();
-      //   // console.log(transporterResponse);
-      //   const transporterList = transporterResponse.slice(0, 5).map(t => {
-      //     t.name,
-      //     t.formatted_adddress,
-      //     t.geometry
-      //     t.icon
-      //   });
-      //   console.log(transporterList);
-
-      //   return;
-      // } catch(e) {
-      //   console.log(e);
-      // }
+      // console.log(distanceUrl);
+      // setLoading(false);
     })();
 
   };
