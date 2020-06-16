@@ -16,6 +16,9 @@ dotenv.config();
 
 const distancePath = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&";
 const placesPath = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=";
+const transporterPath = `https://maps.googleapis.com/maps/api/place/textsearch/json?location`;
+const locationStr = "=&radius=1000&sensor=true&query=transport&key=";
+
 const router = express.Router();
 
 console.log((process.env.TEST_KEY ? "keyTrue" : "keyFalse"));
@@ -24,8 +27,10 @@ console.log((process.env.TEST_KEY ? "keyTrue" : "keyFalse"));
 router.post("/location-transporter", (req, res) => {
   const trip = new TripInfo(req.body.latitude, req.body.longitude, req.body.method);
   const locationTrnasporter = trip.getPlaces();
-
+console.log(locationTrnasporter);
   locationTrnasporter.then((data) => {
+console.log(data);
+
     res.send({ data });
   });
 });
@@ -177,7 +182,7 @@ router.get("/trips/:id", authChecker, async (req, res) => {
         response: trip
       });
     }).catch((e) => {
-      res.status(500).json({ e: e.message });
+      return res.status(500).json({ e: e.message });
     });
 });
 
@@ -190,13 +195,56 @@ router.get("/getplaces/:val", async (req, res) => {
           await axios
           .get(placesUrl)
           .then((response) => {
-            console.log(response);
-            return res.json({response});
+            // console.log(response.data);
+            return res.json(response.data);
           })
-          .catch((e) => console.log(e));
+          .catch((e) => {
+            return res.status(500).json({ e: e.message });
+          });
       } catch (e) {
-        res.status(500).json({ e: e.message });
+        return res.status(500).json({ e: e.message });
       }
 });
+
+
+router.post("/getdistances/", async (req, res) => {
+    const { origin, destination } = req.body;
+    console.log(req.body);
+    const distancesUrl = `${distancePath}origins=${origin.lat},${origin.lng}&destinations=${destination.lat},${destination.lng}&key=${process.env.TEST_KEY}`;
+
+      try {
+          await axios
+          .get(distancesUrl)
+          .then((response) => {
+            // console.log(response.data);
+            return res.json(response.data);
+          })
+          .catch((e) => {
+            return res.status(500).json({ e: e.message });
+          });
+      } catch (e) {
+        return res.status(500).json({ e: e.message });
+      }
+});
+
+router.post("/gettransporters", async (req, res) => {
+    const { origin } = req.body;
+    console.log(req.body);
+    const transportersUrl = `${transporterPath}${origin.lat},${origin.lng}${locationStr}${process.env.TEST_KEY}`;
+
+      try {
+          await axios
+          .get(transportersUrl)
+          .then((response) => {
+            // console.log(response.data);
+            return res.json(response.data);
+          })
+          .catch((e) => {
+            return res.status(500).json({ e: e.message });
+          });
+      } catch (e) {
+        return res.status(500).json({ e: e.message });
+      }
+}); 
 
 module.exports = router;
