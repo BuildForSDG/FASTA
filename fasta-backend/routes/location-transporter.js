@@ -109,7 +109,7 @@ router.post("/schedule-a-trip", async (req, res) => {
 // add the authChecker for authentication before, endpoint will list all the schecduled trip
 router.get("/trips", async (req, res) => {
   await ScheduleTrip.find()
-    .select("_id mode origin destination isVulnerable tripDistance tripTime date")
+    .select()
     .exec()
     .then((allTrips) => {
       if (!allTrips || allTrips < 1) {

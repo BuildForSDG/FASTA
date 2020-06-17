@@ -1,16 +1,45 @@
+/* eslint-disable no-plusplus */
+/* eslint-disable max-len */
 /* eslint-disable no-unused-vars */
 /* eslint-disable consistent-return */
 const express = require("express");
-const { SphericalUtil, PolyUtil } = require("node-geometry-library");
+const axios = require("axios");
+const { PolyUtil } = require("node-geometry-library");
 const ScheduleTrip = require("../models/trip");
 const Reports = require("../models/report");
 
 const router = express.Router();
 
 router.get("/trip-info/:tripId", async (req, res) => {
-// get all the report locations
+  // get all the report locations
   const reports = [];
-  let tripDirection;
+  const reportsInLocation = [];
+  const tripDirection = [];
+  let inPath;
+  let locationReport;
+
+  // get direction from origin to destination
+  const getDirection = async (request, cb) => {
+    // const { mode, origin, destinationLatLng } = request;
+    console.log(`mode:${request.mode}`);
+    await axios
+      .get(
+        `https://maps.googleapis.com/maps/api/directions/json?origin=${request.origin}&destination=${request.destination}&key=${process.env.TEST_KEY}`
+      )
+      .then((response) => {
+        console.log(response.data);
+        if (response.data.length <= 0) {
+          return res.json({ error: response.data.error_message });
+        }
+        console.log(response.data);
+        cb(response.data);
+      })
+      .catch((error) => {
+        throw new Error("Error fetching data");
+      });
+  };
+
+  // try to get all the report location coordinates to check if it falls on the trip path
   await Reports.find()
     .select("-_id location")
     .exec()
@@ -30,44 +59,80 @@ router.get("/trip-info/:tripId", async (req, res) => {
     });
 
   // get schedule trip Id
+
   await ScheduleTrip.findById({ _id: req.params.tripId })
-    .select("-_id origin destination")
+    .select("-_id mode originLatLng destinationLatLng ")
     .exec()
     .then((trip) => {
+      // console.log(trip);
       if (!trip || trip < 1) {
         return res.status(404).json({ response: "unfortunetly, we dont have any report location schedule for you, check back" });
       }
-      tripDirection = trip;
+
+      console.log(trip);
+      // const getTrips = {
+      //   origin: { lat: 5.675, lng: 7.096 },
+      //   destination: { lat: 6.074, lng: 8.435 },
+      //   mode: "driving"
+      // };
+
+      const getTrips = {
+        origin: trip.originLatLng,
+        destination: trip.destinationLatLng,
+        mode: "driving"
+      };
+        // console.log(getTrips.origin);
+      getDirection(getTrips, (response) => {
+        // console.log(getTrips);
+        if (!response || response < 1) {
+          return res.status(404).json({ response: "empty response" });
+        }
+        console.log(response);
+        tripDirection.push(response);
+
+        const reportInTrip = tripDirection.map((report) => {
+          locationReport = PolyUtil.isLocationOnEdge(report, tripDirection);
+          return locationReport ? reportsInLocation.push(reports) : [];
+        });
+        reportInTrip.map((location) => {
+          if (!location) {
+            Reports.find({ location })
+              .select("-_id type description date")
+              .exec()
+              .then((incidence) => {
+                if (!incidence || incidence < 0) {
+                  return res.status(404).json({ response: "empty response" });
+                }
+                // return res.status(200).json({ response: incidence });
+                console.log(incidence);
+              });
+          }
+          return null;
+        });
+      });
     })
     .catch((error) => {
+      console.log(error);
       res.status(500).json({ error });
     });
 
-  try {
-    // get trip directions as polygon
-    const polygon = await PolyUtil.encode(reports);
 
-    // get the incidence report that falls on the trip direction
-    const incidence = await PolyUtil.containsLocation(tripDirection, polygon);
-    if (incidence) {
-      await Reports.find()
-        .select()
-        .exec()
-        .then((allReports) => {
-          if (!allReports || allReports < 1) {
-            return res.status(404).json({ response: "unfortunetly, we dont have any report location schedule for you, check back" });
-          }
-          res.status(200).json({ response: allReports });
-        })
-        .catch((error) => {
-          res.status(500).json({ error });
-        });
-    } else {
-      res.send("Trip does match any incidence");
-    }
-  } catch (err) {
-    // empty
-  }
+  // try {
+  //   for (let i = 0; i < reportsInLocation.length; i++) {
+  //     inPath = reportsInLocation[i];
+  //     Reports.find({ location: inPath })
+  //       .select("-_id type description date")
+  //       .exec()
+  //       .then((incidence) => {
+  //         if (!incidence || incidence < 0) {
+  //           return res.status(404).json({ response: "empty response" });
+  //         }
+  //         return res.status(200).json({ response: incidence });
+  //       });
+  //   }
+  // } catch (e) {
+  //   console.log(e);
+  // }
 });
 
 module.exports = router;

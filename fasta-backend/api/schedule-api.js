@@ -16,6 +16,7 @@ const axiosInstance = axios.create(defaultConfig);
 // instantiate the google http client
 const client = new Client({ axiosInstance });
 
+
 // distance and directions metric
 function TripMetrix(origin, destination) {
   this.origin = origin;
