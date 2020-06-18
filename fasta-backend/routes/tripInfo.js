@@ -21,13 +21,14 @@ router.get("/trip-info/:tripId", async (req, res) => {
   // get direction from origin to destination
   const getDirection = async (request, cb) => {
     // const { mode, origin, destinationLatLng } = request;
-    console.log(`mode:${request.mode}`);
+    // console.log(`mode:${request}`);
+    console.log(request);
     await axios
       .get(
         `https://maps.googleapis.com/maps/api/directions/json?origin=${request.origin}&destination=${request.destination}&key=${process.env.TEST_KEY}`
       )
       .then((response) => {
-        console.log(response.data);
+        console.log(response.data); 
         if (response.data.length <= 0) {
           return res.json({ error: response.data.error_message });
         }
@@ -61,27 +62,31 @@ router.get("/trip-info/:tripId", async (req, res) => {
   // get schedule trip Id
 
   await ScheduleTrip.findById({ _id: req.params.tripId })
-    .select("-_id mode originLatLng destinationLatLng ")
+    // .select("-_id mode originLatLng destinationLatLng isVulnerable")
+    .select()
     .exec()
     .then((trip) => {
       // console.log(trip);
       if (!trip || trip < 1) {
-        return res.status(404).json({ response: "unfortunetly, we dont have any report location schedule for you, check back" });
-      }
-
-      console.log(trip);
+        return res.status(404).json({ response: "unfortunately, we dont have any report location schedule for you, check back" });
+      } 
+ 
+      console.log(trip, trip.originLatLng);
+      const newTrip = trip;
       // const getTrips = {
       //   origin: { lat: 5.675, lng: 7.096 },
       //   destination: { lat: 6.074, lng: 8.435 },
       //   mode: "driving"
       // };
 
+      const { mode, originLatLng, destinationLatLng, userId } = trip;
       const getTrips = {
-        origin: trip.originLatLng,
-        destination: trip.destinationLatLng,
-        mode: "driving"
-      };
-        // console.log(getTrips.origin);
+        origin: originLatLng,
+        destination: destinationLatLng,
+        userId,
+        mode
+      }; 
+        console.log(getTrips);
       getDirection(getTrips, (response) => {
         // console.log(getTrips);
         if (!response || response < 1) {
@@ -113,7 +118,7 @@ router.get("/trip-info/:tripId", async (req, res) => {
     })
     .catch((error) => {
       console.log(error);
-      res.status(500).json({ error });
+      return res.status(500).json({ error });
     });
 
 
