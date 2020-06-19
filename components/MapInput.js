@@ -35,8 +35,8 @@ const InputFieldStyle = styled(MapInputStyle)`
 export const TypeInput = React.forwardRef((props, ref) => {
   return (
     <InputFieldStyle className="mb-4 py-2 px-4">
-      {/* <AutoComplete ref={ref} placeholder={props.placeholder} onSelect={props.onSelect} /> */}
-      <input ref={ref} type={props.type} name={props.name} placeholder={props.placeholder} onChange={props.onChange} onBlur={props.onBlur} />
+      {/* <input ref={ref} type={props.type} name={props.name} placeholder={props.placeholder} onChange={props.onChange} onBlur={props.onBlur} onKeyUp={props.onKeyUp} /> */}
+      <input ref={ref} type={props.type} name={props.name} placeholder={props.placeholder} onChange={props.onChange} />
     </InputFieldStyle>
   );
 });

@@ -16,10 +16,13 @@ const Reports = (props) => {
   return (
     <div>
       <Text color="#232323">Reports in your area</Text>
-      {props.reports && props.reports.slice(0,2).map((report) => (
+      {props.reports && !props.reports.length ?
+       <div>No reports available at the moment!</div>:
+      <div>{props.reports && props.reports.slice(0,2).map((report) => (
       <Report key={report._id} report={report} />
       ))}      
-
+      </div>}
+      
       <Link href="/report">
         <a>
         <TextSmall color="#2699fb">See All Reports</TextSmall>

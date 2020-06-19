@@ -25,8 +25,8 @@
     "google-map-react": "^1.1.7",
     "html-webpack-plugin": "^4.3.0",
     "next": "9.3.6",
-    "next-pwa": "^2.5.0",
     "next-env": "^1.1.1",
+    "next-pwa": "^2.5.0",
     "node-fetch": "^2.6.0",
     "react": "16.13.1",
     "react-cool-onclickoutside": "^1.4.8",
@@ -34,6 +34,7 @@
     "react-google-places-autocomplete": "^2.0.6",
     "react-hook-form": "^5.6.3",
     "react-nextjs-toast": "^1.0.7",
+    "react-places-autocomplete": "^7.2.1",
     "react-spinners": "^0.8.3",
     "react-toastify": "^6.0.2",
     "styled-components": "^5.1.0",
@@ -71,6 +72,5 @@
     "fs": false,
     "path": false,
     "os": false
-  },
-  "proxy": "https://www.google.com"
+  }
 }

@@ -6,21 +6,19 @@ import ReactMap from "google-map-react";
 
 const MapComponent = ({ text }) => <div>{text}</div>;
 
-const Map = (props) => {
-  const [pointer, setPointer] = useState({lat: props.lat, lng: props.lng})
+const Map = ({ lat, lng }) => {
+  const [pointer, setPointer] = useState({lat, lng})
   const defaultProps = {
     center: {
-      lat: props.lat,
-      lng: props.lng
+      lat,
+      lng
     },
-    zoom: 15
+    zoom: 18
   };
-  //  console.log(process.env.apiKey);
-  console.log(props);
 
   useEffect(() => {
-    setPointer({lat: props.lat, lng: props.lng});
-  },[props]);
+    setPointer({lat, lng});
+  },[lat, lng]);
 
   return (
     <div style={{ height: "30vh", width: "100%" }}>
@@ -29,7 +27,7 @@ const Map = (props) => {
         defaultCenter={defaultProps.center}
         defaultZoom={defaultProps.zoom}
       >
-        <MapComponent lat={props.lat} lng={props.lng} text="Map View" />
+        <MapComponent lat={lat} lng={lng} text="Map View" />
       </ReactMap>
     </div>
   );

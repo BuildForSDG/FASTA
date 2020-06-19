@@ -24,6 +24,7 @@ const MainStyle = styled.main`
 const Login = ({loggedIn, setLoggedIn, user, setUser, getUrl, handleToast, token, setToken }) => {
   // console.log("loggedIn:", loggedIn);
   const [loading, setLoading] = useState(false);
+  const [update, setUpdate] = useState(false);
   
   const { register, handleSubmit, errors } = useForm({ validateCriteriaMode: "all" });
  
@@ -45,6 +46,7 @@ try {
       if (res.status === 200) {
         setLoggedIn(true);
         setToken(response.token);
+        setUpdate(!update);
         setUser({name: response.user.fullname.split(" ")[0], email: ev.email, phonenumber: response.user.phonenumber});
         // setUser(response.fullname);
         handleToast(response.response, "success");
@@ -70,7 +72,7 @@ useEffect(() => {
   localStorage.setItem("user", JSON.stringify(user)); 
   localStorage.setItem("token", JSON.stringify(token)); 
   localStorage.setItem("loggedIn", JSON.stringify(loggedIn)); 
-}, [user]);
+}, [update]);
 
 
   if (loggedIn) {

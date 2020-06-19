@@ -168,6 +168,7 @@ const DeleteButton = (props) => {
 };
 
 const TripCard = (props) => {
+  console.log(props);
   console.log(props.trips);
   return (
     <TripCardStyle className="mb-5 p-4 pr-5">

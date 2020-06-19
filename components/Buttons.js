@@ -95,7 +95,7 @@ export const NewReportButton = (props) => {
   );
 };
 
-export const NewTripButton = () => {
+export const NewTripButton = (props) => {
   return (
     <Link href="/trips/new-trip">
       <a>

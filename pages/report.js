@@ -50,11 +50,15 @@ const Reports = ({getUrl, handleToast, reports, setReports, location}) => {
     return () => {
       // cleanup
     };
-  }, [location]);
+  }, []);
 
   return (
     <Layout header="Reports" back >
-      {!reports && <div>No reports available!</div>}
+      {reports && !reports.length ?
+       <div>No reports available at the moment!</div>:
+      <div>    
+
+      {/* {!reports && <div>No reports available!</div>} */}
       {reports && reports.map((report) => (
       <ReportCard 
       key={report._id}
@@ -68,6 +72,8 @@ const Reports = ({getUrl, handleToast, reports, setReports, location}) => {
       details
       />
       ))}
+      </div>}
+
       <NewReportButton getUrl={getUrl} handleToast={handleToast} />
     </Layout>
   );

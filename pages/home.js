@@ -4,7 +4,7 @@ import Router from "next/router";
 import Head from "next/head";
 import Homepage from "../components/Homepage/Homepage";
 
-const Home = ({ loggedIn, user, located, setLocated, location, setLocation, getUrl, trips, setTrips, reports, setReports, token }) => {
+const Home = ({ loggedIn, setLoggedIn, user, located, setLocated, location, setLocation, getUrl, trips, setTrips, reports, setReports, token }) => {
   // console.log("loggedIn:", loggedIn);
   // const name = user.fullname.split(" ")[0];
 
@@ -21,7 +21,10 @@ const Home = ({ loggedIn, user, located, setLocated, location, setLocation, getU
         <link rel="icon" href="/images/Logo.png" />
       </Head>
       <div className="">
-        <Homepage user={user} 
+        <Homepage 
+        user={user} 
+        loggedIn={loggedIn}
+        setLoggedIn={setLoggedIn}
         located={located} 
         setLocated={setLocated} 
         location={location}

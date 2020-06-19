@@ -15,6 +15,7 @@ import { Grid, TransportCompany, TransportProvider } from "../../components/Card
 
 
 const Trip = (props) => {
+  console.log(props);
   const [trip, setTrip] = useState(null);
   const [location, setLocation] = useState({lat: 5.4, lng: 3.2});
   // set riders, providers and transport companies from api
@@ -29,7 +30,9 @@ const Trip = (props) => {
     // effect
     props.setTrips(props.trips);
   const trip = props.trips.filter(x => x["_id"] === id);
-  setTrip(trip[0]);
+  // const trip = {_id:  "5ee8e622eedc07001766d350", mode: "road", origin: "Sagamu", originLatLng: "Object", lat: 6.8322014, lng: 3.6319131, originLocation: "32 Deeper Life S, Sabo, Sagamu, Nigeria", destination: "Lagos", destinationLatLng: Object, destinationLocation: "21 Kayode St, Abule ijesha 100001, Lagos, Nigeria", isVulnerable: "Regular user", tripDistance: "46.3 mi", tripDuration: "1 hour 30 mins", tripTime: "2020-06-16T17:32", userId: "5ec5006bd26329001715617d", date: "2020-06-16T15:32:50.100+00:00"};  
+  
+    setTrip(trip[0]);
     console.log(trip, props.getTrips);
     return () => {
       // cleanup
@@ -72,9 +75,9 @@ const Trip = (props) => {
 
   return (
     <Layout header="Start trip" back>
-    <div className="absolute top-0 right-0 w-screen pb-24">
+    <div className="absolute top-20 right-0 w-screen pb-24">
       {/* Add google map to MapCard */}
-      <div><Map lat={location.lat} lng={location.lng} /></div>
+      <div><Map lat={props.location && props.location.lat} lng={props.location && props.location.lng} /></div>
       {/* <MapCard /> */}
       <div className="px-4">
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -174,20 +177,19 @@ const Trip = (props) => {
           </p>
 
           {/* Add ref from react-hook-forms */}
-          <SelectInput placeholder="-- Condition --"
-            name="condition"
-            options={[
-              "None",
-              "Blind",
-              "Deaf",
-              "Pregnant",
-              "Cripple",
-              "Lame"
-            ]}
-            ref={register({
-              required: "Please select a condition or none"
-            })}
-          />
+          <SelectInput placeholder="--Category--"
+              name="condition"
+              options={[
+                "Regular user",
+                "Children below 15 years",
+                "Adults above 60 years",
+                "Pregnant",
+                "Have some disability",
+              ]}
+              ref={register({
+                required: "Please select a category"
+              })}
+            />
           <ErrorMessage errors={errors} name="condition">
             {({ messages }) =>
               messages &&

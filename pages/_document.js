@@ -20,7 +20,7 @@ export default class MyDocument extends Document {
         styles: (
           <>
             <Head>
-              <meta charset="utf-8" />
+              <meta charSet="utf-8" />
               <meta http-quiv="x-UA-Compatible" content="IE=edge" />
               <meta
                 name="viewport"

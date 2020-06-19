@@ -1,20 +1,19 @@
 /* eslint-disable prettier/prettier */
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
-import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
+import PlacesAutocomplete, {
+  geocodeByAddress,
+  getLatLng,
+ } from 'react-places-autocomplete';
 import { useForm, ErrorMessage } from "react-hook-form";
 import Router from "next/router";
 import BeatLoader from "react-spinners/BeatLoader";
 import { toast } from "react-nextjs-toast";
 
 const handleToast = (msg, type = "info") => toast.notify(msg, { duration: 5, type });
-// import distance from 'google-distance-matrix';
-// import places from "./places";
-// import distanceData from "./distanceMatrix";
 
 import Layout from "../../components/Layout";
 import { SubmitButton, LoaderContainer } from "../../components/Buttons";
-// import MapCard from "../../components/Cards/MapCard";
 import Map from "../../components/Map";
 import { TypeInput, SelectInput} from "../../components/MapInput";
 
@@ -35,83 +34,116 @@ const handleFetch = async (url, method, body, token) => {
 const NewTrip = (props) => {
   const [loading, setLoading] = useState(false);
   const [scheduled, setScheduled] = useState(false);
-  const [origin, setOrigin] = useState("");
-  const [destination, setDestination] = useState("");
+  const [origin, setOrigin] = useState({});
+  const [originText, setOriginText] = useState("");
+  const [destination, setDestination] = useState({});
+  const [destinationText, setDestinationText] = useState("");
+  // const [address, setAddress] = useState({});
  
   if (scheduled) {
     Router.push("/trip");
   }
 
   const apiUrl = props.getUrl();
-  // const apiUrl = "http://localhost:8080/api/v1";
+  const key= "AIzaSyAm00Wsdh6jJB2QzlW5c6t_nu0gMRAZB9s";
+  const scriptUrl = `https://maps.googleapis.com/maps/api/js?key=${key}&libraries=places`;
+
+  console.log(props.location);
 
   useEffect(() => {
     // effect
-    const loadScript = (url) => {
-      let script = document.createElement("script");
-      script.type = "text/javascript";
     
-      if (script.readyState) {
-        script.onreadystatechange = function() {
-          if (script.readyState === "loaded" || script.readyState === "complete") {
-            script.onreadystatechange = null;
-            console.log('script-1');
-          }
-        };
-      } else {
-        script.onload = () => console.log('script-2');
-      }
-    
-      script.src = url;
-      document.getElementsByTagName("head")[0].appendChild(script);
-    };
-
-    // loadScript(
-    //   `https://maps.googleapis.com/maps/api/js?key=${key}&libraries=places`);
     return () => {
-      // cleanup
+    //   // cleanup
     };
   }, []);
 
   const { register, handleSubmit, errors } = useForm({ validateCriteriaMode: "all" });
 
+  const renderFuncOrigin = ({ getInputProps, getSuggestionItemProps, suggestions, loading }) => (
+    <div>
+      <TypeInput {...getInputProps()}
+                      type="text"
+                      name="origin"
+                      placeholder="Start from ..."
+                      ref={register({
+                        required: "Please enter your takeoff location"
+                      })}
+                    />
+            <ErrorMessage errors={errors} name="origin">
+            {({ messages }) =>
+              messages &&
+              Object.entries(messages).map(([type, message]) => (
+                <p key={type} className="text-xs text-red-500 text-center my-2">
+                  {message}
+                </p>
+              ))}
+            </ErrorMessage>      
+            <div>
+        {loading && <div>Loading...</div>}
+        {suggestions.map(suggestion => {
+          const style = { backgroundColor: suggestion.active ? "#fafafa" : "#fff"}
+          return (<div {...getSuggestionItemProps(suggestion, { style })}>
+            <span>{suggestion.description}</span>
+          </div>)
+        })}
+      </div>
+    </div>
+  );
 
-  const location = {lat: 6.33, lng: 3.33};
-  console.log(location, props);
-  // path: `transport&location=${this.latitude},${this.longitude}&radius=10000&
-  
-  const key= "AIzaSyAm00Wsdh6jJB2QzlW5c6t_nu0gMRAZB9s";
-  // const key= "AIzaSyDWLwUNUCh-ON8nTTvdKd6VVlDZDquwi-I";
-  const distancePath = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&";
-  const placesPath = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=";
-  const transporterPath = `https://maps.googleapis.com/maps/api/place/textsearch/json?location`;
-  const locationStr = "=&radius=1000&sensor=true&query=transport&key=";
-//     if (!err)
-//         console.log(distances);
-// })
+  const renderFuncDestination = ({ getInputProps, getSuggestionItemProps, suggestions, loading }) => (
+    <div>
+      <TypeInput {...getInputProps()}
+                      type="text"
+                      name="destination"
+                      placeholder="Stop at ..."
+                      ref={register({
+                        required: "Please enter your preferred destination"
+                      })}
+                    />
+            <ErrorMessage errors={errors} name="destination">
+            {({ messages }) =>
+              messages &&
+              Object.entries(messages).map(([type, message]) => (
+                <p key={type} className="text-xs text-red-500 text-center my-2">
+                  {message}
+                </p>
+              ))}
+            </ErrorMessage>      
+            <div>
+        {loading && <div>Loading...</div>}
+        {suggestions.map(suggestion => {
+          const style = { backgroundColor: suggestion.active ? "#fafafa" : "#fff"}
+          return (<div {...getSuggestionItemProps(suggestion, { style })}>
+            <span>{suggestion.description}</span>
+          </div>)
+        })}
+      </div>
+    </div>
+  );
 
-  const onBlur = async (e) => {
-    const name = e.target.name; 
-    const val = e.target.value;
-    console.log(name, val);
-    const placesUrl = `${placesPath}${val}&key=${key}`;
-    try {
-        const place = await fetch(`${apiUrl}/getplaces/${val}`);
-        const placeResponse = await place.json();
-        console.log(placeResponse);
-        if (name === "origin") {
-          setOrigin(placeResponse.results[0].geometry.location);
-        } else if (name === "destination") {
-          setDestination(placeResponse.results[0].geometry.location);
-        } else {
-        console.log(origin, destination, placesUrl);
-        }
-        return;
-    } catch(e) {
-      // console.log(e);
-      // handleToast("Error in connection", "error");
-    }
-  };
+  // const onBlur = async (e) => {
+  //   const name = e.target.name; 
+  //   const val = e.target.value;
+  //   console.log(name, val);
+  //   // const placesUrl = `${placesPath}${val}&key=${key}`;
+  //   try {
+  //       const place = await fetch(`${apiUrl}/getplaces/${val}`);
+  //       const placeResponse = await place.json();
+  //       console.log(placeResponse);
+  //       if (name === "origin") {
+  //         setOrigin(placeResponse.results[0].geometry.location);
+  //       } else if (name === "destination") {
+  //         setDestination(placeResponse.results[0].geometry.location);
+  //       } else {
+  //       console.log(origin, destination, placesUrl);
+  //       }
+  //       return;
+  //   } catch(e) {
+  //     // console.log(e);
+  //     // handleToast("Error in connection", "error");
+  //   }
+  // };
 
   console.log(origin, destination);
 
@@ -122,33 +154,32 @@ const NewTrip = (props) => {
       try {
         const transporter = await handleFetch(`${apiUrl}/gettransporters`, 'POST', {origin});
         const transporterResponse = transporter.response;
-        console.log(transporterResponse.results);
+        // console.log(transporterResponse.results);
         const transporterList = transporterResponse.results.map(t => {
-          t.name,
-          t.formatted_adddress,
-          t.geometry
-          t.icon
+         
+         const { name, formatted_address, geometry, icon } = t;
+         return {name, formatted_address, geometry, icon };
+         console.log(transporterList);
         });
-        console.log(transporterList);
         // return;
       } catch(e) {
-        // console.log(e);
-        // handleToast("Error in connection", "error");
+        handleToast("Error in connection", "error");
       }
 
-      const distanceUrl = `${distancePath}origins=${origin.lat},${origin.lng}&destinations=${destination.lat},${destination.lng}&key=${key}`;
       try {
         const distanceMatrix  = await handleFetch(`${apiUrl}/getdistances`, 'POST', {origin, destination});
           const distanceMatrixResponse = distanceMatrix.response;
-          console.log(distanceMatrixResponse, distanceMatrixResponse.rows[0].elements[0], distanceUrl);
+          console.log(distanceMatrixResponse, distanceMatrixResponse.rows[0].elements[0]);
           const { distance, duration } = distanceMatrixResponse.rows[0].elements[0];
           const { origin_addresses, destination_addresses } = distanceMatrixResponse;
 
           const tripDetails = {mode: "road", 
-                              origin: e.origin,
+                              // origin: e.origin,
+                              origin: originText,
                               originLatLng: origin,
                               originLocation: origin_addresses[0],
-                              destination: e.destination, 
+                              // destination: e.destination, 
+                              destination: destinationText, 
                               destinationLatLng: destination, 
                               destinationLocation: destination_addresses[0], 
                               isVulnerable: e.condition, 
@@ -156,7 +187,7 @@ const NewTrip = (props) => {
                               tripDuration: duration.text, 
                               tripTime: e.tripTime};
           const newTrip = await handleFetch(`${apiUrl}/schedule-a-trip`, 'POST', tripDetails, props.token);
-          console.log(newTrip);
+          console.log(tripDetails, newTrip);
           if (newTrip.status === 200) {
             setLoading(false);
             setScheduled(true);
@@ -168,22 +199,35 @@ const NewTrip = (props) => {
             return;
           }
       } catch(e) {
-        // console.log(e);
+        console.log(e);
         // handleToast("Error in connection", "error");
         return;
       }
-      // console.log(distanceUrl);
-      // setLoading(false);
     })();
 
   };
 
+  const handleSelectOrigin = async (value) => {
+    const results = await geocodeByAddress(value);
+    const latLng = await getLatLng(results[0]);
+    console.log(latLng);
+    setOriginText(value);
+    setOrigin(latLng);
+  }
+
+  const handleSelectDestination = async (value) => {
+    const results = await geocodeByAddress(value);
+    const latLng = await getLatLng(results[0]);
+    console.log(results, latLng);
+    setDestinationText(value);
+    setDestination(latLng);
+  }
+
   return (
-    <Layout header="Schedule a trip" back>
+    <Layout header="Schedule a trip" url={scriptUrl} back>
       <div className="absolute top-20 right-0 w-screen mb-24">
         {/* Add google map to MapCard */}
-        {/* <div><Map lat={location.lat} lng={location.lng} /></div> */}
-        <div><Map lat={location.lat} lng={location.lng} /></div>
+        <Map lat={props.location &&props.location.lat} lng={props.location && props.location.lng} />
         <div className="px-4">
           <form onSubmit={handleSubmit(onSubmit)}>
             {/* Add click event to LocationInput and make input
@@ -193,87 +237,21 @@ const NewTrip = (props) => {
             <p style={{ color: "#2699FB" }} className="text-xs capitalize mb-2">
               Take-off point
             </p>
-            {/* <GooglePlacesAutocomplete
-              onSelect={console.log}
-              apiKey={key}
-              idPrefix={'1'}
-              renderInput={(props) => (
-                <div className="custom-wrapper">
-                  <TypeInput
-                    type="text"
-                    name="origin"
-                    placeholder="Start from ..."
-                    ref={register({
-                      required: "Please enter your takeoff location"
-                    })}
-                  />
-                </div>
-              )}
-            /> */}
-            <TypeInput
-                    type="text"
-                    name="origin"
-                    placeholder="Start from ..."
-                    ref={register({
-                      required: "Please enter your takeoff location"
-                    })}
-                    onBlur={onBlur}
-                  />
-            <ErrorMessage errors={errors} name="origin">
-            {({ messages }) =>
-              messages &&
-              Object.entries(messages).map(([type, message]) => (
-                <p key={type} className="text-xs text-red-500 text-center my-2">
-                  {message}
-                </p>
-              ))}
-            </ErrorMessage>
-
+            {/* // In render function */}
+            <PlacesAutocomplete value={origin} onChange={setOrigin} onSelect={handleSelectOrigin} >
+              {renderFuncOrigin}
+            </PlacesAutocomplete>
+            
             <p style={{ color: "#2699FB" }} className="text-xs capitalize mb-2">
               Destination
             </p>
-             <TypeInput
-                    type="text"
-                    name="destination"
-                    placeholder="Heading to ..."
-                    ref={register({
-                      required: "Please enter your destination"
-                    })}
-                    onBlur={onBlur}
-                  />
-            {/* <GooglePlacesAutocomplete
-              onSelect={({ description }) => (
-                console.log({ address: description })
-              )}
-              apiKey={key}
-              idPrefix={'1'}
-              renderInput={(props) => (
-                <div className="custom-wrapper">
-                  <TypeInput
-                    type="text"
-                    name="destination"
-                    placeholder="Heading to ..."
-                    ref={register({
-                      required: "Please enter your destination"
-                    })}
-                  />
-                </div>
-              )}
-            /> */}
-              <ErrorMessage errors={errors} name="destination">
-            {({ messages }) =>
-              messages &&
-              Object.entries(messages).map(([type, message]) => (
-                <p key={type} className="text-xs text-red-500 text-center my-2">
-                  {message}
-                </p>
-              ))}
-            </ErrorMessage>
+            <PlacesAutocomplete value={destination} onChange={setDestination} onSelect={handleSelectDestination} >
+              {renderFuncDestination}
+            </PlacesAutocomplete>
 
             <p style={{ color: "#2699FB" }} className="text-xs capitalize mb-2">
               trip date and time
             </p>
-
             {/* Add ref from react-hook-forms */}
             <TypeInput type="datetime-local"
               name="tripTime"
