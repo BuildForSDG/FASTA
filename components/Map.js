@@ -13,7 +13,7 @@ const Map = ({ lat, lng }) => {
       lat,
       lng
     },
-    zoom: 18
+    zoom: 16
   };
 
   useEffect(() => {
