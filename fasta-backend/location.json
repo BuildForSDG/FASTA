@@ -1,0 +1,781 @@
+{
+  "html_attributions" : [],
+  "next_page_token" : "CoQC9gAAAP33ymqRyTnebkYe3ypM2MbbDJnkSZ8LSjZDvi2060q-OPZdU7rCSO9TLktUWTzTU-5rJT5s6a1nGhqH8VSD_3gxBOmlr5BrV-9XXLqhfwJeWRvzkmPPrHLsRjjMmH41IjSB2thRxeZFDh2RKei_DrHTvNPiiRijgr7Lc6cJhXSIb6ehSE9tJmEm00qtH_UKiUsS0xjI7CIv147BGfzj-ZS7yvEsk9WsAViI3Gl3TNvfqdPovrGW9MOjKSUUZ8qU8XmikzXoIRcRYlWq36xStj-LhHCYdwpaZdSO4t-ARnb6L2WPl2nGPhIax2CrITlNSMdTkWCNVgobk3WqaST-JaISELGGALAPpuY9DXeeWxqpS_gaFEFPawUzRdGlZ8xSvhgmD-5KLJ0-",
+  "results" : [
+     {
+        "business_status" : "OPERATIONAL",
+        "formatted_address" : "2a Simbiat Abiola Way, Ikeja, Nigeria",
+        "geometry" : {
+           "location" : {
+              "lat" : 6.594989099999999,
+              "lng" : 3.3385543
+           },
+           "viewport" : {
+              "northeast" : {
+                 "lat" : 6.596339529892721,
+                 "lng" : 3.339916079892723
+              },
+              "southwest" : {
+                 "lat" : 6.593639870107277,
+                 "lng" : 3.337216420107278
+              }
+           }
+        },
+        "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+        "id" : "5548f3e0cf56c5770a3fa75c7c23d8875468f196",
+        "name" : "ABC Transport",
+        "opening_hours" : {
+           "open_now" : true
+        },
+        "photos" : [
+           {
+              "height" : 1080,
+              "html_attributions" : [
+                 "\u003ca href=\"https://maps.google.com/maps/contrib/106022182125952467920\"\u003eTS Tech Talk\u003c/a\u003e"
+              ],
+              "photo_reference" : "CmRaAAAAA7KOVrEuGn9BNi7SJDpUE4R-vCzyTMVqUHpNEQ8A74bI_nTpualILANfmWhm8nQwXJgAfZZtaMi51UNSAz2atIPbCARaVUFi4vkJDf0mPOnzww-2AmXkL8HBlpcVmN-WEhAr2c82IJ_mMjbTJuSlKq8UGhQ5LeYJrcZI1qmA1FsBGuxDCH6eFQ",
+              "width" : 1920
+           }
+        ],
+        "place_id" : "ChIJXQNF3ImROxARLGYvlrlNmEA",
+        "plus_code" : {
+           "compound_code" : "H8VQ+XC Ikeja",
+           "global_code" : "6FR5H8VQ+XC"
+        },
+        "rating" : 3.5,
+        "reference" : "ChIJXQNF3ImROxARLGYvlrlNmEA",
+        "types" : [ "point_of_interest", "establishment" ],
+        "user_ratings_total" : 62
+     },
+     {
+        "business_status" : "OPERATIONAL",
+        "formatted_address" : "164 Okota Rd, Oshodi-Isolo, Lagos, Nigeria",
+        "geometry" : {
+           "location" : {
+              "lat" : 6.509157500000001,
+              "lng" : 3.3215809
+           },
+           "viewport" : {
+              "northeast" : {
+                 "lat" : 6.510509529892721,
+                 "lng" : 3.322909779892723
+              },
+              "southwest" : {
+                 "lat" : 6.507809870107277,
+                 "lng" : 3.320210120107278
+              }
+           }
+        },
+        "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+        "id" : "16da7e2efcbc5a5986bb8ed3cd923b68e89fe5dc",
+        "name" : "G. U. O Transport Company",
+        "opening_hours" : {
+           "open_now" : true
+        },
+        "photos" : [
+           {
+              "height" : 1920,
+              "html_attributions" : [
+                 "\u003ca href=\"https://maps.google.com/maps/contrib/118354993673132869337\"\u003eA Google User\u003c/a\u003e"
+              ],
+              "photo_reference" : "CmRaAAAAZltl7z39Mc4HM9RweN--MmDqA2uzNCR8nE6MPkseTg-pQP3JlVfPTLYOTIz1CWCxyfkVExOtx_8uKWfIj606-csn-QBwsv34OCK--rWWjsghaLsD8FIk3bOGyrnbdRl-EhDzabqoRitXZ0zTeJL8GI8EGhSFFc53CwLnNvqZZCR9IFDtcKWL1g",
+              "width" : 2560
+           }
+        ],
+        "place_id" : "ChIJKXx5g5OOOxARcTvdqlCv5hE",
+        "plus_code" : {
+           "compound_code" : "G85C+MJ Oshodi-Isolo, Lagos",
+           "global_code" : "6FR5G85C+MJ"
+        },
+        "rating" : 3.9,
+        "reference" : "ChIJKXx5g5OOOxARcTvdqlCv5hE",
+        "types" : [ "point_of_interest", "establishment" ],
+        "user_ratings_total" : 563
+     },
+     {
+        "business_status" : "OPERATIONAL",
+        "formatted_address" : "47 Apapa-Oshodi Express Way, Orile Oshodi, Lagos, Nigeria",
+        "geometry" : {
+           "location" : {
+              "lat" : 6.556392499999999,
+              "lng" : 3.3511405
+           },
+           "viewport" : {
+              "northeast" : {
+                 "lat" : 6.557710879892722,
+                 "lng" : 3.352498579892722
+              },
+              "southwest" : {
+                 "lat" : 6.555011220107278,
+                 "lng" : 3.349798920107278
+              }
+           }
+        },
+        "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+        "id" : "f0f826e9c5474dbdb72ca3fc27182947fbcad801",
+        "name" : "ITC Transport",
+        "place_id" : "ChIJnwjIlLWNOxAR61Sg4N0jybQ",
+        "plus_code" : {
+           "compound_code" : "H942+HF Lagos",
+           "global_code" : "6FR5H942+HF"
+        },
+        "rating" : 0,
+        "reference" : "ChIJnwjIlLWNOxAR61Sg4N0jybQ",
+        "types" : [ "point_of_interest", "establishment" ],
+        "user_ratings_total" : 0
+     },
+     {
+        "business_status" : "OPERATIONAL",
+        "formatted_address" : "495-471 A5, Mafoluku Oshodi, Ikeja, Nigeria",
+        "geometry" : {
+           "location" : {
+              "lat" : 6.563604799999999,
+              "lng" : 3.3481791
+           },
+           "viewport" : {
+              "northeast" : {
+                 "lat" : 6.564962879892721,
+                 "lng" : 3.349525879892722
+              },
+              "southwest" : {
+                 "lat" : 6.562263220107277,
+                 "lng" : 3.346826220107277
+              }
+           }
+        },
+        "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+        "id" : "5aff1499eda26a28fdc6c77fafda2cab4b24b8b6",
+        "name" : "ABC Transport Bolade",
+        "place_id" : "ChIJtQdcxKGNOxARqvjbpmniHgk",
+        "plus_code" : {
+           "compound_code" : "H87X+C7 Ikeja",
+           "global_code" : "6FR5H87X+C7"
+        },
+        "rating" : 3.6,
+        "reference" : "ChIJtQdcxKGNOxARqvjbpmniHgk",
+        "types" : [ "point_of_interest", "establishment" ],
+        "user_ratings_total" : 20
+     },
+     {
+        "business_status" : "OPERATIONAL",
+        "formatted_address" : "22 Ikorodu Rd, Igbobi 100252, Lagos, Nigeria",
+        "geometry" : {
+           "location" : {
+              "lat" : 6.5215268,
+              "lng" : 3.3680047
+           },
+           "viewport" : {
+              "northeast" : {
+                 "lat" : 6.522860329892721,
+                 "lng" : 3.369210879892722
+              },
+              "southwest" : {
+                 "lat" : 6.520160670107277,
+                 "lng" : 3.366511220107278
+              }
+           }
+        },
+        "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+        "id" : "fbae5f75a6351d8f60d98111edcd0d7b11e7c3e0",
+        "name" : "ABC Transport",
+        "opening_hours" : {
+           "open_now" : true
+        },
+        "photos" : [
+           {
+              "height" : 2355,
+              "html_attributions" : [
+                 "\u003ca href=\"https://maps.google.com/maps/contrib/109021919043392669000\"\u003eAustin Chikwado Ofor\u003c/a\u003e"
+              ],
+              "photo_reference" : "CmRaAAAAT58-yKaRQXsrFFAZvpnfe2QaTNQ3WXNrChiexUmWg7B_0IvT5NEcsdWzn6aC3xqqU0Ra4TqO_OuY26QbRZhI4rC2gV5IzCrtfI9n7slZRBfQQJJF0FnUoAh1s5p9DHNbEhAUJh39IqWFrc8yTmbix30nGhRK5jKVPfP5JWb00UeV2X-GQ8ZG_g",
+              "width" : 3786
+           }
+        ],
+        "place_id" : "ChIJefMQoE2MOxAR7qQFJf5e9zI",
+        "plus_code" : {
+           "compound_code" : "G9C9+J6 Lagos",
+           "global_code" : "6FR5G9C9+J6"
+        },
+        "rating" : 3.6,
+        "reference" : "ChIJefMQoE2MOxAR7qQFJf5e9zI",
+        "types" : [ "point_of_interest", "establishment" ],
+        "user_ratings_total" : 859
+     },
+     {
+        "business_status" : "OPERATIONAL",
+        "formatted_address" : "1, Edmund Crescent By Jibowu Bus Stop, Beside Road Safety Corps Office, Behind Eagle Transport, Jibowu, Yaba, Lagos, Lagos, Lagos, Nigeria",
+        "geometry" : {
+           "location" : {
+              "lat" : 6.516360000000001,
+              "lng" : 3.3692
+           },
+           "viewport" : {
+              "northeast" : {
+                 "lat" : 6.517748529892722,
+                 "lng" : 3.370637179892722
+              },
+              "southwest" : {
+                 "lat" : 6.515048870107278,
+                 "lng" : 3.367937520107278
+              }
+           }
+        },
+        "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+        "id" : "b236dcb3a1661959230350e022ed292b06c735d8",
+        "name" : "Delta Line Courier Services/Transport",
+        "photos" : [
+           {
+              "height" : 1920,
+              "html_attributions" : [
+                 "\u003ca href=\"https://maps.google.com/maps/contrib/105628698211262693513\"\u003eA Google User\u003c/a\u003e"
+              ],
+              "photo_reference" : "CmRaAAAAm3qMJn72zo4fm3YEotUrxVqHFGRxDrHmaxm4c5FOImT-9JU0xfu-_YW_c5Lg0f6fASTcJH_m7QSGby81nLYZ6Vod1OBhf8OAnwimxakjHnUnVEYszWECTk0bOeZFfR0OEhDEn9NAhWygT_GkmNvZAKVTGhTdWu40Uwm0-qfIpxCAOt0VYpsCSw",
+              "width" : 2560
+           }
+        ],
+        "place_id" : "ChIJ2cWUKlCMOxAR97WssCNOl54",
+        "plus_code" : {
+           "compound_code" : "G989+GM Lagos",
+           "global_code" : "6FR5G989+GM"
+        },
+        "rating" : 3.8,
+        "reference" : "ChIJ2cWUKlCMOxAR97WssCNOl54",
+        "types" : [ "point_of_interest", "establishment" ],
+        "user_ratings_total" : 42
+     },
+     {
+        "business_status" : "OPERATIONAL",
+        "formatted_address" : "Ilupeju, Ikeja, Nigeria",
+        "geometry" : {
+           "location" : {
+              "lat" : 6.556493199999999,
+              "lng" : 3.3523787
+           },
+           "viewport" : {
+              "northeast" : {
+                 "lat" : 6.557841229892722,
+                 "lng" : 3.353619979892722
+              },
+              "southwest" : {
+                 "lat" : 6.555141570107278,
+                 "lng" : 3.350920320107277
+              }
+           }
+        },
+        "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+        "id" : "7dfb5e2bfdc18a5f61da37a4591ef2290e45a319",
+        "name" : "Oshodi Transport Interchange,. Terminal 3.",
+        "photos" : [
+           {
+              "height" : 2322,
+              "html_attributions" : [
+                 "\u003ca href=\"https://maps.google.com/maps/contrib/104368437225224486779\"\u003eA Google User\u003c/a\u003e"
+              ],
+              "photo_reference" : "CmRaAAAAOmBA5TY7avI3cAEeOxY46KuigtkpgCsKWClrx33k7sbeRsw18D6P-PBwz5F8ArfqinNx29d9QBXX3wOT2Acag_cozkU3M3-GbLszRwulzd4E_QvVW_qc8mowYQHhijErEhBlEukNmk404kvkFT5RmM-wGhS1UsxgyGn3zxGTmaWGI1RvDJ71ZQ",
+              "width" : 4128
+           }
+        ],
+        "place_id" : "ChIJFeHUJo-NOxARXQLTrrPKkpA",
+        "plus_code" : {
+           "compound_code" : "H942+HX Ikeja",
+           "global_code" : "6FR5H942+HX"
+        },
+        "rating" : 5,
+        "reference" : "ChIJFeHUJo-NOxARXQLTrrPKkpA",
+        "types" : [ "point_of_interest", "establishment" ],
+        "user_ratings_total" : 2
+     },
+     {
+        "business_status" : "OPERATIONAL",
+        "formatted_address" : "104 Funsho Williams Ave, Surulere, Lagos, Nigeria",
+        "geometry" : {
+           "location" : {
+              "lat" : 6.5085589,
+              "lng" : 3.3634271
+           },
+           "viewport" : {
+              "northeast" : {
+                 "lat" : 6.509902129892721,
+                 "lng" : 3.364749329892722
+              },
+              "southwest" : {
+                 "lat" : 6.507202470107277,
+                 "lng" : 3.362049670107277
+              }
+           }
+        },
+        "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+        "id" : "6e77cde79ea1dd9320e74168afa6935f5c09f831",
+        "name" : "Chisco Transport Company",
+        "photos" : [
+           {
+              "height" : 4864,
+              "html_attributions" : [
+                 "\u003ca href=\"https://maps.google.com/maps/contrib/104628402359487763898\"\u003eA Google User\u003c/a\u003e"
+              ],
+              "photo_reference" : "CmRaAAAA50iS6Nw9t0XxGAvQM6moKFNlTL1ZZsctTsBW5S9KlJrsQi4e4klWuTvVOXbrru72SlzfgkcwKP6DWa_CdqH2UgQ2c2OckPXwrzOArsC_Vihj29HL5lVBiFbFUh3XnQApEhBcq6PLyxKyFqT7e_5XWcbYGhRwlKRTeR8-fuAUU5wRPCYro-l8CA",
+              "width" : 2736
+           }
+        ],
+        "place_id" : "ChIJa8dbPU6MOxARigH_pFTQsFc",
+        "plus_code" : {
+           "compound_code" : "G957+C9 Surulere, Lagos",
+           "global_code" : "6FR5G957+C9"
+        },
+        "rating" : 3.4,
+        "reference" : "ChIJa8dbPU6MOxARigH_pFTQsFc",
+        "types" : [ "point_of_interest", "establishment" ],
+        "user_ratings_total" : 67
+     },
+     {
+        "business_status" : "OPERATIONAL",
+        "formatted_address" : "Kugbuyi St, Fadeyi, Lagos, Nigeria",
+        "geometry" : {
+           "location" : {
+              "lat" : 6.521001200000001,
+              "lng" : 3.365255
+           },
+           "viewport" : {
+              "northeast" : {
+                 "lat" : 6.522325179892722,
+                 "lng" : 3.366559079892722
+              },
+              "southwest" : {
+                 "lat" : 6.519625520107278,
+                 "lng" : 3.363859420107278
+              }
+           }
+        },
+        "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+        "id" : "7717cdc99b6efc28ab80f337dfddcb7aec34a397",
+        "name" : "ABC Transport",
+        "opening_hours" : {
+           "open_now" : true
+        },
+        "place_id" : "ChIJT3ZJaEyMOxARYXs2ZiYBHOc",
+        "plus_code" : {
+           "compound_code" : "G9C8+C4 Lagos",
+           "global_code" : "6FR5G9C8+C4"
+        },
+        "rating" : 3.6,
+        "reference" : "ChIJT3ZJaEyMOxARYXs2ZiYBHOc",
+        "types" : [ "point_of_interest", "establishment" ],
+        "user_ratings_total" : 11
+     },
+     {
+        "business_status" : "OPERATIONAL",
+        "formatted_address" : "6 Adewale Crescent (LSDPC Estate) Oshodi, 100261, Oshodi, Nigeria",
+        "geometry" : {
+           "location" : {
+              "lat" : 6.553502,
+              "lng" : 3.343587
+           },
+           "viewport" : {
+              "northeast" : {
+                 "lat" : 6.554937229892722,
+                 "lng" : 3.345106479892721
+              },
+              "southwest" : {
+                 "lat" : 6.552237570107277,
+                 "lng" : 3.342406820107277
+              }
+           }
+        },
+        "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+        "id" : "acba0cb25eb321c7f18557da818436cce2d999e5",
+        "name" : "Centre for Logistics and Transport Education (CELOTE)",
+        "opening_hours" : {
+           "open_now" : false
+        },
+        "photos" : [
+           {
+              "height" : 584,
+              "html_attributions" : [
+                 "\u003ca href=\"https://maps.google.com/maps/contrib/108011950873537850203\"\u003eCentre for Logistics and Transport Education (CELOTE)\u003c/a\u003e"
+              ],
+              "photo_reference" : "CmRaAAAAQJbcQTw_v8KQV48vNv5SAs8oVqWBIc_s9Xnb9kOYqTsXxaVfKNMrekj_nyP8fMyAHIHRVsybt_1YPMR7LWPGSDJ6oZh5FpaLu_-wsq96eEZ80ozRpyYbwXA4IUVhXd_3EhDAqAy80-Cy1X5VwrTuHjcWGhQk_exyzFmr2veZQcNJehJHR3PnVw",
+              "width" : 1878
+           }
+        ],
+        "place_id" : "ChIJUdcfvYSOOxAR_t-UAKEKqh4",
+        "plus_code" : {
+           "compound_code" : "H83V+CC Lagos",
+           "global_code" : "6FR5H83V+CC"
+        },
+        "rating" : 0,
+        "reference" : "ChIJUdcfvYSOOxAR_t-UAKEKqh4",
+        "types" : [ "point_of_interest", "establishment" ],
+        "user_ratings_total" : 0
+     },
+     {
+        "business_status" : "OPERATIONAL",
+        "formatted_address" : "Aderonke Plaza, No. 20, Olowu Street, Off Bank Anthony Way, Ikeja, 100232, Ikeja, Nigeria",
+        "geometry" : {
+           "location" : {
+              "lat" : 6.5980382,
+              "lng" : 3.3435474
+           },
+           "viewport" : {
+              "northeast" : {
+                 "lat" : 6.599389679892722,
+                 "lng" : 3.344906179892722
+              },
+              "southwest" : {
+                 "lat" : 6.596690020107278,
+                 "lng" : 3.342206520107277
+              }
+           }
+        },
+        "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+        "id" : "ee3819928070807fa2176374f4b7165a195aba3f",
+        "name" : "Premium Transport Solutions Ltd (St. Michael's Executive Bus Services)",
+        "opening_hours" : {
+           "open_now" : true
+        },
+        "photos" : [
+           {
+              "height" : 1152,
+              "html_attributions" : [
+                 "\u003ca href=\"https://maps.google.com/maps/contrib/104831856881896985115\"\u003eA Google User\u003c/a\u003e"
+              ],
+              "photo_reference" : "CmRaAAAAz6PXKE32aboKY0ri8B0q8rwWxkcucFR6zxHE7kEH43zzpdhXUqPBtNB2POUu1fy32bnB8dM445IF8FFUGVN9k_XBFaJH8sfwBcQCZAxJFKOcZrDM5-0cCEemHb4Vq4ZiEhDccJ1TokMG40OEwtVkqRxxGhTMr1Fk-Vkljk2GrvCkzgRetGhiIg",
+              "width" : 2048
+           }
+        ],
+        "place_id" : "ChIJg0u_uCWSOxARfYnl8JuwRZ8",
+        "plus_code" : {
+           "compound_code" : "H8XV+6C Ikeja",
+           "global_code" : "6FR5H8XV+6C"
+        },
+        "rating" : 5,
+        "reference" : "ChIJg0u_uCWSOxARfYnl8JuwRZ8",
+        "types" : [ "point_of_interest", "establishment" ],
+        "user_ratings_total" : 1
+     },
+     {
+        "business_status" : "OPERATIONAL",
+        "formatted_address" : "33 Alhaji Orire St, Coker, Lagos, Nigeria",
+        "geometry" : {
+           "location" : {
+              "lat" : 6.4743055,
+              "lng" : 3.3360229
+           },
+           "viewport" : {
+              "northeast" : {
+                 "lat" : 6.475674729892722,
+                 "lng" : 3.337463679892723
+              },
+              "southwest" : {
+                 "lat" : 6.472975070107278,
+                 "lng" : 3.334764020107278
+              }
+           }
+        },
+        "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+        "id" : "626c35bfe8ee4cc7ad29cb74b6ca5059a46b4930",
+        "name" : "GUO Transport",
+        "opening_hours" : {
+           "open_now" : true
+        },
+        "photos" : [
+           {
+              "height" : 2448,
+              "html_attributions" : [
+                 "\u003ca href=\"https://maps.google.com/maps/contrib/108868084496261007433\"\u003eenem uche\u003c/a\u003e"
+              ],
+              "photo_reference" : "CmRaAAAA0kHkLPk05D-yOwIppfsglqW9yEmEkadK8n2XWbmGHiQGK6SrLnrshXCWxr_YZNcmjrCOHdIkvy3a6bnx5NdSK_4gMpsnHE_9oAFvRHkXxJpRkB6_sq0WDNIqauOCbACBEhA4OgEZterVeXhewuUAL0-mGhSD7lE5w-EcNirvwEk6AeQ5J12TLA",
+              "width" : 3264
+           }
+        ],
+        "place_id" : "ChIJV-wYvVmOOxARCfinsjbPLB8",
+        "plus_code" : {
+           "compound_code" : "F8FP+PC Lagos",
+           "global_code" : "6FR5F8FP+PC"
+        },
+        "rating" : 3.9,
+        "reference" : "ChIJV-wYvVmOOxARCfinsjbPLB8",
+        "types" : [ "point_of_interest", "establishment" ],
+        "user_ratings_total" : 35
+     },
+     {
+        "business_status" : "OPERATIONAL",
+        "formatted_address" : "Dosumu St, Mafoluku Oshodi, Lagos, Nigeria",
+        "geometry" : {
+           "location" : {
+              "lat" : 6.5609441,
+              "lng" : 3.3343278
+           },
+           "viewport" : {
+              "northeast" : {
+                 "lat" : 6.562307229892722,
+                 "lng" : 3.335706379892723
+              },
+              "southwest" : {
+                 "lat" : 6.559607570107278,
+                 "lng" : 3.333006720107278
+              }
+           }
+        },
+        "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+        "id" : "5e1864c6f9aaf893cf7b10765cbfa74831fd4054",
+        "name" : "ABC Transport limited",
+        "place_id" : "ChIJlZ54owaOOxARDwVEOgRIDXA",
+        "plus_code" : {
+           "compound_code" : "H86M+9P Lagos",
+           "global_code" : "6FR5H86M+9P"
+        },
+        "rating" : 4,
+        "reference" : "ChIJlZ54owaOOxARDwVEOgRIDXA",
+        "types" : [ "point_of_interest", "establishment" ],
+        "user_ratings_total" : 2
+     },
+     {
+        "business_status" : "OPERATIONAL",
+        "formatted_address" : "7 Murtala Muhammed Way, Jibowu, Lagos, Nigeria",
+        "geometry" : {
+           "location" : {
+              "lat" : 6.5177977,
+              "lng" : 3.3684582
+           },
+           "viewport" : {
+              "northeast" : {
+                 "lat" : 6.519118429892722,
+                 "lng" : 3.369741929892722
+              },
+              "southwest" : {
+                 "lat" : 6.516418770107277,
+                 "lng" : 3.367042270107278
+              }
+           }
+        },
+        "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+        "id" : "1e96c3f1910da0fe36ad272babef34117b779fcf",
+        "name" : "Chisco Transport International Park",
+        "opening_hours" : {
+           "open_now" : true
+        },
+        "photos" : [
+           {
+              "height" : 2448,
+              "html_attributions" : [
+                 "\u003ca href=\"https://maps.google.com/maps/contrib/107980443956555838143\"\u003eALI HAIDAR\u003c/a\u003e"
+              ],
+              "photo_reference" : "CmRaAAAAV1mtykLtaKiYyCGQ8oK60g9TIJ3C67OlYoCiteS1YW63ZQMjJcOx-orPDuuMnYEOEfLSzc6Kj8H2WT9cyXjV0KonxIGYjb98GEsGkisvH_7nrF-kNBS0nwDGza9-jCywEhBsNJEYmA6q2B8eFp9jz7SoGhTzrrdYORoo4774yUdsjQsysypNGA",
+              "width" : 3264
+           }
+        ],
+        "place_id" : "ChIJp0b9F06MOxARfDv224Uf3wk",
+        "plus_code" : {
+           "compound_code" : "G999+49 Lagos",
+           "global_code" : "6FR5G999+49"
+        },
+        "rating" : 3.5,
+        "reference" : "ChIJp0b9F06MOxARfDv224Uf3wk",
+        "types" : [ "point_of_interest", "establishment" ],
+        "user_ratings_total" : 311
+     },
+     {
+        "business_status" : "OPERATIONAL",
+        "formatted_address" : "2/4 Ikorodu Road Jibowu, Yaba 100001, Lagos, Nigeria",
+        "geometry" : {
+           "location" : {
+              "lat" : 6.5176086,
+              "lng" : 3.3688295
+           },
+           "viewport" : {
+              "northeast" : {
+                 "lat" : 6.518876529892721,
+                 "lng" : 3.369993279892722
+              },
+              "southwest" : {
+                 "lat" : 6.516176870107278,
+                 "lng" : 3.367293620107278
+              }
+           }
+        },
+        "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+        "id" : "3f809b31e9cee07a08b2b0ba70544a9913c8a9fa",
+        "name" : "Ifesinach Transport Limited",
+        "place_id" : "ChIJrUt5IU6MOxARRnSJDcZLNlo",
+        "plus_code" : {
+           "compound_code" : "G999+2G Lagos",
+           "global_code" : "6FR5G999+2G"
+        },
+        "rating" : 0,
+        "reference" : "ChIJrUt5IU6MOxARRnSJDcZLNlo",
+        "types" : [ "point_of_interest", "establishment" ],
+        "user_ratings_total" : 0
+     },
+     {
+        "business_status" : "OPERATIONAL",
+        "formatted_address" : "Orile Oshodi, Lagos, Nigeria",
+        "geometry" : {
+           "location" : {
+              "lat" : 6.555082199999999,
+              "lng" : 3.3515516
+           },
+           "viewport" : {
+              "northeast" : {
+                 "lat" : 6.556432029892721,
+                 "lng" : 3.352901429892721
+              },
+              "southwest" : {
+                 "lat" : 6.553732370107276,
+                 "lng" : 3.350201770107276
+              }
+           }
+        },
+        "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+        "id" : "dfe9bbe622bbb0fd7be122e54f08a98baf97e273",
+        "name" : "Oshodi Transport Interchange. Terminal 1.",
+        "photos" : [
+           {
+              "height" : 3024,
+              "html_attributions" : [
+                 "\u003ca href=\"https://maps.google.com/maps/contrib/111143920019865027801\"\u003eAlaba Ogundipe\u003c/a\u003e"
+              ],
+              "photo_reference" : "CmRaAAAAwMDkiAnUCT7rp24T9d64a8D7AQ8qJFUQ7QEcIRt-FS22273u6Ja8Oo0OE_Wl_6pcFPLtnAWa3zoNmlzzcGv_8KPtsr5x5GSy9uz3dqaPhXr7xZm-Wt_atsCnY_PCcWakEhBjCp6e2SxfJD3Vyvc6o4ceGhSlEM-BP8zGYw82PTAj7R09BRTQtg",
+              "width" : 4032
+           }
+        ],
+        "place_id" : "ChIJI4bmlRiNOxARFAfRXApyITs",
+        "plus_code" : {
+           "compound_code" : "H942+2J Lagos",
+           "global_code" : "6FR5H942+2J"
+        },
+        "rating" : 5,
+        "reference" : "ChIJI4bmlRiNOxARFAfRXApyITs",
+        "types" : [ "point_of_interest", "establishment" ],
+        "user_ratings_total" : 1
+     },
+     {
+        "business_status" : "OPERATIONAL",
+        "formatted_address" : "Ikosi Ketu, Lagos, Nigeria",
+        "geometry" : {
+           "location" : {
+              "lat" : 6.6007817,
+              "lng" : 3.3781923
+           },
+           "viewport" : {
+              "northeast" : {
+                 "lat" : 6.602082279892722,
+                 "lng" : 3.379476879892722
+              },
+              "southwest" : {
+                 "lat" : 6.599382620107278,
+                 "lng" : 3.376777220107277
+              }
+           }
+        },
+        "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+        "id" : "11690f02f9cc06fdc8b2624e791e16126f7a041a",
+        "name" : "Chisco Transport Company Park",
+        "place_id" : "ChIJ-3ySxleSOxARcUPpbIsgnGs",
+        "plus_code" : {
+           "compound_code" : "J92H+87 Lagos",
+           "global_code" : "6FR5J92H+87"
+        },
+        "rating" : 3.9,
+        "reference" : "ChIJ-3ySxleSOxARcUPpbIsgnGs",
+        "types" : [ "point_of_interest", "establishment" ],
+        "user_ratings_total" : 8
+     },
+     {
+        "business_status" : "OPERATIONAL",
+        "formatted_address" : "Off Toyin Street, 5 Seidu Ajibowu St, Ikeja, Nigeria",
+        "geometry" : {
+           "location" : {
+              "lat" : 6.5969691,
+              "lng" : 3.3471782
+           },
+           "viewport" : {
+              "northeast" : {
+                 "lat" : 6.598320679892722,
+                 "lng" : 3.348505729892722
+              },
+              "southwest" : {
+                 "lat" : 6.595621020107277,
+                 "lng" : 3.345806070107277
+              }
+           }
+        },
+        "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/civic_building-71.png",
+        "id" : "8afa417ec3e4296567cc0993904a5d1d5131a56c",
+        "name" : "Cyrstal Transport Worldwide",
+        "place_id" : "ChIJcfATGyWSOxARNqCu9AS1nXA",
+        "plus_code" : {
+           "compound_code" : "H8WW+QV Ikeja",
+           "global_code" : "6FR5H8WW+QV"
+        },
+        "rating" : 0,
+        "reference" : "ChIJcfATGyWSOxARNqCu9AS1nXA",
+        "types" : [ "local_government_office", "point_of_interest", "establishment" ],
+        "user_ratings_total" : 0
+     },
+     {
+        "business_status" : "OPERATIONAL",
+        "formatted_address" : "27 Okusaga St, Ilupeju, Lagos, Nigeria",
+        "geometry" : {
+           "location" : {
+              "lat" : 6.553648399999999,
+              "lng" : 3.3566738
+           },
+           "viewport" : {
+              "northeast" : {
+                 "lat" : 6.555011629892722,
+                 "lng" : 3.358056079892722
+              },
+              "southwest" : {
+                 "lat" : 6.552311970107279,
+                 "lng" : 3.355356420107277
+              }
+           }
+        },
+        "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+        "id" : "9ac24a91de6e857ed62107bed434b6ddabf6c544",
+        "name" : "El Hafiz Transport company",
+        "place_id" : "ChIJn6YB_-yNOxARp1Cxl3lnelI",
+        "rating" : 0,
+        "reference" : "ChIJn6YB_-yNOxARp1Cxl3lnelI",
+        "types" : [ "point_of_interest", "establishment" ],
+        "user_ratings_total" : 0
+     },
+     {
+        "business_status" : "OPERATIONAL",
+        "formatted_address" : "Ayonio Taxi Park, Mafoluku Rd, Mafuluku, Ikeja, Nigeria",
+        "geometry" : {
+           "location" : {
+              "lat" : 6.554894,
+              "lng" : 3.3305824
+           },
+           "viewport" : {
+              "northeast" : {
+                 "lat" : 6.556290829892721,
+                 "lng" : 3.331949729892722
+              },
+              "southwest" : {
+                 "lat" : 6.553591170107278,
+                 "lng" : 3.329250070107277
+              }
+           }
+        },
+        "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+        "id" : "56bc7061dbfffc2e2ea01d9d788fd6a86697246e",
+        "name" : "National Union Of Road Transport Workers",
+        "opening_hours" : {
+           "open_now" : true
+        },
+        "place_id" : "ChIJPW4Ouw-OOxARaT62P4kPHr4",
+        "plus_code" : {
+           "compound_code" : "H83J+X6 Ikeja",
+           "global_code" : "6FR5H83J+X6"
+        },
+        "rating" : 3,
+        "reference" : "ChIJPW4Ouw-OOxARaT62P4kPHr4",
+        "types" : [ "point_of_interest", "establishment" ],
+        "user_ratings_total" : 4
+     }
+  ],
+  "status" : "OK"
+}
+
