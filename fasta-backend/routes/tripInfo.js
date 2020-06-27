@@ -6,20 +6,24 @@
 /* eslint-disable consistent-return */
 const express = require("express");
 const axios = require("axios");
-const { PolyUtil, SphericalUtil } = require("node-geometry-library");
+const { PolyUtil } = require("node-geometry-library");
 const ScheduleTrip = require("../models/trip");
 const Reports = require("../models/report");
 
 const router = express.Router();
-const reports = [];
-const reportsInLocation = [];
-let reportIndex;
-let isPathIndex;
-let tripDirectionReport;
-let inPath;
-let locationReport;
+
 
 router.get("/trip-info/:tripId", async (req, res) => {
+  // get all the report locations
+  const reports = [];
+  const reportsInLocation = [];
+  let reportIndex;
+  let isPathIndex;
+  let tripDirectionReport;
+  let inPath;
+  let locationReport;
+
+  // get direction from origin to destination
   // try to get all the report location coordinates to check if it falls on the trip path
   await Reports.find()
     .select("-_id location")
