@@ -37,7 +37,11 @@ const Reports = ({getUrl, handleToast, reports, setReports, location}) => {
         console.log(res.status, response);
         if (res.status === 200) {
           const getReports = response;
-          setReports(getReports.response);
+          const reportsWithLocation = getReports.response.map(rep => {
+            console.log(rep.location);
+            return rep;
+          });
+          setReports(reportsWithLocation);
           return {getReports};
         }
         } catch(e) {
