@@ -215,4 +215,6 @@ dist
 
 # TernJS port file
 .tern-port
+
+.vscode
 >>>>>>> bg-fix-merge-conflicts
