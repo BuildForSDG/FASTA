@@ -1,12 +1,14 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect } from "react";
+import { connect } from "react-redux";
 import Router from "next/router";
 import Head from "next/head";
 import Homepage from "../components/Homepage/Homepage";
 
-const Home = ({ loggedIn, setLoggedIn, user, located, setLocated, location, setLocation, getUrl, trips, setTrips, reports, setReports, token }) => {
-  // console.log("loggedIn:", loggedIn);
-  // const name = user.fullname.split(" ")[0];
+const Home = (props) => {
+  const { loggedIn, setLoggedIn, user, located, setLocated, locations, setLocation, getUrl, trips, setTrips, reports, setReports, token } = props;
+
+  console.log(props);
 
   useEffect(() => {
     if (!loggedIn) {
@@ -27,7 +29,7 @@ const Home = ({ loggedIn, setLoggedIn, user, located, setLocated, location, setL
         setLoggedIn={setLoggedIn}
         located={located} 
         setLocated={setLocated} 
-        location={location}
+        locations={locations}
         setLocation={setLocation}
         getUrl={getUrl}  
         trips={trips} 
@@ -40,4 +42,14 @@ const Home = ({ loggedIn, setLoggedIn, user, located, setLocated, location, setL
   );
 };
 
-export default Home;
+Home.getInitialProps = async ({store}) => {}
+
+const mapStateToProps = state => {
+  console.log("fasta is here");
+  return {state};
+};
+
+const mapDispatchToProps = {LOGIN: "LOGIN"};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
+// export default Home;

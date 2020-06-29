@@ -44,10 +44,10 @@ try {
       const response = await res.json();
       console.log(res.status, response);
       if (res.status === 200) {
-        setLoggedIn(true);
-        setToken(response.token);
+        setLoggedIn(response);
+        // setToken(response.token);
         setUpdate(!update);
-        setUser({name: response.user.fullname.split(" ")[0], email: ev.email, phonenumber: response.user.phonenumber});
+        // setUser({name: response.user.fullname.split(" ")[0], email: ev.email, phonenumber: response.user.phonenumber});
         // setUser(response.fullname);
         handleToast(response.response, "success");
       } else if (res.status >= 500) {
@@ -58,7 +58,7 @@ try {
 } catch(e) {
       console.log(e, "Some error in connection, Please try again!");
       handleToast("Error in connection", "error");
-} 
+    } 
   setLoading(false);
 };
 
@@ -69,9 +69,9 @@ const onSubmit = (data) => {
 // console.log("token:" , token);
 
 useEffect(() => {
-  localStorage.setItem("user", JSON.stringify(user)); 
-  localStorage.setItem("token", JSON.stringify(token)); 
-  localStorage.setItem("loggedIn", JSON.stringify(loggedIn)); 
+  // localStorage.setItem("user", JSON.stringify(user)); 
+  // localStorage.setItem("token", JSON.stringify(token)); 
+  // localStorage.setItem("loggedIn", JSON.stringify(loggedIn)); 
 }, [update]);
 
 

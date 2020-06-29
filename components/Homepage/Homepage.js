@@ -32,10 +32,10 @@ const Homepage = (props) => {
       // console.log(textContent, latitude, longitude);
       setCoordinates({ lat: latitude, lng: longitude });
       props.setLocation({ lat: latitude, lng: longitude });
-      localStorage.setItem("location", JSON.stringify(location)); 
+      localStorage.setItem("location", JSON.stringify(props.locations)); 
       setLocationText(textContent);
       props.setLocated(true);
-      console.log(props.location, props.located);
+      console.log(props.locations, props.located);
     };
 
     const error = () => {
@@ -70,7 +70,7 @@ const Homepage = (props) => {
       } else if (res.status === 403) {
         // setTokenInvalid(true);
         props.setLoggedIn(false);
-        localStorage.setItem("loggedIn", JSON.stringify(props.loggedIn)); 
+        // localStorage.setItem("loggedIn", JSON.stringify(props.loggedIn)); 
         Router.push("/login");
         return;
       } else {
@@ -86,17 +86,17 @@ const Homepage = (props) => {
         }
       })();
 
-      console.log(props.location);
+      console.log(props.locations);
     const apiUrl = new URL(`${props.getUrl()}/reports`);
    
     (async () => {
-      if (props.location === null) {
+      if (props.locations === null) {
         const getReports = {response: [{_id: 0, description: "Your location is not available!"}]};
         props.setReports(getReports.response);
         return getReports;
       }      
-      apiUrl.searchParams.set('lat', props.location.lat);
-      apiUrl.searchParams.set('lng', props.location.lng);
+      apiUrl.searchParams.set('lat', props.locations.lat);
+      apiUrl.searchParams.set('lng', props.locations.lng);
       try {
         const res = await fetch(`${apiUrl}`, {
                                 method: "GET", 
@@ -133,10 +133,10 @@ const Homepage = (props) => {
           <div>
             {/* {locationText} */}
             {/* <Map lat={coordinates.lat} lng={coordinates.lng} /> */}
-            <Map lat={props.location.lat} lng={props.location.lng} />
+            <Map lat={props.locations && props.locations.lat} lng={props.locations && props.locations.lng} />
           </div>
         )}
-        <NewTrip user={props.user} location={props.location} />
+        <NewTrip user={props.user} locations={props.locations} />
         <RecentTrips trips={props.trips} />
         <Reports reports={props.reports} />
         <NewReport />

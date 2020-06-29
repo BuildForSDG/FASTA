@@ -48,7 +48,7 @@ const NewTrip = (props) => {
   const key= "AIzaSyAm00Wsdh6jJB2QzlW5c6t_nu0gMRAZB9s";
   const scriptUrl = `https://maps.googleapis.com/maps/api/js?key=${key}&libraries=places`;
 
-  console.log(props.location);
+  console.log(props.locations);
 
   useEffect(() => {
     // effect

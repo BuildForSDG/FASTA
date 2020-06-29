@@ -4,7 +4,7 @@ import Router from "next/router";
 import ScheduledTrips from "./trips/scheduled-trips";
 import fetch from "node-fetch";
 
-const Trips = ({getUrl, loggedIn, setLoggedIn, getTrips, token, trips, setTrips, location}) => {
+const Trips = ({getUrl, loggedIn, setLoggedIn, getTrips, token, trips, setTrips}) => {
 
   console.log(getTrips, trips);
   
@@ -44,10 +44,7 @@ const Trips = ({getUrl, loggedIn, setLoggedIn, getTrips, token, trips, setTrips,
 
   console.log(trips);
   return (
-    // {trips ?
-      // <div>No shceduled trips at the moment! </div>:
     <ScheduledTrips loggedIn={loggedIn} setLoggedIn={setLoggedIn} trips={trips} setTrips={setTrips} getUrl={getUrl} token={token} />
-  // }
   );
 };
 

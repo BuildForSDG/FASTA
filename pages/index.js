@@ -1,10 +1,12 @@
 // /* eslint-disable prettier/prettier */
 import Head from "next/head";
 import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
 import views from "../components/OnBoardingLayout/view";
 import Layout from "../components/OnBoardingLayout/Layout";
 
-export default function Hom() {
+// export default function Hom() {
+function Hom() {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -132,3 +134,12 @@ export default function Hom() {
     </div>
   );
 }
+
+const mapStateToProps = state => {
+  console.log("fasta is here");
+  return {state};
+};
+
+const mapDispatchToProps = {LOGIN: "LOGIN"};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Hom);

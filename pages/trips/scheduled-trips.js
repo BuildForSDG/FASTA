@@ -24,7 +24,7 @@ const ScheduledTrips = ({loggedIn, setLoggedIn, trips, setTrips, getUrl, token})
 
   return (
     <Layout header="Your Scheduled Trips" back>
-      {trips && !trips.length && <div>No trips available!</div>}
+      {!trips && <div>No trips available!</div>}
       { trips && trips.map((trip, index) => (
         <TripCard 
           key={trip._id}

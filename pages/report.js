@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-console */
 import React, { useState, useEffect } from "react";
+import Router from "next/router";
 import fetch from "node-fetch";
 
 import Layout from "../components/Layout";
@@ -9,25 +10,25 @@ import { NewReportButton } from "../components/Buttons";
 
 
 
-const Reports = ({getUrl, handleToast, reports, setReports, location}) => {
+const Reports = ({getUrl, loggedIn, handleToast, reports, setReports, locations}) => {
 
   useEffect(() => {
     // effect
-    console.log(location);
+    if (!loggedIn) {
+      Router.push("/login");
+    }
+    
+    console.log(locations);
     const apiUrl = new URL(`${getUrl()}/reports`);
-    // let lat = location ? location.lat : 6;
-    // let lng = location ? location.lng : 3;
-    // apiUrl.searchParams.set('lat', location.lat);
-    // apiUrl.searchParams.set('lng', location.lng);
    
     (async () => {
-      if (location === null) {
+      if (locations === null) {
         const getReports = {response: [{_id: 0, type: "Your location is not available!"}]};
         setReports(getReports.response);
         return getReports;;
       }      
-      apiUrl.searchParams.set('lat', location.lat);
-      apiUrl.searchParams.set('lng', location.lng);
+      apiUrl.searchParams.set('lat', locations.lat);
+      apiUrl.searchParams.set('lng', locations.lng);
       try {
         const res = await fetch(`${apiUrl}`, {
                                 method: "GET", 
@@ -54,7 +55,7 @@ const Reports = ({getUrl, handleToast, reports, setReports, location}) => {
 
   return (
     <Layout header="Reports" back >
-      {reports && !reports.length ?
+      {!reports ?
        <div>No reports available at the moment!</div>:
       <div>    
 
