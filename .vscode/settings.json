@@ -1,0 +1,7 @@
+{
+<<<<<<< HEAD
+    "deno.enable": false
+=======
+  "eslint.debug": true
+>>>>>>> eb299da8b68329cc308694ce8c1f46fba8812bc7
+}

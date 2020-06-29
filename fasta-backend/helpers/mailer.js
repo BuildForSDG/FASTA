@@ -1,4 +1,6 @@
-// const express = require("");
+
+/* eslint-disable no-unused-vars */
+
 
 const nodemailer = require("nodemailer");
 const smtpTransport = require("nodemailer-smtp-transport");
@@ -9,25 +11,31 @@ const mailer = async (options) => {
     service: "gmail",
     host: "smtp.gmail.com",
     auth: {
-      user: "fastamovement@gmail.com", // gmail created just for testing purposes
-      pass: "Fasta123" // for testing purposes
+
+      user: "fastamovements@gmail.com", // gmail created just for testing purposes
+      pass: "Fasta1234" // for testing purposes
     }
   }));
 
   const mailOptions = {
-    from: "<fastamovement@gmail.com>",
+
+    from: "<fastamovements@gmail.com>",
     to: options.receiver,
     subject: options.subject,
     text: options.text,
     html: options.output
   };
-  // console.log(mailOptions);
-  await fastaMailer.sendMail(mailOptions, (error, info) => {
+
+  // NOTE!!!
+  //  this is for any developer in the future, info is the second parameter of the callback
+  //  after error, i had to remove it since i wasnt using it currently to fix some codacy issue
+  await fastaMailer.sendMail(mailOptions, (error) => {
     // console.log(mailOptions, info);
     if (error) {
       throw error;
+      // console.log(error);
     }
-    return `Message sent: %s ${info.messageId}`;
+    return "Mail sent";
   });
 };
 
