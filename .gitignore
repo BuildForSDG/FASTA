@@ -222,3 +222,4 @@ dist
 
 # next.js build output
 .next
+.vscode
