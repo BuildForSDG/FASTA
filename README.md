@@ -1,7 +1,7 @@
 ## PROJECT NAME
 FASTA
 ## CODACY BADGE
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/2a1fa29a29f3454bb1a1cd13d042c1b4)](https://app.codacy.com/gh/BuildForSDG/FASTA?utm_source=github.com&utm_medium=referral&utm_content=BuildForSDG/FASTA&utm_campaign=Badge_Grade_Settings)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/19ea6bb1c2914796ae005b455342104d)](https://app.codacy.com/gh/BuildForSDG/FASTA-FRONTEND?utm_source=github.com&utm_medium=referral&utm_content=BuildForSDG/FASTA-FRONTEND&utm_campaign=Badge_Grade_Dashboard)
 ## SDG 
 Industry, Innovation and Infastructure
 ## STATEMENT OF PROBLEM 
@@ -36,8 +36,8 @@ FASTA APP will enhance the well-being by saving of lives through our alternate t
 ## UNIQUENESS
 
 ## ADVANTAGES/STRENGTH 
-1.  Imagine having an opportunity of booking a ticket at your convenient with a lot of option of choosing a comfortable, secured and cheap ticket price. Which one will you go for?Fasta gives you the list of transport’s company around you, their services, prices and discount rate. It’s awesome?You save money from securing an expensive ticket.
-2.  FASTA will give you a list of approved local riders which will prevent you from paying twice of the supposed price (for visitors).Difference between an individual using FASTA APP with anotherUsing FASTA APP:
+1.  Imagine having an opportunity to know before and realtime what incidence had happened on your trip direction like; traffic rate, congestion, accident, armed robbery, etc and an option of booking a ticket at your convenient with a lot of option of choosing a comfortable, secured and cheap ticket price. Fasta gives you the list of transport’s company around you, and even hook them up to provide you with options about their services, prices and discount rate. It’s awesome? You save money by cheap ticket.
+2.  FASTA will give you a list of approved local transport providers which will allow you call any nearby providers and even provides an opportunity for a user to list as a local provider.
 3.  Life will be more secure and safeYou save money in terms of transportation Save time by avoiding traffic congestion
 4.  Schedule your journey at your convenient
 ## CHALLENGES/WEAKNESS 
@@ -73,7 +73,7 @@ Based on the analysis above (safety, accessibility, saving time and money, knowl
 *   [Nodejs](https://reactjs.org) - Backend framework used
 *   [MongoAtlas](https://www.android.com) - Cloud based Database service used
 ## WEBSITE
-[FASTA](https://frontend-fasta.thevetdoctor.now.sh/)
+[FASTA](https://frontend-fasta.thevetdoctor.vercel.app/)
 ## AUTHORS/TEAM - 002 MEMBERS
 *   [ETCHIE DANIEL](https://github.com/danieletchie) - Frontend Developer, Techincal Team Leader,
 *   [IBE ARUA](https://github.com/myquery) - Backend Developer, Product Manager

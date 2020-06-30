@@ -12,7 +12,7 @@
     "test:watch": "jest --watch",
     "test:cover": "jest --coverage",
     "lint": "eslint \"pages/**/*.js\"",
-    "dev": "next dev",
+    "dev": "next dev --port 3100",
     "build": "next build",
     "start": "next start"
   },

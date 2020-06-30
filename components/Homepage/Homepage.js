@@ -49,7 +49,7 @@ const Homepage = (props) => {
   }, []);
 
   return (
-    <div className="homepage w-screen min-h-screen">
+    <div className="homepage screen min-h-screen">
       <NavBar name="Fasta" />
       <Body className="px-4">
         {!props.located ? (

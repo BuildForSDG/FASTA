@@ -28,6 +28,7 @@ const DetailsBody = styled.div`
   background-color: #fff;
   padding: 15px;
   margin-bottom: 15px;
+  margin-top: 50px;
 `;
 
 const Text = styled(H3)`

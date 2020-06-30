@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable no-unused-vars */
 import styled from "styled-components";
-import React, { useState } from "react";
+import React, {useState} from "react";
 
 const Nav = styled.div`
   background-color: #ffffff;
@@ -22,11 +22,11 @@ const DropDownView = styled.div`
   display: flex;
   position: absolute;
   top: 100%;
-  left: 0;
+  right: 0;
   z-index: 50;
   box-shadow: 0px 3px 6px #00000029;
   background: #ffffff;
-  padding: 20px;
+  padding: 10px;
 
   button {
     margin-bottom: 3px;
