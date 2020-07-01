@@ -11,13 +11,13 @@ import { NewReportButton, SubmitButton } from "../../components/Buttons";
 const Trip = ({getUrl, getReports, handleToast}) => {
   const [reports, setReports] = useState(null);
 
-  console.log(getReports.response);
+  // console.log(getReports.response);
 
   // const apiUrl = getUrl();
   useEffect(() => {
     // effect
     setReports(getReports.response);
-    console.log(getReports, reports);
+    // console.log(getReports, reports);
     return () => {
       // cleanup
     };
