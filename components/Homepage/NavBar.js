@@ -8,10 +8,11 @@ const Nav = styled.div`
   background-color: #ffffff;
   box-shadow: 0px 1px 10px #0000000f;
   width: 100%;
-  height: 54px;
+  // height: 54px;
   padding: 20px;
   position: fixed;
   top: 0;
+  z-index: 100;
 `;
 
 const LogOutStyle = styled.div`
@@ -57,18 +58,20 @@ const NavBar = (props) => {
   };
 
   return (
-    <Nav className="flex justify-between items-center">
-      <NavLogo src="images/Logo.png" alt="Fasta" />
-      <LogOutStyle>
-        <img className="cursor-pointer" src="images/More.png" alt="more" onClick={makeActive} onFocus={makeActive} />
-        {dropdownActive && (
-          <DropDownView onMouseLeave={makeInactive}>
-            <button type="button" className="capitalize">
-              logout
-            </button>
-          </DropDownView>
-        )}
-      </LogOutStyle>
+    <Nav>
+      <div className="flex justify-between items-center container mx-auto">
+        <NavLogo src="images/Logo.png" alt="Fasta" />
+        <LogOutStyle>
+          <img className="cursor-pointer" src="images/More.png" alt="more" onClick={makeActive} onFocus={makeActive} />
+          {dropdownActive && (
+            <DropDownView onMouseLeave={makeInactive}>
+              <button type="button" className="capitalize">
+                logout
+              </button>
+            </DropDownView>
+          )}
+        </LogOutStyle>
+      </div>
     </Nav>
   );
 };

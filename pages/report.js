@@ -26,18 +26,21 @@ const Reports = ({getUrl, getReports, handleToast}) => {
 
   return (
     <Layout header="Reports" back >
-      {reports && reports.map((report) => (
-      <ReportCard 
-      key={report._id}
-      id={report._id}
-      type={report.type}
-      location={report.location}
-      timestamp={report.timestamp}
-      description={report.description}
-      details
-      />
-      ))}
-      <NewReportButton getUrl={getUrl} handleToast={handleToast} />
+      <div className="container mx-auto md:flex flex-wrap">
+        {reports && reports.map((report) => (
+          <ReportCard 
+          key={report._id}
+          id={report._id}
+          type={report.type}
+          location={report.location}
+          timestamp={report.timestamp}
+          description={report.description}
+          details
+          />
+        ))}
+        <NewReportButton getUrl={getUrl} handleToast={handleToast} />
+      </div>
+
     </Layout>
   );
 };

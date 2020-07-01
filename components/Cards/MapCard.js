@@ -2,8 +2,7 @@ import styled from "styled-components";
 
 const MapCardStyle = styled.div`
   min-height: 50vh;
-  width: 100vw;
-  margin-top: 70px;
+  width: 100%;
   background: #AFDEB1;
   margin-bottom: 15px;
 `;

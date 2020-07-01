@@ -120,30 +120,33 @@ const DeleteButton = (props) => {
 
 const TripCard = (props) => {
   return (
-    <TripCardStyle className="mb-5 p-4 pr-5">
-      <DeleteButton id={props.id} />
+    <div className="md:px-4 md:w-6/12">
 
-      <p style={{ color: "#2699FB" }} className="text-xs">
-        Start Position
-      </p>
-      <TextSmall color="#6C6C6C">{props.origin}</TextSmall>
+      <TripCardStyle className="mb-5 p-4 pr-5">
+        <DeleteButton id={props.id} />
 
-      <p style={{ color: "#2699FB" }} className="text-xs mt-4">
-        End Position
-      </p>
-      <TextSmall color="#6C6C6C">{props.destination}</TextSmall>
+        <p style={{ color: "#2699FB" }} className="text-xs">
+          Start Position
+        </p>
+        <TextSmall color="#6C6C6C">{props.origin}</TextSmall>
 
-      <p style={{ color: "#2699FB" }} className="text-xs mt-4">
-        Scheduled For:
-      </p>
-      <TextSmall color="#6C6C6C">{props.time}</TextSmall>
+        <p style={{ color: "#2699FB" }} className="text-xs mt-4">
+          End Position
+        </p>
+        <TextSmall color="#6C6C6C">{props.destination}</TextSmall>
 
-      <div style={{ color: "#43A047" }} className="text-center uppercase font-bold text-xs mt-3">
-        <Link href="/trips/[id]" as={`/trips/${props.id}`}>
-          <a>Start trip now</a>
-        </Link>
-      </div>
-    </TripCardStyle>
+        <p style={{ color: "#2699FB" }} className="text-xs mt-4">
+          Scheduled For:
+        </p>
+        <TextSmall color="#6C6C6C">{props.time}</TextSmall>
+
+        <div style={{ color: "#43A047" }} className="text-center uppercase font-bold text-xs mt-3">
+          <Link href="/trips/[id]" as={`/trips/${props.id}`}>
+            <a>Start trip now</a>
+          </Link>
+        </div>
+      </TripCardStyle>
+    </div>
   );
 };
 

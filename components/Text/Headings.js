@@ -5,7 +5,7 @@ export const H1 = styled.h1`
   font-weight: 600;
 `;
 
-export const H3 = styled.h1`
+export const H3 = styled.h3`
   font-size: 20px;
   font-weight: bold;
   color: ${(props) => props.color};
