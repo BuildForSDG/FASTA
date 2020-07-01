@@ -7,6 +7,7 @@ const reportSchema = new Schema({
   type: { type: String },
   description: { type: String },
   location: { type: Object },
+  address: { type: String },
   date: {
     type: Date,
     default: Date.now

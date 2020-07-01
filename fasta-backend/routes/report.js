@@ -1,6 +1,8 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable consistent-return */
 const express = require("express");
+// const Geocoding = require("reverse-geocoding");
+const axios = require("axios");
 
 
 const router = express.Router();
@@ -17,11 +19,29 @@ router.post("/report", authChecker, async (req, res) => {
     return res.status(403).json({ response: "please all fields are required" });
   }
   try {
+    const { lat, long } = location;
+    let address;
+    await axios.get(
+      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${long}&key=${process.env.TEST_KEY}`
+    ).then((data) => {
+      if (data.data) {
+        if (data.data.status === "OK") {
+          // console.log(data.data.results[0].formatted_address);
+          address = data.data.results[0].formatted_address;
+        } else {
+          // console.log("error");
+          throw new Error();
+        }
+      }
+      // console.log("rubbish");
+    }).catch((e) => e);
+
     const reportDetails = {
       tripId,
       type,
       description,
-      location
+      location,
+      address
     };
     const reports = await Reports.create(reportDetails);
     if (reports) {
@@ -32,12 +52,12 @@ router.post("/report", authChecker, async (req, res) => {
   }
 });
 
-router.get("/reports", async (req, res) => {
+router.get("/reports", authChecker, async (req, res) => {
   let { lat, lng } = req.query;
   lat = Number(lat);
   lng = Number(lng);
   await Reports.find({ "location.lat": { $gte: lat - 1, $lte: lat + 1 }, "location.lng": { $gte: lng - 1, $lte: lng + 1 } })
-  // await Reports.find({ "location.lat": { lat }, "location.lng": { lng } })
+    // await Reports.find({ "location.lat": { lat }, "location.lng": { lng } })
     .select("_id type description location date")
     .exec()
     .then((allReports) => {

@@ -40,7 +40,5 @@ GetTransporter.prototype.getPlaces = async () => {
   req.end();
 };
 
-//
-
 
 module.exports = GetTransporter;
