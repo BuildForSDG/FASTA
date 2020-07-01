@@ -3,37 +3,37 @@
 import { useState, useEffect } from "react";
 import "../styles/styles.css";
 import { toast } from "react-nextjs-toast";
+import Cookie from "js-cookie";
+import cookies from "next-cookies";
 
 // This default export is required in a new `pages/_app.js` file.
-export default function MyApp({ Component, pageProps }) {
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [located, setLocated] = useState(false);
-  const [location, setLocation] = useState(null);
-  const [reports, setReports] = useState(null);
-  const [trips, setTrips] = useState(null);
-  const [token, setToken] = useState(null);
-  const defaultUser = { name: "Guest", email: "guest@fasta.com", phonenumber: "08099887766" };
-  const [user, setUser] = useState(defaultUser);
+function MyApp({ Component, pageProps, initialLoggedIn, initialUser, initialToken, initialLocation, initialLocated, initialReports, initialTrips }) {
+  const [loggedIn, setLoggedIn] = useState(() => initialLoggedIn || false);
+  const [located, setLocated] = useState(() => initialLocated || false);
+  const [location, setLocation] = useState(() => initialLocation || {});
+  const [reports, setReports] = useState(() => initialReports || []);
+  const [trips, setTrips] = useState(() => initialTrips || []);
+  const [token, setToken] = useState(() => initialToken || "");
+  const defaultUser = { fullname: "Guest Fasta", email: "guest@fasta.com", phonenumber: "08099887766" };
+  const [user, setUser] = useState(() => initialUser || defaultUser);
   const getUrl = () => {
     // if(location.host.indexOf('localhost') >= 0){
     // return 'http://localhost:8080/api/v1';
     // } else {
     return "https://fasta-app.herokuapp.com/api/v1";
   };
-  // }
 
   const handleToast = (msg, type = "info") => toast.notify(msg, { duration: 5, type });
 
   useEffect(() => {
-    if (localStorage.getItem("user")) {
-      setUser(JSON.parse(localStorage.getItem("user")));
-      setToken(JSON.parse(localStorage.getItem("token")));
-      setLoggedIn(JSON.parse(localStorage.getItem("loggedIn")));
-      setLocation(JSON.parse(localStorage.getItem("location")));
-    } else {
-      setUser(defaultUser);
-    }
-    console.log(token);
+      Cookie.set("loggedIn", loggedIn);
+      // Cookie.set("user", JSON.stringify(user));
+      Cookie.set("user", user);
+      Cookie.set("token", token);
+      Cookie.set("location", location);
+      Cookie.set("located", located);
+      Cookie.set("reports", JSON.stringify(reports));
+      Cookie.set("trips", JSON.stringify(trips));
 
      const loadScript = (url) => {
          let script = document.createElement("script");
@@ -59,7 +59,7 @@ export default function MyApp({ Component, pageProps }) {
        return () => {
          // cleanup
        };
-  }, []);
+  }, [loggedIn, user, token, location, located, reports, trips]);
 
   return (
     <Component
@@ -83,3 +83,20 @@ export default function MyApp({ Component, pageProps }) {
     />
   );
 }
+
+MyApp.getInitialProps = ({Component, ctx}) => {
+  const allCookies = cookies(ctx);
+  const pageProps = Component.getInitialProps ? Component.getInitialProps(ctx) : {};
+  console.log("allCookies: ", allCookies, pageProps);
+  return {
+    initialLoggedIn: allCookies.loggedIn,
+    initialUser: allCookies.user,
+    initialToken: allCookies.token,
+    initialLocation: allCookies.location,
+    initialLocated: allCookies.located,
+    initialReports: allCookies.reports,
+    initialTrips: allCookies.trips
+  }
+}
+
+export default MyApp;
