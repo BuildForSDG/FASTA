@@ -10,7 +10,7 @@ const Profile = (props) => {
         <title>Profile</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="" style={{ backgroundColor: "#F7F5F5" }}>
+      <div style={{ backgroundColor: "#ffffff" }}>
         <Account user={props.user} setUser={props.setUser} getUrl={props.getUrl} handleToast={props.handleToast} />
       </div>
     </div>

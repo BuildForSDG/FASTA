@@ -21,11 +21,11 @@ const NavBar = styled.nav`
   background-color: #fff;
   box-shadow: 0px 1px 7px #0000001a;
   padding: 15px;
+  top: 0;
 `;
 
 const DetailsBody = styled.div`
-  height: 76px;
-  background-color: #fff;
+  background-color: #f7f5f5;
   padding: 15px;
   margin-bottom: 15px;
 `;
@@ -36,13 +36,13 @@ const Text = styled(H3)`
 
 export const Nav = props => {
   return (
-    <NavBar className="flex justify-between items-center z-10">
-      <div onClick={() => Router.back()}>
-        <img src="/images/account/Back-Arrow.svg" alt="back" />
+    <NavBar className="z-10">
+      <div className="container mx-auto flex justify-between items-center">
+        <button type="button" onClick={() => Router.back()}>
+          <img src="/images/Back-Arrow-Black.svg" alt="back" />
+        </button>
+        <H3 className="mx-auto">{props.title}</H3>
       </div>
-      <Text color="#232323" className="my-0 font-normal mx-auto">
-        {props.title}
-      </Text>
     </NavBar>
   );
 };
@@ -143,7 +143,12 @@ const Number = ({ user, setUser, getUrl, handleToast }) => {
   }, [user]);
 
   return (
-    <div className="bg-white p-4 mb-4 rounded-lg">
+    <div
+      className="bg-white p-4 mb-4 rounded-lg"
+      style={{
+        background: "#f7f5f5"
+      }}
+    >
       <ToastContainer />
       <div className="flex items-center mb-3">
         <img src="/images/phone.svg" alt="phone" />
@@ -235,7 +240,13 @@ const ChangePassword = ({ user, getUrl, handleToast }) => {
   }, []);
 
   return (
-    <form onSubmit={handleSubmit(onSubmitForm)} className="bg-white p-4 rounded-lg mb-4">
+    <form
+      onSubmit={handleSubmit(onSubmitForm)}
+      className="p-4 rounded-lg mb-4"
+      style={{
+        background: "#f7f5f5"
+      }}
+    >
       <ToastContainer />
       <div className="flex items-start">
         <img src="/images/lock.svg" alt="password" />
@@ -350,7 +361,13 @@ const Register = ({ user, setUser, getUrl, handleToast }) => {
   }, [user]);
 
   return (
-    <form onSubmit={handleSubmit(onSubmitForm)} className="bg-white p-4 rounded-lg mb-16">
+    <form
+      onSubmit={handleSubmit(onSubmitForm)}
+      className="p-4 rounded-lg mb-16"
+      style={{
+        background: "#f7f5f5"
+      }}
+    >
       <ToastContainer />
       <div className="flex items-start">
         <img src="/images/car.png" alt="password" />
@@ -427,16 +444,33 @@ const Account = props => {
   return (
     <>
       <Nav title="Profile" />
-      <div className="w-full p-4">
-        <Details user={props.user} />
-        <Number user={props.user} setUser={props.setUser} getUrl={props.getUrl} handleToast={props.handleToast} />
-        <ChangePassword user={props.user} getUrl={props.getUrl} handleToast={props.handleToast} />
-        {/* {props.user ? props.user.status : 'truck'} */}
-        {props.user.status && props.user.status === "transporter" ? (
-          <VehicleDetails user={props.user} />
-        ) : (
-          <Register user={props.user} setUser={props.setUser} getUrl={props.getUrl} handleToast={props.handleToast} />
-        )}
+      <div className="container mx-auto mt-20">
+        <div className="w-full p-4 lg:px-0">
+          <div className="lg:flex flex-wrap justify-between">
+            <div className="lg:px-4 lg:w-1/2">
+              <Details user={props.user} />
+            </div>
+            <div className="lg:px-4 lg:w-1/2">
+              <Number user={props.user} setUser={props.setUser} getUrl={props.getUrl} handleToast={props.handleToast} />
+            </div>
+            <div className="lg:px-4 lg:w-1/2">
+              <ChangePassword user={props.user} getUrl={props.getUrl} handleToast={props.handleToast} />
+            </div>
+            <div className="lg:px-4 lg:w-1/2">
+              {/* {props.user ? props.user.status : 'truck'} */}
+              {props.user.status && props.user.status === "transporter" ? (
+                <VehicleDetails user={props.user} />
+              ) : (
+                <Register
+                  user={props.user}
+                  setUser={props.setUser}
+                  getUrl={props.getUrl}
+                  handleToast={props.handleToast}
+                />
+              )}
+            </div>
+          </div>
+        </div>
       </div>
       {/* <BottomNav accountColor={{color: "#fff"}} /> */}
       <BottomNav />

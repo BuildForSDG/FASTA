@@ -2,7 +2,7 @@
 const views = [
   {
     id: 1,
-    bg: "#AFDEB1",
+    bg: "#FFF",
     img: "/images/traveling.png",
     color: "#43A047",
     heading: "Plan Your Trips",
@@ -11,7 +11,7 @@ const views = [
   },
   {
     id: 2,
-    bg: "#BCE0FD",
+    bg: "#FFF",
     img: "/images/destination.png",
     color: "#2699FB",
     heading: "DISCOVER NEW LOCATIONS",
@@ -19,7 +19,7 @@ const views = [
   },
   {
     id: 3,
-    bg: "#DEB1AF",
+    bg: "#FFF",
     img: "/images/road.png",
     color: "#A04743",
     heading: "SAFETY FIRST",
@@ -27,7 +27,7 @@ const views = [
   },
   {
     id: 4,
-    bg: "#AFDEB1",
+    bg: "#FFF",
     img: "/images/order-ride.png",
     color: "#43A047",
     heading: "BOOK RIDES",

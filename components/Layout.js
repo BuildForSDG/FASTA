@@ -12,7 +12,7 @@ const Body = styled.main`
 
 const Layout = (props) => {
   return (
-    <div className=" w-screen min-h-screen">
+    <div className="min-h-screen">
       <Head>
         <title>Fasta {props.header}</title>
         <meta charset="utf-8" />
@@ -119,7 +119,7 @@ const Layout = (props) => {
         <link href="/manifest.json" rel="manifest" />
       </Head>
       <ShadowedHeader heading={props.header} />
-      <Body className="w-screen pt-4 min-h-screen px-4">{props.children}</Body>
+      <Body className="container mx-auto pt-4 min-h-screen px-4 mt-16">{props.children}</Body>
       <BottomNav />
     </div>
   );

@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
-import React, { useState, useEffect } from "react";
-import fetch from "node-fetch";
+import React, { useEffect } from "react";
+// import fetch from "node-fetch";
 
 import trips from "./trips.json";
 import Layout from "../../components/Layout";
@@ -20,15 +20,18 @@ const ScheduledTrips = () => {
 
   return (
     <Layout header="Your Scheduled Trips" back>
-      { trips.map((trip, index) => (
-        <TripCard 
-          key={index}
-          id={trip.id}
-          origin={trip.origin}
-          destination={trip.destination}
-          time={trip.time}
-         />
-      ))}
+      <div className="container mx-auto md:flex flex-wrap">
+        { trips.map((trip, index) => (
+          <TripCard 
+            key={index}
+            id={trip.id}
+            origin={trip.origin}
+            destination={trip.destination}
+            time={trip.time}
+          />
+        ))}
+
+      </div>
 
       <NewTripButton />
     </Layout>

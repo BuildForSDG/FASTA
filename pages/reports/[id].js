@@ -1,8 +1,5 @@
 /* eslint-disable prettier/prettier */
-import React, { useState, useEffect } from "react";
-import Router, { useRouter } from "next/router";
-import fetch from "node-fetch";
-
+import React from "react";
 
 import Layout from "../../components/Layout";
 import ReportCard from "../../components/Cards/ReportCard";
@@ -23,12 +20,14 @@ import ReportCard from "../../components/Cards/ReportCard";
 const Report = (props) => {
   return (
     <Layout header="Report" back>
-       <ReportCard 
-        type={props.type}
-        location={props.location}
-        timestamp={props.date}
-        description={props.description}
-      />
+      <div className="container mx-auto relative">
+        <ReportCard 
+          type={props.type}
+          location={props.location}
+          timestamp={props.date}
+          description={props.description}
+        />
+      </div>
     </Layout>
   );
 };
