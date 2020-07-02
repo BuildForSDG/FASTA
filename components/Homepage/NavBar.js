@@ -43,7 +43,12 @@ const DropDownView = styled.div`
 `;
 
 const NavLogo = styled.img`
-  height: 30px;
+  height: 40px;
+  width: 60px;
+  margin-left: 15px;
+  @media (max-width: 660px) {
+    margin-left: 0;
+  }
 `;
 
 const NavBar = (props) => {
@@ -60,7 +65,7 @@ const NavBar = (props) => {
   return (
     <Nav>
       <div className="flex justify-between items-center container mx-auto">
-        <NavLogo src="images/Logo.png" alt="Fasta" />
+        <NavLogo src="images/FASTA-LOGO.jpg" alt="Fasta" />
         <LogOutStyle>
           <img className="cursor-pointer" src="images/More.png" alt="more" onClick={makeActive} onFocus={makeActive} />
           {dropdownActive && (
