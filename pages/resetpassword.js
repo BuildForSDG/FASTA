@@ -75,7 +75,7 @@ const onSubmit = (data) => {
     <div className="w-screen ">
       <Head>
         <title>Fasta Password Reset</title>
-        <link rel="icon" href="/images/Logo.png" />
+        <link rel="icon" href="/images/FASTA-LOGO.jpg" />
       </Head>
 
       <Header back />

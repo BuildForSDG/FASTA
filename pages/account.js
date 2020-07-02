@@ -8,7 +8,7 @@ const Profile = (props) => {
     <div>
       <Head>
         <title>Profile</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/images/FASTA-LOGO.jpg" />
       </Head>
       <div style={{ backgroundColor: "#ffffff" }}>
         <Account user={props.user} setUser={props.setUser} getUrl={props.getUrl} handleToast={props.handleToast} />

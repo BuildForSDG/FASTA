@@ -124,7 +124,7 @@ export default function Hom() {
       </Head>
       {!loaded ? (
         <div className="w-screen h-screen flex justify-center items-center" style={{ backgroundColor: "#FFF" }}>
-          <img src="/images/Logo.png" alt="" />
+          <img src="/images/FASTA-LOGO.jpg" alt="" />
         </div>
       ) : (
         <Layout views={views} />

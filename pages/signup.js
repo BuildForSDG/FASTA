@@ -87,7 +87,7 @@ if (loggedIn) {
     <div className="w-screen ">
       <Head>
         <title>Fasta Create Account</title>
-        <link rel="icon" href="/images/Logo.png" />
+        <link rel="icon" href="/images/FASTA-LOGO.jpg" />
       </Head>
 
       <Header />

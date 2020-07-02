@@ -72,7 +72,7 @@ const Layout = (props) => {
         <meta name="msapplication-TileColor" content="#ffffff" />
         <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
         <meta name="theme-color" content="#43a047" />
-        <link rel="icon" href="/images/Logo.png" />
+        <link rel="icon" href="/images/FASTA-LOGO.jpg" />
         {/* <!-- Main Link Tags  --> */}
         <link href="/images/icons/favicon-16.png" rel="icon" type="image/png" sizes="16x16" />
         <link href="/images/icons/favicon-32.png" rel="icon" type="image/png" sizes="32x32" />

@@ -11,7 +11,7 @@ const Home = ({ loggedIn, user, setLocated, located }) => {
     <div>
       <Head>
         <title>Fasta</title>
-        <link rel="icon" href="/images/Logo.png" />
+        <link rel="icon" href="/images/FASTA-LOGO.jpg" />
       </Head>
       <div className="">
         <Homepage user={name} located={located} setLocated={setLocated} />

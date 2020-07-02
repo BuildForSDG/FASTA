@@ -77,7 +77,7 @@ useEffect(() => {
     <div className="w-screen ">
       <Head>
         <title>Fasta Login</title>
-        <link rel="icon" href="/images/Logo.png" />
+        <link rel="icon" href="/images/FASTA-LOGO.png" />
       </Head>
 
       <Header />
