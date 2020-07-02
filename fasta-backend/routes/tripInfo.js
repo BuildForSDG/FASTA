@@ -116,3 +116,5 @@ router.get("/trip-info/:tripId", async (req, res) => {
 });
 
 module.exports = router;
+
+// {"_id":{"$oid":"5ef3d2483864df0017d2d288"},"mode":"road","origin":"Ekpoma, Nigeria","originLatLng":{"lat":{"$numberDouble":"6.749140499999999"},"lng":{"$numberDouble":"6.0732146"}},"originLocation":"Benin Auchi Rd, Ekpoma, Nigeria","destination":"Auchi, Nigeria","destinationLatLng":{"lat":{"$numberDouble":"7.066864499999999"},"lng":{"$numberDouble":"6.274773400000001"}},"destinationLocation":"107 Igbe Rd, Auchi, Nigeria","isVulnerable":"Regular user","tripDistance":"36.2 mi","tripDuration":"1 hour 8 mins","tripTime":"2020-06-25T23:22","userId":"5ed217d74ca54e13680274f2","date":{"$date":{"$numberLong":"1593037384531"}},"__v":{"$numberInt":"0"}}
