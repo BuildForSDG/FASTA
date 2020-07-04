@@ -6,7 +6,7 @@ import { TextSmall } from "../../Text/Body";
 
 const Body = styled.div`
   background-color: #afdeb1;
-  border: 1px solid #bce0fd;
+  border: 1px solid #afdeb1;
   border-radius: 10px;
   color: #43a047;
   padding: 20px;

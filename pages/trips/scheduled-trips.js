@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
-import React, { useState, useEffect } from "react";
-import fetch from "node-fetch";
+import React, { useEffect } from "react";
+// import fetch from "node-fetch";
 
 // import trips from "./trips.json";
 import Layout from "../../components/Layout";

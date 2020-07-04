@@ -355,7 +355,8 @@ const NewTrip = (props) => {
               Schedule Trip
             </SubmitButton>}
 
-          </form>
+            </form>
+          </div>
         </div>
       </div>
     </Layout>

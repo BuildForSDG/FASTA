@@ -22,5 +22,11 @@
     "origin" : "Ikeja, Lagos",
     "destination" : "Choba, Port Harcourt",
     "time" : "22/08/2020 1:50pm"
+  },
+  {
+    "id" : 4,
+    "origin" : "Ikeja, Lagos",
+    "destination" : "Choba, Port Harcourt",
+    "time" : "22/08/2020 1:50pm"
   }
 ]

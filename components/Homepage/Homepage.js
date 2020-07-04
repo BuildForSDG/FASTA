@@ -11,7 +11,7 @@ import Reports from "./Reports/Reports";
 import Map from "../Map";
 
 const Body = styled.main`
-  margin-top: 70px;
+  margin-top: 90px;
   padding-bottom: 60px;
   background: #ffffff;
 `;
@@ -124,9 +124,9 @@ const Homepage = (props) => {
   }, []);
 
   return (
-    <div className="homepage w-screen min-h-screen">
+    <div className="homepage min-h-screen">
       <NavBar name="Fasta" />
-      <Body className="px-4">
+      <Body className="px-4 container mx-auto">
         {!props.located ? (
           <GPS />
         ) : (

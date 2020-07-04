@@ -41,7 +41,7 @@ const ListItem = (props) => {
 const BottomNav = () => {
 
   return (
-    <Nav className="flex justify-evenly items-center w-screen">
+    <Nav className="flex justify-evenly items-center max-w-screen w-full">
      <ListItem 
       href="/home"
       activeImg="/images/Home.png"

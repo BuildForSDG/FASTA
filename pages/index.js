@@ -123,7 +123,7 @@ export default function Hom() {
         <link href="/manifest.json" rel="manifest" />
       </Head>
       {!loaded ? (
-        <div className="w-screen h-screen flex justify-center items-center" style={{ backgroundColor: "#AFDEB1" }}>
+        <div className="w-screen h-screen flex justify-center items-center" style={{ backgroundColor: "#FFF" }}>
           <img src="/images/Logo.png" alt="" />
         </div>
       ) : (

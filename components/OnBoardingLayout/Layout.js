@@ -1,10 +1,10 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Link from "next/link";
 import Head from "next/head";
-
+import Popup from "../Popup";
 import { H1 } from "../Text/Headings";
 
 const StyledLayout = styled.div`
@@ -39,10 +39,15 @@ const OnBoardingContainerLayout = styled.section`
 
 const Layout = (props) => {
   const [screen, setScreen] = useState(0);
+  const [showPopup, setShowPopup] = useState(true);
 
   function changeScreen({ target }) {
     setScreen(target.id);
   }
+
+  const togglePopup = () => {
+    setShowPopup(!showPopup);
+  };
 
   return (
     <div className="w-screen h-screen overflow-x-hidden">
@@ -142,6 +147,7 @@ const Layout = (props) => {
         {/* <!-- Manifest.json  --> */}
         <link href="/manifest.json" rel="manifest" />
       </Head>
+      {showPopup && window.innerWidth > 998 && <Popup closePopup={togglePopup} />}
       <OnBoardingContainerLayout screen={screen}>
         {props.views.map((view, index) => {
           return (

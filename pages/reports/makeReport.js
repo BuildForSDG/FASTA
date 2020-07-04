@@ -68,6 +68,8 @@ try {
 
   return (
     <Layout header="Make New Report" back>
+      <div className="container mx-auto relative">
+
       <form onSubmit={handleSubmit(onSubmit)} className="w-full mt-4">
           <SelectInput placeholder="Report Type"
               name="type"
@@ -135,6 +137,7 @@ try {
             Submit
           </SubmitButton>}
         </form>
+      </div>
 
         {submitted && (
           <div

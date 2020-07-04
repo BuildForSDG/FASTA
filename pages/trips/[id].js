@@ -128,33 +128,85 @@ const Trip = (props) => {
                 ))}
             </ErrorMessage>
 
-          {/* Renders the Transport Companies */}
-          {transportCompany.length > 0 && (
-            <>
               <p style={{ color: "#2699FB" }} className="text-xs mb-2">
-                Transport Companies around you
+                Select mode of transport
               </p>
-              <Grid>
-                {transportCompanies.map((company, idx) => (
-                  <TransportCompany
-                    key={idx}
-                    id={company.id}
-                    business_name={company.business_name}
-                    services={company.services}
-                    status={company.status}
-                    distance={company.distance}
-                    onClick={makeProvider}
-                  />
-                ))}
-              </Grid>
-            </>
-          )}
 
-          {/* Renders the Transport Providers */}
-          {riders.length > 0 && (
-            <>
-              <p style={{ color: "#2699FB" }} className="text-xs mb-2">
-                Transport Providers around you
+              {/* Add ref from react-hook-forms */}
+              <SelectInput placeholder="-- Mode of Transport --"
+                onChange={modeOfTransport}
+                name="modeOfTransport"
+                options={[
+                  "Trekking",
+                  "Private Vehicle",
+                  "Bus",
+                  "Taxi",
+                  "Transport Company",
+                  "Train",
+                  "Airport",
+                  "Waterways",
+                  "Hail Taxi on Fasta"
+                ]}
+                ref={register({
+                  required: "Please select a mode of transport"
+                })}
+              />
+                <ErrorMessage errors={errors} name="modeOfTransport">
+                  {({ messages }) =>
+                    messages &&
+                    Object.entries(messages).map(([type, message]) => (
+                      <p key={type} className="text-xs text-red-500 text-center my-2">
+                        {message}
+                      </p>
+                    ))}
+                </ErrorMessage>
+
+              {/* Renders the Transport Companies */}
+              {transportCompany.length > 0 && (
+                <>
+                  <p style={{ color: "#2699FB" }} className="text-xs mb-2">
+                    Transport Companies around you
+                  </p>
+                  <Grid>
+                    {transportCompanies.map((company, idx) => (
+                      <TransportCompany
+                        key={idx}
+                        id={company.id}
+                        business_name={company.business_name}
+                        services={company.services}
+                        status={company.status}
+                        distance={company.distance}
+                        onClick={makeProvider}
+                      />
+                    ))}
+                  </Grid>
+                </>
+              )}
+
+              {/* Renders the Transport Providers */}
+              {riders.length > 0 && (
+                <>
+                  <p style={{ color: "#2699FB" }} className="text-xs mb-2">
+                    Transport Providers around you
+                  </p>
+                  <Grid>
+                    {riders.map((rider, idx) => (
+                      <TransportProvider
+                        key={idx}
+                        business_name={rider.business_name}
+                        vehicle_type={rider.vehicle_type}
+                        status={rider.status}
+                        distance={rider.distance}
+                        phone={rider.phone}
+                      />
+                    ))}
+                  </Grid>
+                </>
+
+              )}
+
+              <p style={{ color: "#2699FB" }} className="text-xs mb-2 mt-6">
+                Select health condition if any
               </p>
               <Grid>
                 {riders.map((rider, idx) => (
@@ -205,9 +257,40 @@ const Trip = (props) => {
           </SubmitButton>
         </form>
 
-      </div>
+              {/* Add ref from react-hook-forms */}
+              <SelectInput placeholder="-- Condition --"
+                name="condition"
+                options={[
+                  "None",
+                  "Blind",
+                  "Deaf",
+                  "Pregnant",
+                  "Cripple",
+                  "Lame"
+                ]}
+                ref={register({
+                  required: "Please select a condition or none"
+                })}
+              />
+              <ErrorMessage errors={errors} name="condition">
+                {({ messages }) =>
+                  messages &&
+                  Object.entries(messages).map(([type, message]) => (
+                    <p key={type} className="text-xs text-red-500 text-center my-2">
+                      {message}
+                    </p>
+                  ))}
+              </ErrorMessage>
 
-    </div>
+              <SubmitButton type="submit" className="w-full mt-2">
+                Start Trip
+              </SubmitButton>
+            </form>
+
+          </div>
+
+        </div>
+      </div>
 
   </Layout>
   );

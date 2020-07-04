@@ -33,7 +33,7 @@ const ReportCardStyle = styled.div`
 
 const ReportCard = (props) => {
   return (
-    <Link href="/reports/[id]" as={`/reports/${props.id}`}>
+    <Link href="/reports/[id]" as={`/reports/${props.id}`} className="md:px-4 md:w-6/12">
       <a>
         <ReportCardStyle className="mb-5 p-4 pr-5">
           <h4 className="text-base font-semibold" style={{ color: "#43A047" }}>

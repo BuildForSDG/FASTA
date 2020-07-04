@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import Trip from "./Trip";
 import { TextSmall } from "../../Text/Body";
+import { H3 } from "../../Text/Headings";
 
 // const TextSmall = styled.p`
 //   font-size: 14px;
