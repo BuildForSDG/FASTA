@@ -12,7 +12,7 @@ const Home = ({ loggedIn, setLoggedIn, user, located, setLocated, location, setL
     if (!loggedIn) {
       Router.push("/login");
     }
-  }, []);
+  }, [loggedIn]);
 
   return (
     <div>

@@ -25,7 +25,7 @@ const NewTrip = (props) => {
   return (
     <Link href="/trips/new-trip">
       <a>
-      <Text>Welcome back {props.user.name}!</Text>
+      <Text>Welcome back {props.user.fullname}!</Text>
       <Body>
         <H3>Plan a new trip</H3>
         <p>Schedule your next outing</p>

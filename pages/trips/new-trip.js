@@ -357,7 +357,6 @@ const NewTrip = (props) => {
 
             </form>
           </div>
-        </div>
       </div>
     </Layout>
   );

@@ -125,7 +125,7 @@ const Homepage = (props) => {
 
   return (
     <div className="homepage min-h-screen">
-      <NavBar name="Fasta" />
+      <NavBar name="Fasta" setLoggedIn={props.setLoggedIn} />
       <Body className="px-4 container mx-auto">
         {!props.located ? (
           <GPS />
