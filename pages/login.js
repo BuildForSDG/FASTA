@@ -47,8 +47,8 @@ try {
         setLoggedIn(true);
         setToken(response.token);
         setUpdate(!update);
-        setUser({name: response.user.fullname.split(" ")[0], email: ev.email, phonenumber: response.user.phonenumber});
-        // setUser(response.fullname);
+        // setUser({name: response.user.fullname.split(" ")[0], email: ev.email, phonenumber: response.user.phonenumber});
+        setUser(response.user);
         handleToast(response.response, "success");
       } else if (res.status >= 500) {
         handleToast("Some connection or server error", "error");
