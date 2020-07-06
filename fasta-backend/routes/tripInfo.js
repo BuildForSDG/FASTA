@@ -93,7 +93,7 @@ router.get("/trip-info/:tripId", async (req, res) => {
               const reportFound = PolyUtil.isLocationOnEdge(report, path, 0.15);
               // isPathIndex = reportsInLocation.push(reportFound);
               if (reportFound) {
-                // console.log(report);
+                console.log(report);
                 return Reports.find({ location: report })
                   .select("-_id type description date")
                   .exec()
