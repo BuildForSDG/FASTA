@@ -30,9 +30,10 @@ router.get("/trip-info/:tripId", async (req, res) => {
     .exec()
     .then((allReports) => {
       if (!allReports || allReports < 1) {
-        return res.status(404).json({ response: "unfortunetly, we dont have any report in your location , check back" });
+        return res.status(404).json({ response: "Reports not available at the moment, we're still checking" });
       }
 
+      console.log("reports: ", allReports); 
       const reportArray = Object.keys(allReports);
       reportArray.forEach((key) => {
         const reportLocation = allReports[key];
@@ -40,7 +41,7 @@ router.get("/trip-info/:tripId", async (req, res) => {
       });
     })
     .catch((error) => {
-      res.status(500).json({ error });
+      return res.status(500).json({ error });
     });
 
 
@@ -59,10 +60,11 @@ router.get("/trip-info/:tripId", async (req, res) => {
           cb(response.data.routes[0].overview_polyline.points);
         } catch (err) {
           console.error(err);
-        }
+        } 
       })
       .catch((error) => {
-        throw new Error("Error fetching data");
+        // throw new Error("Error fetching data");
+        return res.json({response: "Error fetching data"});
       });
   };
   // get schedule trip Id
@@ -71,8 +73,10 @@ router.get("/trip-info/:tripId", async (req, res) => {
     .exec()
     .then((trip) => {
       if (!trip || trip < 1) {
-        throw new Error("unfortunetly, we dont have any report location schedule for you, check back");
+        // throw new Error("unfortunetly, we dont have any report location schedule for you, check back");
+        return res.json({response: "Trip not found!"});
       }
+      console.log(trip);
       try {
         // console.log(reports);
         for (let i = 0; i < reports.length; i++) {
@@ -116,5 +120,3 @@ router.get("/trip-info/:tripId", async (req, res) => {
 });
 
 module.exports = router;
-
-// {"_id":{"$oid":"5ef3d2483864df0017d2d288"},"mode":"road","origin":"Ekpoma, Nigeria","originLatLng":{"lat":{"$numberDouble":"6.749140499999999"},"lng":{"$numberDouble":"6.0732146"}},"originLocation":"Benin Auchi Rd, Ekpoma, Nigeria","destination":"Auchi, Nigeria","destinationLatLng":{"lat":{"$numberDouble":"7.066864499999999"},"lng":{"$numberDouble":"6.274773400000001"}},"destinationLocation":"107 Igbe Rd, Auchi, Nigeria","isVulnerable":"Regular user","tripDistance":"36.2 mi","tripDuration":"1 hour 8 mins","tripTime":"2020-06-25T23:22","userId":"5ed217d74ca54e13680274f2","date":{"$date":{"$numberLong":"1593037384531"}},"__v":{"$numberInt":"0"}}

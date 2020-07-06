@@ -43,4 +43,24 @@ router.get("/reports", authChecker, async (req, res) => {
       res.status(500).json({ error });
     });
 });
+
+
+router.delete("/reports", async (req, res) => {
+  try {
+    // await Reports.deleteMany({ "location.lat": { $exists: true, $e: null } }, (err, report) => {
+    await Reports.deleteMany({ "location": { $exists: false } }, (err, report) => {
+    if(err) {
+      console.log(err);
+      return res.json({response: "error found"}); 
+    }
+    console.log("reports deleted"); 
+    return res.json({report, response: "Successful deletion"});
+  });
+} catch (e) {
+  console.log(e, "error found"); 
+}
+  return res.json({response: "Successful deletion"});
+}); 
+
 module.exports = router;
+ 
