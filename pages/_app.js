@@ -22,9 +22,9 @@ function MyApp({ Component, pageProps, initialLoggedIn, initialUser, initialToke
     // } else {
     return "https://fasta-app.herokuapp.com/api/v1";
   };
-
+ 
   const handleToast = (msg, type = "info") => toast.notify(msg, { duration: 5, type });
-
+  console.log("loggedIn: ", loggedIn, "location: ", location);
   useEffect(() => {
       Cookie.set("loggedIn", loggedIn);
       // Cookie.set("user", JSON.stringify(user));
@@ -55,7 +55,7 @@ function MyApp({ Component, pageProps, initialLoggedIn, initialUser, initialToke
        };
         const key= "AIzaSyAm00Wsdh6jJB2QzlW5c6t_nu0gMRAZB9s";
         const scriptUrl = `https://maps.googleapis.com/maps/api/js?key=${key}&libraries=places`;
-        loadScript(scriptUrl);
+        // loadScript(scriptUrl);
        return () => {
          // cleanup
        };
@@ -88,7 +88,7 @@ MyApp.getInitialProps = ({Component, ctx}) => {
   const allCookies = cookies(ctx);
   const cookiesLog = Cookie.get();
   const pageProps = Component.getInitialProps ? Component.getInitialProps(ctx) : {};
-  console.log("allCookies: ", allCookies, pageProps, cookiesLog);
+  // console.log("allCookies: ", allCookies, pageProps, cookiesLog);
   return {
     initialLoggedIn: allCookies.loggedIn,
     initialUser: allCookies.user,

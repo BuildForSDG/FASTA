@@ -39,14 +39,18 @@ const ReportCard = (props) => {
           <h4 className="text-base font-semibold" style={{ color: "#43A047" }}>
             {props.type}
           </h4>
-          <TextSmall color="#232323">{(typeof props.location) === 'object' ? `lat: ${props.location.lat}, lng: ${props.location.lng}` : props.location}</TextSmall>
+          {/* <TextSmall color="#232323">{(typeof props.location) === 'object' ? `lat: ${props.location.lat}, lng: ${props.location.lng}` : props.location}</TextSmall> */}
           <p style={{ color: "#6C6C6C" }} className="text-xs">
-            {props.timestamp}
+            {props.date}
           </p>
 
           <TextSmall color="#232323" className={`mt-4 ${props.details && "details"} text-justify`}>
             {props.description}
           </TextSmall>
+          <TextSmall color="#232323" className={`mt-4 ${props.details && "details"} text-justify`}>
+          Reported from: {props.address ? props.address : "Undefined Location"}
+          </TextSmall>
+
         </ReportCardStyle>
       </a>
     </Link>

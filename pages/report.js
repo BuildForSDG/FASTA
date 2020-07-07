@@ -69,7 +69,8 @@ const Reports = ({getUrl, handleToast, reports, setReports, location}) => {
       id={report._id}
       type={report.type}
       location={report.location}
-      timestamp={report.timestamp}
+      address={report.address}
+      date={report.date}
       description={report.description}
       reports={reports}
       setReports={setReports}
