@@ -52,7 +52,7 @@ router.post("/report", authChecker, async (req, res) => {
   }
 });
 
-router.get("/reports", authChecker, async (req, res) => {
+router.get("/reports", async (req, res) => {
   let { lat, lng } = req.query;
   lat = Number(lat);
   lng = Number(lng);

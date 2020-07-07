@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const webpush = require("web-push");
-
-console.log(process.env.VAPID_PUBLIC_KEY);
+ 
+// console.log(process.env.VAPID_PUBLIC_KEY);
 webpush.setVapidDetails("mailto:thevetdoctor@gmail.com", process.env.VAPID_PUBLIC_KEY, process.env.VAPID_PRIVATE_KEY);
 
 

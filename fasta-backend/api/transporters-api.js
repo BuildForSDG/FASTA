@@ -8,7 +8,7 @@ const https = require("https");
 const options = {
   hostname: "maps.googleapis.com",
   port: 443,
-  path: `/maps/api/place/textsearch/json?query=transport&location=${this.latitude},${this.longitude}&radius=10000&key=AIzaSyC8G-WQhDTvlVflIFPzOj30rDQGk0Fekx8`,
+  path: `/maps/api/place/textsearch/json?query=transport&location=${this.latitude},${this.longitude}&radius=10000&key=AIzaSyAm00Wsdh6jJB2QzlW5c6t_nu0gMRAZB9s`,
   method: "GET"
 };
 
@@ -17,7 +17,7 @@ const client = new Client({});
 // Allow function to receive coordinate argument from client
 class GetTripInfo {
   constructor(latitude, longitude, method) {
-    this.latitude = latitude;
+    this.latitude = latitude; 
     this.longitude = longitude;
     this.method = method;
   }
@@ -48,3 +48,7 @@ class GetTripInfo {
 }
 
 module.exports = GetTripInfo;
+
+
+  // path: `/maps/api/place/textsearch/json?query=transport&location=${this.latitude},${this.longitude}&radius=10000&key=AIzaSyDg-6GC6doxzpE_etI9E-yJR2NOLyFzBYc`,
+  // path: `/maps/api/place/textsearch/json?query=transport&location=${this.latitude},${this.longitude}&radius=10000&key=AIzaSyC8G-WQhDTvlVflIFPzOj30rDQGk0Fekx8`,
