@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Link from "next/link";
-
+import Moment from "react-moment"
 import { TextSmall } from "../Text/Body";
 
 const ReportCardStyle = styled.div`
@@ -42,15 +42,17 @@ const ReportCard = (props) => {
           </h4>
           {/* <TextSmall color="#232323">{(typeof props.location) === 'object' ? `lat: ${props.location.lat}, lng: ${props.location.lng}` : props.location}</TextSmall> */}
           <p style={{ color: "#6C6C6C" }} className="text-xs">
-            {props.date}
+            <Moment fromNow>{props.date}</Moment>
           </p>
 
           <TextSmall color="#232323" className={`mt-4 ${props.details && "details"} text-justify`}>
             {props.description}
           </TextSmall>
-          <TextSmall color="#232323" className={`mt-4 ${props.details && "details"} text-justify`}>
+          <p>...</p>
+          <p></p>
+          <p style={{ color: "#6C6C6C" }} className="text-xs">
           Location: {props.address ? props.address : "Unknown"}
-          </TextSmall>
+          </p>
  
         </ReportCardStyle>
       </a>

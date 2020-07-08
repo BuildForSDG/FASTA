@@ -74,27 +74,27 @@ const NewTrip = (props) => {
 
   useEffect(() => {
     // effect
-    // const loadScript = (url) => {
-    //      let script = document.createElement("script");
-    //      script.type = "text/javascript";
+    const loadScript = (url) => {
+         let script = document.createElement("script");
+         script.type = "text/javascript";
       
-    //      if (script.readyState) {
-    //        script.onreadystatechange = function() {
-    //          if (script.readyState === "loaded" || script.readyState === "complete") {
-    //            script.onreadystatechange = null;
-    //            console.log('script-1');
-    //          }
-    //        };
-    //      } else {
-    //        script.onload = () => console.log('script-2');
-    //      }
+         if (script.readyState) {
+           script.onreadystatechange = function() {
+             if (script.readyState === "loaded" || script.readyState === "complete") {
+               script.onreadystatechange = null;
+               console.log('script-1');
+             }
+           };
+         } else {
+           script.onload = () => console.log('script-2');
+         }
       
-    //      script.src = url;
-    //      document.getElementsByTagName("head")[0].appendChild(script);
-    //    };
-    //     const key= "AIzaSyAm00Wsdh6jJB2QzlW5c6t_nu0gMRAZB9s";
-    //     const scriptUrl = `https://maps.googleapis.com/maps/api/js?key=${key}&libraries=places`;
-    //     loadScript(scriptUrl);
+         script.src = url;
+         document.getElementsByTagName("head")[0].appendChild(script);
+       };
+        const key= "AIzaSyAm00Wsdh6jJB2QzlW5c6t_nu0gMRAZB9s";
+        const scriptUrl = `https://maps.googleapis.com/maps/api/js?key=${key}&libraries=places`;
+        // loadScript(scriptUrl);
     return () => {
     //   // cleanup
     };
