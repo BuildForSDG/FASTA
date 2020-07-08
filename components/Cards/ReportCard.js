@@ -33,7 +33,8 @@ const ReportCardStyle = styled.div`
 
 const ReportCard = (props) => {
   return (
-    <Link href="/reports/[id]" as={`/reports/${props.id}`} className="md:px-4 md:w-6/12">
+    // <Link href="/reports/[id]" as={`/reports/${props.id}`} className="md:px-4 md:w-6/12">
+    <Link href="/reports/[id]" as={`/reports/${props.id}`}>
       <a>
         <ReportCardStyle className="mb-5 p-4 pr-5">
           <h4 className="text-base font-semibold" style={{ color: "#43A047" }}>
@@ -48,9 +49,9 @@ const ReportCard = (props) => {
             {props.description}
           </TextSmall>
           <TextSmall color="#232323" className={`mt-4 ${props.details && "details"} text-justify`}>
-          Reported from: {props.address ? props.address : "Undefined Location"}
+          Location: {props.address ? props.address : "Unknown"}
           </TextSmall>
-
+ 
         </ReportCardStyle>
       </a>
     </Link>
