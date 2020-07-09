@@ -20,14 +20,12 @@ export default class MyDocument extends Document {
         styles: (
           <>
             <Head>
-              <meta charset="utf-8" />
-              <meta http-quiv="x-UA-Compatible" content="IE=edge" />
-              <meta
-                name="viewport"
-                content="width=device-width,initial-scale=1,minimun-scale=1,maximum-scale=1,user-scalable=no"
-              />
-              <meta name="description" content="Your travel companion" />
-              <meta name="keywords" content="travel, faster, safe trip, vehicle, taxi, map, plan" />
+            <link href="/manifest.json" rel="manifest" />
+            <meta charset='utf-8' />
+            <meta http-quiv='x-UA-Compatible' content='IE=edge'/>
+            <meta name='viewport' content='width=device-width,initial-scale=1,minimun-scale=1,maximum-scale=1,user-scalable=no'/>
+            <meta name="description" content="Your travel companion" />
+            <meta name="keywords" content="travel, faster, safe trip, vehicle, taxi, map, plan" />
 
               {/* <!-- Android  --> */}
               <meta name="theme-color" content="#43a047" />
@@ -119,9 +117,6 @@ export default class MyDocument extends Document {
               <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32x32.png" />
               <link rel="icon" type="image/png" sizes="96x96" href="/images/icons/favicon-96x96.png" />
               <link rel="icon" type="image/png" sizes="16x16" href="/images/icons/favicon-16x16.png" />
-
-              {/* <!-- Manifest.json  --> */}
-              <link href="/manifest.json" rel="manifest" />
             </Head>
             {initialProps.styles}
             {sheet.getStyleElement()}
