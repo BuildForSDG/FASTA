@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-console */
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import PlacesAutocomplete, {
@@ -83,11 +84,11 @@ const NewTrip = (props) => {
            script.onreadystatechange = function() {
              if (script.readyState === "loaded" || script.readyState === "complete") {
                script.onreadystatechange = null;
-               console.log('script-1');
+               console.log("script-1");
              }
            };
          } else {
-           script.onload = () => console.log('script-2');
+           script.onload = () => console.log("script-2");
          }
       
          script.src = url;
@@ -126,9 +127,9 @@ const NewTrip = (props) => {
         {loading && <div>Loading...</div>}
         {suggestions.map((suggestion) => {
           const style = { backgroundColor: suggestion.active ? "#fafafa" : "#fff"};
-          return (<div {...getSuggestionItemProps(suggestion, { style })}>
+          return (<div {...getSuggestionItemProps((suggestion), { style })}>
             <span>{suggestion.description}</span>
-          </div>)
+          </div>);
         })}
       </div>
     </div>
@@ -156,9 +157,9 @@ const NewTrip = (props) => {
             </ErrorMessage>      
             <div>
         {loading && <div>Loading...</div>}
-        {suggestions.map(suggestion => {
-          const style = { backgroundColor: suggestion.active ? "#fafafa" : "#fff"}
-          return (<div {...getSuggestionItemProps(suggestion, { style })}>
+        {suggestions.map((suggestion) => {
+          const style = { backgroundColor: suggestion.active ? "#fafafa" : "#fff"};
+          return (<div {...getSuggestionItemProps((suggestion), { style })}>
             <span>{suggestion.description}</span>
           </div>)
         })}
@@ -202,8 +203,8 @@ const NewTrip = (props) => {
         const transporterList = transporterResponse.results.map((t) => {
          
          const { name, formatted_address, geometry, icon } = t;
-         return {name, formatted_address, geometry, icon };
          console.log(transporterList);
+         return {name, formatted_address, geometry, icon };
         });
         // return;
       } catch(e) {
@@ -257,7 +258,7 @@ const NewTrip = (props) => {
     console.log(value, latLng);
     setOriginText(value);
     setOrigin(latLng);
-  }
+  };
 
   const handleSelectDestination = async (value) => {
     const results = await geocodeByAddress(value);

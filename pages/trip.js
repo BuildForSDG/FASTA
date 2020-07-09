@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-console */
+/* eslint-disable no-unused-vars */
 import React, { useEffect } from "react";
 import Router from "next/router";
 import ScheduledTrips from "./trips/scheduled-trips";

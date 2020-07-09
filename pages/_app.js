@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
+/* eslint-disable no-unused-vars */
 import { useState, useEffect } from "react";
 import "../styles/styles.css";
 import { toast } from "react-nextjs-toast";
@@ -98,6 +99,6 @@ MyApp.getInitialProps = ({Component, ctx}) => {
     initialReports: allCookies.reports,
     initialTrips: allCookies.trips
   };
-}
+};
 
 export default MyApp;
