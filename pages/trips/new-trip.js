@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
+/* eslint-disable camelcase */
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import PlacesAutocomplete, {
@@ -161,7 +162,7 @@ const NewTrip = (props) => {
           const style = { backgroundColor: suggestion.active ? "#fafafa" : "#fff"};
           return (<div {...getSuggestionItemProps((suggestion), { style })}>
             <span>{suggestion.description}</span>
-          </div>)
+          </div>);
         })}
       </div>
     </div>
@@ -266,7 +267,7 @@ const NewTrip = (props) => {
     console.log(results, latLng);
     setDestinationText(value);
     setDestination(latLng);
-  }
+  };
 
   return (
     <Layout header="Schedule a trip" url={scriptUrl} back>
