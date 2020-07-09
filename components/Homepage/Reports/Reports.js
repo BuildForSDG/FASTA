@@ -16,19 +16,29 @@ const Reports = (props) => {
   console.log(props);
   return (
     <div>
-      <Text color="#232323">Reports in your area</Text>
+      <Text color="#232323">{props.header}</Text>
       {props.reports && !props.reports.length ?
-       <div>No reports available at the moment!</div>:
+      //  <div>No reports available at the moment!</div>:
+       <Report report={{description: "No reports available at the moment!"}} />:
+       <div>{props.link ?
       <div>{props.reports && props.reports.slice(0,2).map((report) => (
-      <Report key={report._id} report={report} />
+      <Report key={report._id} report={report} details />
+      ))}      
+      </div>:
+      <div>{props.reports && props.reports.slice(0,4).map((report) => (
+      <Report key={report._id} report={report} details />
       ))}      
       </div>}
+      </div>
+      }
       
+      {props.link ?
       <Link href="/report">
         <a>
         <TextSmall color="#2699fb">See All Reports</TextSmall>
         </a>
       </Link>
+      :<span>See more reports...</span>}
     </div>
   );
 };

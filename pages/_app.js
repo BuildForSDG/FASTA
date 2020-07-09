@@ -8,12 +8,13 @@ import Cookie from "js-cookie";
 import cookies from "next-cookies";
 
 // This default export is required in a new `pages/_app.js` file.
-function MyApp({ Component, pageProps, initialLoggedIn, initialUser, initialToken, initialLocation, initialLocated, initialReports, initialTrips }) {
+function MyApp({ Component, pageProps, initialLoggedIn, initialUser, initialToken, initialLocation, initialLocated, initialReports, initialTrips, initialTripId }) {
   const [loggedIn, setLoggedIn] = useState(() => initialLoggedIn || false);
   const [located, setLocated] = useState(() => initialLocated || false);
   const [location, setLocation] = useState(() => initialLocation || {});
   const [reports, setReports] = useState(() => initialReports || []);
   const [trips, setTrips] = useState(() => initialTrips || []);
+  const [tripId, setTripId] = useState(() => initialTripId || "");
   const [token, setToken] = useState(() => initialToken || "");
   const defaultUser = { fullname: "Guest Fasta", email: "guest@fasta.com", phonenumber: "08099887766" };
   const [user, setUser] = useState(() => initialUser || defaultUser);
@@ -35,6 +36,7 @@ function MyApp({ Component, pageProps, initialLoggedIn, initialUser, initialToke
       Cookie.set("located", located);
       Cookie.set("reports", JSON.stringify(reports));
       Cookie.set("trips", JSON.stringify(trips));
+      Cookie.set("tripId", tripId);
 
      const loadScript = (url) => {
          let script = document.createElement("script");
@@ -79,6 +81,8 @@ function MyApp({ Component, pageProps, initialLoggedIn, initialUser, initialToke
       setReports={setReports}
       trips={trips}
       setTrips={setTrips}
+      tripId={tripId}
+      setTripId={setTripId}
       token={token}
       setToken={setToken}
     />
@@ -97,7 +101,8 @@ MyApp.getInitialProps = ({Component, ctx}) => {
     initialLocation: allCookies.location,
     initialLocated: allCookies.located,
     initialReports: allCookies.reports,
-    initialTrips: allCookies.trips
+    initialTrips: allCookies.trips,
+    initialTripId: allCookies.tripId
   };
 };
 

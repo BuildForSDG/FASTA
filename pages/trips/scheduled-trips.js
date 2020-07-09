@@ -9,7 +9,7 @@ import TripCard from "../../components/Cards/TripCard";
 import { NewTripButton } from "../../components/Buttons";
 
 
-const ScheduledTrips = ({loggedIn, setLoggedIn, trips, setTrips, getUrl, token}) => {
+const ScheduledTrips = ({loggedIn, setLoggedIn, header, trips, setTrips, tripId, setTripId, getUrl, token}) => {
   console.log(trips);
 
   useEffect(() => {
@@ -30,13 +30,16 @@ const ScheduledTrips = ({loggedIn, setLoggedIn, trips, setTrips, getUrl, token})
         <TripCard 
           key={trip._id}
           id={trip._id}
+          header="Reports on your way"
           origin={trip.origin}
           destination={trip.destination}
           tripTime={trip.tripTime}
           tripDistance={trip.tripDistance}
           tripDuration={trip.tripDuration}
           trips={trips}
+          tripId={tripId}
           setTrips={setTrips}
+          setTripId={setTripId}
           getUrl={getUrl}
           token={token}
          />

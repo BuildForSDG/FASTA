@@ -48,7 +48,7 @@ const Trips = ({getUrl, loggedIn, setLoggedIn, getTrips, token, trips, setTrips,
   return (
     // {trips ?
       // <div>No shceduled trips at the moment! </div>:
-    <ScheduledTrips loggedIn={loggedIn} setLoggedIn={setLoggedIn} trips={trips} setTrips={setTrips} getUrl={getUrl} token={token} />
+    <ScheduledTrips loggedIn={loggedIn} setLoggedIn={setLoggedIn} trips={trips} setTrips={setTrips} getUrl={getUrl} token={token} header="Reports on your way"/>
   // }
   );
 };

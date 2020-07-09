@@ -22,6 +22,7 @@ const Home = ({ loggedIn, setLoggedIn, user, located, setLocated, location, setL
       </Head>
       <div className="">
         <Homepage 
+        header="Reports in your area"
         user={user} 
         loggedIn={loggedIn}
         setLoggedIn={setLoggedIn}

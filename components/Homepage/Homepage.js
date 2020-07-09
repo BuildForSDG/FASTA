@@ -55,7 +55,7 @@ const Homepage = (props) => {
     
     (async () => {
       const apiUrl = props.getUrl();
-      console.log(props);
+      // console.log("props: ", props);
     try {
       const res = await fetch(`${apiUrl}/trips`, {
                               method: "GET", 
@@ -139,7 +139,7 @@ const Homepage = (props) => {
         )}
         <NewTrip user={props.user} location={props.location} />
         <RecentTrips trips={props.trips} />
-        <Reports reports={props.reports} />
+        <Reports header={props.header} reports={props.reports} link />
         <NewReport />
       </Body>
       {/* <BottomNav homeColor={{color: "#fff"}} /> */}

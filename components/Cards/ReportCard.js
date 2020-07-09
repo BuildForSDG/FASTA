@@ -3,7 +3,7 @@ import Link from "next/link";
 import Moment from "react-moment";
 import { TextSmall } from "../Text/Body";
 
-const ReportCardStyle = styled.div`
+export const ReportCardStyle = styled.div`
   background: #ffffff;
   box-shadow: 0px 3px 6px #00000029;
   border: 1px solid transparent;

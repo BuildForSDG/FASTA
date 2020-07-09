@@ -17,7 +17,7 @@ import { Grid, TransportCompany, TransportProvider } from "../../components/Card
 
 
 const Trip = (props) => {
-  console.log(props);
+  // console.log(props);
   const [trip, setTrip] = useState(null);
   const [location, setLocation] = useState({lat: 5.4, lng: 3.2});
   // set riders, providers and transport companies from api
@@ -35,8 +35,13 @@ const Trip = (props) => {
   // const trip = {_id:  "5ee8e622eedc07001766d350", mode: "road", origin: "Sagamu", originLatLng: "Object", lat: 6.8322014, lng: 3.6319131, originLocation: "32 Deeper Life S, Sabo, Sagamu, Nigeria", destination: "Lagos", destinationLatLng: Object, destinationLocation: "21 Kayode St, Abule ijesha 100001, Lagos, Nigeria", isVulnerable: "Regular user", tripDistance: "46.3 mi", tripDuration: "1 hour 30 mins", tripTime: "2020-06-16T17:32", userId: "5ec5006bd26329001715617d", date: "2020-06-16T15:32:50.100+00:00"};  
   
     setTrip(trip[0]);
-    console.log(trip, props.getTrips);
-    return () => {
+    props.setTripId(id);
+    console.log(trip, props.trips, id);
+
+    if (!trip.length) {
+      Router.push("/login");
+    }
+      return () => {
       // cleanup
     };
   }, []);
@@ -95,6 +100,10 @@ const Trip = (props) => {
           <LocationInput
             label="end position"
             input={trip && trip.destination}
+          />
+          <LocationInput
+            label="User Category"
+            input={trip && trip.isVulnerable}
           />
 
           <p style={{ color: "#2699FB" }} className="text-xs mb-2">
@@ -173,34 +182,6 @@ const Trip = (props) => {
                 </>
 
               )}
-
-          <p style={{ color: "#2699FB" }} className="text-xs mb-2 mt-6">
-            Select health condition if any
-          </p>
-
-          {/* Add ref from react-hook-forms */}
-          <SelectInput placeholder="--Category--"
-              name="condition"
-              options={[
-                "Regular user",
-                "Children below 15 years",
-                "Adults above 60 years",
-                "Pregnant",
-                "Have some disability",
-              ]}
-              ref={register({
-                required: "Please select a category"
-              })}
-            />
-          <ErrorMessage errors={errors} name="condition">
-            {({ messages }) =>
-              messages &&
-              Object.entries(messages).map(([type, message]) => (
-                <p key={type} className="text-xs text-red-500 text-center my-2">
-                  {message}
-                </p>
-              ))}
-          </ErrorMessage>
 
           <SubmitButton type="submit" className="w-full mt-2">
             Start Trip

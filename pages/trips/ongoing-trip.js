@@ -8,6 +8,38 @@ import NewReport from "../../components/Homepage/NewReport";
 import Map from "../../components/Map";
 
 const Trip = (props) => {
+    const [tripReports, setTripReports] = useState([]);
+
+  const apiUrl = props.getUrl();
+
+  useEffect(() => {
+    // effect
+    console.log(props.location, props.tripId);
+   
+    (async () => {
+      try {
+        const res = await fetch(`${apiUrl}/trip-info/${props.tripId}`, {
+                                method: "GET", 
+                                headers: { "Content-Type" : "application/json"}
+                              });
+        const response = await res.json();
+        console.log(res.status, response);
+        if (res.status === 200) {
+          const tripReports = response;
+          setTripReports(tripReports);
+          return {tripReports};
+        }
+        } catch(e) {
+            console.log(e, "Some error in connection, Please try again!");
+            const tripReports = {response: [{_id: 0, type: "No reports at the moment!"}]};
+            setTripReports(tripReports.response);
+            return {tripReports};
+          }
+    })();
+    return () => {
+      // cleanup
+    };
+  }, []);
 
   return (
     <Layout header="Ongoing Trip" back>
@@ -16,7 +48,7 @@ const Trip = (props) => {
         <Map lat={props.location &&props.location.lat} lng={props.location && props.location.lng} />
         {/* <MapCard /> */}
         <div className="px-4">
-          <Reports reports={props.reports} />
+          <Reports header="Reports on your way" reports={tripReports} />
           <NewReport />
         </div>
 
