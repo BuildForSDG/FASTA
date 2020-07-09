@@ -51,9 +51,9 @@ const NavBar = (props) => {
   const [dropdownActive, setDropdownActive] = useState(false);
 
   const logOut = () => {
-    console.log("logging out!"):
+    console.log("logging out!");
     props.setLoggedIn(false);
-    console.log("logged out!"):
+    console.log("logged out!");
   }; 
 
   const makeActive = () => {

@@ -135,7 +135,7 @@ const DeleteButton = (props) => {
             loading
             />
           </LoaderContainer>
-          :  <SubmitButton className="w-5/12 " style={{ backgroundColor: '#A04743' }} onClick={confirmTripDelete}>
+          :  <SubmitButton className="w-5/12 " style={{ backgroundColor: "#A04743" }} onClick={confirmTripDelete}>
                 delete
               </SubmitButton>}
 

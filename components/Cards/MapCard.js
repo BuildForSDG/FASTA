@@ -1,4 +1,4 @@
-// eslint-disable no-unused-vars
+/* eslint-disable no-unused-vars */
 import styled from "styled-components";
 import Map from "../Map";
 
