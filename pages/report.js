@@ -24,10 +24,10 @@ const Reports = ({getUrl, handleToast, reports, setReports, location}) => {
       if (location === null) {
         const getReports = {response: [{_id: 0, type: "Your location is not available!"}]};
         setReports(getReports.response);
-        return getReports;;
+        return getReports;
       }      
-      apiUrl.searchParams.set('lat', location.lat);
-      apiUrl.searchParams.set('lng', location.lng);
+      apiUrl.searchParams.set("lat", location.lat);
+      apiUrl.searchParams.set("lng", location.lng);
       try {
         const res = await fetch(`${apiUrl}`, {
                                 method: "GET", 
@@ -37,7 +37,7 @@ const Reports = ({getUrl, handleToast, reports, setReports, location}) => {
         console.log(res.status, response);
         if (res.status === 200) {
           const getReports = response;
-          const reportsWithLocation = getReports.response.map(rep => {
+          const reportsWithLocation = getReports.response.map((rep) => {
             console.log(rep.location);
             return rep;
           });

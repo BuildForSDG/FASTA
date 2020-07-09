@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable no-unused-vars */
+/* eslint-disable no-console */
 import styled from "styled-components";
 import React, {useState} from "react";
 
@@ -50,9 +51,9 @@ const NavBar = (props) => {
   const [dropdownActive, setDropdownActive] = useState(false);
 
   const logOut = () => {
-    console.log("logging out!")
+    console.log("logging out!"):
     props.setLoggedIn(false);
-    console.log("logged out!")
+    console.log("logged out!"):
   }; 
 
   const makeActive = () => {

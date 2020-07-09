@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Link from "next/link";
-import Moment from "react-moment"
+import Moment from "react-moment";
 import { TextSmall } from "../Text/Body";
 
 const ReportCardStyle = styled.div`

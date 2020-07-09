@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import React, { useState } from "react"
+/* eslint-disable no-console */
+import React, { useState } from "react";
 import BeatLoader from "react-spinners/BeatLoader";
 import { toast } from "react-nextjs-toast";
 
@@ -83,7 +84,7 @@ const DeleteButton = (props) => {
           setHasDeleted(true);
           // handleToast(response.success, "success");
           console.log(props.trips);
-          const updatedTripList = props.trips.filter(t => t._id !== tripId);
+          const updatedTripList = props.trips.filter((t) => t._id !== tripId);
           props.setTrips(updatedTripList);
           console.log(response.success);
         } else if (res.status >= 500) {

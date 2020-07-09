@@ -4,7 +4,7 @@ import Head from "next/head";
 import Router from "next/router";
 import Account from "../components/Account/account";
 
-const Profile = props => {
+const Profile = (props) => {
 
   useEffect(() => {
     if (!props.loggedIn) {

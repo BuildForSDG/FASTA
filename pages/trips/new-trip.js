@@ -1,10 +1,11 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable no-console */
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
- } from 'react-places-autocomplete';
+ } from "react-places-autocomplete";
 import { useForm, ErrorMessage } from "react-hook-form";
 import Router from "next/router";
 import BeatLoader from "react-spinners/BeatLoader";
@@ -58,11 +59,11 @@ const NewTrip = (props) => {
       script.onreadystatechange = function() {
         if (script.readyState === "loaded" || script.readyState === "complete") {
           script.onreadystatechange = null;
-          console.log('script-1');
+          console.log("script-1");
         }
       };
     } else {
-      script.onload = () => console.log('script-2');
+      script.onload = () => console.log("script-2");
     }
  
     script.src = url;
@@ -123,8 +124,8 @@ const NewTrip = (props) => {
             </ErrorMessage>      
             <div>
         {loading && <div>Loading...</div>}
-        {suggestions.map(suggestion => {
-          const style = { backgroundColor: suggestion.active ? "#fafafa" : "#fff"}
+        {suggestions.map((suggestion) => {
+          const style = { backgroundColor: suggestion.active ? "#fafafa" : "#fff"};
           return (<div {...getSuggestionItemProps(suggestion, { style })}>
             <span>{suggestion.description}</span>
           </div>)
@@ -195,10 +196,10 @@ const NewTrip = (props) => {
     setLoading(true);
     (async () => {
       try {
-        const transporter = await handleFetch(`${apiUrl}/gettransporters`, 'POST', {origin});
+        const transporter = await handleFetch(`${apiUrl}/gettransporters`, "POST", {origin});
         const transporterResponse = transporter.response;
         // console.log(transporterResponse.results);
-        const transporterList = transporterResponse.results.map(t => {
+        const transporterList = transporterResponse.results.map((t) => {
          
          const { name, formatted_address, geometry, icon } = t;
          return {name, formatted_address, geometry, icon };
@@ -210,7 +211,7 @@ const NewTrip = (props) => {
       }
 
       try {
-        const distanceMatrix  = await handleFetch(`${apiUrl}/getdistances`, 'POST', {origin, destination});
+        const distanceMatrix  = await handleFetch(`${apiUrl}/getdistances`, "POST", {origin, destination});
           const distanceMatrixResponse = distanceMatrix.response;
           console.log(distanceMatrixResponse, distanceMatrixResponse.rows[0].elements[0]);
           const { distance, duration } = distanceMatrixResponse.rows[0].elements[0];
@@ -229,7 +230,7 @@ const NewTrip = (props) => {
                               tripDistance: distance.text, 
                               tripDuration: duration.text, 
                               tripTime: e.tripTime};
-          const newTrip = await handleFetch(`${apiUrl}/schedule-a-trip`, 'POST', tripDetails, props.token);
+          const newTrip = await handleFetch(`${apiUrl}/schedule-a-trip`, "POST", tripDetails, props.token);
           console.log(tripDetails, newTrip);
           if (newTrip.status === 200) {
             setLoading(false);

@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+/* eslint-disable no-console */
 import styled from "styled-components";
 import React from "react";
 import Link from "next/link";

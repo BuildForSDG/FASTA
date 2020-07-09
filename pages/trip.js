@@ -1,4 +1,5 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable no-console */
 import React, { useEffect } from "react";
 import Router from "next/router";
 import ScheduledTrips from "./trips/scheduled-trips";

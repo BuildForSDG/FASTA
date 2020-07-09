@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useState, useEffect } from "react";
 import Router from "next/router";
 import styled from "styled-components";
@@ -95,8 +96,8 @@ const Homepage = (props) => {
         props.setReports(getReports.response);
         return getReports;
       }      
-      apiUrl.searchParams.set('lat', props.location.lat);
-      apiUrl.searchParams.set('lng', props.location.lng);
+      apiUrl.searchParams.set("lat", props.location.lat);
+      apiUrl.searchParams.set("lng", props.location.lng);
       try {
         const res = await fetch(`${apiUrl}`, {
                                 method: "GET", 
@@ -120,7 +121,7 @@ const Homepage = (props) => {
             return {getReports};
           }
     })();
-    return () => {}
+    return () => {};
   }, []);
 
   return (

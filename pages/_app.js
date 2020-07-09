@@ -43,11 +43,11 @@ function MyApp({ Component, pageProps, initialLoggedIn, initialUser, initialToke
            script.onreadystatechange = function() {
              if (script.readyState === "loaded" || script.readyState === "complete") {
                script.onreadystatechange = null;
-               console.log('script-1');
+               console.log("script-1");
              }
            };
          } else {
-           script.onload = () => console.log('script-2');
+           script.onload = () => console.log("script-2");
          }
       
          script.src = url;
@@ -86,7 +86,7 @@ function MyApp({ Component, pageProps, initialLoggedIn, initialUser, initialToke
 
 MyApp.getInitialProps = ({Component, ctx}) => {
   const allCookies = cookies(ctx);
-  const cookiesLog = Cookie.get();
+  // const cookiesLog = Cookie.get();
   const pageProps = Component.getInitialProps ? Component.getInitialProps(ctx) : {};
   // console.log("allCookies: ", allCookies, pageProps, cookiesLog);
   return {
@@ -97,7 +97,7 @@ MyApp.getInitialProps = ({Component, ctx}) => {
     initialLocated: allCookies.located,
     initialReports: allCookies.reports,
     initialTrips: allCookies.trips
-  }
+  };
 }
 
 export default MyApp;

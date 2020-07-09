@@ -1,4 +1,5 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable no-console */
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
@@ -16,7 +17,7 @@ const Report = ({getReports, reports, setReports}) => {
   useEffect(() => {
     // effect
     setReports(reports);
-  const report = reports.filter(x => x["_id"] === id);
+  const report = reports.filter((x) => x["_id"] === id);
   setReport(report[0]);
     console.log(report, getReports);
     return () => {
