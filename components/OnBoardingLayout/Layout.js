@@ -53,6 +53,12 @@ const Layout = (props) => {
     <div className="w-screen h-screen overflow-x-hidden">
       <Head>
         <title>Fasta {props.header}</title>
+        <link href="/manifest.json" rel="manifest" />
+        <meta charset='utf-8' />
+            <meta http-quiv='x-UA-Compatible' content='IE=edge'/>
+            <meta name='viewport' content='width=device-width,initial-scale=1,minimun-scale=1,maximum-scale=1,user-scalable=no'/>
+            <meta name='description' conmtent='Description'/>
+            <meta name='keywords' />
         {/* <!-- Android  --> */}
         <meta name="theme-color" content="#43a047" />
         <meta name="mobile-web-app-capable" content="yes" />
@@ -143,9 +149,6 @@ const Layout = (props) => {
         <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="96x96" href="/images/icons/favicon-96x96.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/images/icons/favicon-16x16.png" />
-
-        {/* <!-- Manifest.json  --> */}
-        <link href="/manifest.json" rel="manifest" />
       </Head>
       {showPopup && window.innerWidth > 998 && <Popup closePopup={togglePopup} />}
       <OnBoardingContainerLayout screen={screen}>

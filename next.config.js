@@ -20,9 +20,9 @@ module.exports = withPWA({
 //   }
 // }
 
-module.exports = {
-  env: {
-    customKey: "my-value",
-    apiKey: "AIzaSyAm00Wsdh6jJB2QzlW5c6t_nu0gMRAZB9s"
-  }
-};
+// module.exports = {
+//   env: {
+//     customKey: "my-value",
+//     apiKey: "AIzaSyAm00Wsdh6jJB2QzlW5c6t_nu0gMRAZB9s"
+//   }
+// };
