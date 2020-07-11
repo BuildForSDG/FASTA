@@ -21,6 +21,7 @@ module.exports = {
     'comma-dangle': ['error', 'never'],
     'no-param-reassign': ['error', { props: false }],
     "no-console": "off",
+    'no-unused-vars': ["error", { "args": "none" }],    
     quotes: ["error", "double"]
   },
 };

@@ -10,14 +10,12 @@ const MapCardStyle = styled.div`
   margin-bottom: 15px;
 `;
 
-// const MapCard = ({location}) => {
 const MapCard = () => {
-  // return <MapCardStyle />;
   const location = {lat: 6.33, lng: 3.33};
   return (
-        // <MapCardStyle>
+        <MapCardStyle>
           <Map lat={location.lat} lng={location.lng} />
-        // </MapCardStyle>
+        </MapCardStyle>
   );
 };
 

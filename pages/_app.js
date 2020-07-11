@@ -93,7 +93,7 @@ MyApp.getInitialProps = ({Component, ctx}) => {
   const allCookies = cookies(ctx);
   // const cookiesLog = Cookie.get();
   const pageProps = Component.getInitialProps ? Component.getInitialProps(ctx) : {};
-  // console.log("allCookies: ", allCookies, pageProps, cookiesLog);
+  console.log("allCookies: ", allCookies, pageProps, cookiesLog);
   return {
     initialLoggedIn: allCookies.loggedIn,
     initialUser: allCookies.user,

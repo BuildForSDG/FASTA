@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-console */
-/* eslint-disable no-camelcase */
+/* eslint-disable camelcase */
 import React, { useState, useEffect } from "react";
 import Router, { useRouter } from "next/router";
 import { useForm, ErrorMessage } from "react-hook-form";
