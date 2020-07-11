@@ -1,4 +1,5 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable no-console */
 import React, { useState, useEffect } from "react";
 // import fetch from "node-fetch";
 import Layout from "../../components/Layout";

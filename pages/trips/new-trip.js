@@ -273,7 +273,7 @@ const NewTrip = (props) => {
     <Layout header="Schedule a trip" url={scriptUrl} back>
       <div className="absolute top-20 right-0 w-screen mb-24">
         {/* Add google map to MapCard */}
-        <Map lat={props.location &&props.location.lat} lng={props.location && props.location.lng} />
+        <Map lat={props.location && props.location.lat} lng={props.location && props.location.lng} />
         <div className="px-4">
           <form onSubmit={handleSubmit(onSubmit)}>
             {/* Add click event to LocationInput and make input

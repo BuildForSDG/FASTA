@@ -1,12 +1,12 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import Router from "next/router";
 import ScheduledTrips from "./trips/scheduled-trips";
 import fetch from "node-fetch";
 
-const Trips = ({getUrl, loggedIn, setLoggedIn, getTrips, token, trips, setTrips, location}) => {
+const Trips = ({getUrl, loggedIn, setLoggedIn, getTrips, token, trips, setTrips}) => {
 
   console.log(getTrips, trips);
   
