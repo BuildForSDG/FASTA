@@ -122,7 +122,7 @@ const Homepage = (props) => {
           }
     })();
     return () => {};
-  }, []);
+  }, [props.location]);
 
   return (
     <div className="homepage min-h-screen">

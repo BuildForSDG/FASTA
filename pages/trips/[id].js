@@ -13,7 +13,8 @@ import { SubmitButton } from "../../components/Buttons";
 import Map from "../../components/Map";
 // import MapCard from "../../components/Cards/MapCard";
 import { LocationInput, SelectInput} from "../../components/MapInput";
-import { Grid, TransportCompany, TransportProvider } from "../../components/Cards/TransportCard";
+// import { Grid, TransportCompany, TransportProvider } from "../../components/Cards/TransportCard";
+import { Grid, TransportProvider } from "../../components/Cards/TransportCard";
 
 
 const Trip = (props) => {
@@ -38,6 +39,8 @@ const Trip = (props) => {
     props.setTripId(id);
     console.log(trip, props.trips, id);
 
+    setTransportCompany(props.transportersList);
+
     if (!trip.length) {
       Router.push("/login");
     }
@@ -60,7 +63,7 @@ const Trip = (props) => {
 
     try {
       if (value === "Transport Company" ) {
-        setTransportCompany(transportCompanies);
+        setTransportCompany(transportersList);
         setRiders([]);
       } else if (value === "Hail Taxi on Fasta") {
         setRiders(transporters);
@@ -146,7 +149,7 @@ const Trip = (props) => {
                     Transport Companies around you
                   </p>
                   <Grid>
-                    {transportCompanies.map((company, idx) => (
+                    {/* {transportCompanies.map((company, idx) => (
                       <TransportCompany
                         key={idx}
                         id={company.id}
@@ -154,6 +157,16 @@ const Trip = (props) => {
                         services={company.services}
                         status={company.status}
                         distance={company.distance}
+                        onClick={makeProvider}
+                      />
+                    ))} */}
+                    {transportCompanies.map((company, idx) => (
+                      <TransportCompany
+                        key={idx}
+                        name={company.name}
+                        address={company.formatted_address}
+                        icon={company.icon}
+                        distance={company.geometry.location}
                         onClick={makeProvider}
                       />
                     ))}

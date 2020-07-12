@@ -8,12 +8,13 @@ import Cookie from "js-cookie";
 import cookies from "next-cookies";
 
 // This default export is required in a new `pages/_app.js` file.
-function MyApp({ Component, pageProps, initialLoggedIn, initialUser, initialToken, initialLocation, initialLocated, initialReports, initialTrips, initialTripId }) {
+function MyApp({ Component, pageProps, initialLoggedIn, initialUser, initialToken, initialLocation, initialLocated, initialReports, initialTrips, initialTripId, initialTransportersList }) {
   const [loggedIn, setLoggedIn] = useState(() => initialLoggedIn || false);
   const [located, setLocated] = useState(() => initialLocated || false);
   const [location, setLocation] = useState(() => initialLocation || {});
   const [reports, setReports] = useState(() => initialReports || []);
   const [trips, setTrips] = useState(() => initialTrips || []);
+  const [transportersList, setTransportersList] = useState(() => initialTransportersList || []);
   const [tripId, setTripId] = useState(() => initialTripId || "");
   const [token, setToken] = useState(() => initialToken || "");
   const defaultUser = { fullname: "Guest Fasta", email: "guest@fasta.com", phonenumber: "08099887766" };
@@ -37,6 +38,7 @@ function MyApp({ Component, pageProps, initialLoggedIn, initialUser, initialToke
       Cookie.set("reports", JSON.stringify(reports));
       Cookie.set("trips", JSON.stringify(trips));
       Cookie.set("tripId", tripId);
+      Cookie.set("transportersList", transportersList);
 
     //  const loadScript = (url) => {
     //      let script = document.createElement("script");
@@ -85,6 +87,7 @@ function MyApp({ Component, pageProps, initialLoggedIn, initialUser, initialToke
       setTripId={setTripId}
       token={token}
       setToken={setToken}
+      transportersList={transportersList}
     />
   );
 }
@@ -102,7 +105,8 @@ MyApp.getInitialProps = ({Component, ctx}) => {
     initialLocated: allCookies.located,
     initialReports: allCookies.reports,
     initialTrips: allCookies.trips,
-    initialTripId: allCookies.tripId
+    initialTripId: allCookies.tripId,
+    initialTransportersList: allCookies.transportersList
   };
 };
 

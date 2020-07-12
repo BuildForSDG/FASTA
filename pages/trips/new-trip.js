@@ -4,10 +4,15 @@
 /* eslint-disable camelcase */
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
-import PlacesAutocomplete, {
-  geocodeByAddress,
+// import PlacesAutocomplete, {
+//   geocodeByAddress,
+//   getLatLng,
+//  } from "react-places-autocomplete";
+ import usePlacesAutocomplete, {
+  getGeocode,
   getLatLng,
- } from "react-places-autocomplete";
+} from "use-places-autocomplete";
+import useOnclickOutside from "react-cool-onclickoutside";
 import { useForm, ErrorMessage } from "react-hook-form";
 import Router from "next/router";
 import BeatLoader from "react-spinners/BeatLoader";
@@ -74,34 +79,6 @@ const NewTrip = (props) => {
    const key= "AIzaSyAm00Wsdh6jJB2QzlW5c6t_nu0gMRAZB9s";
    const scriptUrl = `https://maps.googleapis.com/maps/api/js?key=${key}&libraries=places`;
   //  loadScript(scriptUrl);
-
-  useEffect(() => {
-    // effect
-    // const loadScript = (url) => {
-    //      let script = document.createElement("script");
-    //      script.type = "text/javascript";
-      
-    //      if (script.readyState) {
-    //        script.onreadystatechange = function() {
-    //          if (script.readyState === "loaded" || script.readyState === "complete") {
-    //            script.onreadystatechange = null;
-    //            console.log("script-1");
-    //          }
-    //        };
-    //      } else {
-    //        script.onload = () => console.log("script-2");
-    //      }
-      
-    //      script.src = url;
-    //      document.getElementsByTagName("head")[0].appendChild(script);
-    //    };
-    //     const key= "AIzaSyAm00Wsdh6jJB2QzlW5c6t_nu0gMRAZB9s";
-    //     const scriptUrl = `https://maps.googleapis.com/maps/api/js?key=${key}&libraries=places`;
-        // loadScript(scriptUrl);
-    return () => {
-    //   // cleanup
-    };
-  }, []);
 
   const { register, handleSubmit, errors } = useForm({ validateCriteriaMode: "all" });
 
@@ -204,9 +181,10 @@ const NewTrip = (props) => {
         const transporterList = transporterResponse.results.map((t) => {
          
          const { name, formatted_address, geometry, icon } = t;
-         console.log(transporterList);
+         console.log({name, formatted_address, geometry, icon });
          return {name, formatted_address, geometry, icon };
         });
+         console.log(transporterList);
         // return;
       } catch(e) {
         handleToast("Error in connection", "error");
@@ -229,8 +207,8 @@ const NewTrip = (props) => {
                               destinationLatLng: destination, 
                               destinationLocation: destination_addresses[0], 
                               isVulnerable: e.condition, 
-                              tripDistance: distance.text, 
-                              tripDuration: duration.text, 
+                              tripDistance: distance ? distance.text : "unknown", 
+                              tripDuration: duration ? duration.text : "unknown", 
                               tripTime: e.tripTime};
           const newTrip = await handleFetch(`${apiUrl}/schedule-a-trip`, "POST", tripDetails, props.token);
           console.log(tripDetails, newTrip);
@@ -253,21 +231,99 @@ const NewTrip = (props) => {
 
   };
 
-  const handleSelectOrigin = async (value) => {
-    const results = await geocodeByAddress(value);
-    const latLng = await getLatLng(results[0]);
-    console.log(value, latLng);
-    setOriginText(value);
-    setOrigin(latLng);
-  };
+  // const handleSelectOrigin = async (value) => {
+  //   const results = await geocodeByAddress(value);
+  //   const latLng = await getLatLng(results[0]);
+  //   console.log(value, latLng);
+  //   setOriginText(value);
+  //   setOrigin(latLng);
+  // };
 
-  const handleSelectDestination = async (value) => {
-    const results = await geocodeByAddress(value);
-    const latLng = await getLatLng(results[0]);
-    console.log(results, latLng);
-    setDestinationText(value);
-    setDestination(latLng);
-  };
+  // const handleSelectDestination = async (value) => {
+  //   const results = await geocodeByAddress(value);
+  //   const latLng = await getLatLng(results[0]);
+  //   console.log(results, latLng);
+  //   setDestinationText(value);
+  //   setDestination(latLng);
+  // };
+
+  const PlacesAutocomplete = ({name, placeholder}) => {
+    const {
+      ready,
+      value,
+      suggestions: { status, data },
+      setValue,
+      clearSuggestions,
+    } = usePlacesAutocomplete({
+      requestOptions: {
+        /* Define search scope here */
+      },
+      debounce: 300,
+    });
+    const ref = useOnclickOutside(() => {
+      // When user clicks outside of the component, we can dismiss
+      // the searched suggestions by calling this method
+      clearSuggestions();
+    });
+   
+    const handleInput = (e) => {
+      // Update the keyword of the input element
+      setValue(e.target.value);
+    };
+   
+    const handleSelect = ({ description }) => () => {
+      // When user selects a place, we can replace the keyword without request data from API
+      // by setting the second parameter to "false"
+      setValue(description, false);
+      clearSuggestions();
+   
+      // Get latitude and longitude via utility functions
+      getGeocode({ address: description })
+        .then((results) => getLatLng(results[0]))
+        .then(({ lat, lng }) => {
+          console.log("📍 Coordinates: ", { lat, lng });
+          console.log(description, name);
+          if (name === "origin") {
+          setOrigin({lat, lng});
+          setOriginText(description);
+          } else {
+            setDestination({lat, lng});
+            setDestinationText(description);
+          }
+        })
+        .catch((error) => {
+          console.log("😱 Error: ", error);
+        });
+    };
+   
+    const renderSuggestions = () =>
+      data.map((suggestion, index) => {
+        const {
+          id,
+          structured_formatting: { main_text, secondary_text },
+        } = suggestion;
+   
+        return (
+          <li key={index} onClick={handleSelect(suggestion)}>
+            <strong>{main_text}</strong> <small>{secondary_text}</small>
+          </li>
+        );
+      });
+   
+    return (
+      <div ref={ref}>
+        <input
+          name={name}
+          value={value}
+          onChange={handleInput}
+          disabled={!ready}
+          placeholder={placeholder}
+        />
+        {/* We can use the "status" to decide whether we should display the dropdown or not */}
+        {status === "OK" && <ul>{renderSuggestions()}</ul>}
+        </div>
+  );
+};
 
   return (
     <Layout header="Schedule a trip" url={scriptUrl} back>
@@ -280,19 +336,33 @@ const NewTrip = (props) => {
               data come from the result of the map selection and
               typed location
             */}
+            <p>...</p>
             <p style={{ color: "#2699FB" }} className="text-xs capitalize mb-2">
               Take-off point
             </p>
             {/* // In render function */}
-            <PlacesAutocomplete value={origin} onChange={setOrigin} onSelect={handleSelectOrigin} >
-              {renderFuncOrigin}
+            <PlacesAutocomplete 
+            name="origin"
+            // value={origin} 
+            placeholder="Please enter your takeoff location" 
+            // onChange={setOrigin} 
+            // onSelect={handleSelectOrigin} 
+            >
+              {/* {renderFuncOrigin} */}
             </PlacesAutocomplete>
+            <p>...</p>
             
             <p style={{ color: "#2699FB" }} className="text-xs capitalize mb-2">
               Destination
             </p>
-            <PlacesAutocomplete value={destination} onChange={setDestination} onSelect={handleSelectDestination} >
-              {renderFuncDestination}
+            <PlacesAutocomplete 
+            name="destination"
+            // value={destination} 
+            placeholder="Please enter your preferred destination" 
+            // onChange={setDestination} 
+            // onSelect={handleSelectDestination} 
+            >
+              {/* {renderFuncDestination} */}
             </PlacesAutocomplete>
 
             <p style={{ color: "#2699FB" }} className="text-xs capitalize mb-2">
