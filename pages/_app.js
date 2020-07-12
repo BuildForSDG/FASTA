@@ -20,7 +20,7 @@ function MyApp({ Component, pageProps, initialLoggedIn, initialUser, initialToke
   const [user, setUser] = useState(() => initialUser || defaultUser);
   const getUrl = () => {
     // if(location.host.indexOf('localhost') >= 0){
-    return 'http://localhost:8080/api/v1';
+    return "http://localhost:8080/api/v1";
     // } else {
     // return "https://fasta-app.herokuapp.com/api/v1";
   };
