@@ -1,18 +1,23 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable no-console */
 import React, { useEffect } from "react";
 // import fetch from "node-fetch";
 
-import trips from "./trips.json";
+// import trips from "./trips.json";
 import Layout from "../../components/Layout";
 import TripCard from "../../components/Cards/TripCard";
 import { NewTripButton } from "../../components/Buttons";
 
 
-const ScheduledTrips = () => {
-  // const [trips, setTrips] = useState(null);
+const ScheduledTrips = ({loggedIn, setLoggedIn, header, trips, setTrips, tripId, setTripId, getUrl, token}) => {
+  console.log(trips);
 
   useEffect(() => {
     // effect
+    // if (getTrips !== undefined) {
+    //   setTrips(getTrips.response);
+    // }
+    
     return () => {
       // cleanup
     };
@@ -20,20 +25,27 @@ const ScheduledTrips = () => {
 
   return (
     <Layout header="Your Scheduled Trips" back>
-      <div className="container mx-auto md:flex flex-wrap">
-        { trips.map((trip, index) => (
-          <TripCard 
-            key={index}
-            id={trip.id}
-            origin={trip.origin}
-            destination={trip.destination}
-            time={trip.time}
-          />
-        ))}
+      {trips && !trips.length && <div>No trips available!</div>}
+      { trips && trips.map((trip, index) => (
+        <TripCard 
+          key={trip._id}
+          id={trip._id}
+          header="Reports on your way"
+          origin={trip.origin}
+          destination={trip.destination}
+          tripTime={trip.tripTime}
+          tripDistance={trip.tripDistance}
+          tripDuration={trip.tripDuration}
+          trips={trips}
+          tripId={tripId}
+          setTrips={setTrips}
+          setTripId={setTripId}
+          getUrl={getUrl}
+          token={token}
+         />
+      ))}
 
-      </div>
-
-      <NewTripButton />
+      <NewTripButton trips={trips} />
     </Layout>
   );
 };

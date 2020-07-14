@@ -28,6 +28,7 @@ const DetailsBody = styled.div`
   background-color: #f7f5f5;
   padding: 15px;
   margin-bottom: 15px;
+  margin-top: 45px;
 `;
 
 const Text = styled(H3)`
@@ -36,12 +37,9 @@ const Text = styled(H3)`
 
 export const Nav = props => {
   return (
-    <NavBar className="z-10">
-      <div className="container mx-auto flex justify-between items-center">
-        <button type="button" onClick={() => Router.back()}>
-          <img src="/images/Back-Arrow-Black.svg" alt="back" />
-        </button>
-        <H3 className="mx-auto">{props.title}</H3>
+    <NavBar className="flex justify-between items-center z-10">
+      <div onClick={() => Router.back()}>
+        <img src="/images/Back-Arrow-Black.svg" alt="back" />
       </div>
     </NavBar>
   );
@@ -116,7 +114,7 @@ const Number = ({ user, setUser, getUrl, handleToast }) => {
         email,
         oldphonenumber: phonenumber,
         newphonenumber: ev.newphonenumber,
-        origin
+        origin: ev.origin
       });
       console.log(resetResponse);
       if (resetResponse.status === 200) {
@@ -205,7 +203,7 @@ const ChangePassword = ({ user, getUrl, handleToast }) => {
 
     try {
       const auth = await handleFetch(`${apiUrl}/users/login`, "POST", { email, password: ev.currentPassword });
-      console.log(auth);
+      // console.log(auth);
       if (auth.status === 200) {
         const forgetResponse = await handleFetch(`${apiUrl}/users/forget`, "POST", {
           email,
@@ -338,7 +336,8 @@ const Register = ({ user, setUser, getUrl, handleToast }) => {
       });
       if (registerResponse.status === 200) {
         handleToast("Registration is successful");
-        setUser(registerResponse.response.user);
+        // setUser(registerResponse.response.user);
+        setUser(registerResponse.user);
         setUpdated(!updated);
         console.log(registerResponse, user);
       } else {
@@ -441,6 +440,7 @@ const Register = ({ user, setUser, getUrl, handleToast }) => {
 };
 
 const Account = props => {
+
   return (
     <>
       <Nav title="Profile" />

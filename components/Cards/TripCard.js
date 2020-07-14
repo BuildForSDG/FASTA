@@ -1,12 +1,15 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable no-console */
 import React, { useState } from "react";
+import BeatLoader from "react-spinners/BeatLoader";
+import { toast } from "react-nextjs-toast";
 
 import styled from "styled-components";
 import Link from "next/link";
 
 import { TextSmall } from "../Text/Body";
-import { SubmitButton } from "../../components/Buttons";
+import { SubmitButton, LoaderContainer } from "../../components/Buttons";
 
 
 const TripCardStyle = styled.div`
@@ -48,24 +51,63 @@ const DeleteButtonStyle = styled.div`
   top: 15px;
   right: 15px;
 `;
+// const handleToast = (msg, type = "info") => toast.notify(msg, { duration: 10, type });
 
 const DeleteButton = (props) => {
+  const [loading, setLoading] = useState(false);
   const [toDelete, setToDelete] = useState(false);
   const [hasDeleted, setHasDeleted] = useState(false);
   toDelete || hasDeleted && (document.body.style.overflow = "hidden");
+
+  const apiUrl = props.getUrl();
 
   const cancelDelete = () => {
     setToDelete(false);
     setHasDeleted(false);
   };
 
+  //  delete trip
+  const tripDelete = async(tripId) => {
+    console.log(tripId);
+    setLoading(true);
+  
+  try {
+        const res = await fetch(`${apiUrl}/trips/${tripId}`, {
+                                method: "DELETE", 
+                                headers: { "Content-Type" : "application/json",
+                                          "Authorization": `Bearer ${props.token}`}
+                              });
+        const response = await res.json();
+        console.log(res.status, response);
+        if (response.success) {
+          setToDelete(false);
+          setHasDeleted(true);
+          // handleToast(response.success, "success");
+          console.log(props.trips);
+          const updatedTripList = props.trips.filter((t) => t._id !== tripId);
+          props.setTrips(updatedTripList);
+          console.log(response.success);
+        } else if (res.status >= 500) {
+          // handleToast("Some connection or server error", "error");
+          console.log("Some connection or server error");
+        } else {
+          // handleToast("Delete failed", "error");
+          console.log("Delete failed");
+        }
+  } catch(e) {
+        console.log(e, "Some error in connection, Please try again!");
+        // handleToast("Error in connection", "error");
+  } 
+    setLoading(false);
+  };
+  
   const confirmTripDelete = () => {
-    alert(`Trip ${props.id} deleted`);
-    setToDelete(false);
-    setHasDeleted(true);
+    console.log(props.id);
+    tripDelete(props.id);
   };
 
   const deleteTrip = (e) => {
+    console.log(props.id);
     setToDelete(true);
   };
 
@@ -85,9 +127,17 @@ const DeleteButton = (props) => {
             </TextSmall>
 
             <div className="flex justify-around items-center">
-              <SubmitButton className="w-5/12 " style={{ backgroundColor: "#A04743" }} onClick={confirmTripDelete}>
+            {loading ?
+          <LoaderContainer className="w-full mt-6">
+            <BeatLoader
+            size={30}
+            color="#43a047"
+            loading
+            />
+          </LoaderContainer>
+          :  <SubmitButton className="w-5/12 " style={{ backgroundColor: "#A04743" }} onClick={confirmTripDelete}>
                 delete
-              </SubmitButton>
+              </SubmitButton>}
 
               <SubmitButton className="w-5/12" onClick={cancelDelete}>
                 cancel
@@ -119,34 +169,45 @@ const DeleteButton = (props) => {
 };
 
 const TripCard = (props) => {
+  console.log(props);
+  console.log(props.trips);
   return (
-    <div className="md:px-4 md:w-6/12">
+    <TripCardStyle className="mb-5 p-4 pr-5">
+      <DeleteButton id={props.id} getUrl={props.getUrl} trips={props.trips} setTrips={props.setTrips} token={props.token} />
 
-      <TripCardStyle className="mb-5 p-4 pr-5">
-        <DeleteButton id={props.id} />
+      <p style={{ color: "#2699FB" }} className="text-xs">
+        Start Position
+      </p>
+      <TextSmall color="#6C6C6C">{props.origin}</TextSmall>
 
-        <p style={{ color: "#2699FB" }} className="text-xs">
-          Start Position
-        </p>
-        <TextSmall color="#6C6C6C">{props.origin}</TextSmall>
+      <p style={{ color: "#2699FB" }} className="text-xs mt-4">
+        End Position
+      </p>
+      <TextSmall color="#6C6C6C">{props.destination}</TextSmall>
 
-        <p style={{ color: "#2699FB" }} className="text-xs mt-4">
-          End Position
-        </p>
-        <TextSmall color="#6C6C6C">{props.destination}</TextSmall>
+      <p style={{ color: "#2699FB" }} className="text-xs mt-4">
+        Scheduled For:
+      </p>
+      <TextSmall color="#6C6C6C">{props.tripTime}</TextSmall>
 
-        <p style={{ color: "#2699FB" }} className="text-xs mt-4">
-          Scheduled For:
-        </p>
-        <TextSmall color="#6C6C6C">{props.time}</TextSmall>
+      <p style={{ color: "#2699FB" }} className="text-xs mt-4">
+        Distance:
+      </p>
+      <TextSmall color="#6C6C6C">{props.tripDistance}</TextSmall>
 
-        <div style={{ color: "#43A047" }} className="text-center uppercase font-bold text-xs mt-3">
-          <Link href="/trips/[id]" as={`/trips/${props.id}`}>
-            <a>Start trip now</a>
-          </Link>
-        </div>
-      </TripCardStyle>
-    </div>
+      <p style={{ color: "#2699FB" }} className="text-xs mt-4">
+        Duration:
+      </p>
+      <TextSmall color="#6C6C6C">{props.tripDuration}</TextSmall>
+
+      <Link href="/trips/[id]" as={`/trips/${props.id}`}>
+        <a>
+          <p style={{ color: "#43A047" }} className="text-center uppercase font-bold text-xs mt-3">
+            Start trip now
+          </p>
+        </a>
+      </Link>
+    </TripCardStyle>
   );
 };
 

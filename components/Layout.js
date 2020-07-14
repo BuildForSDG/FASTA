@@ -6,7 +6,7 @@ import BottomNav from "./BottomNav";
 
 const Body = styled.main`
   padding-bottom: 60px;
-  background: #ffffff;
+  background: #f5f5f5;
   max-width: 100vw;
 `;
 
@@ -15,7 +15,7 @@ const Layout = (props) => {
     <div className="min-h-screen">
       <Head>
         <title>Fasta {props.header}</title>
-        <meta charset="utf-8" />
+        <meta charSet="utf-8" />
         <meta http-quiv="x-UA-Compatible" content="IE=edge" />
         <meta
           name="viewport"
@@ -117,6 +117,7 @@ const Layout = (props) => {
 
         {/* <!-- Manifest.json  --> */}
         <link href="/manifest.json" rel="manifest" />
+        <script src={props.url} type="text/javascript"></script>
       </Head>
       <ShadowedHeader heading={props.header} />
       <Body className="container mx-auto pt-4 min-h-screen px-4 mt-16">{props.children}</Body>

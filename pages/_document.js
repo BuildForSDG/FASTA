@@ -20,12 +20,14 @@ export default class MyDocument extends Document {
         styles: (
           <>
             <Head>
-            <link href="/manifest.json" rel="manifest" />
-            <meta charset='utf-8' />
-            <meta http-quiv='x-UA-Compatible' content='IE=edge'/>
-            <meta name='viewport' content='width=device-width,initial-scale=1,minimun-scale=1,maximum-scale=1,user-scalable=no'/>
-            <meta name="description" content="Your travel companion" />
-            <meta name="keywords" content="travel, faster, safe trip, vehicle, taxi, map, plan" />
+              <meta charSet="utf-8" />
+              <meta http-quiv="x-UA-Compatible" content="IE=edge" />
+              <meta
+                name="viewport"
+                content="width=device-width,initial-scale=1,minimun-scale=1,maximum-scale=1,user-scalable=no"
+              />
+              <meta name="description" content="Your travel companion" />
+              <meta name="keywords" content="travel, faster, safe trip, vehicle, taxi, map, plan" />
 
               {/* <!-- Android  --> */}
               <meta name="theme-color" content="#43a047" />

@@ -16,7 +16,7 @@ const Body = styled.div`
 
 const NewReport = (props) => {
   return (
-    <Link href="reports/makeReport">
+    <Link href="/reports/makeReport">
       <a>
         <Body>
           <H3>Make a New Report</H3>

@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable no-unused-vars */
+/* eslint-disable no-console */
 import styled from "styled-components";
 import React, {useState} from "react";
 
@@ -49,6 +50,12 @@ const NavLogo = styled.img`
 const NavBar = (props) => {
   const [dropdownActive, setDropdownActive] = useState(false);
 
+  const logOut = () => {
+    console.log("logging out!");
+    props.setLoggedIn(false);
+    console.log("logged out!");
+  }; 
+
   const makeActive = () => {
     setDropdownActive(true);
   };
@@ -65,7 +72,7 @@ const NavBar = (props) => {
           <img className="cursor-pointer" src="images/More.png" alt="more" onClick={makeActive} onFocus={makeActive} />
           {dropdownActive && (
             <DropDownView onMouseLeave={makeInactive}>
-              <button type="button" className="capitalize">
+              <button type="button" className="capitalize" onClick={logOut}>
                 logout
               </button>
             </DropDownView>

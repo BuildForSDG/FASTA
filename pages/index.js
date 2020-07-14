@@ -19,7 +19,7 @@ export default function Hom() {
     <div>
       <Head>
         <title>Fasta</title>
-        <meta charset="utf-8" />
+        <meta charSet="utf-8" />
         <meta http-quiv="x-UA-Compatible" content="IE=edge" />
         <meta
           name="viewport"

@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import Link from "next/link";
-
+import Moment from "react-moment";
 import { TextSmall } from "../Text/Body";
 
-const ReportCardStyle = styled.div`
+export const ReportCardStyle = styled.div`
   background: #ffffff;
   box-shadow: 0px 3px 6px #00000029;
   border: 1px solid transparent;
@@ -33,20 +33,27 @@ const ReportCardStyle = styled.div`
 
 const ReportCard = (props) => {
   return (
-    <Link href="/reports/[id]" as={`/reports/${props.id}`} className="md:px-4 md:w-6/12">
+    // <Link href="/reports/[id]" as={`/reports/${props.id}`} className="md:px-4 md:w-6/12">
+    <Link href="/reports/[id]" as={`/reports/${props.id}`}>
       <a>
         <ReportCardStyle className="mb-5 p-4 pr-5">
           <h4 className="text-base font-semibold" style={{ color: "#43A047" }}>
             {props.type}
           </h4>
-          <TextSmall color="#232323">{props.location}</TextSmall>
+          {/* <TextSmall color="#232323">{(typeof props.location) === 'object' ? `lat: ${props.location.lat}, lng: ${props.location.lng}` : props.location}</TextSmall> */}
           <p style={{ color: "#6C6C6C" }} className="text-xs">
-            {props.timestamp}
+            <Moment fromNow>{props.date}</Moment>
           </p>
 
           <TextSmall color="#232323" className={`mt-4 ${props.details && "details"} text-justify`}>
             {props.description}
           </TextSmall>
+          <p>...</p>
+          <p></p>
+          <p style={{ color: "#6C6C6C" }} className="text-xs">
+          Location: {props.address ? props.address : "Unknown"}
+          </p>
+ 
         </ReportCardStyle>
       </a>
     </Link>

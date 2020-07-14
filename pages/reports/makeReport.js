@@ -3,11 +3,14 @@
 import React, { useState, useEffect } from "react";
 import { useForm, ErrorMessage } from "react-hook-form";
 import styled from "styled-components";
+import { toast } from "react-nextjs-toast";
+import BeatLoader from "react-spinners/BeatLoader";
 
 
 import Layout from "../../components/Layout";
-import { SubmitButton, LinkButton } from "../../components/Buttons";
-import Input, { TextArea } from "../../components/Input";
+import { SubmitButton, LinkButton, LoaderContainer } from "../../components/Buttons";
+import { Input,  TextArea } from "../../components/Input";
+import { SelectInput } from "../../components/MapInput";
 import { TextSmall } from "../../components/Text/Body";
 
 
@@ -15,8 +18,9 @@ const AlertCardStyle = styled.div`
   border-radius: 10px;
   padding: 60px 26px 46px;
 `;
+const handleToast = (msg, type = "info") => toast.notify(msg, { duration: 10, type });
 
-const MakeReport = ({getUrl, handleToast}) => {
+const MakeReport = ({getUrl, token, location}) => {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   submitted && (document.body.style.overflow = "hidden");
@@ -24,18 +28,21 @@ const MakeReport = ({getUrl, handleToast}) => {
   const { register, handleSubmit, errors, watch } = useForm({ validateCriteriaMode: "all" });
   const apiUrl = getUrl();
 
+  console.log(location);
 //  makeReport
 const submitReport = async(ev) => {
+  ev.location = location;
   console.log(ev, Object.keys(ev));
   setLoading(true);
 
 try {
-      const res = await fetch(`${apiUrl}/reports`, {
+      const res = await fetch(`${apiUrl}/report`, {
                               method: "POST", 
                               body: JSON.stringify(ev), 
-                              headers: { "Content-Type" : "application/json"}
+                              headers: { "Content-Type" : "application/json",
+                                        "Authorization": `Bearer ${token}`}
                             });
-      console.log(res.status);
+      console.log(res.status, res);
       const response = await res.json();
       console.log(response);
       if (res.status === 200) {
@@ -64,18 +71,21 @@ try {
       <div className="container mx-auto relative">
 
       <form onSubmit={handleSubmit(onSubmit)} className="w-full mt-4">
-          <Input
+          <SelectInput placeholder="Report Type"
+              name="type"
             className="mx-auto"
-            type="text"
-            name="type"
+            options={[
+              "Traffic",
+              "Congestion",
+              "Accident",
+              "Crime",
+              "Safety",
+              "Armed robbery",
+              "Fire",
+            ]}
             ref={register({
-              required: "Please enter type of report",
-              minLength: {
-                value: 3,
-                message: "Please enter descriptive type, e.g 'accident', 'fire', 'hold-up'"
-              }
+              required: "Please select type of report",
             })}
-            placeholder="Report Type"
           />
           <ErrorMessage errors={errors} name="report_type">
             {({ messages }) =>
@@ -115,9 +125,17 @@ try {
             Your location is recorded as part of report data.
           </p>
 
-          <SubmitButton type="submit" className="w-full mt-6">
+          {loading ?
+          <LoaderContainer className="w-full mt-6">
+            <BeatLoader
+            size={30}
+            color="#43a047"
+            loading
+            />
+          </LoaderContainer>
+          :<SubmitButton type="submit" className="w-full mt-6">
             Submit
-          </SubmitButton>
+          </SubmitButton>}
         </form>
       </div>
 

@@ -1,23 +1,42 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable no-console */
 import React, { useState, useEffect } from "react";
 // import fetch from "node-fetch";
 import Layout from "../../components/Layout";
 import MapCard from "../../components/Cards/MapCard";
-// import NewReport from "../../components/Homepage/NewReport";
-import { H3 } from "../../components/Text/Headings";
-import ReportCard from "../../components/Cards/ReportCard";
-import { NewReportButton, SubmitButton } from "../../components/Buttons";
+import Reports from "../../components/Homepage/Reports/Reports";
+import NewReport from "../../components/Homepage/NewReport";
+import Map from "../../components/Map";
 
-const Trip = ({getUrl, getReports, handleToast}) => {
-  const [reports, setReports] = useState(null);
+const Trip = (props) => {
+    const [tripReports, setTripReports] = useState([]);
 
-  // console.log(getReports.response);
+  const apiUrl = props.getUrl();
 
-  // const apiUrl = getUrl();
   useEffect(() => {
     // effect
-    setReports(getReports.response);
-    // console.log(getReports, reports);
+    console.log(props.location, props.tripId);
+   
+    (async () => {
+      try {
+        const res = await fetch(`${apiUrl}/trip-info/${props.tripId}`, {
+                                method: "GET", 
+                                headers: { "Content-Type" : "application/json"}
+                              });
+        const response = await res.json();
+        console.log(res.status, response);
+        if (res.status === 200) {
+          const tripReports = response;
+          setTripReports(tripReports);
+          return {tripReports};
+        }
+        } catch(e) {
+            console.log(e, "Some error in connection, Please try again!");
+            const tripReports = {response: [{_id: 0, type: "No reports at the moment!"}]};
+            setTripReports(tripReports.response);
+            return {tripReports};
+          }
+    })();
     return () => {
       // cleanup
     };
@@ -25,32 +44,13 @@ const Trip = ({getUrl, getReports, handleToast}) => {
 
   return (
     <Layout header="Ongoing Trip" back>
-      <div className="container mx-auto relative">
-        <div className="absolute top-0 right-0 w-full pb-10">
-          {/* Add google map to MapCard */}
-          <MapCard />
-          <div className="px-4">
-            <div>
-              <H3>Reports on your route</H3>
-              <div className="md:px-4 md:w-1/2">
-               {reports && reports.map((report) => (
-                  <ReportCard 
-                  key={report._id}
-                  id={report._id}
-                  type={report.type}
-                  location={report.location}
-                  timestamp={report.timestamp}
-                  description={report.description}
-                  details
-                  />
-                ))}
-                <NewReportButton getUrl={getUrl} handleToast={handleToast} />
-              </div>
-            </div>
-            <SubmitButton type="submit" className="w-full mt-2">
-              End Trip
-            </SubmitButton>
-          </div>
+      <div className="absolute top-20 right-0 w-screen pb-10">
+        {/* Add google map to MapCard */}
+        <Map lat={props.location &&props.location.lat} lng={props.location && props.location.lng} />
+        {/* <MapCard /> */}
+        <div className="px-4">
+          <Reports header="Reports on your way" reports={tripReports} />
+          <NewReport />
         </div>
 
       </div>

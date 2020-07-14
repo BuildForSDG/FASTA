@@ -1,31 +1,44 @@
 /* eslint-disable no-unused-vars */
+/* eslint-disable no-console */
 import React from "react";
 import Link from "next/link";
 import Report from "./Report";
-import { H3 } from "../../Text/Headings";
+import { TextSmall } from "../../Text/Body";
+import styled from "styled-components";
+// import { H3 } from "../../Text/Headings";
 
-const Reports = () => {
+const Text = styled(TextSmall)`
+  font-size: 20px;
+  margin: 5px 0;
+`;
+
+const Reports = (props) => {
+  console.log(props);
   return (
     <div>
-      {/* fetch Reports from report api */}
-      {/* Show only the two latest reports */}
-      <H3>Reports in your area</H3>
-      <div className="md:grid grid-cols-2 gap-4 mt-4">
-        <Report
-          title=" Accident"
-          description="Along Olu-Obansanjo road. cars are on fire avoid the area, fire fighters are at the scene. Traffic is..."
-        />
-        <Report
-          title="Shoot-out"
-          description="Along Olu-Obansanjo road. cars are on fire avoid the area, fire fighters are at the scene. Traffic is..."
-        />
+      <Text color="#232323">{props.header}</Text>
+      {props.reports && !props.reports.length ?
+      //  <div>No reports available at the moment!</div>:
+       <Report report={{description: "No reports available at the moment!"}} />:
+       <div>{props.link ?
+      <div>{props.reports && props.reports.slice(0,2).map((report) => (
+      <Report key={report._id} report={report} details />
+      ))}      
+      </div>:
+      <div>{props.reports && props.reports.slice(0,4).map((report) => (
+      <Report key={report._id} report={report} details />
+      ))}      
+      </div>}
       </div>
-
+      }
+      
+      {props.link ?
       <Link href="/report">
         <a>
-          <span style={{ color: "#2699fb", fontSize: "12px" }}>See All Reports</span>
+        <TextSmall color="#2699fb">See All Reports</TextSmall>
         </a>
       </Link>
+      :<span>See more reports...</span>}
     </div>
   );
 };

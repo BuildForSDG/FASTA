@@ -83,7 +83,7 @@ const NewReportButtonSyled = styled.div`
   box-shadow: 0px 0px 7px #0000001a;
 `;
 
-export const NewReportButton = () => {
+export const NewReportButton = (props) => {
   return (
     <Link href="reports/makeReport">
       <a>
@@ -95,9 +95,9 @@ export const NewReportButton = () => {
   );
 };
 
-export const NewTripButton = () => {
+export const NewTripButton = (props) => {
   return (
-    <Link href="trips/new-trip">
+    <Link href="/trips/new-trip">
       <a>
         <NewReportButtonSyled>
           <img src="/images/add-trip.svg" alt="add trip" />

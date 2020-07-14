@@ -1,9 +1,17 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useEffect } from "react";
 import Head from "next/head";
+import Router from "next/router";
 import Account from "../components/Account/account";
 
 const Profile = (props) => {
+
+  useEffect(() => {
+    if (!props.loggedIn) {
+      Router.push("/login");
+    }
+  }, []);
+
   return (
     <div>
       <Head>
@@ -107,8 +115,8 @@ const Profile = (props) => {
               <link rel="icon" type="image/png" sizes="96x96" href="/images/icons/favicon-96x96.png" />
               <link rel="icon" type="image/png" sizes="16x16" href="/images/icons/favicon-16x16.png" />
       </Head>
-      <div style={{ backgroundColor: "#ffffff" }}>
-        <Account user={props.user} setUser={props.setUser} getUrl={props.getUrl} handleToast={props.handleToast} />
+      <div className="" style={{ backgroundColor: "#F7F5F5" }}>
+        <Account loggedIn={props.loggedIn} user={props.user} setUser={props.setUser} getUrl={props.getUrl} handleToast={props.handleToast} />
       </div>
     </div>
   );

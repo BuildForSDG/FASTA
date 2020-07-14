@@ -1,12 +1,19 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
-// import Router from "next/router";
+import React, { useEffect } from "react";
+import Router from "next/router";
 import Head from "next/head";
 import Homepage from "../components/Homepage/Homepage";
 
-const Home = ({ loggedIn, user, setLocated, located }) => {
+const Home = ({ loggedIn, setLoggedIn, user, located, setLocated, location, setLocation, getUrl, trips, setTrips, reports, setReports, token }) => {
   // console.log("loggedIn:", loggedIn);
-  const name = user.fullname.split(" ")[0];
+  // const name = user.fullname.split(" ")[0];
+
+  useEffect(() => {
+    if (!loggedIn) {
+      Router.push("/login");
+    }
+  }, [loggedIn]);
+
   return (
     <div>
       <Head>
@@ -14,7 +21,21 @@ const Home = ({ loggedIn, user, setLocated, located }) => {
         <link rel="icon" href="/images/Logo.png" />
       </Head>
       <div className="">
-        <Homepage user={name} located={located} setLocated={setLocated} />
+        <Homepage 
+        header="Reports in your area"
+        user={user} 
+        loggedIn={loggedIn}
+        setLoggedIn={setLoggedIn}
+        located={located} 
+        setLocated={setLocated} 
+        location={location}
+        setLocation={setLocation}
+        getUrl={getUrl}  
+        trips={trips} 
+        setTrips={setTrips}
+        reports={reports} 
+        setReports={setReports}
+        token={token} />
       </div>
     </div>
   );

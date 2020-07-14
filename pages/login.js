@@ -21,9 +21,10 @@ const MainStyle = styled.main`
   height: calc(100vh - 78px);
 `;
 
-const Login = ({loggedIn, setLoggedIn, user, setUser, getUrl, handleToast }) => {
+const Login = ({loggedIn, setLoggedIn, user, setUser, getUrl, handleToast, token, setToken }) => {
   // console.log("loggedIn:", loggedIn);
   const [loading, setLoading] = useState(false);
+  const [update, setUpdate] = useState(false);
   
   const { register, handleSubmit, errors } = useForm({ validateCriteriaMode: "all" });
  
@@ -44,7 +45,9 @@ try {
       console.log(res.status, response);
       if (res.status === 200) {
         setLoggedIn(true);
-        // setUser({name: response.user.fullname.split(" ")[0], email: ev.email, number: response.user.phonenumber});
+        setToken(response.token);
+        setUpdate(!update);
+        // setUser({name: response.user.fullname.split(" ")[0], email: ev.email, phonenumber: response.user.phonenumber});
         setUser(response.user);
         handleToast(response.response, "success");
       } else if (res.status >= 500) {
@@ -63,10 +66,13 @@ const onSubmit = (data) => {
   // console.log(data);
   signIn(data);
 };
+// console.log("token:" , token);
 
 useEffect(() => {
   localStorage.setItem("user", JSON.stringify(user)); 
-}, [user]);
+  localStorage.setItem("token", JSON.stringify(token)); 
+  localStorage.setItem("loggedIn", JSON.stringify(loggedIn)); 
+}, [update]);
 
 
   if (loggedIn) {

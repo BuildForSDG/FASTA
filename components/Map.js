@@ -1,20 +1,25 @@
 /* eslint no-unused-vars */
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ReactMap from "google-map-react";
 // import env from "dotenv";
 // env.config();
 
 const MapComponent = ({ text }) => <div>{text}</div>;
 
-const Map = (props) => {
+const Map = ({ lat, lng }) => {
+  const [pointer, setPointer] = useState({lat, lng})
   const defaultProps = {
     center: {
-      lat: 59.95,
-      lng: 30.33
+      lat,
+      lng
     },
-    zoom: 11
+    zoom: 16
   };
-  //  console.log(process.env.apiKey);
+
+  useEffect(() => {
+    setPointer({lat, lng});
+  },[lat, lng]);
+
   return (
     <div style={{ height: "30vh", width: "100%" }}>
       <ReactMap
@@ -22,7 +27,7 @@ const Map = (props) => {
         defaultCenter={defaultProps.center}
         defaultZoom={defaultProps.zoom}
       >
-        <MapComponent lat={props.lat} lng={props.lng} text="Map View" />
+        <MapComponent lat={lat} lng={lng} text="Map View" />
       </ReactMap>
     </div>
   );

@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+/* eslint-disable no-console */
 import styled from "styled-components";
 import React from "react";
 import Link from "next/link";
@@ -6,22 +7,28 @@ import Trip from "./Trip";
 import { TextSmall } from "../../Text/Body";
 import { H3 } from "../../Text/Headings";
 
+// const TextSmall = styled.p`
+//   font-size: 14px;
+//   color: ${(props) => props.color};
+// `;
+
 const Text = styled(TextSmall)`
   font-size: 20px;
   margin: 5px 0;
 `;
 
-const RecentTrips = () => {
+const RecentTrips = (props) => {
+  console.log(props.trips);
   return (
     <div className="trips my-4 flex flex-col justify-between">
-      <H3>Your Recent Trips</H3>
-      <div className="md:grid grid-cols-2 gap-4 mt-4">
-        <Trip origin="Rumuokoro, Port Harcourt" destination="Choba, Port Harcourt" />
-        <Trip origin="Asaba, Delta State" destination="Ikeja, Lagos" />
-      </div>
-      <Link href="/trips/scheduled-trips">
+      <Text>Your Recent Trips</Text>
+      {props.trips && props.trips.slice(0,2).map((trip) => (
+      <Trip key={trip._id} trip={trip} />
+      ))}
+      
+      <Link href="/trip">
         <a>
-          <span style={{ color: "#2699fb", fontSize: "12px" }}>See All Trips</span>
+        <TextSmall color="#2699fb">See All Trips</TextSmall>
         </a>
       </Link>
     </div>
