@@ -5,7 +5,6 @@ const logger = require("morgan");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 
-
 dotenv.config();
 
 const CORS = require("cors");
@@ -17,6 +16,7 @@ const reportRouter = require("./routes/report");
 
 const tripInfoRouter = require("./routes/tripInfo");
 
+const notififoRouter = require("./routes/notification");
 
 
 require("./db/index");
@@ -43,6 +43,8 @@ app.use("/api/v1/", sendRouter);
 app.use("/api/v1/", getTransporter);
 app.use("/api/v1", reportRouter);
 app.use("/api/v1", tripInfoRouter);
+app.use("/api/v1", notififoRouter);
+
 
 app.get("/", (req, res) => res.send("<h2>Welcome to FASTA</h2><p><a href=\"/api/v1\">Check out version 1 of the FASTA API</a></p>"));
 

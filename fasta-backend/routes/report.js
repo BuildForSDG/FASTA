@@ -19,10 +19,10 @@ router.post("/report", authChecker, async (req, res) => {
     return res.status(403).json({ response: "please all fields are required" });
   }
   try {
-    const { lat, long } = location;
+    const { lat, lng } = location;
     let address;
     await axios.get(
-      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${long}&key=${process.env.TEST_KEY}`
+      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${process.env.TEST_KEY}`
     ).then((data) => {
       if (data.data) {
         if (data.data.status === "OK") {
@@ -30,6 +30,7 @@ router.post("/report", authChecker, async (req, res) => {
           address = data.data.results[0].formatted_address;
         } else {
           // console.log("error");
+          address = "Unidentified Location";
           throw new Error();
         }
       }
@@ -40,9 +41,10 @@ router.post("/report", authChecker, async (req, res) => {
       tripId,
       type,
       description,
-      location,
+      location, 
       address
     };
+    // console.log(reportDetails);
     const reports = await Reports.create(reportDetails);
     if (reports) {
       return res.status(200).json({ response: `${reports} Thanks for giving, your report has been saved` });
@@ -52,13 +54,13 @@ router.post("/report", authChecker, async (req, res) => {
   }
 });
 
-router.get("/reports", authChecker, async (req, res) => {
+router.get("/reports", async (req, res) => {
   let { lat, lng } = req.query;
   lat = Number(lat);
   lng = Number(lng);
-  await Reports.find({ "location.lat": { $gte: lat - 1, $lte: lat + 1 }, "location.lng": { $gte: lng - 1, $lte: lng + 1 } })
+  await Reports.find({ "location.lat": { $gte: lat - 0.07, $lte: lat + 0.07 }, "location.lng": { $gte: lng - 0.07, $lte: lng + 0.07 } })
     // await Reports.find({ "location.lat": { lat }, "location.lng": { lng } })
-    .select("_id type description location date")
+    .select("_id type description location address date")
     .exec()
     .then((allReports) => {
       if (!allReports || allReports < 1) {
