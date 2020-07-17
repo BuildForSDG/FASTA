@@ -11,7 +11,6 @@ const User = require("../models/index.js");
 const bcrypt = require("../helpers/auth");
 const authChecker = require("../middlewares/authChecker");
 const mailer = require("../helpers/mailer");
-const notification = require("../helpers/notification");
 
 
 //  CREATE A NEW USER AND ADD TO DATABASE
@@ -75,7 +74,7 @@ router.post("/login", async (req, res) => {
       const passwordcheck = bcrypt.comparePassword(password, user.password);
       if (passwordcheck) {
         const token = bcrypt.generateToken(user);
-        notification();
+
         return res.status(200).json({
           response: "Login successful",
           token,
@@ -109,7 +108,7 @@ router.get("/:id", authChecker, (req, res) => {
     _id: id
   }).then(
     (thisUser) => {
-      //   console.log("Getting specific user by ID!");
+    // console.log("Getting specific user by ID!");
       res.status(200).json(thisUser);
     }
   ).catch(

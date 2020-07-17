@@ -1,14 +1,10 @@
-/* eslint-disable consistent-return */
-/* eslint-disable func-names */
-/* eslint-disable no-undefined */
-const cron = require("node-cron");
+const router = require("express").Router();
 
 const ScheduleTrip = require("../models/trip");
 const Reports = require("../models/report");
-const mailer = require("./mailer");
 const User = require("../models/index");
 
-const notification = async () => {
+router.get("/notification", async (req, res) => {
   const reports = await Reports.find()
     .select("description location date")
     .exec();
@@ -19,19 +15,17 @@ const notification = async () => {
 
   reports.forEach((r) => {
     schedules.forEach((s) => {
-      if (r.location === s.destination && r.date < s.tripTime) {
-        const ids = User.findById(s.userId)
-          .select("email fullname")
-          .exec();
-        ids
+      // if (r.location === s.destination && r.date < s.tripTime) {
+      if (r.location === s.destination) {
+        User.findById(s.userId)
           .then((id) => {
             const options = {
-              receiver: id.email,
               subject: "This is happening in your desiation!",
               text: `Hello ${id.fullname}`,
-              output: `${r.description}\n\n`
+              output: `${r.description}`
             };
-            mailer(options);
+
+            return res.send({ options });
           })
           .catch(() => {
             // console.log(e);
@@ -39,12 +33,7 @@ const notification = async () => {
       }
     });
   });
-};
+});
 
-const pushNotification = () => {
-  cron.schedule("* 08 * * *", () => {
-    notification();
-  });
-};
 
-module.exports = pushNotification;
+module.exports = router;
