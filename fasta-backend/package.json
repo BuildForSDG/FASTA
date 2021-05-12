@@ -25,7 +25,7 @@
     "morgan": "~1.9.1",
     "node-cron": "^2.0.3",
     "node-geometry-library": "^1.2.2",
-    "nodemailer": "^6.4.6",
+    "nodemailer": "^6.4.16",
     "nodemailer-smtp-transport": "^2.7.4",
     "reverse-geocoding": "^3.0.2",
     "reverse-geocoding-google": "^1.1.0"
